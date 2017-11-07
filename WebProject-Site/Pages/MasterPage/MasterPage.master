@@ -8,17 +8,17 @@
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body onload="updateSize();">
+<body onload="updateUpperBarSize();" style="background-color:rgb(113, 116, 156)">
     <div>
         <div id="Upper_Bar" style="position:fixed; top:0px; left:0px; visibility:hidden; z-index:10">
             <div id="homePage_drop" style="position:absolute;">
                 <button id="homePage_btn" onclick="dropbtnClick();" class="dropbtn" style="position:absolute; z-index:2" runat="server">Home Page</button>
                 <div id="dropdownList" class="dropdown-content" style="position:absolute; z-index:1">
-                    <button id="welcome_btn" onclick="scrollToElement('welcomeDiv');" style="position:absolute; left:0px;">Welcome</button>
-                    <button id="login_btn" onclick="scrollToElement('loginDiv');" style="position:absolute; left:0px">Log In</button>
-                    <button id="signup_btn" onclick="scrollToElement('signupDiv');" style="position:absolute; left:0px">Sign Up</button>
-                    <button id="about_btn" onclick="scrollToElement('aboutDiv');" style="position:absolute; left:0px">About</button>
-                    <button id="terms_btn" onclick="scrollToElement('termsDiv');" style="position:absolute; left:0px">Terms of Use</button>
+                    <button id="welcome_btn" onclick="scrollToElement('welcome');" style="position:absolute; left:0px;">Welcome</button>
+                    <button id="login_btn" onclick="scrollToElement('login',250);" style="position:absolute; left:0px">Log In</button>
+                    <button id="signup_btn" onclick="scrollToElement('signup',250);" style="position:absolute; left:0px">Sign Up</button>
+                    <button id="about_btn" onclick="scrollToElement('about',250);" style="position:absolute; left:0px">About</button>
+                    <button id="terms_btn" onclick="scrollToElement('terms',250);" style="position:absolute; left:0px">Terms of Use</button>
                 </div>
             </div>
             <div id="workingSpace" style="position:absolute;">
@@ -29,6 +29,7 @@
             </div>
         </div>
         <script src="/Pages/MasterPage/JavaScript.js"></script>
+        <script src="/Pages/HomePage/JavaScript.js"></script>
         <link href="/Pages/MasterPage/StyleSheet.css" rel="stylesheet" />
         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
         

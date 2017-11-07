@@ -3,7 +3,7 @@ var width = 0;
 var buttonWidth = 0;
 var buttonHeight = 0;
 
-function updateUpperBar() {
+function updateUpperBarSize() {
     width = window.innerWidth;
     buttonWidth = width / 6;
     buttonHeight = width / 20;
@@ -28,6 +28,7 @@ function updateUpperBar() {
         children[i].style.height = buttonHeight + "px";
         children[i].style.width = buttonWidth + "px";
         children[i].style.top = "0px";
+        children[i].style.fontSize = buttonHeight / 4 + "px";
     }
     document.getElementById("Upper_Bar").style.visibility = "visible";
 }
@@ -60,6 +61,18 @@ function dropbtnClick() {
 function buttonLinkClick(link) {
     window.location.href = link;
 }
-
-window.onload = updateUpperBar;
-window.onresize = updateUpperBar;
+function addResizeEvent(func) {
+    var oldonresize = window.onresize;
+    if (typeof window.onresize != 'function') {
+        window.onresize = func;
+    }
+    else {
+        window.onresize = function () {
+            if (oldonresize) {
+                oldonresize();
+            }
+            func();
+        }
+    }
+}
+addResizeEvent(updateUpperBarSize);

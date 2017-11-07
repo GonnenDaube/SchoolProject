@@ -1,9 +1,11 @@
-﻿.dropbtn{
+﻿
+.dropbtn{
     background-color:rgb(8, 37, 130);
     color: white;
     border: none;
-    outline:none;
+    outline: none;
     cursor: pointer;
+    box-shadow: 2.5px 5px 5px rgba(0,0,0,0.1);
 }
 
 .dropbtn:hover, .dropbtn:focus{
@@ -13,10 +15,11 @@
 .dropdown-content button{
     color: gray;
     border: none;
+    outline: none;
     cursor: pointer;
     transition:0.5s;
 }
 
-.dropdown-content button:hover{
+.dropdown-content button:hover, .dropdown-content button:focus{
     background-color: darkgray;
 }
