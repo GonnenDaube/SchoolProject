@@ -3,5 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <i>This is Home Page</i>
+    <script src="/Pages/HomePage/JavaScript.js"></script>
+
 </asp:Content>
 

@@ -1,0 +1,22 @@
+﻿.dropbtn{
+    background-color:rgb(8, 37, 130);
+    color: white;
+    border: none;
+    outline:none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus{
+    background-color:rgb(6, 29, 101);
+}
+
+.dropdown-content button{
+    color: gray;
+    border: none;
+    cursor: pointer;
+    transition:0.5s;
+}
+
+.dropdown-content button:hover{
+    background-color: darkgray;
+}
