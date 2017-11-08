@@ -4,21 +4,41 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div id="contentDiv" style="position:absolute; visibility:hidden; z-index:1">
-        <div id="welcomeDiv" style="position:absolute; background-color: rgba(255, 255, 255, 0.9)">
-            
-            <p id ="welcomeTxt" style="position:absolute; width:100%; margin-left:auto; margin-right:auto; text-align:center">Welcome</p>
+        <!--Put all welcome elements here -->
+        <div id="welcomeDiv" style="position:absolute; background-color: rgba(255, 255, 255, 0.9)"> 
+            <p id ="welcomeTxt" style="position:absolute; top:20%; width:100%; margin-left:auto; margin-right:auto; text-align:center; font-size:500%">Welcome</p>
         </div>
+        <!--Put all login elements here -->
         <div id="loginDiv" style="position:absolute; background-color: rgba(255, 255, 255, 0.9)">
-            <p id ="loginTxt" style="position:absolute; width:100%; margin-left:auto; margin-right:auto; text-align:center">Log In</p>
+            <p id ="loginTxt" style="position:absolute; top:20%; width:100%; margin-left:auto; margin-right:auto; text-align:center; font-size:500%">Log In</p>
         </div>
+        <!--Put all signup elements here -->
         <div id="signupDiv" style="position:absolute; background-color: rgba(255, 255, 255, 0.9)">
-            <p id ="signupTxt" style="position:absolute; width:100%; margin-left:auto; margin-right:auto; text-align:center">Sign Up</p>
+            <form id="signUpForm" runat="server" style="position:absolute; top: 10%; width:25%; margin-left:auto; margin-right:auto; text-align:center; font-size:100%">
+                <div id="username">
+                    <p id="username-hint">Username:</p>
+                    <asp:TextBox ID="usernameTxtbox" runat="server" placeholder="Username"></asp:TextBox>
+                </div>
+                <div id="email">
+                    <p id="email-hint">Email:</p>
+                    <asp:TextBox ID="emailTxtbox" runat="server" placeholder="Email"></asp:TextBox>
+                </div>
+                <div id="password">
+                    <p id="password-hint">Password:</p>
+                    <asp:TextBox ID="passwordTxtbox" runat="server" placeholder="Password"></asp:TextBox>
+                </div>
+                <div id="submit">
+                    <asp:Button ID="submitbtn"/>
+                </div>
+            </form>
         </div>
+        <!--Put all about elements here -->
         <div id="aboutDiv" style="position:absolute; background-color: rgba(255, 255, 255, 0.9)">
-            <p id ="aboutTxt" style="position:absolute; width:100%; margin-left:auto; margin-right:auto; text-align:center">About</p>
+            <p id ="aboutTxt" style="position:absolute; top:20%; width:100%; margin-left:auto; margin-right:auto; text-align:center; font-size:500%">About</p>
         </div>
+        <!--Put all terms of use elements here -->
         <div id="termDiv" style="position:absolute; background-color: rgba(255, 255, 255, 0.9)">
-            <p id ="termsTxt" style="position:absolute; width:100%; margin-left:auto; margin-right:auto; text-align:center">Terms of Use</p>
+            <p id ="termsTxt" style="position:absolute; top:20%; width:100%; margin-left:auto; margin-right:auto; text-align:center; font-size:500%">Terms of Use</p>
         </div>
     </div>
     <p id="Hidden_Element" style="position:absolute; font-size:1px; visibility:hidden">hidden-text</p>

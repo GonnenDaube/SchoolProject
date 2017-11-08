@@ -54,12 +54,6 @@ function updatePageSize() {
 
     document.getElementById("Hidden_Element").style.top = height * 5 - 2 + "px";
 
-    var pars = document.getElementById("contentDiv").getElementsByTagName("p");
-    for (var i = 0; i < pars.length; i++) {
-        pars[i].style.top = height * 0.2 + "px";
-        pars[i].style.fontSize = height * 0.1 + "px";
-    }
-
     document.getElementById("contentDiv").style.visibility = "visible";
 }
 
