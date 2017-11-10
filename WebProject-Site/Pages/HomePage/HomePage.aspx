@@ -28,7 +28,7 @@
                     <asp:TextBox ID="passwordTxtbox" runat="server" placeholder="Password"></asp:TextBox>
                 </div>
                 <div id="submit">
-                    <asp:Button ID="submitbtn"/>
+                    <asp:Button ID="submitbtn" runat="server" OnClick="submitbtn_Click" Text="Submit"/>
                 </div>
             </form>
         </div>
