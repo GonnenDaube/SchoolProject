@@ -55,6 +55,14 @@ function updatePageSize() {
     document.getElementById("Hidden_Element").style.top = height * 5 - 2 + "px";
 
     document.getElementById("contentDiv").style.visibility = "visible";
+
+    var svgLines = document.getElementsByTagName("svg");
+    var lines = document.getElementsByTagName("line");
+
+    for (var i = 0; i < svgLines.length; i++) {
+        svgLines[i].setAttribute("width", width * 0.8);
+        lines[i].setAttribute("x2", width * 0.8);
+    }
 }
 
 function addResizeEvent(func) {

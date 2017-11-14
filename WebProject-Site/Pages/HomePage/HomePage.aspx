@@ -7,10 +7,16 @@
         <!--Put all welcome elements here -->
         <div id="welcomeDiv" style="position:absolute; background-color: rgba(255, 255, 255, 0.9)"> 
             <p id ="welcomeTxt" style="position:absolute; top:20%; width:100%; margin-left:auto; margin-right:auto; text-align:center; font-size:500%">Welcome</p>
+            <svg height="10" width="0" style="position:absolute;left:5%;top:100%; z-index:3">
+                <line x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(0,0,0);stroke-width:2; "/>
+            </svg>
         </div>
         <!--Put all login elements here -->
         <div id="loginDiv" style="position:absolute; background-color: rgba(255, 255, 255, 0.9)">
             <p id ="loginTxt" style="position:absolute; top:20%; width:100%; margin-left:auto; margin-right:auto; text-align:center; font-size:500%">Log In</p>
+            <svg height="10" width="0" style="position:absolute;left:5%;top:100%; z-index:3">
+                <line x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(0,0,0);stroke-width:2; "/>
+            </svg>
         </div>
         <!--Put all signup elements here -->
         <div id="signupDiv" style="position:absolute; background-color: rgba(255, 255, 255, 0.9)">
@@ -31,10 +37,16 @@
                     <asp:Button ID="submitbtn" runat="server" OnClick="submitbtn_Click" Text="Submit"/>
                 </div>
             </form>
+            <svg height="10" width="0" style="position:absolute;left:5%;top:100%; z-index:3">
+                <line x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(0,0,0);stroke-width:2; "/>
+            </svg>
         </div>
         <!--Put all about elements here -->
         <div id="aboutDiv" style="position:absolute; background-color: rgba(255, 255, 255, 0.9)">
             <p id ="aboutTxt" style="position:absolute; top:20%; width:100%; margin-left:auto; margin-right:auto; text-align:center; font-size:500%">About</p>
+            <svg height="10" width="0" style="position:absolute;left:5%;top:100%; z-index:3">
+                <line x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(0,0,0);stroke-width:2; "/>
+            </svg>
         </div>
         <!--Put all terms of use elements here -->
         <div id="termDiv" style="position:absolute; background-color: rgba(255, 255, 255, 0.9)">
