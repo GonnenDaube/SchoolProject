@@ -28,28 +28,28 @@ function updatePageSize() {
     var width = window.innerWidth;
     var height = window.innerHeight;
     document.getElementById("welcomeDiv").style.width = width * 0.9 + "px";
-    document.getElementById("welcomeDiv").style.height = height * 0.9 + "px";
+    document.getElementById("welcomeDiv").style.height = height * 0.95 + "px";
     document.getElementById("welcomeDiv").style.top = height * 0.05 + "px";
     document.getElementById("welcomeDiv").style.left = width * 0.05 + "px";
 
     document.getElementById("loginDiv").style.width = width * 0.9 + "px";
-    document.getElementById("loginDiv").style.height = height * 0.9 + "px";
-    document.getElementById("loginDiv").style.top = height * 1.05 + "px";
+    document.getElementById("loginDiv").style.height = height * 1 + "px";
+    document.getElementById("loginDiv").style.top = height * 1 + "px";
     document.getElementById("loginDiv").style.left = width * 0.05 + "px";
 
     document.getElementById("signupDiv").style.width = width * 0.9 + "px";
-    document.getElementById("signupDiv").style.height = height * 0.9 + "px";
-    document.getElementById("signupDiv").style.top = height * 2.05 + "px";
+    document.getElementById("signupDiv").style.height = height * 1 + "px";
+    document.getElementById("signupDiv").style.top = height * 2 + "px";
     document.getElementById("signupDiv").style.left = width * 0.05 + "px";
 
     document.getElementById("aboutDiv").style.width = width * 0.9 + "px";
-    document.getElementById("aboutDiv").style.height = height * 0.9 + "px";
-    document.getElementById("aboutDiv").style.top = height * 3.05 + "px";
+    document.getElementById("aboutDiv").style.height = height * 1 + "px";
+    document.getElementById("aboutDiv").style.top = height * 3 + "px";
     document.getElementById("aboutDiv").style.left = width * 0.05 + "px";
 
     document.getElementById("termDiv").style.width = width * 0.9 + "px";
-    document.getElementById("termDiv").style.height = height * 0.9 + "px";
-    document.getElementById("termDiv").style.top = height * 4.05 + "px";
+    document.getElementById("termDiv").style.height = height * 0.95 + "px";
+    document.getElementById("termDiv").style.top = height * 4 + "px";
     document.getElementById("termDiv").style.left = width * 0.05 + "px";
 
     document.getElementById("Hidden_Element").style.top = height * 5 - 2 + "px";
