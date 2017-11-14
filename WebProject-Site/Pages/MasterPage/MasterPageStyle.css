@@ -12,9 +12,24 @@
     background-color:rgb(6, 29, 101);
 }
 
+.dropIconRetract{
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    transition:0.5s;
+}
+
+.dropIconExpand{
+    -ms-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+    transition:0.5s;
+}
+
 .dropdown-content a{
     color: black;
     background-color: lightgray;
+    line-height: 350%;
     text-decoration:none;
     border: none;
     outline: none;

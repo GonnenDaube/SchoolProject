@@ -22,13 +22,13 @@ function updateUpperBarSize() {
     document.getElementById("library_btn").style.height = buttonHeight + "px";
     document.getElementById("library_btn").style.fontSize = buttonHeight / 4 + "px";
 
-    var children = document.getElementById("dropdownList").children;
+    var links = document.getElementsByTagName("a");
     document.getElementById("dropdownList").style.visibility = 'hidden';
-    for(var i = 0; i < children.length; i++){
-        children[i].style.height = buttonHeight + "px";
-        children[i].style.width = buttonWidth + "px";
-        children[i].style.top = "0px";
-        children[i].style.fontSize = buttonHeight / 4 + "px";
+    for(var i = 0; i < links.length; i++){
+        links[i].style.height = buttonHeight + "px";
+        links[i].style.width = buttonWidth + "px";
+        links[i].style.top = "0px";
+        links[i].style.fontSize = buttonHeight / 4 + "px";
     }
     document.getElementById("Upper_Bar").style.visibility = "visible";
 }
@@ -43,9 +43,13 @@ function dropbtnClick() {
         var children = document.getElementById("dropdownList").children;
         if (!dropped) {
             document.getElementById("dropdownList").style.visibility = 'hidden';
+            document.getElementById("homePageDropIcon").classList.add("dropIconRetract");
+            document.getElementById("homePageDropIcon").classList.remove("dropIconExpand");
         }
         else {
             document.getElementById("dropdownList").style.visibility = 'visible';
+            document.getElementById("homePageDropIcon").classList.add("dropIconExpand");
+            document.getElementById("homePageDropIcon").classList.remove("dropIconRetract");
         }
         for (var i = 0; i < children.length; i++) {
             if (!dropped) {
