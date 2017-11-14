@@ -1,36 +1,12 @@
-﻿
-
-function scrollToElement(id, transition) {
-    var height = window.innerHeight;
-    var elementLocation = 0;
-    var userLocation = document.documentElement.scrollTop;
-    switch (id) {
-        case "welcome":
-            elementLocation = 0;
-            break;
-        case "login":
-            elementLocation = height * 1;
-            break;
-        case "signup":
-            elementLocation = height * 2;
-            break;
-        case "about":
-            elementLocation = height * 3;
-            break;
-        case "terms":
-            elementLocation = height * 4;
-            break;
-    }
-    window.scrollBy(0, (elementLocation - userLocation));
-}
-
-function updatePageSize() {
+﻿function updatePageSize() {
     var width = window.innerWidth;
     var height = window.innerHeight;
+
     document.getElementById("welcomeDiv").style.width = width * 0.9 + "px";
     document.getElementById("welcomeDiv").style.height = height * 0.95 + "px";
     document.getElementById("welcomeDiv").style.top = height * 0.05 + "px";
     document.getElementById("welcomeDiv").style.left = width * 0.05 + "px";
+    document.getElementById("welcomePos").style.top = -height * 0.05 + "px";// is used for smooth scrolling
 
     document.getElementById("loginDiv").style.width = width * 0.9 + "px";
     document.getElementById("loginDiv").style.height = height * 1 + "px";

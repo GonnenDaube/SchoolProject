@@ -12,14 +12,16 @@
     background-color:rgb(6, 29, 101);
 }
 
-.dropdown-content button{
-    color: gray;
+.dropdown-content a{
+    color: black;
+    background-color: lightgray;
+    text-decoration:none;
     border: none;
     outline: none;
     cursor: pointer;
     transition:0.5s;
 }
 
-.dropdown-content button:hover, .dropdown-content button:focus{
+.dropdown-content a:hover, .dropdown-content a:focus{
     background-color: darkgray;
 }

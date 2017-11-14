@@ -14,11 +14,11 @@
             <div id="homePage_drop" style="position:absolute;">
                 <button id="homePage_btn" onclick="dropbtnClick();" class="dropbtn" style="position:absolute; z-index:2" runat="server">Home Page</button>
                 <div id="dropdownList" class="dropdown-content" style="position:absolute; z-index:1">
-                    <button id="welcome_btn" onclick="scrollToElement('welcome');" style="position:absolute; left:0px;">Welcome</button>
-                    <button id="login_btn" onclick="scrollToElement('login',250);" style="position:absolute; left:0px">Log In</button>
-                    <button id="signup_btn" onclick="scrollToElement('signup',250);" style="position:absolute; left:0px">Sign Up</button>
-                    <button id="about_btn" onclick="scrollToElement('about',250);" style="position:absolute; left:0px">About</button>
-                    <button id="terms_btn" onclick="scrollToElement('terms',250);" style="position:absolute; left:0px">Terms of Use</button>
+                    <a id="welcome_link" href="#welcomePos"style="position:absolute; left:0px; margin-left:auto; margin-right:auto; text-align:center;">Welcome</a>
+                    <a id="login_link" href="#loginDiv"style="position:absolute; left:0px; margin-left:auto; margin-right:auto; text-align:center;">Log In</a>
+                    <a id="signup_link" href="#signupDiv"style="position:absolute; left:0px; margin-left:auto; margin-right:auto; text-align:center;">Sign Up</a>
+                    <a id="about_link" href="#aboutDiv"style="position:absolute; left:0px; margin-left:auto; margin-right:auto; text-align:center;">About</a>
+                    <a id="terms_link" href="#termDiv"style="position:absolute; left:0px; margin-left:auto; margin-right:auto; text-align:center;">Terms of Use</a>
                 </div>
             </div>
             <div id="workingSpace" style="position:absolute;">
@@ -31,6 +31,7 @@
         <script src="/Pages/MasterPage/MasterPageJs.js"></script>
         <script src="/Pages/HomePage/HomePageJs.js"></script>
         <link href="/Pages/MasterPage/MasterPageStyle.css" rel="stylesheet" />
+        <link href="/Pages/HomePage/HomePageStyle.css" rel="stylesheet" />
         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
         
         </asp:ContentPlaceHolder>
