@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <div id="contentDiv" style="position:absolute; visibility:hidden; z-index:1" class="scrollGroup">
+    <div id="contentDiv" style="position:absolute; visibility:hidden; z-index:1" class="scrollGroup" onscroll="updateUserLocation();">
         <!--Put all welcome elements here -->
         <div id="welcomeDiv" style="position:absolute; background-color: rgba(255, 255, 255, 0.9)"> 
             <p id="welcomePos" style="position:absolute; font-size:1px; visibility:hidden">hidden-text</p>

@@ -30,6 +30,14 @@ function updateUpperBarSize() {
         links[i].style.top = "0px";
         links[i].style.fontSize = buttonHeight / 4 + "px";
     }
+
+    if (window.location.href.includes("HomePage.aspx"))
+        document.getElementById("homePageDropIcon").style.visibility = "visible";
+    else if (window.location.href.includes("WorkingSpace.aspx"))
+        document.getElementById("workingspaceLinkIcon").style.visibility = "visible";
+    else if (window.location.href.includes("Library.aspx"))
+        document.getElementById("libraryLinkIcon").style.visibility = "visible";
+
     document.getElementById("Upper_Bar").style.visibility = "visible";
 }
 

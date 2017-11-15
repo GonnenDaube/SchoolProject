@@ -1,6 +1,29 @@
-﻿function updatePageSize() {
-    var width = window.innerWidth;
-    var height = window.innerHeight;
+﻿var userlocation;
+var width;
+var height;
+
+function updateUserLocation() {
+    userlocation = document.getElementById("contentDiv").scrollTop;
+    var indicator = Math.floor((userlocation + height * 0.1) / height);
+    console.log("userlocation : " + userlocation);
+    console.log("indicator : " + indicator);
+    updateIndicator(indicator);
+}
+
+function updateIndicator(indicator) {
+    //gets indicator index (top to bottom)
+    //sets to visible and all others to hidden
+    document.getElementById("linkIcon" + indicator).style.visibility = "visible";
+    for (var i = 0; i < 5; i++) {
+        if(i != indicator)
+            document.getElementById("linkIcon" + i).style.visibility = "hidden";
+    }
+
+}
+
+function updatePageSize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
 
     document.getElementById("welcomeDiv").style.width = width * 0.9 + "px";
     document.getElementById("welcomeDiv").style.height = height * 0.95 + "px";
@@ -55,6 +78,7 @@ function addResizeEvent(func) {
         }
     }
 }
+
 function addLoadEvent(func) {
     var oldonload = window.onload;
     if (typeof window.onload != 'function') {
@@ -73,4 +97,5 @@ function addLoadEvent(func) {
 if (window.location.href.includes("HomePage.aspx")) {
     addLoadEvent(updatePageSize);
     addResizeEvent(updatePageSize);
+    addLoadEvent(updateUserLocation);
 }
