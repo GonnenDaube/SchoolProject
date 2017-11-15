@@ -8,45 +8,38 @@
         <div id="welcomeDiv" style="position:absolute; background-color: rgba(255, 255, 255, 0.9)"> 
             <p id="welcomePos" style="position:absolute; font-size:1px; visibility:hidden">hidden-text</p>
             <p id ="welcomeTxt" style="position:absolute; top:20%; width:100%; margin-left:auto; margin-right:auto; text-align:center; font-size:500%">Welcome</p>
-            <svg height="10" width="0" style="position:absolute;left:5%;top:100%; z-index:3">
-                <line x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(0,0,0);stroke-width:2; "/>
+            <svg height="10" width="0" style="position:absolute;left:5%;top:100%; z-index:3" class="breakLine">
+                <line x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(0,0,0);stroke-width:2; " class="line"/>
             </svg>
         </div>
         <!--Put all login elements here -->
         <div id="loginDiv" style="position:absolute; background-color: rgba(255, 255, 255, 0.9)">
             <p id ="loginTxt" style="position:absolute; top:20%; width:100%; margin-left:auto; margin-right:auto; text-align:center; font-size:500%">Log In</p>
-            <svg height="10" width="0" style="position:absolute;left:5%;top:100%; z-index:3">
-                <line x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(0,0,0);stroke-width:2; "/>
+            <svg height="10" width="0" style="position:absolute;left:5%;top:100%; z-index:3" class="breakLine">
+                <line x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(0,0,0);stroke-width:2; " class="line"/>
             </svg>
         </div>
         <!--Put all signup elements here -->
         <div id="signupDiv" style="position:absolute; background-color: rgba(255, 255, 255, 0.9)">
-            <form id="signUpForm" runat="server" style="position:absolute; top: 10%; width:25%; margin-left:auto; margin-right:auto; text-align:center; font-size:100%">
-                <div id="username">
-                    <p id="username-hint">Username:</p>
-                    <asp:TextBox ID="usernameTxtbox" runat="server" placeholder="Username"></asp:TextBox>
-                </div>
-                <div id="email">
-                    <p id="email-hint">Email:</p>
-                    <asp:TextBox ID="emailTxtbox" runat="server" placeholder="Email"></asp:TextBox>
-                </div>
-                <div id="password">
-                    <p id="password-hint">Password:</p>
-                    <asp:TextBox ID="passwordTxtbox" runat="server" placeholder="Password"></asp:TextBox>
-                </div>
-                <div id="submit">
-                    <asp:Button ID="submitbtn" runat="server" OnClick="submitbtn_Click" Text="Submit"/>
-                </div>
+            <p id ="headline" style="position:absolute; top:2.5%; width:100%; margin-left:auto; margin-right:auto; text-align:center; font-size:500%">Register:</p>
+            <form id="signUpForm" runat="server" style="position:absolute; top: 5%; width:25%; margin-left:auto; margin-right:auto; text-align:center; font-size:100%">
+                <div></div>
             </form>
-            <svg height="10" width="0" style="position:absolute;left:5%;top:100%; z-index:3">
-                <line x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(0,0,0);stroke-width:2; "/>
+            <p id="completion-barTxt" style="position:absolute;top:78%; width:100%; margin-left:auto; margin-right:auto; text-align:center; font-size:200%; z-index:4">0%</p>
+            <svg id="completion-bar" height="0" width="0" style="position:absolute; left:17.5%; top:80%; z-index:3">
+                <rect height="0" width="0" style="stroke:rgba(0,0,0,0); stroke-width:3; fill:rgb(64, 255, 89); z-index:2"></rect>
+                <rect height="0" width="0" style="stroke:rgb(0,0,0);stroke-width:3; fill:rgba(0,0,0,0); z-index:3"></rect>
+            </svg>
+            <button onclick="changeCompletionBar(33);"></button>
+            <svg height="10" width="0" style="position:absolute;left:5%;top:100%; z-index:3" class="breakLine">
+                <line x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(0,0,0);stroke-width:2; " class="line"/>
             </svg>
         </div>
         <!--Put all about elements here -->
         <div id="aboutDiv" style="position:absolute; background-color: rgba(255, 255, 255, 0.9)">
             <p id ="aboutTxt" style="position:absolute; top:20%; width:100%; margin-left:auto; margin-right:auto; text-align:center; font-size:500%">About</p>
-            <svg height="10" width="0" style="position:absolute;left:5%;top:100%; z-index:3">
-                <line x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(0,0,0);stroke-width:2; "/>
+            <svg height="10" width="0" style="position:absolute;left:5%;top:100%; z-index:3" class="breakLine">
+                <line x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(0,0,0);stroke-width:2; " class="line"/>
             </svg>
         </div>
         <!--Put all terms of use elements here -->

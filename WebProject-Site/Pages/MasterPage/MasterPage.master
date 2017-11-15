@@ -8,7 +8,7 @@
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body onload="updateUpperBarSize();" style="background-color:rgb(113, 116, 156)">
+<body onload="updateUpperBarSize();" style="background-color:rgb(113, 116, 156); font-family:'Franklin Gothic Medium';">
     <div>
         <div id="Upper_Bar" style="position:fixed; top:0px; left:0px; visibility:hidden; z-index:10">
             <div id="homePage_drop" style="position:absolute;">

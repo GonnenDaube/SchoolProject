@@ -5,8 +5,6 @@ var height;
 function updateUserLocation() {
     userlocation = document.getElementById("contentDiv").scrollTop;
     var indicator = Math.floor((userlocation + height * 0.1) / height);
-    console.log("userlocation : " + userlocation);
-    console.log("indicator : " + indicator);
     updateIndicator(indicator);
 }
 
@@ -19,6 +17,12 @@ function updateIndicator(indicator) {
             document.getElementById("linkIcon" + i).style.visibility = "hidden";
     }
 
+}
+
+function changeCompletionBar(percent) {
+    document.getElementById("completion-barTxt").innerHTML = percent + "%";
+    var barwidth = document.getElementById("completion-bar").getAttribute("width");
+    document.getElementById("completion-bar").getElementsByTagName("rect")[0].setAttribute("width", (barwidth * percent/100));
 }
 
 function updatePageSize() {
@@ -55,13 +59,19 @@ function updatePageSize() {
 
     document.getElementById("contentDiv").style.visibility = "visible";
 
-    var svgLines = document.getElementsByTagName("svg");
-    var lines = document.getElementsByTagName("line");
+    var svgLines = document.getElementsByClassName("breakLine");
+    var lines = document.getElementsByClassName("line");
 
     for (var i = 0; i < svgLines.length; i++) {
         svgLines[i].setAttribute("width", width * 0.8);
         lines[i].setAttribute("x2", width * 0.8);
     }
+
+    document.getElementById("completion-bar").setAttribute("height", width * 0.03);
+    document.getElementById("completion-bar").setAttribute("width", width * 0.6);
+    document.getElementById("completion-bar").getElementsByTagName("rect")[1].setAttribute("height", width * 0.03);
+    document.getElementById("completion-bar").getElementsByTagName("rect")[1].setAttribute("width", width * 0.6);
+    document.getElementById("completion-bar").getElementsByTagName("rect")[0].setAttribute("height", width * 0.03);
 }
 
 function addResizeEvent(func) {
