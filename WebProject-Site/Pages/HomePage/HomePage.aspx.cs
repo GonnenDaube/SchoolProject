@@ -11,10 +11,4 @@ public partial class Pages_HomePage_HomePage : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
     }
-
-
-
-    protected void submitbtn_Click(object sender, EventArgs e)
-    {
-    }
 }

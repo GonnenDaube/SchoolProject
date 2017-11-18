@@ -1,6 +1,29 @@
-﻿.dropbtn{
+﻿@font-face{
+    font-family:Ailerons;
+    src: url(/Resources/fonts/Ailerons-Typeface.otf);
+}
+
+.AileronsFont{
+    font-family:Ailerons;
+}
+
+.subTxt{
+    letter-spacing: 0.085vmax;
+}
+
+body{
+    background-image: url(/Resources/Images/polygon-mountain.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size:cover;
+    font-family:Ailerons;
+}
+
+.dropbtn{
     background-color:rgb(8, 37, 130);
     color: white;
+    font-family:Ailerons;
     border: none;
     outline: none;
     cursor: pointer;

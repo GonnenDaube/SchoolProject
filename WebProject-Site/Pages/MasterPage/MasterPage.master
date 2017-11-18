@@ -8,7 +8,7 @@
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body onload="updateUpperBarSize();" style="background-color:rgb(113, 116, 156); font-family:'Franklin Gothic Medium';">
+<body onload="updateUpperBarSize();">
     <div>
         <div id="Upper_Bar" style="position:fixed; top:0px; left:0px; visibility:hidden; z-index:10">
             <div id="homePage_drop" style="position:absolute;">
@@ -54,9 +54,11 @@
         </div>
         <script src="/Pages/MasterPage/MasterPageJs.js"></script>
         <script src="/Pages/HomePage/HomePageJs.js"></script>
+
         <link href="/Pages/MasterPage/MasterPageStyle.css" rel="stylesheet" />
         <link href="/Pages/HomePage/HomePageStyle.css" rel="stylesheet" />
-        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        <asp:ContentPlaceHolder id="body" runat="server">
         
         </asp:ContentPlaceHolder>
     </div>

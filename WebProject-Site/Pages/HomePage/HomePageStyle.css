@@ -8,3 +8,81 @@
     overflow-y:scroll;
     scroll-behavior: smooth;
 }
+
+.stage0{
+    position:absolute;
+    left:0%;
+    top:0%;
+    width:100%;
+    height:100%;
+    transition:0.5s;
+    cursor:pointer;
+}
+
+.stage0 img{
+    position:absolute; 
+    top:60%; 
+    left:47%; 
+    height:5vmax; 
+    width:5vmax;
+}
+.stage0 p{
+    position:absolute; 
+    top:20%; 
+    width:100%; 
+    margin-left:auto; 
+    margin-right:auto; 
+    text-align:center; 
+    font-size:5vmax; 
+    color:rgb(120, 51, 39);
+}
+
+.stage0Hidden{
+    position:absolute;
+    left:0%;
+    top:0%;
+    width:100%;
+    height:100%;
+    transition:0.5s;
+}
+
+.stage0Hidden img{
+    position:absolute; 
+    top:-5%; 
+    left:49.5%; 
+    height:1vmax; 
+    width:1vmax;
+    transition:0.5s;
+}
+.stage0Hidden p{
+    position:absolute; 
+    top:-22.5%; 
+    width:100%; 
+    margin-left:auto; 
+    margin-right:auto; 
+    text-align:center; 
+    font-size:2vmax; 
+    color:rgb(120, 51, 39);
+    transition:0.5s;
+}
+
+.showTrans{
+    opacity:1;
+    transition:0.5s;
+}
+
+.hideTrans{
+    opacity:0;
+    transition:0.5s;
+}
+
+.Textbox{
+    width:100%;
+    height:100%;
+    color:inherit;
+    background-color:inherit;
+    border:inherit;
+    outline:none;
+    font-size:inherit;
+    caret-color: rgb(255, 255, 255);
+}
