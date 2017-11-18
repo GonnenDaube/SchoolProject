@@ -68,6 +68,6 @@ body{
     transition:0.5s;
 }
 
-.dropdown-content a:hover, .dropdown-content a:focus{
+.dropdown-content a:hover, .dropdown-content a:focus {
     background-color: darkgray;
 }

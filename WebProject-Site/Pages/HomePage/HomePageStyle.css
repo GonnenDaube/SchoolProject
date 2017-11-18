@@ -133,3 +133,18 @@
 .transitionDelayhalfSec{
     transition-delay:0.5s;
 }
+
+.optionButton{
+    background-color:rgba(255, 248, 233,0.00);
+    transition:0.5s;
+}
+
+.optionButton:hover{
+    background-color:rgba(255, 248, 233,0.5);
+    transition:0.5s;
+}
+
+.selectedOption{
+    background-color:rgba(255, 248, 233,1.00);
+    transition:0.5s;
+}

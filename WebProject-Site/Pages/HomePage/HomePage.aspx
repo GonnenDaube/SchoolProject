@@ -58,20 +58,14 @@
                         </div>
                     </div>
                 </div>
-                <div id="stage2" style="position:absolute; top:20%; width:40%; height:50%; left:50%; z-index:2;" class="AileronsFont hideTrans">
-                    <div id="emailDiv1" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(131, 108, 108);">
-                        <p id="emailLbl1" style="position:absolute; left:30%; top:0%; margin-top:0.5%">Email:</p>
-                        <div style="border:none; background-color:rgba(0,0,0,0.00); color:white; width:10vw; height:3vw; font-size:1vw; position:absolute; left:50%; top:0%;" class="textboxStyle">
-                            <asp:TextBox ID="TextBox1" runat="server" CssClass="Textbox TrenchFont"></asp:TextBox>
-                            <svg style="position:absolute; top:100%; left:0%; height:5%">
-                                <line class="textboxLine" x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(120, 51, 39); stroke-width:1vw"></line>
-                            </svg>
-                        </div>
+                <div id="stage2" style="position:absolute; top:20%; width:30%; height:50%; left:50%; z-index:2;" class="AileronsFont hideTrans">
+                    <div id="usernameTitleDiv" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(131, 108, 108);">
+                        <p id="usernameTitleLbl" style="position:absolute; left:19.5%; top:0%; margin-top:0.5%; max-width:22.5vw; font-size:1.5vw">How do you want to be called?</p>
                     </div>
-                    <div id="passwordDiv1" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(131, 108, 108);">
-                        <p id="passwordLbl1" style="position:absolute; left:19.5%; top:0%; margin-top:0.5%">Password:</p>
-                        <div style="border:none; background-color:rgba(0,0,0,0.00); color:white; width:10vw; height:3vw; font-size:1vw; position:absolute; left:50%; top:0%;" class="textboxStyle">
-                            <asp:TextBox ID="TextBox2" runat="server" CssClass="Textbox TrenchFont"></asp:TextBox>
+                    <div id="usernameDiv" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(131, 108, 108);">
+                        <p id="usernameLbl" style="position:absolute; left:19.5%; top:0%; margin-top:0.5%">Username:</p>
+                        <div style="border:none; background-color:rgba(0,0,0,0.00); color:white; width:10vw; height:3vw; font-size:1vw; position:absolute; left:60%; top:0%;" class="textboxStyle">
+                            <asp:TextBox ID="usernameBox" runat="server" CssClass="Textbox TrenchFont"></asp:TextBox>
                             <svg style="position:absolute; top:100%; left:0%; height:5%">
                                 <line class="textboxLine" x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(120, 51, 39); stroke-width:1vw"></line>
                             </svg>
@@ -79,23 +73,14 @@
                     </div>
                 </div>
                 <div id="stage3" style="position:absolute; top:20%; width:40%; height:50%; left:57.5%; z-index:1;" class="AileronsFont hideTrans">
-                    <div id="emailDiv2" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(131, 108, 108);">
-                        <p id="emailLbl2" style="position:absolute; left:30%; top:0%; margin-top:0.5%">Email:</p>
-                        <div style="border:none; background-color:rgba(0,0,0,0.00); color:white; width:10vw; height:3vw; font-size:1vw; position:absolute; left:50%; top:0%;" class="textboxStyle">
-                            <asp:TextBox ID="TextBox3" runat="server" CssClass="Textbox TrenchFont"></asp:TextBox>
-                            <svg style="position:absolute; top:100%; left:0%; height:5%">
-                                <line class="textboxLine" x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(120, 51, 39); stroke-width:1vw"></line>
-                            </svg>
-                        </div>
+                    <div id="usageTitleDiv" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(131, 108, 108);">
+                        <p id="usageTitleLbl" style="position:absolute; left:19.5%; top:0%; margin-top:0.5%; max-width:22.5vw; font-size:1.5vw">How do you want to use Model Makertron 2100 - v2.0?</p>
                     </div>
-                    <div id="passwordDiv2" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(131, 108, 108);">
-                        <p id="passwordLbl2" style="position:absolute; left:19.5%; top:0%; margin-top:0.5%">Password:</p>
-                        <div style="border:none; background-color:rgba(0,0,0,0.00); color:white; width:10vw; height:3vw; font-size:1vw; position:absolute; left:50%; top:0%;" class="textboxStyle">
-                            <asp:TextBox ID="TextBox4" runat="server" CssClass="Textbox TrenchFont"></asp:TextBox>
-                            <svg style="position:absolute; top:100%; left:0%; height:5%">
-                                <line class="textboxLine" x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(120, 51, 39); stroke-width:1vw"></line>
-                            </svg>
-                        </div>
+                    <div id="creatorDiv" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(131, 108, 108); margin-top: 5%">
+                        <button id="creator" style="position:absolute; left:20%; width:57.5%; outline:none; border:solid; border-color:rgb(120, 51, 39); color:rgb(120, 51, 39); border-width:0.1vw; font-size:2vw; cursor:pointer;" class="AileronsFont optionButton" onclick="selectOption('creator'); return false;">Content Creator</button>
+                    </div>
+                    <div id="consumerDiv" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(131, 108, 108); margin-top:-5%">
+                        <button id="consumer" style="position:absolute; left:20%; width:57.5%; outline:none; border:solid; border-color:rgb(120, 51, 39); color:rgb(120, 51, 39); border-width:0.1vw; font-size:2vw; cursor:pointer;" class="AileronsFont optionButton" onclick="selectOption('consumer'); return false;">Content Consumer</button>
                     </div>
                 </div>
             </form>

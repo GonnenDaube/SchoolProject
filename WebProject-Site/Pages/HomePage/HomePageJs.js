@@ -139,7 +139,7 @@ function nextStep() {
     if (step == 3) {
         document.getElementById("stage2").classList.remove("transitionDelayhalfSec");
         document.getElementById("stage1").style.left = "3.5%";
-        document.getElementById("stage2").style.left = "30%";
+        document.getElementById("stage2").style.left = "32.5%";
         document.getElementById("stage3").classList.remove("hideTrans");
         document.getElementById("stage3").classList.add("showTrans");
         document.getElementById("stage3").classList.add("transitionDelayhalfSec");
@@ -149,4 +149,25 @@ function nextStep() {
         document.getElementById("stage3Svg").classList.remove("hiddenSignUpLine");
         document.getElementById("stage3Svg").classList.add("stage3-2SignUpLine");
     }
+}
+
+function selectOption(option) {
+    if (isSelected(option)) {
+        deselectOption(option);
+    }
+    else {
+        document.getElementById(option).classList.remove("optionButton");
+        document.getElementById(option).classList.add("selectedOption");
+    }
+}
+
+function deselectOption(option) {
+    document.getElementById(option).classList.add("optionButton");
+    document.getElementById(option).classList.remove("selectedOption");
+}
+
+function isSelected(option) {
+    if (document.getElementById(option).classList.contains("selectedOption"))
+        return true;
+    return false;
 }
