@@ -3,12 +3,21 @@
     src: url(/Resources/fonts/Ailerons-Typeface.otf);
 }
 
+@font-face{
+    font-family:Trench;
+    src: url(/Resources/fonts/trench100free.otf);
+}
+
 .AileronsFont{
     font-family:Ailerons;
 }
 
+.TrenchFont{
+    font-family:Trench;
+}
+
 .subTxt{
-    letter-spacing: 0.085vmax;
+    letter-spacing: 0.085vw;
 }
 
 body{
@@ -21,17 +30,17 @@ body{
 }
 
 .dropbtn{
-    background-color:rgb(8, 37, 130);
+    background-color:rgb(16, 11, 11);
     color: white;
     font-family:Ailerons;
     border: none;
     outline: none;
     cursor: pointer;
-    box-shadow: 2.5px 5px 5px rgba(0,0,0,0.1);
+    box-shadow: 0px 15px 40px rgba(0,0,0,0.5);
 }
 
 .dropbtn:hover, .dropbtn:focus{
-    background-color:rgb(6, 29, 101);
+    background-color:rgb(120, 51, 39);
 }
 
 .dropIconRetract{

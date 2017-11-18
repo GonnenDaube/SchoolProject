@@ -62,6 +62,18 @@ function updatePageSize() {
         svgLines[i].setAttribute("width", width * 0.8);
         lines[i].setAttribute("x2", width * 0.8);
     }
+
+    var textBoxLines = document.getElementsByClassName("textboxLine");
+
+    for (var i = 0; i < textBoxLines.length; i++) {
+        textBoxLines[i].setAttribute("x2", width * 0.1);
+    }
+
+    var signUpLines = document.getElementsByClassName("signUpLine");
+
+    for (var i = 0; i < signUpLines.length; i++) {
+        signUpLines[i].setAttribute("y2", 0.5 * panelHeight);
+    }
 }
 
 function addResizeEvent(func) {
@@ -108,4 +120,33 @@ function startRegistration() {
     document.getElementById("continue").classList.add("showTrans");
     document.getElementById("stage1").classList.remove("hideTrans");
     document.getElementById("stage1").classList.add("showTrans");
+    document.getElementById("stageNumber").innerHTML = parseInt(document.getElementById("stageNumber").innerHTML) + 1;
+}
+
+function nextStep() {
+    document.getElementById("stageNumber").innerHTML = parseInt(document.getElementById("stageNumber").innerHTML) + 1;
+    var step = parseInt(document.getElementById("stageNumber").innerHTML);
+    if (step == 2) {
+        document.getElementById("stage1").style.left = "10%";
+        document.getElementById("stage2").classList.remove("hideTrans");
+        document.getElementById("stage2").classList.add("showTrans");
+        document.getElementById("stage2").classList.add("transitionDelayhalfSec");
+
+        document.getElementById("stage2Svg").classList.remove("hiddenSignUpLine");
+        document.getElementById("stage2Svg").classList.add("stage2SignUpLine");
+    }
+
+    if (step == 3) {
+        document.getElementById("stage2").classList.remove("transitionDelayhalfSec");
+        document.getElementById("stage1").style.left = "3.5%";
+        document.getElementById("stage2").style.left = "30%";
+        document.getElementById("stage3").classList.remove("hideTrans");
+        document.getElementById("stage3").classList.add("showTrans");
+        document.getElementById("stage3").classList.add("transitionDelayhalfSec");
+
+        document.getElementById("stage2Svg").classList.remove("stage2SignUpLine");
+        document.getElementById("stage2Svg").classList.add("stage3-1SignUpLine");
+        document.getElementById("stage3Svg").classList.remove("hiddenSignUpLine");
+        document.getElementById("stage3Svg").classList.add("stage3-2SignUpLine");
+    }
 }

@@ -23,8 +23,8 @@
     position:absolute; 
     top:60%; 
     left:47%; 
-    height:5vmax; 
-    width:5vmax;
+    height:5vw; 
+    width:5vw;
 }
 .stage0 p{
     position:absolute; 
@@ -33,7 +33,7 @@
     margin-left:auto; 
     margin-right:auto; 
     text-align:center; 
-    font-size:5vmax; 
+    font-size:5vw; 
     color:rgb(120, 51, 39);
 }
 
@@ -50,8 +50,8 @@
     position:absolute; 
     top:-5%; 
     left:49.5%; 
-    height:1vmax; 
-    width:1vmax;
+    height:1vw; 
+    width:1vw;
     transition:0.5s;
 }
 .stage0Hidden p{
@@ -61,7 +61,7 @@
     margin-left:auto; 
     margin-right:auto; 
     text-align:center; 
-    font-size:2vmax; 
+    font-size:2vw; 
     color:rgb(120, 51, 39);
     transition:0.5s;
 }
@@ -85,4 +85,51 @@
     outline:none;
     font-size:inherit;
     caret-color: rgb(255, 255, 255);
+}
+
+.textboxStyle svg{
+    width:0%;
+    transition:0.5s;
+}
+
+.textboxStyle:hover svg{
+    width:100%;
+    transition:0.5s;
+}
+
+.hiddenSignUpLine{
+    position:absolute; 
+    left:89.9%; 
+    top:20%; 
+    height:50%; 
+    width:5%;
+    transition:0.5s;
+}
+.stage2SignUpLine{
+    position:absolute; 
+    left:50%; 
+    top:20%; 
+    height:50%; 
+    width:5%;
+    transition:0.5s;
+}
+.stage3-1SignUpLine{
+    position:absolute; 
+    left:36%;
+    top:20%; 
+    height:50%; 
+    width:5%;
+    transition:0.5s;
+}
+.stage3-2SignUpLine{
+    position:absolute; 
+    left:64%; 
+    top:20%; 
+    height:50%; 
+    width:5%;
+    transition:0.5s;
+}
+
+.transitionDelayhalfSec{
+    transition-delay:0.5s;
 }

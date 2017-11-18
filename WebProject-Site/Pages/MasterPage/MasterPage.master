@@ -14,41 +14,41 @@
             <div id="homePage_drop" style="position:absolute;">
                 <button id="homePage_btn" onclick="dropbtnClick();" class="dropbtn" style="position:absolute; z-index:2" runat="server">
                     Welcome
-                    <img src="/Resources/Icons/dropdown_icon.png" id="homePageDropIcon" style="position:absolute; height:1vmax; width:1vmax; top:65%; left: 47.5%; visibility:hidden" class="dropIconRetract"/>
+                    <img src="/Resources/Icons/dropdown_icon.png" id="homePageDropIcon" style="position:absolute; height:1vw; width:1vw; top:65%; left: 47.5%; visibility:hidden" class="dropIconRetract"/>
                 </button>
                 <div id="dropdownList" class="dropdown-content" style="position:absolute; z-index:1">
                     <a id="welcome_link" href="#welcomePos"style="position:absolute; left:0px; margin-left:auto; margin-right:auto; text-align:center;">
                         Welcome
-                        <img src="/Resources/Icons/dropdownLink_icon.png" id="linkIcon0" style="position:absolute; height:1vmax; width:1vmax; top:32.5%; left: 75%; visibility:hidden"/>
+                        <img src="/Resources/Icons/dropdownLink_icon.png" id="linkIcon0" style="position:absolute; height:1vw; width:1vw; top:32.5%; left: 75%; visibility:hidden"/>
                     </a>
                     <a id="login_link" href="#loginDiv"style="position:absolute; left:0px; margin-left:auto; margin-right:auto; text-align:center;">
                         Log In
-                        <img src="/Resources/Icons/dropdownLink_icon.png" id="linkIcon1" style="position:absolute; height:1vmax; width:1vmax; top:32.5%; left: 75%; visibility:hidden"/>
+                        <img src="/Resources/Icons/dropdownLink_icon.png" id="linkIcon1" style="position:absolute; height:1vw; width:1vw; top:32.5%; left: 75%; visibility:hidden"/>
                     </a>
                     <a id="signup_link" href="#signupDiv"style="position:absolute; left:0px; margin-left:auto; margin-right:auto; text-align:center;">
                         Sign Up
-                        <img src="/Resources/Icons/dropdownLink_icon.png" id="linkIcon2" style="position:absolute; height:1vmax; width:1vmax; top:32.5%; left: 75%; visibility:hidden"/>
+                        <img src="/Resources/Icons/dropdownLink_icon.png" id="linkIcon2" style="position:absolute; height:1vw; width:1vw; top:32.5%; left: 75%; visibility:hidden"/>
                     </a>
                     <a id="about_link" href="#aboutDiv"style="position:absolute; left:0px; margin-left:auto; margin-right:auto; text-align:center;">
                         About
-                        <img src="/Resources/Icons/dropdownLink_icon.png" id="linkIcon3" style="position:absolute; height:1vmax; width:1vmax; top:32.5%; left: 75%; visibility:hidden"/>
+                        <img src="/Resources/Icons/dropdownLink_icon.png" id="linkIcon3" style="position:absolute; height:1vw; width:1vw; top:32.5%; left: 75%; visibility:hidden"/>
                     </a>
                     <a id="terms_link" href="#termDiv"style="position:absolute; left:0px; margin-left:auto; margin-right:auto; text-align:center;">
                         Terms of Use
-                        <img src="/Resources/Icons/dropdownLink_icon.png" id="linkIcon4" style="position:absolute; height:1vmax; width:1vmax; top:32.5%; left: 75%; visibility:hidden"/>
+                        <img src="/Resources/Icons/dropdownLink_icon.png" id="linkIcon4" style="position:absolute; height:1vw; width:1vw; top:32.5%; left: 75%; visibility:hidden"/>
                     </a>
                 </div>
             </div>
             <div id="workingSpace" style="position:absolute;">
                 <button id="workingSpace_btn" onclick="buttonLinkClick('/Pages/WorkingSpace/WorkingSpace.aspx');" class="dropbtn" style="position:absolute; z-index:2">
                     Working Space
-                    <img src="/Resources/Icons/pagelink_icon.png" id="workingspaceLinkIcon" style="position:absolute; height:1vmax; width:1vmax; top:70%; left: 47.5%; visibility:hidden"/>
+                    <img src="/Resources/Icons/pagelink_icon.png" id="workingspaceLinkIcon" style="position:absolute; height:1vw; width:1vw; top:70%; left: 47.5%; visibility:hidden"/>
                 </button>
             </div>
             <div id="library" style="position:absolute;">
                 <button id="library_btn" onclick="buttonLinkClick('/Pages/Library/Library.aspx');" class="dropbtn" style="position:absolute; z-index:2">
                     Library
-                    <img src="/Resources/Icons/pagelink_icon.png" id="libraryLinkIcon" style="position:absolute; height:1vmax; width:1vmax; top:70%; left: 47.5%; visibility:hidden"/>
+                    <img src="/Resources/Icons/pagelink_icon.png" id="libraryLinkIcon" style="position:absolute; height:1vw; width:1vw; top:70%; left: 47.5%; visibility:hidden"/>
                 </button>
             </div>
         </div>
