@@ -7,7 +7,7 @@
         <!--Put all welcome elements here -->
         <div id="welcomeDiv" style="position:absolute; background-color: rgba(255, 248, 233,0.9)"> 
             <p id="welcomePos" style="position:absolute; font-size:1px; visibility:hidden">hidden-text</p>
-            <div id="welcomeHeader" style="position:absolute;top:37.5%; width:100%; height:100%; margin-left:auto; margin-right:auto; text-align:center;">
+            <div id="welcomeHeader" style="position:absolute;top:30%; width:100%; height:100%; margin-left:auto; margin-right:auto; text-align:center;">
                 <p id ="welcomeTxt" style="font-size:10vw; margin-top:0%; margin-bottom:0%;">Welcome</p>
                 <p id="subTxt" style="position:relative;top:0% ;font-size:2vw; margin-top:0%; margin-bottom:0%;" class="subTxt">The Model Makertron 2100 - v2.0</p>
             </div>
@@ -82,6 +82,8 @@
                     <div id="consumerDiv" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(131, 108, 108); margin-top:-5%">
                         <button id="consumer" style="position:absolute; left:20%; width:57.5%; outline:none; border:solid; border-color:rgb(120, 51, 39); color:rgb(120, 51, 39); border-width:0.1vw; font-size:2vw; cursor:pointer;" class="AileronsFont optionButton" onclick="selectOption('consumer'); return false;">Content Consumer</button>
                     </div>
+                    <asp:hiddenfield id="content_creator" runat="server" Value="False"></asp:hiddenfield>
+                    <asp:hiddenfield id="content_consumer" runat="server" Value="False"></asp:hiddenfield>
                 </div>
                 <asp:button runat="server" text="SignUp" id="submitButton" CssClass="AileronsFont hideTrans buttonSignUp" OnClick="SignUp"/>
             </form>

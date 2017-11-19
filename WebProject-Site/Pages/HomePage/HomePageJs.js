@@ -163,12 +163,14 @@ function selectOption(option) {
     else {
         document.getElementById(option).classList.remove("optionButton");
         document.getElementById(option).classList.add("selectedOption");
+        document.getElementById("body_content_" + option).nodeValue = "True";
     }
 }
 
 function deselectOption(option) {
     document.getElementById(option).classList.add("optionButton");
     document.getElementById(option).classList.remove("selectedOption");
+    document.getElementById("body_content_" + option).nodeValue = "False";
 }
 
 function isSelected(option) {
