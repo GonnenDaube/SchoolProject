@@ -110,7 +110,21 @@ if (window.location.href.includes("HomePage.aspx")) {
     addLoadEvent(updatePageSize);
     addResizeEvent(updatePageSize);
     addLoadEvent(updateUserLocation);
+
+    //document.getElementById("body_emailBox").onchange = validateTextBox(document.getElementById("body_emailBox"), 'email');
+    //document.getElementById("body_usernameBox").onchange = validateTextBox(document.getElementById("body_usernameBox"), 'username');
+    //document.getElementById("body_passwordBox").onchange = validateTextBox(document.getElementById("body_passwordBox"), 'password');
 }
+
+
+//function validateTextBox(textObj, textType) {
+//    if (textObj.value == null || textObj.value == "") {
+//        alert(textType + " field must not be empty");
+//    }
+//    else if (textType.includes("email")) {
+
+//    }
+//}
 
 function startRegistration() {
     document.getElementById("signupframe").style.zIndex = 0;
@@ -130,6 +144,7 @@ function nextStep() {
         document.getElementById("stage1").style.left = "10%";
         document.getElementById("stage2").classList.remove("hideTrans");
         document.getElementById("stage2").classList.add("showTrans");
+        console.log("shows stage2");
         document.getElementById("stage2").classList.add("transitionDelayhalfSec");
 
         document.getElementById("stage2Svg").classList.remove("hiddenSignUpLine");
@@ -163,14 +178,14 @@ function selectOption(option) {
     else {
         document.getElementById(option).classList.remove("optionButton");
         document.getElementById(option).classList.add("selectedOption");
-        document.getElementById("body_content_" + option).nodeValue = "True";
+        document.getElementById("body_content_" + option).setAttribute("value", "True");
     }
 }
 
 function deselectOption(option) {
     document.getElementById(option).classList.add("optionButton");
     document.getElementById(option).classList.remove("selectedOption");
-    document.getElementById("body_content_" + option).nodeValue = "False";
+    document.getElementById("body_content_" + option).setAttribute("value", "False");
 }
 
 function isSelected(option) {

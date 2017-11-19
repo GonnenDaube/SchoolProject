@@ -71,3 +71,8 @@ body{
 .dropdown-content a:hover, .dropdown-content a:focus {
     background-color: darkgray;
 }
+
+.HiddenField{
+    position:absolute;
+    visibility:hidden;
+}

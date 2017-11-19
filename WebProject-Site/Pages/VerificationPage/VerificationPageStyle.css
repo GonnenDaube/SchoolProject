@@ -1,0 +1,38 @@
+﻿@font-face{
+    font-family:Ailerons;
+    src: url(/Resources/fonts/Ailerons-Typeface.otf);
+}
+
+@font-face{
+    font-family:Trench;
+    src: url(/Resources/fonts/trench100free.otf);
+}
+
+body{
+    background-image: url(/Resources/Images/polygon-mountain.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size:cover;
+    font-family:Ailerons;
+}
+
+.Button{
+    background-color:rgb(16, 11, 11);
+    color: white;
+    position:absolute;
+    left:45%;
+    top:60%;
+    width:10%;
+    height:10%;
+    font-size:2vw;
+    font-family:Ailerons;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    box-shadow: 0px 1vw 3vw rgba(0,0,0,0.5);
+}
+
+.Button:hover{
+    background-color:rgb(120, 51, 39);
+}

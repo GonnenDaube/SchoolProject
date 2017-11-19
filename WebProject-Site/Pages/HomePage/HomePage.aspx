@@ -11,6 +11,7 @@
                 <p id ="welcomeTxt" style="font-size:10vw; margin-top:0%; margin-bottom:0%;">Welcome</p>
                 <p id="subTxt" style="position:relative;top:0% ;font-size:2vw; margin-top:0%; margin-bottom:0%;" class="subTxt">The Model Makertron 2100 - v2.0</p>
             </div>
+            <asp:Panel ID="WelcomeMessage" runat="server"></asp:Panel>
             <svg height="10" width="0" style="position:absolute;left:5%;top:100%; z-index:3" class="breakLine">
                 <line x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(0,0,0);stroke-width:2; " class="line"/>
             </svg>
@@ -42,6 +43,7 @@
                     <div id="emailDiv" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(131, 108, 108);">
                         <p id="emailLbl" style="position:absolute; left:19.5%; top:0%; margin-top:0.5%">Email:</p>
                         <div style="border:none; background-color:rgba(0,0,0,0.00); color:white; width:10vw; height:3vw; font-size:1vw; position:absolute; left:40%; top:0%;" class="textboxStyle">
+                            <asp:RegularExpressionValidator ID="EmailValidator" runat="server" ErrorMessage="Email must be in email format: example@domain.com" ValidationExpression="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" ControlToValidate="emailBox" CssClass="TrenchFont validator validatorPosHeader"></asp:RegularExpressionValidator>
                             <asp:TextBox ID="emailBox" runat="server" CssClass="Textbox TrenchFont"></asp:TextBox>
                             <svg style="position:absolute; top:100%; left:0%; height:5%">
                                 <line class="textboxLine" x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(120, 51, 39); stroke-width:1vw"></line>
@@ -51,6 +53,7 @@
                     <div id="passwordDiv" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(131, 108, 108);">
                         <p id="passwordLbl" style="position:absolute; left:19.5%; top:0%; margin-top:0.5%">Password:</p>
                         <div style="border:none; background-color:rgba(0,0,0,0.00); color:white; width:10vw; height:3vw; font-size:1vw; position:absolute; left:50%; top:0%;" class="textboxStyle">
+                            <asp:RegularExpressionValidator ID="PasswordValidator" runat="server" ErrorMessage="Password must be in password format" ToolTip="password needs the following:&#013;contain only alphabetic letters and number,&#013;between 8-15 characters" ControlToValidate="passwordBox" ValidationExpression="^([a-zA-Z0-9@*#]{8,15})$" CssClass="TrenchFont validator validatorPosFooter"></asp:RegularExpressionValidator>
                             <asp:TextBox ID="passwordBox" runat="server" CssClass="Textbox TrenchFont"></asp:TextBox>
                             <svg style="position:absolute; top:100%; left:0%; height:5%">
                                 <line class="textboxLine" x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(120, 51, 39); stroke-width:1vw"></line>
@@ -65,6 +68,7 @@
                     <div id="usernameDiv" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(131, 108, 108);">
                         <p id="usernameLbl" style="position:absolute; left:19.5%; top:0%; margin-top:0.5%">Username:</p>
                         <div style="border:none; background-color:rgba(0,0,0,0.00); color:white; width:10vw; height:3vw; font-size:1vw; position:absolute; left:60%; top:0%;" class="textboxStyle">
+                            <asp:RegularExpressionValidator ID="UsernameValidator" runat="server" ErrorMessage="Username needs to be between 4-20 characters" ControlToValidate="usernameBox" ValidationExpression="^[A-Za-z0-9._]{4,20}$" CssClass="TrenchFont validator validatorPosFooter"></asp:RegularExpressionValidator>
                             <asp:TextBox ID="usernameBox" runat="server" CssClass="Textbox TrenchFont"></asp:TextBox>
                             <svg style="position:absolute; top:100%; left:0%; height:5%">
                                 <line class="textboxLine" x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(120, 51, 39); stroke-width:1vw"></line>
@@ -82,8 +86,8 @@
                     <div id="consumerDiv" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(131, 108, 108); margin-top:-5%">
                         <button id="consumer" style="position:absolute; left:20%; width:57.5%; outline:none; border:solid; border-color:rgb(120, 51, 39); color:rgb(120, 51, 39); border-width:0.1vw; font-size:2vw; cursor:pointer;" class="AileronsFont optionButton" onclick="selectOption('consumer'); return false;">Content Consumer</button>
                     </div>
-                    <asp:hiddenfield id="content_creator" runat="server" Value="False"></asp:hiddenfield>
-                    <asp:hiddenfield id="content_consumer" runat="server" Value="False"></asp:hiddenfield>
+                    <asp:TextBox ID="content_creator" runat="server" Text="False" CssClass="HiddenField"></asp:TextBox>
+                    <asp:TextBox ID="content_consumer" runat="server" Text="False" CssClass="HiddenField"></asp:TextBox>
                 </div>
                 <asp:button runat="server" text="SignUp" id="submitButton" CssClass="AileronsFont hideTrans buttonSignUp" OnClick="SignUp"/>
             </form>

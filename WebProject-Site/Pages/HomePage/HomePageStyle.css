@@ -166,3 +166,38 @@
     font-size:2vw; 
     cursor:pointer;
 }
+
+.validator{
+    font-size:1vw;
+    max-width:10vw;
+    color:indianred;
+}
+
+.validatorPosHeader{
+    position:absolute;
+    left:0%;
+    top:-65%;
+}
+.validatorPosFooter{
+    position:absolute;
+    left:0%;
+    top:110%;
+}
+
+.WelcomeMessage{
+    position:absolute;
+    left:0%;
+    top:60%;
+    width:100%;
+}
+.WelcomeMessage p{
+    position:absolute;
+    left:0%;
+    top:0%;
+    font-size:2vw;
+    width:100%;
+    color:rgb(106, 155, 0);
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+}
