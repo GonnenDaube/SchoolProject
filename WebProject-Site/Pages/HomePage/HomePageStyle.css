@@ -68,11 +68,13 @@
 
 .showTrans{
     opacity:1;
+    visibility:visible;
     transition:0.5s;
 }
 
 .hideTrans{
     opacity:0;
+    visibility:hidden;
     transition:0.5s;
 }
 
@@ -147,4 +149,20 @@
 .selectedOption{
     background-color:rgba(255, 248, 233,1.00);
     transition:0.5s;
+}
+
+.buttonSignUp{
+    position:absolute; 
+    top:75%; 
+    left:40%; 
+    width:20%; 
+    height:10%; 
+    outline:none; 
+    border:solid; 
+    border-color:rgb(120, 51, 39); 
+    color:rgb(120, 51, 39); 
+    border-width:0.1vw; 
+    background-color:rgba(0,0,0,0.00); 
+    font-size:2vw; 
+    cursor:pointer;
 }

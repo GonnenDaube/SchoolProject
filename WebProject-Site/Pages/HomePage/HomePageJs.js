@@ -148,6 +148,11 @@ function nextStep() {
         document.getElementById("stage2Svg").classList.add("stage3-1SignUpLine");
         document.getElementById("stage3Svg").classList.remove("hiddenSignUpLine");
         document.getElementById("stage3Svg").classList.add("stage3-2SignUpLine");
+
+        document.getElementById("continue").classList.add("hideTrans");
+        document.getElementById("body_submitButton").classList.remove("hideTrans");
+        document.getElementById("continue").classList.remove("showTrans");
+        document.getElementById("body_submitButton").classList.add("showTrans");
     }
 }
 
