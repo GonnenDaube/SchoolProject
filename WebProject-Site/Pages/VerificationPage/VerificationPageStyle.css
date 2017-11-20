@@ -8,6 +8,10 @@
     src: url(/Resources/fonts/trench100free.otf);
 }
 
+.TrenchFont{
+    font-family:Trench;
+}
+
 body{
     background-image: url(/Resources/Images/polygon-mountain.jpg);
     background-repeat: no-repeat;

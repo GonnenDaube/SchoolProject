@@ -86,7 +86,11 @@
     border:inherit;
     outline:none;
     font-size:inherit;
-    caret-color: rgb(255, 255, 255);
+    caret-color: inherit;
+}
+
+.WhiteCaret{
+    caret-color: white;
 }
 
 .textboxStyle svg{
@@ -137,17 +141,18 @@
 }
 
 .optionButton{
-    background-color:rgba(255, 248, 233,0.00);
+    background-color:rgba(0,0,0,0.00);
     transition:0.5s;
 }
 
 .optionButton:hover{
-    background-color:rgba(255, 248, 233,0.5);
+    box-shadow: 0px 1vw 3vw rgba(0,0,0,0.5);
     transition:0.5s;
 }
 
 .selectedOption{
-    background-color:rgba(255, 248, 233,1.00);
+    background-color:rgba(0,0,0,0.20);
+    box-shadow: 0px 1vw 3vw rgba(0,0,0,0.5);
     transition:0.5s;
 }
 
@@ -165,6 +170,34 @@
     background-color:rgba(0,0,0,0.00); 
     font-size:2vw; 
     cursor:pointer;
+}
+
+.buttonLogin{
+    position:absolute; 
+    top:60%; 
+    left:40%; 
+    width:20%; 
+    height:10%; 
+    outline:none; 
+    border:solid; 
+    border-color:rgb(16, 11, 11); 
+    color:rgb(16, 11, 11); 
+    border-width:0.1vw; 
+    background-color:rgba(0,0,0,0.00); 
+    font-size:2vw; 
+    cursor:pointer;
+    z-index:3;
+    transition:0.5s;
+}
+
+.buttonLogin:hover{
+    box-shadow: 0px 1vw 3vw rgba(0,0,0,0.5);
+    transition:0.5s;
+}
+
+.buttonSignUp:hover{
+    box-shadow: 0px 1vw 3vw rgba(0,0,0,0.5);
+    transition:0.5s;
 }
 
 .validator{

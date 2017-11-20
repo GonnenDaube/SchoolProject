@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">
+    <form id="HomePageForm" runat="server">
     <div id="contentDiv" style="position:absolute; visibility:hidden; z-index:1" class="scrollGroup" onscroll="updateUserLocation();">
         <!--Put all welcome elements here -->
         <div id="welcomeDiv" style="position:absolute; background-color: rgba(255, 248, 233,0.9)"> 
@@ -18,20 +19,43 @@
         </div>
         <!--Put all login elements here -->
         <div id="loginDiv" style="position:absolute; background-color: rgba(255, 248, 233,0.9)">
-            <p id ="loginTxt" style="position:absolute; top:20%; width:100%; margin-left:auto; margin-right:auto; text-align:center; font-size:4vw">Log In</p>
+            <p id ="loginTxt" style="position:absolute; top:10%; width:100%; margin-left:auto; margin-right:auto; text-align:center; font-size:5vw; margin-top:0%">Log In</p>
+            <div id="loginForm" style="position:absolute; top:20%; width:40%; height:50%; left:31.5%; z-index:2;" class="TrenchFont">
+                    <div id="emailLogInDiv" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(16, 11, 11);">
+                        <p id="emailLogInLbl" style="position:absolute; left:19.5%; top:0%; margin-top:0.5%">Email:</p>
+                        <div style="border:none; background-color:rgba(0,0,0,0.00); color:rgb(16, 11, 11); width:10vw; height:3vw; font-size:1vw; position:absolute; left:40%; top:0%;" class="textboxStyle">
+                            <asp:TextBox ID="emailLogInBox" runat="server" CssClass="Textbox TrenchFont"></asp:TextBox>
+                            <svg style="position:absolute; top:100%; left:0%; height:5%">
+                                <line class="textboxLine" x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(16, 11, 11); stroke-width:1vw"></line>
+                            </svg>
+                        </div>
+                    </div>
+                    <div id="passwordLogInDiv" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(16, 11, 11);">
+                        <p id="passwordLogInLbl" style="position:absolute; left:19.5%; top:0%; margin-top:0.5%">Password:</p>
+                        <div style="border:none; background-color:rgba(0,0,0,0.00); color:rgb(16, 11, 11); width:10vw; height:3vw; font-size:1vw; position:absolute; left:50%; top:0%;" class="textboxStyle">
+                            <asp:TextBox ID="passwordLogInBox" runat="server" CssClass="Textbox TrenchFont"></asp:TextBox>
+                            <svg style="position:absolute; top:100%; left:0%; height:5%">
+                                <line class="textboxLine" x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(16, 11, 11); stroke-width:1vw"></line>
+                            </svg>
+                        </div>
+                    </div>
+            </div>
+            <div id="loginMessageDiv" style="position:absolute; width:100%; height:20%; top:50%; font-size:1.5vw; color:indianred;">
+                <asp:Panel ID="loginMessage" runat="server"></asp:Panel>
+            </div>
+            <asp:button runat="server" text="LOG IN" id="LoginButton" CssClass="AileronsFont buttonLogin" OnClick="Login"/>
             <svg height="10" width="0" style="position:absolute;left:5%;top:100%; z-index:3" class="breakLine">
                 <line x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(0,0,0);stroke-width:2; " class="line"/>
             </svg>
         </div>
         <!--Put all signup elements here -->
         <div id="signupDiv" style="position:absolute; background-color:rgba(16, 11, 11, 0.99)">
-            <button id="signupframe" style="position:absolute; top:20%; width:80%; height:50%; left: 10%; border:solid; border-color:rgb(120, 51, 39); border-width:0.1vw; background-color:rgba(255, 255, 255, 0.00); z-index:4; outline:none" onclick="startRegistration();" class="AileronsFont">
+            <button id="signupframe" style="position:absolute; top:20%; width:80%; height:50%; left: 10%; border:solid; border-color:rgb(120, 51, 39); border-width:0.1vw; background-color:rgba(255, 255, 255, 0.00); z-index:4; outline:none" onclick="startRegistration(); return false;" class="AileronsFont optionButton">
                 <div id="stage0" class="stage0">
                     <p id="headline">SIGN UP</p>
                     <img src="/Resources/Icons/dropdown_icon.png"/>
                 </div>
             </button>
-            <form id="signUpForm" runat="server">
                 <p id="stageNumber" style="visibility:hidden; position:absolute;">0</p>
                 <svg class="hiddenSignUpLine" id="stage2Svg">
                         <line id="stage2Line" class="signUpLine" x1="0" x2="0" y1="0" y2="0" style="stroke:rgb(120, 51, 39); stroke-width:0.25vw"></line>
@@ -44,7 +68,7 @@
                         <p id="emailLbl" style="position:absolute; left:19.5%; top:0%; margin-top:0.5%">Email:</p>
                         <div style="border:none; background-color:rgba(0,0,0,0.00); color:white; width:10vw; height:3vw; font-size:1vw; position:absolute; left:40%; top:0%;" class="textboxStyle">
                             <asp:RegularExpressionValidator ID="EmailValidator" runat="server" ErrorMessage="Email must be in email format: example@domain.com" ValidationExpression="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" ControlToValidate="emailBox" CssClass="TrenchFont validator validatorPosHeader"></asp:RegularExpressionValidator>
-                            <asp:TextBox ID="emailBox" runat="server" CssClass="Textbox TrenchFont"></asp:TextBox>
+                            <asp:TextBox ID="emailBox" runat="server" CssClass="Textbox TrenchFont WhiteCaret"></asp:TextBox>
                             <svg style="position:absolute; top:100%; left:0%; height:5%">
                                 <line class="textboxLine" x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(120, 51, 39); stroke-width:1vw"></line>
                             </svg>
@@ -54,7 +78,7 @@
                         <p id="passwordLbl" style="position:absolute; left:19.5%; top:0%; margin-top:0.5%">Password:</p>
                         <div style="border:none; background-color:rgba(0,0,0,0.00); color:white; width:10vw; height:3vw; font-size:1vw; position:absolute; left:50%; top:0%;" class="textboxStyle">
                             <asp:RegularExpressionValidator ID="PasswordValidator" runat="server" ErrorMessage="Password must be in password format" ToolTip="password needs the following:&#013;contain only alphabetic letters and number,&#013;between 8-15 characters" ControlToValidate="passwordBox" ValidationExpression="^([a-zA-Z0-9@*#]{8,15})$" CssClass="TrenchFont validator validatorPosFooter"></asp:RegularExpressionValidator>
-                            <asp:TextBox ID="passwordBox" runat="server" CssClass="Textbox TrenchFont"></asp:TextBox>
+                            <asp:TextBox ID="passwordBox" runat="server" CssClass="Textbox TrenchFont WhiteCaret"></asp:TextBox>
                             <svg style="position:absolute; top:100%; left:0%; height:5%">
                                 <line class="textboxLine" x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(120, 51, 39); stroke-width:1vw"></line>
                             </svg>
@@ -69,7 +93,7 @@
                         <p id="usernameLbl" style="position:absolute; left:19.5%; top:0%; margin-top:0.5%">Username:</p>
                         <div style="border:none; background-color:rgba(0,0,0,0.00); color:white; width:10vw; height:3vw; font-size:1vw; position:absolute; left:60%; top:0%;" class="textboxStyle">
                             <asp:RegularExpressionValidator ID="UsernameValidator" runat="server" ErrorMessage="Username needs to be between 4-20 characters" ControlToValidate="usernameBox" ValidationExpression="^[A-Za-z0-9._]{4,20}$" CssClass="TrenchFont validator validatorPosFooter"></asp:RegularExpressionValidator>
-                            <asp:TextBox ID="usernameBox" runat="server" CssClass="Textbox TrenchFont"></asp:TextBox>
+                            <asp:TextBox ID="usernameBox" runat="server" CssClass="Textbox TrenchFont WhiteCaret"></asp:TextBox>
                             <svg style="position:absolute; top:100%; left:0%; height:5%">
                                 <line class="textboxLine" x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(120, 51, 39); stroke-width:1vw"></line>
                             </svg>
@@ -90,8 +114,7 @@
                     <asp:TextBox ID="content_consumer" runat="server" Text="False" CssClass="HiddenField"></asp:TextBox>
                 </div>
                 <asp:button runat="server" text="SignUp" id="submitButton" CssClass="AileronsFont hideTrans buttonSignUp" OnClick="SignUp"/>
-            </form>
-            <button id="continue" class="AileronsFont hideTrans buttonSignUp" onclick="nextStep();">Continue</button>
+                <button id="continue" class="AileronsFont hideTrans buttonSignUp" onclick="nextStep(); return false;">Continue</button>
         </div>
         <!--Put all about elements here -->
         <div id="aboutDiv" style="position:absolute; background-color: rgba(255, 248, 233,0.9)">
@@ -110,5 +133,6 @@
 
         <!-- COMMENT: Make sure when percentages used to only put Y percentages on childs of responsive parents-->
     </div>
+    </form>
 </asp:Content>
 

@@ -110,24 +110,11 @@ if (window.location.href.includes("HomePage.aspx")) {
     addLoadEvent(updatePageSize);
     addResizeEvent(updatePageSize);
     addLoadEvent(updateUserLocation);
-
-    //document.getElementById("body_emailBox").onchange = validateTextBox(document.getElementById("body_emailBox"), 'email');
-    //document.getElementById("body_usernameBox").onchange = validateTextBox(document.getElementById("body_usernameBox"), 'username');
-    //document.getElementById("body_passwordBox").onchange = validateTextBox(document.getElementById("body_passwordBox"), 'password');
 }
-
-
-//function validateTextBox(textObj, textType) {
-//    if (textObj.value == null || textObj.value == "") {
-//        alert(textType + " field must not be empty");
-//    }
-//    else if (textType.includes("email")) {
-
-//    }
-//}
 
 function startRegistration() {
     document.getElementById("signupframe").style.zIndex = 0;
+    document.getElementById("signupframe").classList.remove("optionButton");
     document.getElementById("stage0").classList.remove("stage0");
     document.getElementById("stage0").classList.add("stage0Hidden");
     document.getElementById("continue").classList.remove("hideTrans");
