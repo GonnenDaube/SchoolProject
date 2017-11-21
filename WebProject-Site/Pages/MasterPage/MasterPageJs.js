@@ -47,12 +47,6 @@ function dropbtnClick() {
     }
     else {
         var children = document.getElementById("dropdownList").children;
-        var ispartof = false;
-        for (var i = 0; i < children.length; i++) {
-            if (document.hasFocus())
-                ispartof = true;
-        }
-        if (!ispartof) {// is button itself - then close/open. is not related - then close
             dropped = !dropped;
             if (!dropped) {
                 document.getElementById("dropdownList").style.visibility = 'hidden';
@@ -72,7 +66,6 @@ function dropbtnClick() {
                     children[i].style.top = buttonHeight * (i + 1) + "px";
                 }
             }
-        }
     }
 }
 
