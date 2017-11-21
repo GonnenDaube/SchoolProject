@@ -19,40 +19,46 @@
         </div>
         <!--Put all login elements here -->
         <div id="loginDiv" style="position:absolute; background-color: rgba(255, 248, 233,0.9)">
+            <asp:ScriptManager ID="ScriptManager" runat="server">
+            </asp:ScriptManager>
+            <asp:UpdatePanel ID="UpdatePanelLogin" runat="server">
+            <ContentTemplate>
             <p id ="loginTxt" style="position:absolute; top:10%; width:100%; margin-left:auto; margin-right:auto; text-align:center; font-size:5vw; margin-top:0%">Log In</p>
             <div id="loginForm" style="position:absolute; top:20%; width:40%; height:50%; left:30%; z-index:2;" class="TrenchFont">
-                    <div id="emailLogInDiv" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(16, 11, 11);">
-                        <p id="emailLogInLbl" style="position:absolute; left:19.5%; top:0%; margin-top:0.5%">Email:</p>
-                        <div style="border:none; background-color:rgba(0,0,0,0.00); color:rgb(16, 11, 11); width:10vw; height:3vw; font-size:1vw; position:absolute; left:40%; top:0%;" class="textboxStyle">
-                            <asp:TextBox ID="emailLogInBox" runat="server" CssClass="Textbox TrenchFont"></asp:TextBox>
-                            <svg style="position:absolute; top:100%; left:0%; height:5%">
-                                <line class="textboxLine" x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(16, 11, 11); stroke-width:1vw"></line>
-                            </svg>
-                        </div>
+                <div id="emailLogInDiv" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(16, 11, 11);">
+                    <p id="emailLogInLbl" style="position:absolute; left:19.5%; top:0%; margin-top:0.5%">Email:</p>
+                    <div style="border:none; background-color:rgba(0,0,0,0.00); color:rgb(16, 11, 11); width:10vw; height:3vw; font-size:1vw; position:absolute; left:40%; top:0%;" class="textboxStyle">
+                        <asp:TextBox ID="emailLogInBox" runat="server" CssClass="Textbox TrenchFont"></asp:TextBox>
+                        <svg style="position:absolute; top:100%; left:0%; height:5%">
+                            <line class="textboxLine" x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(16, 11, 11); stroke-width:1vw"></line>
+                        </svg>
                     </div>
-                    <div id="passwordLogInDiv" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(16, 11, 11);">
-                        <p id="passwordLogInLbl" style="position:absolute; left:19.5%; top:0%; margin-top:0.5%">Password:</p>
-                        <div style="border:none; background-color:rgba(0,0,0,0.00); color:rgb(16, 11, 11); width:10vw; height:3vw; font-size:1vw; position:absolute; left:50%; top:0%;" class="textboxStyle">
-                            <asp:TextBox ID="passwordLogInBox" runat="server" CssClass="Textbox TrenchFont" TextMode="Password"></asp:TextBox>
-                            <svg style="position:absolute; top:100%; left:0%; height:5%">
-                                <line class="textboxLine" x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(16, 11, 11); stroke-width:1vw"></line>
-                            </svg>
-                            <button id="passShownIcon" style="position:absolute; left:100%; top:20%; height:2vw; width:2vw; border:none; background-color:rgba(0,0,0,0.00); z-index:2; cursor:pointer; outline:none;" onclick="hidePassword(); return false;">
-                                <img src="/Resources/Icons/shownPass_icon.png" style="position:absolute; left:0%; top:0%; width:100%; height:100%"/>
-                            </button>
-                            <button id="passHiddenIcon" style="position:absolute; left:100%; top:20%; height:2vw; width:2vw; border:none; background-color:rgba(0,0,0,0.00); z-index:3; cursor:pointer; outline:none;" class="passHidden" onclick="showPassword(); return false;">
-                                <img src="/Resources/Icons/hiddenPass_icon.png" style="position:absolute; left:0%; top:0%; width:100%; height:100%"/>
-                            </button>
-                        </div>
+                </div>
+                <div id="passwordLogInDiv" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(16, 11, 11);">
+                    <p id="passwordLogInLbl" style="position:absolute; left:19.5%; top:0%; margin-top:0.5%">Password:</p>
+                    <div style="border:none; background-color:rgba(0,0,0,0.00); color:rgb(16, 11, 11); width:10vw; height:3vw; font-size:1vw; position:absolute; left:50%; top:0%;" class="textboxStyle">
+                        <asp:TextBox ID="passwordLogInBox" runat="server" CssClass="Textbox TrenchFont" TextMode="Password"></asp:TextBox>
+                        <svg style="position:absolute; top:100%; left:0%; height:5%">
+                            <line class="textboxLine" x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(16, 11, 11); stroke-width:1vw"></line>
+                        </svg>
+                        <button id="passShownIcon" style="position:absolute; left:100%; top:20%; height:2vw; width:2vw; border:none; background-color:rgba(0,0,0,0.00); z-index:2; cursor:pointer; outline:none;" onclick="hidePassword(); return false;">
+                            <img src="/Resources/Icons/shownPass_icon.png" style="position:absolute; left:0%; top:0%; width:100%; height:100%"/>
+                        </button>
+                        <button id="passHiddenIcon" style="position:absolute; left:100%; top:20%; height:2vw; width:2vw; border:none; background-color:rgba(0,0,0,0.00); z-index:3; cursor:pointer; outline:none;" class="passHidden" onclick="showPassword(); return false;">
+                            <img src="/Resources/Icons/hiddenPass_icon.png" style="position:absolute; left:0%; top:0%; width:100%; height:100%"/>
+                        </button>
                     </div>
+                </div>
             </div>
             <div id="loginMessageDiv" style="position:absolute; width:100%; height:20%; top:50%; font-size:1.5vw; color:indianred;">
                 <asp:Panel ID="loginMessage" runat="server"></asp:Panel>
             </div>
-            <asp:button runat="server" text="LOG IN" id="LoginButton" CssClass="AileronsFont buttonLogin" OnClick="Login"/>
+            <asp:Button ID="LoginButton" runat="server" Text="LOG IN" CssClass="AileronsFont buttonLogin" OnClick="Login" CausesValidation="false"/>
             <svg height="10" width="0" style="position:absolute;left:5%;top:100%; z-index:3" class="breakLine">
                 <line x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(0,0,0);stroke-width:2; " class="line"/>
             </svg>
+            </ContentTemplate>
+            </asp:UpdatePanel>
         </div>
         <!--Put all signup elements here -->
         <div id="signupDiv" style="position:absolute; background-color:rgba(16, 11, 11, 0.99)">
@@ -73,6 +79,7 @@
                     <div id="emailDiv" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(131, 108, 108);">
                         <p id="emailLbl" style="position:absolute; left:19.5%; top:0%; margin-top:0.5%">Email:</p>
                         <div style="border:none; background-color:rgba(0,0,0,0.00); color:white; width:10vw; height:3vw; font-size:1vw; position:absolute; left:40%; top:0%;" class="textboxStyle">
+                            <asp:RequiredFieldValidator ID="EmailRequired" runat="server" ErrorMessage="*" ControlToValidate="emailBox" CssClass="TrenchFont validator validatorPosHeader"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="EmailValidator" runat="server" ErrorMessage="Email must be in email format: example@domain.com" ValidationExpression="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" ControlToValidate="emailBox" CssClass="TrenchFont validator validatorPosHeader"></asp:RegularExpressionValidator>
                             <asp:TextBox ID="emailBox" runat="server" CssClass="Textbox TrenchFont WhiteCaret"></asp:TextBox>
                             <svg style="position:absolute; top:100%; left:0%; height:5%">
@@ -83,6 +90,7 @@
                     <div id="passwordDiv" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(131, 108, 108);">
                         <p id="passwordLbl" style="position:absolute; left:19.5%; top:0%; margin-top:0.5%">Password:</p>
                         <div style="border:none; background-color:rgba(0,0,0,0.00); color:white; width:10vw; height:3vw; font-size:1vw; position:absolute; left:50%; top:0%;" class="textboxStyle">
+                            <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ErrorMessage="*" ControlToValidate="passwordBox" CssClass="TrenchFont validator validatorPosFooter"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="PasswordValidator" runat="server" ErrorMessage="Password must be in password format" ToolTip="password needs the following:&#013;contain only alphabetic letters and number,&#013;between 8-15 characters" ControlToValidate="passwordBox" ValidationExpression="^([a-zA-Z0-9@*#]{8,15})$" CssClass="TrenchFont validator validatorPosFooter"></asp:RegularExpressionValidator>
                             <asp:TextBox ID="passwordBox" runat="server" CssClass="Textbox TrenchFont WhiteCaret"></asp:TextBox>
                             <svg style="position:absolute; top:100%; left:0%; height:5%">
@@ -98,6 +106,7 @@
                     <div id="usernameDiv" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(131, 108, 108);">
                         <p id="usernameLbl" style="position:absolute; left:19.5%; top:0%; margin-top:0.5%">Username:</p>
                         <div style="border:none; background-color:rgba(0,0,0,0.00); color:white; width:10vw; height:3vw; font-size:1vw; position:absolute; left:60%; top:0%;" class="textboxStyle">
+                            <asp:RequiredFieldValidator ID="UsernameRequired" runat="server" ErrorMessage="*" ControlToValidate="usernameBox" CssClass="TrenchFont validator validatorPosFooter"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="UsernameValidator" runat="server" ErrorMessage="Username needs to be between 4-20 characters" ControlToValidate="usernameBox" ValidationExpression="^[A-Za-z0-9._]{4,20}$" CssClass="TrenchFont validator validatorPosFooter"></asp:RegularExpressionValidator>
                             <asp:TextBox ID="usernameBox" runat="server" CssClass="Textbox TrenchFont WhiteCaret"></asp:TextBox>
                             <svg style="position:absolute; top:100%; left:0%; height:5%">
