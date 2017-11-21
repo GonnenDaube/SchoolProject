@@ -242,3 +242,15 @@
 .passShown{
     visibility:hidden;
 }
+
+.link{
+    text-decoration:none;
+    color:rgb(16, 11, 11);
+    cursor:pointer;
+    font-size:2vw;
+}
+
+.link:hover{
+    color:rgb(120, 51, 39);
+    cursor:grab;
+}

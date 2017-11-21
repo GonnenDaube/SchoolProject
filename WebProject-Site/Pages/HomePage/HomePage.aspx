@@ -24,6 +24,9 @@
             <asp:UpdatePanel ID="UpdatePanelLogin" runat="server">
             <ContentTemplate>
             <p id ="loginTxt" style="position:absolute; top:10%; width:100%; margin-left:auto; margin-right:auto; text-align:center; font-size:5vw; margin-top:0%">Log In</p>
+            <div style="position:absolute; left:39.75%; width:100%; top:75%; height:10%;">
+                <a id="noAccount" class="TrenchFont link" style="margin-top:0%; margin-bottom:0%; margin-left:auto; margin-right:auto; text-align:center;" href="#signupDiv">don't have an account?</a>
+            </div>
             <div id="loginForm" style="position:absolute; top:20%; width:40%; height:50%; left:30%; z-index:2;" class="TrenchFont">
                 <div id="emailLogInDiv" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(16, 11, 11);">
                     <p id="emailLogInLbl" style="position:absolute; left:19.5%; top:0%; margin-top:0.5%">Email:</p>
@@ -61,7 +64,7 @@
             </asp:UpdatePanel>
         </div>
         <!--Put all signup elements here -->
-        <div id="signupDiv" style="position:absolute; background-color:rgba(16, 11, 11, 0.99)">
+        <div id="signupDiv" style="position:absolute; background-color:rgba(16, 11, 11, 0.97)">
             <button id="signupframe" style="position:absolute; top:20%; width:80%; height:50%; left: 10%; border:solid; border-color:rgb(120, 51, 39); border-width:0.1vw; background-color:rgba(255, 255, 255, 0.00); z-index:4; outline:none" onclick="startRegistration(); return false;" class="AileronsFont optionButton">
                 <div id="stage0" class="stage0">
                     <p id="headline">SIGN UP</p>
@@ -139,8 +142,26 @@
             </svg>
         </div>
         <!--Put all terms of use elements here -->
-        <div id="termDiv" style="position:absolute; background-color: rgba(255, 248, 233,0.9)">
-            <p id ="termsTxt" style="position:absolute; top:20%; width:100%; margin-left:auto; margin-right:auto; text-align:center; font-size:4vw">Terms of Use</p>
+        <div id="termDiv" style="position:absolute; background-color: rgba(16, 11, 11, 0.97)">
+            <p id ="termsTxt" style="position:absolute; top:10%; width:100%; margin-left:auto; margin-right:auto; text-align:center; font-size:4vw; margin-top:0%; color:rgb(120, 51, 39)">Terms of Use</p>
+            <div id="termsofuseContent" style="position:absolute; left:20%; top:20%; font-size:1.5vw; color:rgb(131, 108, 108); width:60%; height:75%; max-width:60%" class="TrenchFont">
+                <p>
+                    This website is a free content creation software that can be used by everyone.<br />
+                    Users who register and/or use this website for any intent or purpose automatically agree to the terms of service of this website.<br />
+                    Users who create content on this website may not charge any type of money in any type of way (especially not through 3rd party software) for use of their content.<br />
+                    Users who "use" or "consume" any type of content created on this website must give credit for this website and the creator of the content.<br />
+                    <br />
+                    How to give credit to Model Makertron 2100 - v2.0?<br />
+                    - Credit on software: Add the following line on the software's README file,"Created on Model Makertron 2100 - v2.0 - made by (creator's username)".
+                    Also, consumers must publically show they used said content by using the websites feature for copyright<br />
+                    <br />
+                    - Credit on website: On about page Add the foloowing line,"Created on Model Makertron 2100 - v2.0 - made by (creator's username)".
+                    Also, consumers must publically show they used said content by using the websites feature for copyright<br />
+                    <br />
+                    <br />
+                    Any type of violation to these terms of service may be grounds for legal prosecution.
+                </p>
+            </div>
         </div>
 
         <!-- Ignore -->

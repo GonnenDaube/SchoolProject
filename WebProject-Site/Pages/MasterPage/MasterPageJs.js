@@ -22,7 +22,7 @@ function updateUpperBarSize() {
     document.getElementById("library_btn").style.height = buttonHeight + "px";
     document.getElementById("library_btn").style.fontSize = buttonHeight / 4 + "px";
 
-    var links = document.getElementsByTagName("a");
+    var links = document.getElementById("dropdownList").children;
     document.getElementById("dropdownList").style.visibility = 'hidden';
     for(var i = 0; i < links.length; i++){
         links[i].style.height = buttonHeight + "px";
@@ -46,25 +46,31 @@ function dropbtnClick() {
         window.location.href = "/Pages/HomePage/HomePage.aspx";
     }
     else {
-        dropped = !dropped;
-
         var children = document.getElementById("dropdownList").children;
-        if (!dropped) {
-            document.getElementById("dropdownList").style.visibility = 'hidden';
-            document.getElementById("homePageDropIcon").classList.add("dropIconRetract");
-            document.getElementById("homePageDropIcon").classList.remove("dropIconExpand");
-        }
-        else {
-            document.getElementById("dropdownList").style.visibility = 'visible';
-            document.getElementById("homePageDropIcon").classList.add("dropIconExpand");
-            document.getElementById("homePageDropIcon").classList.remove("dropIconRetract");
-        }
+        var ispartof = false;
         for (var i = 0; i < children.length; i++) {
+            if (document.hasFocus())
+                ispartof = true;
+        }
+        if (!ispartof) {// is button itself - then close/open. is not related - then close
+            dropped = !dropped;
             if (!dropped) {
-                children[i].style.top = "0px";
+                document.getElementById("dropdownList").style.visibility = 'hidden';
+                document.getElementById("homePageDropIcon").classList.add("dropIconRetract");
+                document.getElementById("homePageDropIcon").classList.remove("dropIconExpand");
             }
             else {
-                children[i].style.top = buttonHeight * (i + 1) + "px";
+                document.getElementById("dropdownList").style.visibility = 'visible';
+                document.getElementById("homePageDropIcon").classList.add("dropIconExpand");
+                document.getElementById("homePageDropIcon").classList.remove("dropIconRetract");
+            }
+            for (var i = 0; i < children.length; i++) {
+                if (!dropped) {
+                    children[i].style.top = "0px";
+                }
+                else {
+                    children[i].style.top = buttonHeight * (i + 1) + "px";
+                }
             }
         }
     }
