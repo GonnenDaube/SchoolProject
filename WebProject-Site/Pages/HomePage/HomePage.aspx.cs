@@ -105,6 +105,7 @@ public partial class Pages_HomePage_HomePage : System.Web.UI.Page
             }
             reader.Close();
             sqlConnection.Close();
+            loginMessage.Controls.Clear();
         }
         else
         {

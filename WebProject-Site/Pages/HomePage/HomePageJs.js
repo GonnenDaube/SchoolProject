@@ -110,6 +110,7 @@ if (window.location.href.includes("HomePage.aspx")) {
     addLoadEvent(updatePageSize);
     addResizeEvent(updatePageSize);
     addLoadEvent(updateUserLocation);
+    addLoadEvent(goToMessages);
 }
 
 function startRegistration() {
@@ -179,4 +180,24 @@ function isSelected(option) {
     if (document.getElementById(option).classList.contains("selectedOption"))
         return true;
     return false;
+}
+
+function goToMessages() {
+    if (document.getElementById("body_WelcomeMessage").children.length > 0) {
+        window.location = "#welcomePos";
+    }
+    if (document.getElementById("body_loginMessage").children.length > 0) {
+        window.location = "#loginDiv";
+    }
+}
+function showPassword() {
+    document.getElementById("passHiddenIcon").classList.remove("passHidden");
+    document.getElementById("passHiddenIcon").classList.add("passShown");
+    document.getElementById("body_passwordLogInBox").attributes.removeNamedItem("TextMode");
+}
+
+function hidePassword() {
+    document.getElementById("passHiddenIcon").classList.add("passHidden");
+    document.getElementById("passHiddenIcon").classList.remove("passShown");
+    document.getElementById("body_passwordLogInBox").setAttribute("TextMode") = "Password";
 }

@@ -20,7 +20,7 @@
         <!--Put all login elements here -->
         <div id="loginDiv" style="position:absolute; background-color: rgba(255, 248, 233,0.9)">
             <p id ="loginTxt" style="position:absolute; top:10%; width:100%; margin-left:auto; margin-right:auto; text-align:center; font-size:5vw; margin-top:0%">Log In</p>
-            <div id="loginForm" style="position:absolute; top:20%; width:40%; height:50%; left:31.5%; z-index:2;" class="TrenchFont">
+            <div id="loginForm" style="position:absolute; top:20%; width:40%; height:50%; left:30%; z-index:2;" class="TrenchFont">
                     <div id="emailLogInDiv" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(16, 11, 11);">
                         <p id="emailLogInLbl" style="position:absolute; left:19.5%; top:0%; margin-top:0.5%">Email:</p>
                         <div style="border:none; background-color:rgba(0,0,0,0.00); color:rgb(16, 11, 11); width:10vw; height:3vw; font-size:1vw; position:absolute; left:40%; top:0%;" class="textboxStyle">
@@ -33,10 +33,16 @@
                     <div id="passwordLogInDiv" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(16, 11, 11);">
                         <p id="passwordLogInLbl" style="position:absolute; left:19.5%; top:0%; margin-top:0.5%">Password:</p>
                         <div style="border:none; background-color:rgba(0,0,0,0.00); color:rgb(16, 11, 11); width:10vw; height:3vw; font-size:1vw; position:absolute; left:50%; top:0%;" class="textboxStyle">
-                            <asp:TextBox ID="passwordLogInBox" runat="server" CssClass="Textbox TrenchFont"></asp:TextBox>
+                            <asp:TextBox ID="passwordLogInBox" runat="server" CssClass="Textbox TrenchFont" TextMode="Password"></asp:TextBox>
                             <svg style="position:absolute; top:100%; left:0%; height:5%">
                                 <line class="textboxLine" x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(16, 11, 11); stroke-width:1vw"></line>
                             </svg>
+                            <button id="passShownIcon" style="position:absolute; left:100%; top:20%; height:2vw; width:2vw; border:none; background-color:rgba(0,0,0,0.00); z-index:2; cursor:pointer; outline:none;" onclick="hidePassword(); return false;">
+                                <img src="/Resources/Icons/shownPass_icon.png" style="position:absolute; left:0%; top:0%; width:100%; height:100%"/>
+                            </button>
+                            <button id="passHiddenIcon" style="position:absolute; left:100%; top:20%; height:2vw; width:2vw; border:none; background-color:rgba(0,0,0,0.00); z-index:3; cursor:pointer; outline:none;" class="passHidden" onclick="showPassword(); return false;">
+                                <img src="/Resources/Icons/hiddenPass_icon.png" style="position:absolute; left:0%; top:0%; width:100%; height:100%"/>
+                            </button>
                         </div>
                     </div>
             </div>

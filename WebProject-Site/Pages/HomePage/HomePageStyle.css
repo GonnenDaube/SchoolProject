@@ -234,3 +234,11 @@
     margin-right:auto;
     text-align:center;
 }
+
+.passHidden{
+    visibility:visible;
+}
+
+.passShown{
+    visibility:hidden;
+}
