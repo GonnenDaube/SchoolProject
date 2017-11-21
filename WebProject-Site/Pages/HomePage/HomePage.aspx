@@ -24,7 +24,7 @@
             <asp:UpdatePanel ID="UpdatePanelLogin" runat="server">
             <ContentTemplate>
             <p id ="loginTxt" style="position:absolute; top:10%; width:100%; margin-left:auto; margin-right:auto; text-align:center; font-size:5vw; margin-top:0%">Log In</p>
-            <div style="position:absolute; left:39.75%; width:100%; top:75%; height:10%;">
+            <div style="position:absolute; left:39.95%; width:40%; top:75%; height:10%;">
                 <a id="noAccount" class="TrenchFont link" style="margin-top:0%; margin-bottom:0%; margin-left:auto; margin-right:auto; text-align:center;" href="#signupDiv">don't have an account?</a>
             </div>
             <div id="loginForm" style="position:absolute; top:20%; width:40%; height:50%; left:30%; z-index:2;" class="TrenchFont">

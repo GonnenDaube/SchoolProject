@@ -46,26 +46,26 @@ function dropbtnClick() {
         window.location.href = "/Pages/HomePage/HomePage.aspx";
     }
     else {
-        var children = document.getElementById("dropdownList").children;
-            dropped = !dropped;
-            if (!dropped) {
-                document.getElementById("dropdownList").style.visibility = 'hidden';
-                document.getElementById("homePageDropIcon").classList.add("dropIconRetract");
-                document.getElementById("homePageDropIcon").classList.remove("dropIconExpand");
-            }
-            else {
-                document.getElementById("dropdownList").style.visibility = 'visible';
-                document.getElementById("homePageDropIcon").classList.add("dropIconExpand");
-                document.getElementById("homePageDropIcon").classList.remove("dropIconRetract");
-            }
-            for (var i = 0; i < children.length; i++) {
+            var children = document.getElementById("dropdownList").children;
+                dropped = !dropped;
                 if (!dropped) {
-                    children[i].style.top = "0px";
+                    document.getElementById("dropdownList").style.visibility = 'hidden';
+                    document.getElementById("homePageDropIcon").classList.add("dropIconRetract");
+                    document.getElementById("homePageDropIcon").classList.remove("dropIconExpand");
                 }
                 else {
-                    children[i].style.top = buttonHeight * (i + 1) + "px";
+                    document.getElementById("dropdownList").style.visibility = 'visible';
+                    document.getElementById("homePageDropIcon").classList.add("dropIconExpand");
+                    document.getElementById("homePageDropIcon").classList.remove("dropIconRetract");
                 }
-            }
+                for (var i = 0; i < children.length; i++) {
+                    if (!dropped) {
+                        children[i].style.top = "0px";
+                    }
+                    else {
+                        children[i].style.top = buttonHeight * (i + 1) + "px";
+                    }
+                }
     }
 }
 
