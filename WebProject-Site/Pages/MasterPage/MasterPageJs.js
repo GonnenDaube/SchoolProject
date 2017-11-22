@@ -40,32 +40,42 @@ function updateUpperBarSize() {
 
     document.getElementById("Upper_Bar").style.visibility = "visible";
 }
-
-function dropbtnClick() {
+function closeDropDown() {
     if (!window.location.href.includes("HomePage.aspx")) {
         window.location.href = "/Pages/HomePage/HomePage.aspx";
     }
     else {
-            var children = document.getElementById("dropdownList").children;
-                dropped = !dropped;
-                if (!dropped) {
-                    document.getElementById("dropdownList").style.visibility = 'hidden';
-                    document.getElementById("homePageDropIcon").classList.add("dropIconRetract");
-                    document.getElementById("homePageDropIcon").classList.remove("dropIconExpand");
-                }
-                else {
-                    document.getElementById("dropdownList").style.visibility = 'visible';
-                    document.getElementById("homePageDropIcon").classList.add("dropIconExpand");
-                    document.getElementById("homePageDropIcon").classList.remove("dropIconRetract");
-                }
-                for (var i = 0; i < children.length; i++) {
-                    if (!dropped) {
-                        children[i].style.top = "0px";
-                    }
-                    else {
-                        children[i].style.top = buttonHeight * (i + 1) + "px";
-                    }
-                }
+        var children = document.getElementById("dropdownList").children;
+        document.getElementById("dropdownList").style.visibility = 'hidden';
+        document.getElementById("homePageDropIcon").classList.add("dropIconRetract");
+        document.getElementById("homePageDropIcon").classList.remove("dropIconExpand");
+        for (var i = 0; i < children.length; i++) {
+            children[i].style.top = "0px";
+        }
+    }
+}
+function openDropDown() {
+    if (!window.location.href.includes("HomePage.aspx")) {
+        window.location.href = "/Pages/HomePage/HomePage.aspx";
+    }
+    else {
+        var children = document.getElementById("dropdownList").children;
+        document.getElementById("dropdownList").style.visibility = 'visible';
+        document.getElementById("homePageDropIcon").classList.add("dropIconExpand");
+        document.getElementById("homePageDropIcon").classList.remove("dropIconRetract");
+        for (var i = 0; i < children.length; i++) {
+            children[i].style.top = buttonHeight * (i + 1) + "px";
+        }
+    }
+}
+
+function dropbtnClick() {
+    dropped = !dropped;
+    if (!dropped) {
+        openDropDown();
+    }
+    else {
+        closeDropDown();
     }
 }
 
