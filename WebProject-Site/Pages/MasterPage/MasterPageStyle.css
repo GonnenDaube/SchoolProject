@@ -58,18 +58,19 @@ body{
     transition:0.5s;
 }
 
-.dropdown-content a{
+.dropdownOpt{
     color: black;
     background-color: lightgray;
-    line-height: 350%;
-    text-decoration:none;
     border: none;
-    outline: none;
+    outline:none;
     cursor: pointer;
     transition:0.5s;
 }
 
-.dropdown-content a:hover, .dropdown-content a:focus {
+.dropdownOpt:hover{
+    background-color: darkgray;
+}
+.dropdownOpt:focus{
     background-color: darkgray;
 }
 

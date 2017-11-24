@@ -9,59 +9,58 @@
     </asp:ContentPlaceHolder>
 </head>
 <body onload="updateUpperBarSize();">
-    <div>
-        <div id="Upper_Bar" style="position:fixed; top:0px; left:0px; visibility:hidden; z-index:10">
-            <div id="homePage_drop" style="position:absolute;">
-                <button id="homePage_btn" onclick="dropbtnClick();" class="dropbtn" style="position:absolute; z-index:2" runat="server">
+    <div id="parentDiv">
+        <div id="Upper_Bar" style="position:fixed; top:0px; left:0px; visibility:hidden; z-index:3" onblur="ShouldntClose();">
+            <div id="homePage_drop" style="position:absolute; z-index:3" class="dropdown">
+                <button id="homePage_btn" onclick="dropbtnClick();" class="dropbtn" style="position:absolute; z-index:5" runat="server">
                     Welcome
                     <img src="/Resources/Icons/dropdown_icon.png" id="homePageDropIcon" style="position:absolute; height:1vw; width:1vw; top:65%; left: 47.5%; visibility:hidden" class="dropIconRetract"/>
                 </button>
                 <div id="dropdownList" class="dropdown-content" style="position:absolute; z-index:1">
-                    <a id="welcome_link" href="#welcomePos" onclick="dropbtnClick();" style="position:absolute; left:0px; margin-left:auto; margin-right:auto; text-align:center;">
+                    <button id="welcome_link" onclick="linkButton('#welcomePos');" style="position:absolute; left:0px; margin-left:auto; margin-right:auto; text-align:center;" class="AileronsFont dropdownOpt">
                         Welcome
                         <img src="/Resources/Icons/dropdownLink_icon.png" id="linkIcon0" style="position:absolute; height:1vw; width:1vw; top:32.5%; left: 75%; visibility:hidden"/>
-                    </a>
-                    <a id="login_link" href="#loginDiv" onclick="dropbtnClick();" style="position:absolute; left:0px; margin-left:auto; margin-right:auto; text-align:center;">
+                    </button>
+                    <button id="login_link" onclick="linkButton('#loginDiv');" style="position:absolute; left:0px; margin-left:auto; margin-right:auto; text-align:center;" class="AileronsFont dropdownOpt">
                         Log In
                         <img src="/Resources/Icons/dropdownLink_icon.png" id="linkIcon1" style="position:absolute; height:1vw; width:1vw; top:32.5%; left: 75%; visibility:hidden"/>
-                    </a>
-                    <a id="signup_link" href="#signupDiv" onclick="dropbtnClick();" style="position:absolute; left:0px; margin-left:auto; margin-right:auto; text-align:center;">
+                    </button>
+                    <button id="signup_link" onclick="linkButton('#signupDiv');" style="position:absolute; left:0px; margin-left:auto; margin-right:auto; text-align:center;" class="AileronsFont dropdownOpt">
                         Sign Up
                         <img src="/Resources/Icons/dropdownLink_icon.png" id="linkIcon2" style="position:absolute; height:1vw; width:1vw; top:32.5%; left: 75%; visibility:hidden"/>
-                    </a>
-                    <a id="about_link" href="#aboutDiv" onclick="dropbtnClick();" style="position:absolute; left:0px; margin-left:auto; margin-right:auto; text-align:center;">
+                    </button>
+                    <button id="about_link" onclick="linkButton('#aboutDiv');" style="position:absolute; left:0px; margin-left:auto; margin-right:auto; text-align:center;" class="AileronsFont dropdownOpt">
                         About
                         <img src="/Resources/Icons/dropdownLink_icon.png" id="linkIcon3" style="position:absolute; height:1vw; width:1vw; top:32.5%; left: 75%; visibility:hidden"/>
-                    </a>
-                    <a id="terms_link" href="#termDiv" onclick="dropbtnClick();" style="position:absolute; left:0px; margin-left:auto; margin-right:auto; text-align:center;">
+                    </button>
+                    <button id="terms_link" onclick="linkButton('#termDiv');" style="position:absolute; left:0px; margin-left:auto; margin-right:auto; text-align:center;" class="AileronsFont dropdownOpt">
                         Terms of Use
                         <img src="/Resources/Icons/dropdownLink_icon.png" id="linkIcon4" style="position:absolute; height:1vw; width:1vw; top:32.5%; left: 75%; visibility:hidden"/>
-                    </a>
+                    </button>
                 </div>
             </div>
-            <div id="workingSpace" style="position:absolute;">
+            <div id="workingSpace" style="position:absolute; z-index:3">
                 <button id="workingSpace_btn" onclick="buttonLinkClick('/Pages/WorkingSpace/WorkingSpace.aspx');" class="dropbtn" style="position:absolute; z-index:2">
                     Working Space
                     <img src="/Resources/Icons/pagelink_icon.png" id="workingspaceLinkIcon" style="position:absolute; height:1vw; width:1vw; top:70%; left: 47.5%; visibility:hidden"/>
                 </button>
             </div>
-            <div id="library" style="position:absolute;">
+            <div id="library" style="position:absolute; z-index:3">
                 <button id="library_btn" onclick="buttonLinkClick('/Pages/Library/Library.aspx');" class="dropbtn" style="position:absolute; z-index:2">
                     Library
                     <img src="/Resources/Icons/pagelink_icon.png" id="libraryLinkIcon" style="position:absolute; height:1vw; width:1vw; top:70%; left: 47.5%; visibility:hidden"/>
                 </button>
             </div>
         </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="/Pages/MasterPage/MasterPageJs.js"></script>
         <script src="/Pages/HomePage/HomePageJs.js"></script>
 
         <link href="/Pages/MasterPage/MasterPageStyle.css" rel="stylesheet" />
         <link href="/Pages/HomePage/HomePageStyle.css" rel="stylesheet" />
         
-        <asp:ContentPlaceHolder id="body" runat="server">
-        
-        </asp:ContentPlaceHolder>
+        <div id="content">
+            <asp:ContentPlaceHolder id="body" runat="server"></asp:ContentPlaceHolder>
+        </div>
     </div>
 </body>
 </html>

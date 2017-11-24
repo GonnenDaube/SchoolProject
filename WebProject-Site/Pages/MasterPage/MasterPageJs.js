@@ -2,6 +2,7 @@
 var width = 0;
 var buttonWidth = 0;
 var buttonHeight = 0;
+var shouldClose = true;
 
 function updateUpperBarSize() {
     width = window.innerWidth;
@@ -40,7 +41,7 @@ function updateUpperBarSize() {
 
     document.getElementById("Upper_Bar").style.visibility = "visible";
 }
-function closeDropDown() {
+function closeDropDown(isclick) {
     if (!window.location.href.includes("HomePage.aspx")) {
         window.location.href = "/Pages/HomePage/HomePage.aspx";
     }
@@ -52,7 +53,11 @@ function closeDropDown() {
         for (var i = 0; i < children.length; i++) {
             children[i].style.top = "0px";
         }
+        dropped = false;
     }
+}
+function linkButton(location) {
+    window.location = location;
 }
 function openDropDown() {
     if (!window.location.href.includes("HomePage.aspx")) {
@@ -66,17 +71,22 @@ function openDropDown() {
         for (var i = 0; i < children.length; i++) {
             children[i].style.top = buttonHeight * (i + 1) + "px";
         }
+        dropped = true;
     }
 }
 
 function dropbtnClick() {
-    dropped = !dropped;
     if (!dropped) {
         openDropDown();
     }
     else {
-        closeDropDown();
+        closeDropDown(true);
     }
+}
+
+function ShouldntClose() {
+    shouldClose = false;
+    alert('shouldClose = ' + shoudlClose);
 }
 
 function buttonLinkClick(link) {
