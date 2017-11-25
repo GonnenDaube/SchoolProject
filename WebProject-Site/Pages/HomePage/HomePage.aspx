@@ -47,7 +47,7 @@
                         <button id="passShownIcon" style="position:absolute; left:100%; top:20%; height:2vw; width:2vw; border:none; background-color:rgba(0,0,0,0.00); z-index:2; cursor:pointer; outline:none;" onclick="hidePassword(); return false;">
                             <img src="/Resources/Icons/shownPass_icon.png" style="position:absolute; left:0%; top:0%; width:100%; height:100%"/>
                         </button>
-                        <button id="passHiddenIcon" style="position:absolute; left:100%; top:20%; height:2vw; width:2vw; border:none; background-color:rgba(0,0,0,0.00); z-index:3; cursor:pointer; outline:none;" class="passHidden" onclick="showPassword(); return false;">
+                        <button id="passHiddenIcon" style="position:absolute; left:100%; top:20%; height:2vw; width:2vw; border:none; background-color:rgba(0,0,0,0.00); z-index:3; cursor:pointer; outline:none;" class="passShown" onclick="showPassword(); return false;">
                             <img src="/Resources/Icons/hiddenPass_icon.png" style="position:absolute; left:0%; top:0%; width:100%; height:100%"/>
                         </button>
                     </div>
@@ -155,7 +155,7 @@
                     - Credit on software: Add the following line on the software's README file,"Created on Model Makertron 2100 - v2.0 - made by (creator's username)".
                     Also, consumers must publically show they used said content by using the websites feature for copyright<br />
                     <br />
-                    - Credit on website: On about page Add the foloowing line,"Created on Model Makertron 2100 - v2.0 - made by (creator's username)".
+                    - Credit on website: On about page Add the following line,"Created on Model Makertron 2100 - v2.0 - made by (creator's username)".
                     Also, consumers must publically show they used said content by using the websites feature for copyright<br />
                     <br />
                     <br />

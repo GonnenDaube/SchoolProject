@@ -8,9 +8,13 @@ function updateUpperBarSize() {
     width = window.innerWidth;
     buttonWidth = width / 6;
     buttonHeight = width / 20;
+
+    document.getElementById("Upper_Bar").style.visibility = "visible";
+
     if (window.location.href.includes("HomePage.aspx")){
         document.getElementById("homePageDropIcon").style.visibility = "visible";
         document.getElementById("dropdown_content").style.visibility = "visible";
+        document.getElementById("homePage_btn").removeAttribute("href");
     }
     else if (window.location.href.includes("WorkingSpace.aspx"))
         document.getElementById("workingspaceLinkIcon").style.visibility = "visible";

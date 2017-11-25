@@ -52,6 +52,7 @@ function updatePageSize() {
     document.getElementById("Hidden_Element").style.top = panelHeight * 5 - 2 + "px";
 
     document.getElementById("contentDiv").style.visibility = "visible";
+    hidePassword();
 
     var svgLines = document.getElementsByClassName("breakLine");
     var lines = document.getElementsByClassName("line");
