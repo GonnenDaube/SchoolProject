@@ -120,17 +120,24 @@ function startRegistration() {
     document.getElementById("continue").classList.add("showTrans");
     document.getElementById("stage1").classList.remove("hideTrans");
     document.getElementById("stage1").classList.add("showTrans");
-    document.getElementById("stageNumber").innerHTML = parseInt(document.getElementById("stageNumber").innerHTML) + 1;
+    document.getElementById("stageNumber").innerHTML = 1;
 }
 
 function nextStep() {
-    document.getElementById("stageNumber").innerHTML = parseInt(document.getElementById("stageNumber").innerHTML) + 1;
+    if (document.getElementById("stage3").classList.contains("showTrans"))
+        document.getElementById("stageNumber").innerHTML = 4;
+    else if (document.getElementById("stage2").classList.contains("showTrans"))
+        document.getElementById("stageNumber").innerHTML = 3;
+    else if (document.getElementById("stage1").classList.contains("showTrans"))
+        document.getElementById("stageNumber").innerHTML = 2;
+    else
+        document.getElementById("stageNumber").innerHTML = 1;
     var step = parseInt(document.getElementById("stageNumber").innerHTML);
+    console.log(step);
     if (step == 2) {
         document.getElementById("stage1").style.left = "10%";
         document.getElementById("stage2").classList.remove("hideTrans");
         document.getElementById("stage2").classList.add("showTrans");
-        console.log("shows stage2");
         document.getElementById("stage2").classList.add("transitionDelayhalfSec");
 
         document.getElementById("stage2Svg").classList.remove("hiddenSignUpLine");

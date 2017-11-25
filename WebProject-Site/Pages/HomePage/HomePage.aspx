@@ -94,7 +94,7 @@
                         <p id="passwordLbl" style="position:absolute; left:19.5%; top:0%; margin-top:0.5%">Password:</p>
                         <div style="border:none; background-color:rgba(0,0,0,0.00); color:white; width:10vw; height:3vw; font-size:1vw; position:absolute; left:50%; top:0%;" class="textboxStyle">
                             <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ErrorMessage="*" ControlToValidate="passwordBox" CssClass="TrenchFont validator validatorPosFooter"></asp:RequiredFieldValidator>
-                            <asp:RegularExpressionValidator ID="PasswordValidator" runat="server" ErrorMessage="Password must be in password format" ToolTip="password needs the following:&#013;contain only alphabetic letters and number,&#013;between 8-15 characters" ControlToValidate="passwordBox" ValidationExpression="^([a-zA-Z0-9@*#]{8,15})$" CssClass="TrenchFont validator validatorPosFooter"></asp:RegularExpressionValidator>
+                            <asp:RegularExpressionValidator ID="PasswordValidator" runat="server" ErrorMessage="Password must contain only alphabetic letters and numbers and be between 8-15 characters" ControlToValidate="passwordBox" ValidationExpression="^([a-zA-Z0-9@*#]{8,15})$" CssClass="TrenchFont validator validatorPosFooter"></asp:RegularExpressionValidator>
                             <asp:TextBox ID="passwordBox" runat="server" CssClass="Textbox TrenchFont WhiteCaret"></asp:TextBox>
                             <svg style="position:absolute; top:100%; left:0%; height:5%">
                                 <line class="textboxLine" x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(120, 51, 39); stroke-width:1vw"></line>
@@ -123,10 +123,10 @@
                         <p id="usageTitleLbl" style="position:absolute; left:19.5%; top:0%; margin-top:0.5%; max-width:22.5vw; font-size:1.5vw">How do you want to use Model Makertron 2100 - v2.0?</p>
                     </div>
                     <div id="creatorDiv" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(131, 108, 108); margin-top: 5%">
-                        <button id="creator" style="position:absolute; left:20%; width:57.5%; outline:none; border:solid; border-color:rgb(120, 51, 39); color:rgb(120, 51, 39); border-width:0.1vw; font-size:2vw; cursor:pointer;" class="AileronsFont optionButton" onclick="selectOption('creator'); return false;">Content Creator</button>
+                        <button id="creator" class="AileronsFont optionButton" onclick="selectOption('creator'); return false;">Content Creator</button>
                     </div>
                     <div id="consumerDiv" style="position:relative; width:100%; height:20%; top:30%; font-size:2vw; color:rgb(131, 108, 108); margin-top:-5%">
-                        <button id="consumer" style="position:absolute; left:20%; width:57.5%; outline:none; border:solid; border-color:rgb(120, 51, 39); color:rgb(120, 51, 39); border-width:0.1vw; font-size:2vw; cursor:pointer;" class="AileronsFont optionButton" onclick="selectOption('consumer'); return false;">Content Consumer</button>
+                        <button id="consumer" class="AileronsFont optionButton" onclick="selectOption('consumer'); return false;">Content Consumer</button>
                     </div>
                     <asp:TextBox ID="content_creator" runat="server" Text="False" CssClass="HiddenField"></asp:TextBox>
                     <asp:TextBox ID="content_consumer" runat="server" Text="False" CssClass="HiddenField"></asp:TextBox>
@@ -136,7 +136,26 @@
         </div>
         <!--Put all about elements here -->
         <div id="aboutDiv" style="position:absolute; background-color: rgba(255, 248, 233,0.9)">
-            <p id ="aboutTxt" style="position:absolute; top:20%; width:100%; margin-left:auto; margin-right:auto; text-align:center; font-size:4vw">About</p>
+            <p id ="aboutTxt" style="position:absolute; top:10%; width:100%; margin-left:auto; margin-right:auto; text-align:center; font-size:4vw; margin-top:0vw">About</p>
+            <div id="aboutContent" style="position:absolute; left:20%; top:20%; font-size:1.5vw; color:rgb(16, 11, 11); width:60%; height:75%; max-width:60%" class="TrenchFont">
+                <p style="font-size:2vw; color:rgb(120, 51, 39); margin-left:auto; margin-right:auto; text-align:center; width:100%; margin-bottom:0vw">
+                    First things first:
+                </p>
+                <br />
+                <p>
+                    Model Makertron 2100 - v2.0 (tm) is a free model creation and distribution platform over the web.<br />
+                    This Website's purpose is to make asset creation for 3d software easier, more intuitive, open to everyone and most importantly, free to use.<br />
+                    Model Makertron 2100 - v2.0 (tm) is a non-profit organisation that's meant to change the monopoly of certain software that are overpriced over this market.<br />
+                </p>
+                <p style="font-size:2vw; color:rgb(120, 51, 39); margin-left:auto; margin-right:auto; text-align:center; width:100%; margin-bottom:0vw">
+                    Contact Us:
+                </p>
+                <p>
+                    If there are any problem with copyright, bugs, etc... please contact us via email.<br />
+                    Our email address:<br />
+                    model.makertron@gmail.com
+                </p>
+            </div>
             <svg height="10" width="0" style="position:absolute;left:5%;top:100%; z-index:3" class="breakLine">
                 <line x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(0,0,0);stroke-width:2; " class="line"/>
             </svg>

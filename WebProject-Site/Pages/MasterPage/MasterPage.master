@@ -40,12 +40,14 @@
                     </a>
                 </div>
             </div>
+            <!-- -->
             <div id="workingSpace" class="upperbarItem">
                 <a id="workingSpace_btn" href="/Pages/WorkingSpace/WorkingSpace.aspx" class="upperbarlink">
                     <p>Working Space</p>
                     <img src="/Resources/Icons/pagelink_icon.png" id="workingspaceLinkIcon" style="visibility:hidden" class="menuIcon"/>
                 </a>
             </div>
+            <!-- -->
             <div id="library" class="upperbarItem">
                 <a id="library_btn" href="/Pages/Library/Library.aspx" class="upperbarlink">
                     <p>Library</p>
