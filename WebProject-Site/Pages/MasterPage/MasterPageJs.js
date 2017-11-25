@@ -8,38 +8,14 @@ function updateUpperBarSize() {
     width = window.innerWidth;
     buttonWidth = width / 6;
     buttonHeight = width / 20;
-
-    document.getElementById("homePage_drop").style.left = (width / 2 - (buttonWidth * 1.5)) + "px";
-    document.getElementById("homePage_btn").style.width = buttonWidth + "px";
-    document.getElementById("homePage_btn").style.height = buttonHeight + "px";
-    document.getElementById("homePage_btn").style.fontSize = buttonHeight / 4 + "px";
-
-    document.getElementById("workingSpace").style.left = (width / 2 - (buttonWidth * 0.5)) + "px";
-    document.getElementById("workingSpace_btn").style.width = buttonWidth + "px";
-    document.getElementById("workingSpace_btn").style.height = buttonHeight + "px";
-    document.getElementById("workingSpace_btn").style.fontSize = buttonHeight / 4 + "px";
-    document.getElementById("library").style.left = (width / 2 + (buttonWidth * 0.5)) + "px";
-    document.getElementById("library_btn").style.width = buttonWidth + "px";
-    document.getElementById("library_btn").style.height = buttonHeight + "px";
-    document.getElementById("library_btn").style.fontSize = buttonHeight / 4 + "px";
-
-    var links = document.getElementById("dropdownList").children;
-    document.getElementById("dropdownList").style.visibility = 'hidden';
-    for(var i = 0; i < links.length; i++){
-        links[i].style.height = buttonHeight + "px";
-        links[i].style.width = buttonWidth + "px";
-        links[i].style.top = "0px";
-        links[i].style.fontSize = buttonHeight / 4 + "px";
-    }
-
-    if (window.location.href.includes("HomePage.aspx"))
+    if (window.location.href.includes("HomePage.aspx")){
         document.getElementById("homePageDropIcon").style.visibility = "visible";
+        document.getElementById("dropdown_content").style.visibility = "visible";
+    }
     else if (window.location.href.includes("WorkingSpace.aspx"))
         document.getElementById("workingspaceLinkIcon").style.visibility = "visible";
     else if (window.location.href.includes("Library.aspx"))
         document.getElementById("libraryLinkIcon").style.visibility = "visible";
-
-    document.getElementById("Upper_Bar").style.visibility = "visible";
 }
 function closeDropDown(isclick) {
     if (!window.location.href.includes("HomePage.aspx")) {
