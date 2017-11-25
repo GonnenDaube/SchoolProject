@@ -8,6 +8,10 @@
     src: url(/Resources/fonts/trench100free.otf);
 }
 
+/* color1 : rgb(16, 11, 11) */
+
+/* color2 : rgb(120, 51, 39) */
+
 .AileronsFont{
     font-family:Ailerons;
 }
@@ -28,50 +32,137 @@ body{
     background-size:cover;
     font-family:Ailerons;
     overflow-x:hidden;
+    width:100%;
 }
 
-.dropbtn{
+.upperbar{
+    position:fixed; 
+    top:0vw;
+    left:25%;
+    width:50%;
+    height:5vw;
+    z-index:3;
+}
+
+.upperbarItem{
+    position:relative;
+    left:0%;
+    top:0%;
+    width:33%;/*100% / number of items*/
+    height:100%;
+    margin-left:-0.75em;
+    display:inline-block;
+    color:white;
     background-color:rgb(16, 11, 11);
-    color: white;
-    font-family:Ailerons;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    box-shadow: 0px 1vw 3vw rgba(0,0,0,0.5);
+    transition:0.1s;
 }
-
-.dropbtn:hover, .dropbtn:focus{
+.upperbarItem:hover{
     background-color:rgb(120, 51, 39);
 }
 
-.dropIconRetract{
+.dropdown img{
     -ms-transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
     transition:0.5s;
 }
 
-.dropIconExpand{
+.dropdown:hover img{
     -ms-transform: rotate(180deg);
     -webkit-transform: rotate(180deg);
     transform: rotate(180deg);
+}
+
+.upperbarlink{
+    position:relative;
+    display:block;
+    top:0%;
+    left:0%;
+    width:100%;
+    height:100%;
+    margin-top:0%;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+    font-size:1.5vw;
+    text-decoration:none;
+    color:white;
+    z-index:3;
+}
+
+.dropdown-hider{
+    position:absolute;
+    top:0%;
+    left:0%;
+    width:100%;
+    height:100%;
+    background-color:rgb(16, 11, 11);
+    z-index:2;
+    transition:0.25s;
+}
+
+.dropdown:hover .dropdown-hider{
+    background-color:rgb(120, 51, 39);
+}
+
+.dropdown-content{
+    display:block;
+    position: relative;
+    top:-500%;/*size of dropdown-content*/
+    width:100%;
+    height:100%;
+    min-width: 100%;
+    margin-top:-9%;
+    z-index:1;
     transition:0.5s;
 }
 
-.dropdownOpt{
-    color: black;
-    background-color: lightgray;
-    border: none;
-    outline:none;
-    cursor: pointer;
-    transition:0.5s;
+.dropdown:hover .dropdown-content{
+    top:0%;
 }
 
-.dropdownOpt:hover{
-    background-color: darkgray;
+.dropdown_option{
+    position:relative;
+    display:block;
+    top:0%;
+    left:0%;
+    width:100%;
+    height:100%;
+    font-size:1vw;
+    text-decoration:none;
+    color:black;
+    background-color:lightgray;
+    transition:0.25s;
 }
-.dropdownOpt:focus{
-    background-color: darkgray;
+
+.dropdown_option p{
+    position:absolute;
+    left:0%;
+    width:100%;
+    margin-top:7.5%;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+}
+
+.dropdown_option:hover{
+    background-color:darkgray;
+}
+
+.menuIcon{
+    position:absolute;
+    height:1vw; 
+    width:1vw; 
+    top:40%; 
+    left:47.5%;
+}
+
+.dropdownIcon{
+    position:absolute;
+    height:1vw;
+    width:1vw;
+    top:32.5%;
+    left:75%;
 }
 
 .HiddenField{

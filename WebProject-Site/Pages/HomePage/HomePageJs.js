@@ -12,12 +12,10 @@ function updateUserLocation() {
 function updateIndicator(indicator) {
     //gets indicator index (top to bottom)
     //sets to visible and all others to hidden
-    document.getElementById("linkIcon" + indicator).style.visibility = "visible";
     for (var i = 0; i < 5; i++) {
-        if(i != indicator)
-            document.getElementById("linkIcon" + i).style.visibility = "hidden";
+        document.getElementById("linkIcon" + i).style.visibility = "hidden";
     }
-
+    document.getElementById("linkIcon" + indicator).style.visibility = "visible";
 }
 
 function updatePageSize() {
