@@ -60,6 +60,8 @@
 
         <link href="/Pages/MasterPage/MasterPageStyle.css" rel="stylesheet" />
         <link href="/Pages/HomePage/HomePageStyle.css" rel="stylesheet" />
+        <link href="/Pages/Library/LibraryStyle.css" rel="stylesheet" />
+        <link href="/Pages/AssetPage/AssetPageStyle.css" rel="stylesheet" />
         
         <div id="content">
             <asp:ContentPlaceHolder id="body" runat="server"></asp:ContentPlaceHolder>

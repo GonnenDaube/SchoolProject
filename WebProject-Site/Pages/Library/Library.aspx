@@ -3,6 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">
-    <i>This is Library Page</i>
+    <asp:Panel ID="AssetPanel" runat="server" CssClass="assetsGroup"></asp:Panel>
 </asp:Content>
 
