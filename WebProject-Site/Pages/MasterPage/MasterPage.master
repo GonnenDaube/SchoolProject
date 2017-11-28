@@ -61,11 +61,17 @@
         </div>
         <script src="/Pages/MasterPage/MasterPageJs.js"></script>
         <script src="/Pages/HomePage/HomePageJs.js"></script>
+        <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/Camera.js"></script>
+        <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/Display.js"></script>
+        <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/FpsCounter.js"></script>
+        <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/Scene.js"></script>
+        <script src="/Pages/WorkingSpace/WorkingSpaceJs/main.js"></script>
 
         <link href="/Pages/MasterPage/MasterPageStyle.css" rel="stylesheet" />
         <link href="/Pages/HomePage/HomePageStyle.css" rel="stylesheet" />
         <link href="/Pages/Library/LibraryStyle.css" rel="stylesheet" />
         <link href="/Pages/AssetPage/AssetPageStyle.css" rel="stylesheet" />
+        <link href="../WorkingSpace/WorkingSpaceStyle.css" rel="stylesheet" />
         
         <div id="content">
             <asp:ContentPlaceHolder id="body" runat="server"></asp:ContentPlaceHolder>
