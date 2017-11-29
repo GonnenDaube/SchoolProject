@@ -65,6 +65,7 @@
         <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/Display.js"></script>
         <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/FpsCounter.js"></script>
         <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/Scene.js"></script>
+        <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/PlayerInputDetector.js"></script>
         <script src="/Pages/WorkingSpace/WorkingSpaceJs/main.js"></script>
 
         <link href="/Pages/MasterPage/MasterPageStyle.css" rel="stylesheet" />

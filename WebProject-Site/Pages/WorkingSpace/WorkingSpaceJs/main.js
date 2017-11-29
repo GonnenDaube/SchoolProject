@@ -24,8 +24,8 @@ var math_const = {
 }
 
 var canvas_const = {
-    WINDOW_HEIGHT: window.innerWidth * 0.45,
-    WINDOW_WIDTH: window.innerWidth * 0.8,
+    WINDOW_HEIGHT: window.innerWidth * 0.39,
+    WINDOW_WIDTH: window.innerWidth * 0.7,
 };
 
 var camera_const = {
@@ -69,5 +69,6 @@ function init() {
     scene.camera = new Camera(camera_const.INITIAL_CAMERA_POSITION, camera_const.INITIAL_CAMERA_LOOKAT, camera_const.INITIAL_CAMERA_LOOKUP, camera_const.FOV);
 
     //init PlayerInputDetector
+    playerInputDetector = new PlayerInputDetector(scene, display);
 
 }
