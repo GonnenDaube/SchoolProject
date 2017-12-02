@@ -1,6 +1,6 @@
 ﻿class FrameShader extends GLSLProgram {
     constructor(gl) {
-        shader_const = {
+        let shader_const = {
             FRAME_VERTEX_SHADER: 'frame-vertex-shader',
             FRAME_FRAGMENT_SHADER: 'frame-fragment-shader',
         }
@@ -11,7 +11,7 @@
 
     setupUniformsStruct(gl) {
         super.uniforms = {
-            screenTexture: gl.getUniformLocation(super.shaderProgram, "screenTexture"),
+            screenTexture: gl.getUniformLocation(this.shaderProgram, "screenTexture"),
         }
     }
 }

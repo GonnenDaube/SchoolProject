@@ -1,10 +1,16 @@
 ﻿class Object3D {
-    constructor() {
-        this.position = null;
+    constructor(model) {
+        this.position = [0, 0, 0];
+        this.rotation = [0, 0, 0];
+        this.scale = [0, 0, 0];
+        this.model = null;
     }
 
     getTransformation() {
-        let transform = translate(transform, this.position);
+        let transform;
+        transform = rotate(transform, this.rotation);
+        transform = scale(transform, this.scale);
+        transform = translate(transform, this.position);
         return transform;
     }
 }

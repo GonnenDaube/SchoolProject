@@ -1,0 +1,85 @@
+﻿class Renderer {
+    constructor(gl, canvas_const, scene) {
+        this.sphereShader = new SphereShader(gl);
+        this.frameShader = new FrameShader(gl);
+        this.frame = new Frame(gl);
+        this.fbo = null;
+        this.sceneTexture = null;
+        this.rbo = null;
+        this.genFrameBuffer(gl, canvas_const);
+        this.scene = scene;
+    }
+    renderSceneToFramebuffer(display, gl) {
+        gl.bindFrameBuffer(gl.FRAMEBUFFER, this.fbo);
+
+        display.updateWindow();
+
+        //this section renders spheres using the specific sphere shader
+        this.sphereShader.useProgram();
+        gl.uniformMatrix4fv(this.sphereShader.uniforms.vp_matrix, 1, false, this.scene.camera.getVPMatrix());
+        gl.uniform3fv(this.sphereShader.uniforms.viewPos, 1, this.scene.camera.position);
+        this.enableDepthTest();
+        for (var i in this.scene.objects) {
+            if (i instanceof Sphere) {
+                gl.uniformMatrix4fv(this.sphereShader.uniforms.m_matrix, 1, false, i.getTransformation());
+                i.draw();
+            }
+        }
+        this.sphereShader.unUseProgram();
+    }
+    renderFramebuffertoViewPort(display, gl) {
+        gl.bindFrameBuffer(gl.FRAMEBUFFER, 0);
+
+        display.updateWindow();
+
+        this.frameShader.useProgram();
+        gl.activeTexture(gl.TEXTURE0);
+        gl.bindTexture(gl.TEXTURE_2D, this.sceneTexture);
+        gl.uniform1i(this.frameShader.uniforms.screenTexture, 0);
+        this.disableDepthTest();
+        this.frame.draw();
+        this.frameShader.unUseProgram();
+    }
+    genFrameBuffer(gl, canvas_const) {
+        //framebuffer creation
+        this.fbo = gl.createFrameBuffer();
+        gl.bindFrameBuffer(gl.FRAMEBUFFER, this.fbo);
+
+        //texture creation
+        this.sceneTexture = gl.createTexture();
+        gl.bindTexture(gl.TEXTURE_2D, this.sceneTexture);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, canvas_const.WINDOW_WIDTH, canvas_const.WINDOW_HEIGHT, 0, gl.RGB, gl.UNSIGNED_BYTE, null);
+        gl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+        
+        //unbind texture
+        gl.bindTexture(gl.TEXTURE_2D, 0);
+
+        //attaching the texture to the framebuffer
+        gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, this.sceneTexture, 0);
+
+        //Renderbuffer creation
+        gl.createRenderbuffer(1, this.rbo);
+        gl.bindRenderbuffer(gl.RENDERBUFFER, this.rbo);
+
+        //RenderBuffer storage
+        gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH24_STENCIL8, gl.RENDERBUFFER, this.rbo);
+
+        //unbind renderbuffer
+        gl.bindRenderbuffer(gl.RENDERBUFFER, 0);
+
+        //attaching the rbo to the framebuffer
+        gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_STENCIL_ATTACHMENT, gl.RENDERBUFFER, this.rbo);
+
+        //framebuffer completeness validation test
+        if (gl.checkFramebufferStatus(gl.FRAMEBUFFER) != gl.FRAMEBUFFER_COMPLETE)
+            console.warn('ERROR Framebuffer is not complete!');
+        //unbind framebuffer
+        gl.bindFrameBuffer(gl.FRAMEBUFFER, 0);
+    }
+    enableDepthTest(gl) {
+        gl.enable(gl.DEPTH_TEST);
+    }
+    disableDepthTest(gl) {
+        gl.disable(gl.DEPTH_TEST);
+    }
+}

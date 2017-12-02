@@ -1,6 +1,6 @@
 ﻿class SphereShader extends GLSLProgram {
     constructor(gl) {
-        shader_const = {
+        let shader_const = {
             SPHERE_VERTEX_SHADER: 'sphere-vertex-shader',
             SPHERE_FRAGMENT_SHADER: 'sphere-fragment-shader',
         }
@@ -11,8 +11,9 @@
 
     setupUniformsStruct(gl) {
         super.uniforms = {
-            vp_matrix: gl.getUniformLocation(super.shaderProgram, "vp_matrix"),
-            viewPos: gl.getUniformLocation(super.shaderProgram, "viewPos"),
+            vp_matrix: gl.getUniformLocation(this.shaderProgram, "vp_matrix"),
+            viewPos: gl.getUniformLocation(this.shaderProgram, "viewPos"),
+            m_matrix: gl.getUniformLocation(this.shaderProgram, "m_matrix"),
         }
     }
 }

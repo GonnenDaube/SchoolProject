@@ -3,7 +3,7 @@
         this.shaderProgram = gl.createProgram();
 
         for (var i = 0; i < shaders.length; i++) {
-            gl.attachShader(this.shaderProgram, getShader(gl,shaders[i]));
+            gl.attachShader(this.shaderProgram, this.getShader(gl,shaders[i]));
         }
 
         gl.linkProgram(this.shaderProgram);

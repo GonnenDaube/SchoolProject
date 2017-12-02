@@ -42,7 +42,19 @@ var playerInputDetector;
 var fpsCounter;
 
 function main() {
-    init();
+    let gl = init();
+
+    while (true) {
+        renderer.renderSceneToFramebuffer(display, gl);
+
+        renderer.renderFramebuffertoViewPort(display, gl);
+
+        fpsCounter.updateFps();
+
+        scene.updateScene();
+
+        display.setFpsCounter(fpsCounter.fps);
+    }
 }
 
 function init() {
@@ -71,4 +83,13 @@ function init() {
     //init PlayerInputDetector
     playerInputDetector = new PlayerInputDetector(scene, display);
 
+    //init renderer
+    renderer = new Renderer(gl, canvas_const, scene);
+
+    //add all objects to scene
+    for (var i = 0; i < 10; i++) {
+        scene.addObject(new Sphere(gl, 1, [i, 0, 0]));
+    }
+
+    return gl;
 }
