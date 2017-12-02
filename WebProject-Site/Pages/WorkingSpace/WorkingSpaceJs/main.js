@@ -19,10 +19,6 @@ if (window.location.href.includes("WorkingSpace.aspx")) {
     addLoadEvent(main);
 }
 
-var math_const = {
-    PI: 3.14159265359,
-}
-
 var canvas_const = {
     WINDOW_HEIGHT: window.innerWidth * 0.39,
     WINDOW_WIDTH: window.innerWidth * 0.7,
@@ -32,7 +28,7 @@ var camera_const = {
     INITIAL_CAMERA_POSITION:[0.0, 0.0, -10.0],
     INITIAL_CAMERA_LOOKAT:[0.0, 0.0, 1.0],
     INITIAL_CAMERA_LOOKUP:[0.0, 1.0, 0.0],
-    FOV: math_const.PI / 3, // 60 deg
+    FOV: Math.PI / 3, // 60 deg
 }
 
 var display;
