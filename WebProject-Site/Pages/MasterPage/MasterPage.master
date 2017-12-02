@@ -63,6 +63,7 @@
         <script src="/Pages/HomePage/HomePageJs.js"></script>
         <div id="WorkingSpaceJs">
             <div id="objects">
+                <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/objects/Model.js"></script>
                 <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/objects/Object3D.js"></script>
                 <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/objects/Sphere.js"></script>
                 <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/objects/Frame.js"></script>
@@ -167,7 +168,7 @@
 
                         void main()
                         {
-                        	vec4 texColor = texture(screenTexture, TexCoords);
+                        	vec4 texColor = texture2D(screenTexture, TexCoords);
                         	gl_FragColor = texColor;
                         }
                     </script>

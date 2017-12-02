@@ -62,7 +62,7 @@ function init() {
     display = new Display(canvas_const.WINDOW_HEIGHT, canvas_const.WINDOW_WIDTH);
 
     //init webgl
-    const gl = display.canvas.getContext("experimental-webgl");
+    const gl = display.canvas.getContext("webgl2");
 
     if (!gl) {
         console.log("Unable to initialize WebGl. Your browser or machine may not support it.");

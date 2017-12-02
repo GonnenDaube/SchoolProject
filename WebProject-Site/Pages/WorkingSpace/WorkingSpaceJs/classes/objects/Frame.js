@@ -27,11 +27,11 @@
         this.gl.vertexAttribPointer(0, 2, this.gl.FLOAT, this.gl.FALSE, 2 * Float32Array.BYTES_PER_ELEMENT, null);
         this.gl.enableVertexAttribArray(0);
 
-        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.quadModel.texCoords, this.gl.STATIC_DRAW);
+        this.gl.bufferData(this.gl.ARRAY_BUFFER, this.quadModel.texCoords, this.gl.STATIC_DRAW);
         this.gl.vertexAttribPointer(1, 2, this.gl.FLOAT, this.gl.FALSE, 2 * Float32Array.BYTES_PER_ELEMENT, null);
         this.gl.enableVertexAttribArray(1);
 
-        this.gl.bindBuffer(0);
-        this.gl.bindVertexArray(0);
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);
+        this.gl.bindVertexArray(null);
     }
 }
