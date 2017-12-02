@@ -2,6 +2,7 @@
     constructor(fpsCounter) {
         this.fpsCounter = fpsCounter;
         this.objects = new Array();
+        this.camera = null;
     }
     
     updateScene() {
@@ -12,3 +13,5 @@
         this.objects.push(object3d);
     }
 }
+
+export Scene;

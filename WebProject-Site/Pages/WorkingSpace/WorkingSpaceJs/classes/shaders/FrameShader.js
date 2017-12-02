@@ -1,4 +1,6 @@
-﻿class FrameShader extends GLSLProgram {
+﻿//import GLSLProgram from './GLSLProgram.js';
+
+class FrameShader extends GLSLProgram {
     constructor(gl) {
         let shader_const = {
             FRAME_VERTEX_SHADER: 'frame-vertex-shader',
@@ -15,3 +17,5 @@
         }
     }
 }
+
+export FrameShader;

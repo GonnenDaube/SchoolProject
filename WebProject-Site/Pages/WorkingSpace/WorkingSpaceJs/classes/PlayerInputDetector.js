@@ -116,3 +116,5 @@ class PlayerInputDetector {
         }
     }
 }
+
+export PlayerInputDetector;

@@ -1,4 +1,6 @@
-﻿class SphereShader extends GLSLProgram {
+﻿//import GLSLProgram from './GLSLProgram.js';
+
+class SphereShader extends GLSLProgram {
     constructor(gl) {
         let shader_const = {
             SPHERE_VERTEX_SHADER: 'sphere-vertex-shader',
@@ -17,3 +19,5 @@
         }
     }
 }
+
+export SphereShader;

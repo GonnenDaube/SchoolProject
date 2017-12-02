@@ -91,3 +91,5 @@
             this.moveDown();
     }
 }
+
+export Camera;

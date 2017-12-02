@@ -10,3 +10,5 @@
         this.fps = 1 / this.delta;
     }
 }
+
+export FpsCounter;

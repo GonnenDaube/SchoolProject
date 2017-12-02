@@ -1,9 +1,12 @@
-﻿class Sphere extends Object3D {
+﻿//import Object3D from './Object3D.js';
+//import Model from './Model.js';
+
+class Sphere extends Object3D {
     constructor(gl, radius, position) {
         super(Model.createSphereModel());
         this.radius = radius;
-        super.position = position;
-        super.scale = [radius, radius, radius];
+        this.position = position;
+        this.scale = [radius, radius, radius];
         this.gl = gl;
         this.VAO = null;
         this.modelVBO = null;
@@ -31,3 +34,5 @@
         this.gl.bindVertexArray(0);
     }
 }
+
+export Sphere;

@@ -21,3 +21,5 @@ class Display {
         this.fpsLabel.innerHTML = str;
     }
 }
+
+export Display;

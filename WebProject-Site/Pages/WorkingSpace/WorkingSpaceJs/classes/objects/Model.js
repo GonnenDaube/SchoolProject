@@ -101,3 +101,5 @@
         return this.numVertices * 3;
     }
 }
+
+export Model;

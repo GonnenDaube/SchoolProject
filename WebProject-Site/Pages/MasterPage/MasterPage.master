@@ -62,17 +62,21 @@
         <script src="/Pages/MasterPage/MasterPageJs.js"></script>
         <script src="/Pages/HomePage/HomePageJs.js"></script>
         <div id="WorkingSpaceJs">
+            <div id="libs">
+                <script src="/Pages/WorkingSpace/WorkingSpaceJs/libs/glMatrix/gl-matrix.js" type="module">
+                </script>
+            </div>
             <div id="objects">
-                <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/objects/Model.js"></script>
-                <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/objects/Object3D.js"></script>
-                <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/objects/Sphere.js"></script>
-                <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/objects/Frame.js"></script>
+                <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/objects/Model.js" type="module"></script>
+                <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/objects/Object3D.js" type="module"></script>
+                <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/objects/Frame.js" type="module"></script>
+                <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/objects/Sphere.js" type="module"></script>
             </div>
             <div id="shaders">
                 <div id="glslShaders">
                     <script src="/Pages/WorkingSpace/WorkingSpaceJs/glslShaders/sphere_fragment_shader.frag" type="x-shader/x-fragment" id="sphere-fragment-shader">
                         precision mediump float;
-
+                        
                         uniform vec3 viewPos;
 
                         vec3 CalcAmbient(vec3 lightColor);
@@ -187,22 +191,22 @@
                     </script>
                 </div>
                 <div id="shaderPrograms">
-                    <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/shaders/GLSLProgram.js"></script>
-                    <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/shaders/SphereShader.js"></script>
-                    <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/shaders/FrameShader.js"></script>
+                    <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/shaders/GLSLProgram.js" type="module"></script>
+                    <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/shaders/SphereShader.js" type="module"></script>
+                    <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/shaders/FrameShader.js" type="module"></script>
                 </div>
             </div>
             <div id="graphics">
-                <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/graphics/Camera.js"></script>
-                <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/graphics/Display.js"></script>
-                <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/graphics/Renderer.js"></script>
+                <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/graphics/Camera.js" type="module"></script>
+                <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/graphics/Display.js" type="module"></script>
+                <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/graphics/Renderer.js" type="module"></script>
             </div>
             <div id="misc">
-                <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/FpsCounter.js"></script>
-                <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/Scene.js"></script>
-                <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/PlayerInputDetector.js"></script>
+                <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/FpsCounter.js" type="module"></script>
+                <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/Scene.js" type="module"></script>
+                <script src="/Pages/WorkingSpace/WorkingSpaceJs/classes/PlayerInputDetector.js" type="module"></script>
             </div>
-            <script src="/Pages/WorkingSpace/WorkingSpaceJs/main.js" defer="defer"></script>
+            <script src="/Pages/WorkingSpace/WorkingSpaceJs/main.js" defer="defer" type="module"></script>
         </div>
 
         <link href="/Pages/MasterPage/MasterPageStyle.css" rel="stylesheet" />

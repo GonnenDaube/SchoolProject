@@ -1,4 +1,16 @@
-﻿'use strict';
+﻿import * as glMatrix from './libs/glMatrix/gl-matrix.js';
+import Camera from './classes/graphics/Camera.js';
+import Display from './classes/graphics/Display.js';
+import Renderer from './classes/graphics/Renderer.js';
+import Object3D from './classes/objects/Object3D.js';
+import Frame from './classes/objects/Frame.js';
+import Sphere from './classes/objects/Sphere.js';
+import Model from './classes/objects/Model.js';
+import GLSLProgram from './classes/shaders/GLSLProgram.js';
+import FrameShader from './classes/shaders/FrameShader.js';
+import SphereShader from './classes/shaders/SphereShader.js';
+import FpsCounter from './classes/FpsCounter.js';
+import PlayerInputDetector from './classes/PlayerInputDetector.js';
 
 function addLoadEvent(func) {
     var oldonload = window.onload;

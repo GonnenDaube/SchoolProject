@@ -83,3 +83,5 @@
         gl.disable(gl.DEPTH_TEST);
     }
 }
+
+export Renderer;

@@ -67,3 +67,5 @@
         return shader;
     }
 }
+
+export GLSLProgram;
