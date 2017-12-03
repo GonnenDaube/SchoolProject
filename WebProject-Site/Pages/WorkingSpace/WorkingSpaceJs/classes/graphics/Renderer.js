@@ -63,11 +63,12 @@ class Renderer {
         gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, this.sceneTexture, 0);
 
         //Renderbuffer creation
-        gl.createRenderbuffer(1, this.rbo);
+        this.rbo = gl.createRenderbuffer();
+
         gl.bindRenderbuffer(gl.RENDERBUFFER, this.rbo);
 
         //RenderBuffer storage
-        gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH24_STENCIL8, gl.RENDERBUFFER, this.rbo);
+        gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH24_STENCIL8, canvas_const.WINDOW_WIDTH, canvas_const.WINDOW_HEIGHT);
 
         //unbind renderbuffer
         gl.bindRenderbuffer(gl.RENDERBUFFER, null);

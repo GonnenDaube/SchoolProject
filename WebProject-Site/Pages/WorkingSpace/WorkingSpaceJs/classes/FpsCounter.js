@@ -1,13 +1,13 @@
 ﻿class FpsCounter {
     constructor() {
-        this.curTime = this.privTime = new Date().getTime();
+        this.curTime = this.privTime = 0;
         this.delta = this.fps = 0;
     }
-    updateFps() {
+    updateFps(timestamp) {
         this.privTime = this.curTime;
-        this.curTime = new Date().getTime();
+        this.curTime = timestamp;
         this.delta = this.curTime - this.privTime;
-        this.fps = 1 / this.delta;
+        this.fps = this.delta;
     }
 }
 

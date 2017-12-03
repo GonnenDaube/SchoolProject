@@ -33,8 +33,8 @@ if (window.location.href.includes("WorkingSpace.aspx")) {
 }
 
 var canvas_const = {
-    WINDOW_HEIGHT: window.innerWidth * 0.39,
-    WINDOW_WIDTH: window.innerWidth * 0.7,
+    WINDOW_HEIGHT: window.innerWidth * 0.4,
+    WINDOW_WIDTH: window.innerWidth * 0.8,
 };
 
 var camera_const = {
@@ -53,17 +53,20 @@ var fpsCounter;
 function main() {
     let gl = init();
 
-    //while (true) {
+    var loop = function(timestamp){
         renderer.renderSceneToFramebuffer(display, gl);
 
         renderer.renderFramebuffertoViewPort(display, gl);
 
-        fpsCounter.updateFps();
+        fpsCounter.updateFps(timestamp);
 
         scene.updateScene();
 
         display.setFpsCounter(fpsCounter.fps);
-    //}
+
+        //window.requestAnimationFrame(loop);
+    };
+    window.requestAnimationFrame(loop);
 }
 
 function init() {
