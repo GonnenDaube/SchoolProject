@@ -11,4 +11,4 @@
     }
 }
 
-export FpsCounter;
+export default FpsCounter;

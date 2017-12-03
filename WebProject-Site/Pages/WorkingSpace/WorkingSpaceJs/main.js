@@ -11,6 +11,7 @@ import FrameShader from './classes/shaders/FrameShader.js';
 import SphereShader from './classes/shaders/SphereShader.js';
 import FpsCounter from './classes/FpsCounter.js';
 import PlayerInputDetector from './classes/PlayerInputDetector.js';
+import Scene from './classes/Scene.js';
 
 function addLoadEvent(func) {
     var oldonload = window.onload;

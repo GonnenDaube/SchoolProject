@@ -1,4 +1,4 @@
-﻿//import GLSLProgram from './GLSLProgram.js';
+﻿import GLSLProgram from './GLSLProgram.js';
 
 class FrameShader extends GLSLProgram {
     constructor(gl) {
@@ -18,4 +18,4 @@ class FrameShader extends GLSLProgram {
     }
 }
 
-export FrameShader;
+export default FrameShader;

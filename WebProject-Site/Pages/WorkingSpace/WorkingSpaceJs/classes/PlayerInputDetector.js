@@ -1,4 +1,6 @@
-﻿var key_const = {
+﻿import * from '../libs/glMatrix/gl-matrix.js';
+
+var key_const = {
     W: 87,
     A: 65,
     S: 83,
@@ -80,21 +82,21 @@ class PlayerInputDetector {
         let ypos = event.clientY;
         let diffX = xpos - this.cursorPosX;
         let diffY = ypos - this.cursorPosY;
-        let yaw = acos(dot(this.scene.camera.lookingAt, [0.0, 1.0, 0.0]));
-        if(!((yaw >= 0 && yaw <= radians(15.0) && diffY <= 0) || (yaw <= radians(180.0) && yaw >= radians(165.0) && diffY >= 0))){
-            mat = rotate(mat, atan2(this.scene.camera.lookingAt[0], this.scene.camera.lookingAt[2]), [0.0, 1.0, 0.0]);
-            mat = rotate(mat, radians(-diffY / 10.0), [1.0, 0.0, 0.0]);
-            mat = rotate(mat, -atan2(this.scene.camera.lookingAt[0], this.scene.camera.lookingAt[2]), [0.0, 1.0, 0.0]);
+        let yaw = Math.acos(vec4.dot(this.scene.camera.lookingAt, [0.0, 1.0, 0.0]));
+        if(!((yaw >= 0 && yaw <= glMatrix.toRadian(15.0) && diffY <= 0) || (yaw <= glMatrix.toRadian(180.0) && yaw >= glMatrix.toRadian(165.0) && diffY >= 0))){
+            mat = mat4.rotate(mat, atan2(this.scene.camera.lookingAt[0], this.scene.camera.lookingAt[2]), [0.0, 1.0, 0.0]);
+            mat = mat4.rotate(mat, radians(-diffY / 10.0), [1.0, 0.0, 0.0]);
+            mat = mat4.rotate(mat, -atan2(this.scene.camera.lookingAt[0], this.scene.camera.lookingAt[2]), [0.0, 1.0, 0.0]);
             let v = this.scene.camera.lookingAt;
             v[3] = 1.0;
-            v = multiplyVec4Mat4(v,v,mat);
+            v = v * mat;
             this.scene.camera.lookingAt = [v[0], v[1], v[2]];
         }
 
-        mat = rotate(mat, radians(diffX / 10.0), [0.0, 1.0, 0.0]);
+        mat = mat4.rotate(mat, glMatrix.toRadian(diffX / 10.0), [0.0, 1.0, 0.0]);
         let v2 = this.scene.camera.lookingAt;
         v2[3] = 1.0;
-        v2 = multiplyVec4Mat4(v2,v2,mat);
+        v2 = v2 * mat;
         this.scene.camera.lookingAt = [v2[0], v2[1], v2[2]];
 
         this.cursorPosX = xpos;
@@ -117,4 +119,4 @@ class PlayerInputDetector {
     }
 }
 
-export PlayerInputDetector;
+export default PlayerInputDetector;

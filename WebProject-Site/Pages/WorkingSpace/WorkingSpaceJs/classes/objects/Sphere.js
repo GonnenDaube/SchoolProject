@@ -1,5 +1,5 @@
-﻿//import Object3D from './Object3D.js';
-//import Model from './Model.js';
+﻿import Object3D from './Object3D.js';
+import Model from './Model.js';
 
 class Sphere extends Object3D {
     constructor(gl, radius, position) {
@@ -35,4 +35,4 @@ class Sphere extends Object3D {
     }
 }
 
-export Sphere;
+export default Sphere;

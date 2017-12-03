@@ -1,4 +1,6 @@
-﻿class Object3D {
+﻿import * from '../libs/glMatrix/gl-matrix.js';
+
+class Object3D {
     constructor(model) {
         this.position = [0, 0, 0];
         this.rotation = [0, 0, 0];
@@ -8,11 +10,11 @@
 
     getTransformation() {
         let transform;
-        transform = rotate(transform, this.rotation);
-        transform = scale(transform, this.scale);
-        transform = translate(transform, this.position);
+        transform = mat4.rotate(transform, this.rotation);
+        transform = mat4.scale(transform, this.scale);
+        transform = mat4.translate(transform, this.position);
         return transform;
     }
 }
 
-export Object3D;
+export default Object3D;

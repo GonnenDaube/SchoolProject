@@ -14,4 +14,4 @@
     }
 }
 
-export Scene;
+export default Scene;

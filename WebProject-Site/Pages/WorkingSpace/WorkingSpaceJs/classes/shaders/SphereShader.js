@@ -1,4 +1,4 @@
-﻿//import GLSLProgram from './GLSLProgram.js';
+﻿import GLSLProgram from './GLSLProgram.js';
 
 class SphereShader extends GLSLProgram {
     constructor(gl) {
@@ -20,4 +20,4 @@ class SphereShader extends GLSLProgram {
     }
 }
 
-export SphereShader;
+export default SphereShader;

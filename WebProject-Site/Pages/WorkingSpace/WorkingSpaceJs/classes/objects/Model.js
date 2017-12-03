@@ -1,4 +1,6 @@
-﻿class Model {
+﻿import * from '../libs/glMatrix/gl-matrix.js';
+
+class Model {
     constructor(vertices, indices, normals, num_vertices, isIndexed, color, mode) {
         this.color = color;
         this.mode = mode;
@@ -13,14 +15,14 @@
     static createSphereModel(smoothness, gl) {
         var ballModel = new Model(null, null, null, null, null, null, null);
         var privRadius = [0.0, 1.0, 0.0];
-        var temp = multiplyMat4vec4(rotate(null, 2 * Math.PI / (smoothness * 2), [1.0, 0.0, 0.0]), [privRadius[0], privRadius[1], privRadius[2], 1.0]);
+        var temp = mat4.rotate(mat4.create(), 2 * Math.PI / (smoothness * 2), [1.0, 0.0, 0.0]) * [privRadius[0], privRadius[1], privRadius[2], 1.0];
         var curRadius = [temp[0], temp[1], temp[2]];
         var privRing = ballModel.createRing([0.0, curRadius[1], 0.0], [0.0, 1.0, 0.0], smoothness, Math.abs(curRadius[2]));
         var curRing = privRing;
         ballModel.addCap(privRadius, privRing, smoothness);
 
         for (var i = 1; i < smoothness; i++) {
-            temp = multiplyMat4vec4(rotate(null, 2 * Math.PI / (smoothness * 2), [1.0, 0.0, 0.0]), [curRadius[0], curRadius[1], curRadius[2], 1.0]);
+            temp = mat4.rotate(mat4.create(), 2 * Math.PI / (smoothness * 2), [1.0, 0.0, 0.0]) * [curRadius[0], curRadius[1], curRadius[2], 1.0];
             curRadius = [temp[0], temp[1], temp[2]];
             curRing = ballModel.createRing([0.0, curRadius[1], 0.0], [0.0, 1.0, 0.0], smoothness, Math.abs(curRadius[2]));
             ballModel.addRings(privRing, curRing, smoothness);
@@ -91,7 +93,7 @@
         let ring = new Array(smoothness);
         for (var i = 0; i < smoothness; i++) {
             ring[i] = radius + center;
-            temp = multiplyMat4vec4(rotate(null, (2 * Math.PI / smoothness), normal), [radius[0], radius[1], radius[2], 1.0]);
+            temp = mat4.rotate(mat4.create(), (2 * Math.PI / smoothness), normal) * [radius[0], radius[1], radius[2], 1.0];
             radius = [temp[0], temp[1], temp[2]];
         }
         return ring;
@@ -102,4 +104,4 @@
     }
 }
 
-export Model;
+export default Model;

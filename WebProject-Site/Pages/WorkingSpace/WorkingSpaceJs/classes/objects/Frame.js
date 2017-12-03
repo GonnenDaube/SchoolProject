@@ -1,5 +1,5 @@
-﻿//import Object3D from './Object3D.js';
-//import Model from './Model.js';
+﻿import Object3D from './Object3D.js';
+import Model from './Model.js';
 
 class Frame extends Object3D {
     constructor(gl) {
@@ -38,4 +38,4 @@ class Frame extends Object3D {
     }
 }
 
-export Frame;
+export default Frame;

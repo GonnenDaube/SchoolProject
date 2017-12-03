@@ -1,4 +1,8 @@
-﻿class Renderer {
+﻿import SphereShader from '../shaders/SphereShader.js';
+import FrameShader from '../shaders/FrameShader.js';
+import Frame from '../objects/Frame.js';
+
+class Renderer {
     constructor(gl, canvas_const, scene) {
         this.sphereShader = new SphereShader(gl);
         this.frameShader = new FrameShader(gl);
@@ -84,4 +88,4 @@
     }
 }
 
-export Renderer;
+export default Renderer;

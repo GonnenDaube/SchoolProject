@@ -68,4 +68,4 @@
     }
 }
 
-export GLSLProgram;
+export default GLSLProgram;

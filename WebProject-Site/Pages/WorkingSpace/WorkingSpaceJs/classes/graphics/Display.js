@@ -22,4 +22,4 @@ class Display {
     }
 }
 
-export Display;
+export default Display;
