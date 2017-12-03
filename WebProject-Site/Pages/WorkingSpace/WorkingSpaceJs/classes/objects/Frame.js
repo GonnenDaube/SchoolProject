@@ -29,6 +29,7 @@ class Frame extends Object3D {
         this.gl.vertexAttribPointer(0, 2, this.gl.FLOAT, this.gl.FALSE, 2 * Float32Array.BYTES_PER_ELEMENT, 0);
         this.gl.enableVertexAttribArray(0);
 
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.texCoordVBO);
         this.gl.bufferData(this.gl.ARRAY_BUFFER, this.model.texCoords, this.gl.STATIC_DRAW);
         this.gl.vertexAttribPointer(1, 2, this.gl.FLOAT, this.gl.FALSE, 2 * Float32Array.BYTES_PER_ELEMENT, 0);
         this.gl.enableVertexAttribArray(1);
