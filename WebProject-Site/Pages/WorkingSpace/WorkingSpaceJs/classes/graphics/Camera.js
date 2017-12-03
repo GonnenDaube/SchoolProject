@@ -1,4 +1,4 @@
-﻿import * from '../libs/glMatrix/gl-matrix.js';
+﻿import {mat4, vec4} from '/Pages/WorkingSpace/WorkingSpaceJs/libs/glMatrix/gl-matrix.js';
 
 class Camera {
     constructor(position, lookingAt, lookingUp, fov) {
@@ -12,7 +12,8 @@ class Camera {
     }
     getLookAt() {
         let lookAtMat = mat4.create();
-        lookAtMat = mat4.lookAt(lookAtMat, this.position, this.position + this.lookingAt, this.lookingUp);
+        lookAtMat = mat4.lookAt(lookAtMat, this.position, [this.position[0] + this.lookingAt[0], this.position[1] + this.lookingAt[1], this.position[2] + this.lookingAt[2]], this.lookingUp);
+        console.log(lookAtMat);
         return lookAtMat;
     }
     getPerspective() {
@@ -21,8 +22,8 @@ class Camera {
         return perspectiveMat;
     }
     getVpMatrix() {
-        let vpMat = this.getPerspective() * this.getLookAt();
-        return vpMat;
+        var vpMat = this.getPerspective() * this.getLookAt();
+        return 0;
     }
     moveForward() {
         let mat = mat4.create();

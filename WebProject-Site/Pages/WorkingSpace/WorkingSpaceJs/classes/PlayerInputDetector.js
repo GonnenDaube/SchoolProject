@@ -1,4 +1,4 @@
-﻿import * from '../libs/glMatrix/gl-matrix.js';
+﻿import {mat4, vec4} from '/Pages/WorkingSpace/WorkingSpaceJs/libs/glMatrix/gl-matrix.js';
 
 var key_const = {
     W: 87,

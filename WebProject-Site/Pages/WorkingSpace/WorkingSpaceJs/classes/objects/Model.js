@@ -1,4 +1,4 @@
-﻿import * from '../libs/glMatrix/gl-matrix.js';
+﻿import {mat4, vec3, vec4} from '/Pages/WorkingSpace/WorkingSpaceJs/libs/glMatrix/gl-matrix.js';
 
 class Model {
     constructor(vertices, indices, normals, num_vertices, isIndexed, color, mode) {
@@ -15,14 +15,14 @@ class Model {
     static createSphereModel(smoothness, gl) {
         var ballModel = new Model(null, null, null, null, null, null, null);
         var privRadius = [0.0, 1.0, 0.0];
-        var temp = mat4.rotate(mat4.create(), 2 * Math.PI / (smoothness * 2), [1.0, 0.0, 0.0]) * [privRadius[0], privRadius[1], privRadius[2], 1.0];
+        var temp = mat4.rotate(mat4.create(), mat4.create(), 2 * Math.PI / (smoothness * 2), [1.0, 0.0, 0.0]) * [privRadius[0], privRadius[1], privRadius[2], 1.0];
         var curRadius = [temp[0], temp[1], temp[2]];
         var privRing = ballModel.createRing([0.0, curRadius[1], 0.0], [0.0, 1.0, 0.0], smoothness, Math.abs(curRadius[2]));
         var curRing = privRing;
         ballModel.addCap(privRadius, privRing, smoothness);
 
         for (var i = 1; i < smoothness; i++) {
-            temp = mat4.rotate(mat4.create(), 2 * Math.PI / (smoothness * 2), [1.0, 0.0, 0.0]) * [curRadius[0], curRadius[1], curRadius[2], 1.0];
+            temp = mat4.rotate(mat4.create(), mat4.create(), 2 * Math.PI / (smoothness * 2), [1.0, 0.0, 0.0]) * [curRadius[0], curRadius[1], curRadius[2], 1.0];
             curRadius = [temp[0], temp[1], temp[2]];
             curRing = ballModel.createRing([0.0, curRadius[1], 0.0], [0.0, 1.0, 0.0], smoothness, Math.abs(curRadius[2]));
             ballModel.addRings(privRing, curRing, smoothness);
@@ -60,6 +60,9 @@ class Model {
     }
 
     addPoint(point) {
+        if(this.vertices === null){
+            this.vertices = new Array();
+        }
         for (var i = 0; i < 3; i++) {
             this.vertices.push(point[i]);
         }
@@ -91,9 +94,10 @@ class Model {
     createRing(center, normal, smoothness, r) {
         let radius = [normal[0], -normal[2], normal[1]] * r;
         let ring = new Array(smoothness);
+        let temp;
         for (var i = 0; i < smoothness; i++) {
             ring[i] = radius + center;
-            temp = mat4.rotate(mat4.create(), (2 * Math.PI / smoothness), normal) * [radius[0], radius[1], radius[2], 1.0];
+            temp = mat4.rotate(mat4.create(), mat4.create(), (2 * Math.PI / smoothness), normal) * [radius[0], radius[1], radius[2], 1.0];
             radius = [temp[0], temp[1], temp[2]];
         }
         return ring;

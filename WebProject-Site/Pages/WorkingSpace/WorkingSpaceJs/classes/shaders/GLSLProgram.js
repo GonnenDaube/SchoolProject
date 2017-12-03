@@ -20,10 +20,10 @@
 
         this.uniforms = null;
     }
-    useProgram() {
+    useProgram(gl) {
         gl.useProgram(this.shaderProgram);
     }
-    unUseProgram() {
+    unUseProgram(gl) {
         gl.useProgram(0);
     }
     getShader(gl, id) {

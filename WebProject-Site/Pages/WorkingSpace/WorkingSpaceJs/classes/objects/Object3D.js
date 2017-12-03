@@ -1,4 +1,4 @@
-﻿import * from '../libs/glMatrix/gl-matrix.js';
+﻿import {mat4} from '/Pages/WorkingSpace/WorkingSpaceJs/libs/glMatrix/gl-matrix.js';
 
 class Object3D {
     constructor(model) {

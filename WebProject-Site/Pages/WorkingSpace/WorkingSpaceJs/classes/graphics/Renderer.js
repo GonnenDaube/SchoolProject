@@ -14,35 +14,36 @@ class Renderer {
         this.scene = scene;
     }
     renderSceneToFramebuffer(display, gl) {
-        gl.bindFrameBuffer(gl.FRAMEBUFFER, this.fbo);
+        gl.bindFramebuffer(gl.FRAMEBUFFER, this.fbo);
 
-        display.updateWindow();
+        display.updateCanvas(gl);
 
         //this section renders spheres using the specific sphere shader
-        this.sphereShader.useProgram();
-        gl.uniformMatrix4fv(this.sphereShader.uniforms.vp_matrix, 1, false, this.scene.camera.getVPMatrix());
-        gl.uniform3fv(this.sphereShader.uniforms.viewPos, 1, this.scene.camera.position);
+        this.sphereShader.useProgram(gl);
+        console.log(this.scene.camera.getVpMatrix());
+        gl.uniformMatrix4fv(this.sphereShader.uniforms.vp_matrix, false, this.scene.camera.getVpMatrix());
+        gl.uniform3fv(this.sphereShader.uniforms.viewPos, false, this.scene.camera.position);
         this.enableDepthTest();
         for (var i in this.scene.objects) {
             if (i instanceof Sphere) {
-                gl.uniformMatrix4fv(this.sphereShader.uniforms.m_matrix, 1, false, i.getTransformation());
+                gl.uniformMatrix4fv(this.sphereShader.uniforms.m_matrix, i.getTransformation());
                 i.draw();
             }
         }
-        this.sphereShader.unUseProgram();
+        this.sphereShader.unUseProgram(gl);
     }
     renderFramebuffertoViewPort(display, gl) {
         gl.bindFrameBuffer(gl.FRAMEBUFFER, 0);
 
-        display.updateWindow();
+        display.updateCanvas(gl);
 
-        this.frameShader.useProgram();
+        this.frameShader.useProgram(gl);
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, this.sceneTexture);
         gl.uniform1i(this.frameShader.uniforms.screenTexture, 0);
         this.disableDepthTest();
         this.frame.draw();
-        this.frameShader.unUseProgram();
+        this.frameShader.unUseProgram(gl);
     }
     genFrameBuffer(gl, canvas_const) {
         //framebuffer creation

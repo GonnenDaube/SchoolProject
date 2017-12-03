@@ -3,7 +3,7 @@ import Model from './Model.js';
 
 class Sphere extends Object3D {
     constructor(gl, radius, position) {
-        super(Model.createSphereModel());
+        super(Model.createSphereModel(10, gl));
         this.radius = radius;
         this.position = position;
         this.scale = [radius, radius, radius];
@@ -30,8 +30,8 @@ class Sphere extends Object3D {
         this.gl.vertexAttribPointer(0, 3, this.gl.FLOAT, this.gl.FALSE, 3 * Float32Array.BYTES_PER_ELEMENT, null);
         this.gl.enableVertexAttribArray(0);
 
-        this.gl.bindBuffer(0);
-        this.gl.bindVertexArray(0);
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);
+        this.gl.bindVertexArray(null);
     }
 }
 
