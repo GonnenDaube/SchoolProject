@@ -62,8 +62,7 @@
         <script src="/Pages/MasterPage/MasterPageJs.js"></script>
         <script src="/Pages/HomePage/HomePageJs.js"></script>
         <div id="WorkingSpaceJs">
-            <div id="shaders">
-                <div id="glslShaders">
+            <div id="glslShaders">
                     <script type="x-shader/x-fragment" id="sphere-fragment-shader">
                         precision mediump float;
                         
@@ -180,7 +179,6 @@
                         }
                     </script>
                 </div>
-            </div>
             <script src="/Pages/WorkingSpace/WorkingSpaceJs/main.js" defer="defer" type="module"></script>
         </div>
 

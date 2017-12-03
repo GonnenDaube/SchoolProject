@@ -1,6 +1,7 @@
 ﻿import SphereShader from '../shaders/SphereShader.js';
 import FrameShader from '../shaders/FrameShader.js';
 import Frame from '../objects/Frame.js';
+import Sphere from '../objects/Sphere.js';
 
 class Renderer {
     constructor(gl, canvas_const, scene) {
@@ -20,10 +21,9 @@ class Renderer {
 
         //this section renders spheres using the specific sphere shader
         this.sphereShader.useProgram(gl);
-        console.log(this.scene.camera.getVpMatrix());
         gl.uniformMatrix4fv(this.sphereShader.uniforms.vp_matrix, false, this.scene.camera.getVpMatrix());
-        gl.uniform3fv(this.sphereShader.uniforms.viewPos, false, this.scene.camera.position);
-        this.enableDepthTest();
+        gl.uniform3fv(this.sphereShader.uniforms.viewPos, this.scene.camera.position);
+        this.enableDepthTest(gl);
         for (var i in this.scene.objects) {
             if (i instanceof Sphere) {
                 gl.uniformMatrix4fv(this.sphereShader.uniforms.m_matrix, i.getTransformation());
@@ -33,7 +33,7 @@ class Renderer {
         this.sphereShader.unUseProgram(gl);
     }
     renderFramebuffertoViewPort(display, gl) {
-        gl.bindFrameBuffer(gl.FRAMEBUFFER, 0);
+        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
         display.updateCanvas(gl);
 
@@ -41,7 +41,7 @@ class Renderer {
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, this.sceneTexture);
         gl.uniform1i(this.frameShader.uniforms.screenTexture, 0);
-        this.disableDepthTest();
+        this.disableDepthTest(gl);
         this.frame.draw();
         this.frameShader.unUseProgram(gl);
     }

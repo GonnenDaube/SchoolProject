@@ -24,7 +24,7 @@
         gl.useProgram(this.shaderProgram);
     }
     unUseProgram(gl) {
-        gl.useProgram(0);
+        gl.useProgram(null);
     }
     getShader(gl, id) {
         var shaderScript = document.getElementById(id);

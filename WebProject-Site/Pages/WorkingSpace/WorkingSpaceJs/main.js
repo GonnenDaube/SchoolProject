@@ -53,7 +53,7 @@ var fpsCounter;
 function main() {
     let gl = init();
 
-    while (true) {
+    //while (true) {
         renderer.renderSceneToFramebuffer(display, gl);
 
         renderer.renderFramebuffertoViewPort(display, gl);
@@ -63,7 +63,7 @@ function main() {
         scene.updateScene();
 
         display.setFpsCounter(fpsCounter.fps);
-    }
+    //}
 }
 
 function init() {

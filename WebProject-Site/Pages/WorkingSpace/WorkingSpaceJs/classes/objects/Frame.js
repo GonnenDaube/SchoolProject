@@ -14,7 +14,7 @@ class Frame extends Object3D {
     draw() {
         this.gl.bindVertexArray(this.VAO);
         this.gl.drawArrays(this.gl.TRIANGLES, 0, this.model.numVertices);
-        this.gl.bindVertexArray(0);
+        this.gl.bindVertexArray(null);
     }
 
     setupOpengl() {
