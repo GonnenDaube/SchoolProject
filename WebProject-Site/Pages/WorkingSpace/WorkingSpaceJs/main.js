@@ -64,12 +64,13 @@ function main() {
 
         display.setFpsCounter(fpsCounter.fps);
 
-        //window.requestAnimationFrame(loop);
+        window.requestAnimationFrame(loop);
     };
     window.requestAnimationFrame(loop);
 }
 
 function init() {
+
     //init display
     display = new Display(canvas_const.WINDOW_HEIGHT, canvas_const.WINDOW_WIDTH);
 
@@ -90,7 +91,7 @@ function init() {
     scene = new Scene(fpsCounter);
 
     //create camera
-    scene.camera = new Camera(camera_const.INITIAL_CAMERA_POSITION, camera_const.INITIAL_CAMERA_LOOKAT, camera_const.INITIAL_CAMERA_LOOKUP, camera_const.FOV);
+    scene.camera = new Camera(camera_const);
 
     //init PlayerInputDetector
     playerInputDetector = new PlayerInputDetector(scene, display);
@@ -100,8 +101,25 @@ function init() {
 
     //add all objects to scene
     for (var i = 0; i < 10; i++) {
-        scene.addObject(new Sphere(gl, 1, [i, 0, 0]));
+        scene.addObject(new Sphere(gl, 1, [i, 0, 0], renderer.sphereShader));
     }
 
     return gl;
 }
+
+function keydown_callback(){
+    playerInputDetector.key_callback_down(event);
+}
+
+function keyup_callback(){
+    playerInputDetector.key_callback_up(event);
+}
+
+function mouse_callback(){
+    playerInputDetector.mouse_callback(event);
+}
+
+
+window.onkeydown = keydown_callback;
+window.onkeyup = keyup_callback;
+window.onmousemove = mouse_callback;

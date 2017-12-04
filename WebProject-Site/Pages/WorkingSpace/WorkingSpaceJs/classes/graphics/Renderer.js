@@ -7,7 +7,7 @@ class Renderer {
     constructor(gl, canvas_const, scene) {
         this.sphereShader = new SphereShader(gl);
         this.frameShader = new FrameShader(gl);
-        this.frame = new Frame(gl);
+        this.frame = new Frame(gl, this.frameShader);
         this.fbo = null;
         this.sceneTexture = null;
         this.rbo = null;
@@ -31,10 +31,10 @@ class Renderer {
             }
         }
         this.sphereShader.unUseProgram(gl);
+
+        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     }
     renderFramebuffertoViewPort(display, gl) {
-        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-
         display.updateCanvas(gl);
 
         this.frameShader.useProgram(gl);

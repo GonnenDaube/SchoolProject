@@ -2,7 +2,7 @@
 import Model from './Model.js';
 
 class Sphere extends Object3D {
-    constructor(gl, radius, position) {
+    constructor(gl, radius, position, shader) {
         super(Model.createSphereModel(10, gl));
         this.radius = radius;
         this.position = position;
@@ -10,7 +10,7 @@ class Sphere extends Object3D {
         this.gl = gl;
         this.VAO = null;
         this.modelVBO = null;
-        this.setupOpengl();
+        this.setupOpengl(shader);
     }
 
     draw() {
@@ -19,16 +19,18 @@ class Sphere extends Object3D {
         this.gl.bindVertexArray(0);
     }
 
-    setupOpengl() {
+    setupOpengl(shader) {
         this.VAO = this.gl.createVertexArray();
         this.modelVBO = this.gl.createBuffer();
 
         this.gl.bindVertexArray(this.VAO);
 
+        let positionAttrib = this.gl.getAttribLocation(shader.shaderProgram, "SphereVertices");
+
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.modelVBO);
         this.gl.bufferData(this.gl.ARRAY_BUFFER, this.model.vertices, this.gl.STATIC_DRAW);
-        this.gl.vertexAttribPointer(0, 3, this.gl.FLOAT, this.gl.FALSE, 3 * Float32Array.BYTES_PER_ELEMENT, 0);
-        this.gl.enableVertexAttribArray(0);
+        this.gl.vertexAttribPointer(positionAttrib, 3, this.gl.FLOAT, this.gl.FALSE, 3 * Float32Array.BYTES_PER_ELEMENT, 0);
+        this.gl.enableVertexAttribArray(positionAttrib);
 
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);
         this.gl.bindVertexArray(null);

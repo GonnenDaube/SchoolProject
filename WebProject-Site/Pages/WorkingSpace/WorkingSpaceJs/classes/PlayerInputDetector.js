@@ -1,4 +1,4 @@
-﻿import {mat4, vec4} from '/Pages/WorkingSpace/WorkingSpaceJs/libs/glMatrix/gl-matrix.js';
+﻿import {mat4, vec4, glMatrix, vec3} from '/Pages/WorkingSpace/WorkingSpaceJs/libs/glMatrix/gl-matrix.js';
 
 var key_const = {
     W: 87,
@@ -14,16 +14,12 @@ class PlayerInputDetector {
     constructor(scene, display) {
         this.scene = scene;
         this.display = display;
-        //this.addMouseMoveEvent(this.mouse_callback(event));
-        document.getElementsByTagName("body")[0].setAttribute("onkeydown", "playerInputDetector.key_callback_down(event)");
-        document.getElementsByTagName("body")[0].setAttribute("onkeyup", "playerInputDetector.key_callback_up(event)");
         this.cursorPosX = event.clientX;
         this.cursorPosY = event.clientY;
     }
     key_callback_down(event) {
         switch (event.keyCode) {
             case key_const.W:
-                console.log("w is pressed");
                 this.scene.camera.forward = true;
                 break;
             case key_const.S:
@@ -51,7 +47,6 @@ class PlayerInputDetector {
     key_callback_up(event) {
         switch (event.keyCode) {
             case key_const.W:
-                console.log("w is released");
                 this.scene.camera.forward = false;
                 break;
             case key_const.S:
@@ -77,26 +72,31 @@ class PlayerInputDetector {
         }
     }
     mouse_callback(event) {
-        let mat;
+        let mat = mat4.create();
         let xpos = event.clientX;
         let ypos = event.clientY;
         let diffX = xpos - this.cursorPosX;
         let diffY = ypos - this.cursorPosY;
-        let yaw = Math.acos(vec4.dot(this.scene.camera.lookingAt, [0.0, 1.0, 0.0]));
+        let yaw = Math.acos(vec3.dot(this.scene.camera.lookingAt, [0.0, 1.0, 0.0]));
         if(!((yaw >= 0 && yaw <= glMatrix.toRadian(15.0) && diffY <= 0) || (yaw <= glMatrix.toRadian(180.0) && yaw >= glMatrix.toRadian(165.0) && diffY >= 0))){
-            mat = mat4.rotate(mat, atan2(this.scene.camera.lookingAt[0], this.scene.camera.lookingAt[2]), [0.0, 1.0, 0.0]);
-            mat = mat4.rotate(mat, radians(-diffY / 10.0), [1.0, 0.0, 0.0]);
-            mat = mat4.rotate(mat, -atan2(this.scene.camera.lookingAt[0], this.scene.camera.lookingAt[2]), [0.0, 1.0, 0.0]);
-            let v = this.scene.camera.lookingAt;
+            let angle = Math.atan2(this.scene.camera.lookingAt[0], this.scene.camera.lookingAt[2]);
+            mat = mat4.rotate(mat, mat, angle, [0.0, 1.0, 0.0]);
+            mat = mat4.rotate(mat, mat, glMatrix.toRadian(-diffY / 10.0), [1.0, 0.0, 0.0]);
+            mat = mat4.rotate(mat, mat, -angle, [0.0, 1.0, 0.0]);
+
+            //TODO : fix
+            let v = this.scene.camera.lookingAt.slice();
             v[3] = 1.0;
-            v = v * mat;
+            v = vec4.transformMat4(v, v, mat);
             this.scene.camera.lookingAt = [v[0], v[1], v[2]];
         }
 
-        mat = mat4.rotate(mat, glMatrix.toRadian(diffX / 10.0), [0.0, 1.0, 0.0]);
-        let v2 = this.scene.camera.lookingAt;
+        mat = mat4.rotate(mat, mat, glMatrix.toRadian(diffX / 10.0), [0.0, 1.0, 0.0]);
+
+        //TODO : fix
+        let v2 = this.scene.camera.lookingAt.slice();
         v2[3] = 1.0;
-        v2 = v2 * mat;
+        v2 = vec4.transformMat4(v2, v2, mat);
         this.scene.camera.lookingAt = [v2[0], v2[1], v2[2]];
 
         this.cursorPosX = xpos;
