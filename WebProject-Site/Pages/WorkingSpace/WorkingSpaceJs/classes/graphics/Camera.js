@@ -34,7 +34,6 @@ class Camera {
         this.position[1] = pos[1];
         this.position[2] = pos[2];
         this.position.splice(3,1);
-        console.log(this.position);
     }
     moveBackward() {
         let mat = mat4.create();
@@ -46,7 +45,6 @@ class Camera {
         this.position[1] = pos[1];
         this.position[2] = pos[2];
         this.position.splice(3,1);
-        console.log(this.position);
     }
     moveRight() {
         let mat = mat4.create();
@@ -63,7 +61,6 @@ class Camera {
         this.position[1] = pos[1];
         this.position[2] = pos[2];
         this.position.splice(3,1);
-        console.log(this.position);
     }
     moveLeft() {
         let mat = mat4.create();
@@ -80,7 +77,6 @@ class Camera {
         this.position[1] = pos[1];
         this.position[2] = pos[2];
         this.position.splice(3,1);
-        console.log(this.position);
     }
     moveUp() {
         this.position[1] = this.position[1] + this.speed;

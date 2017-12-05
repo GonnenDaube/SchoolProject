@@ -15,8 +15,8 @@ class Sphere extends Object3D {
 
     draw() {
         this.gl.bindVertexArray(this.VAO);
-        this.gl.drawArrays(this.gl.TRIANGLES, 0, this.model.numVertices - 5);
-        this.gl.bindVertexArray(0);
+        this.gl.drawArrays(this.gl.TRIANGLES, 0, this.model.numVertices);
+        this.gl.bindVertexArray(null);
     }
 
     setupOpengl(shader) {
@@ -28,7 +28,7 @@ class Sphere extends Object3D {
         let positionAttrib = this.gl.getAttribLocation(shader.shaderProgram, "SphereVertices");
 
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.modelVBO);
-        this.gl.bufferData(this.gl.ARRAY_BUFFER, this.model.vertices, this.gl.STATIC_DRAW);
+        this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(this.model.vertices), this.gl.STATIC_DRAW);
         this.gl.vertexAttribPointer(positionAttrib, 3, this.gl.FLOAT, this.gl.FALSE, 3 * Float32Array.BYTES_PER_ELEMENT, 0);
         this.gl.enableVertexAttribArray(positionAttrib);
 

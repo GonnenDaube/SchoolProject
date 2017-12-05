@@ -7,7 +7,7 @@
         this.privTime = this.curTime;
         this.curTime = timestamp;
         this.delta = this.curTime - this.privTime;
-        this.fps = this.delta;
+        this.fps = Math.round(1000 / this.delta);
     }
 }
 

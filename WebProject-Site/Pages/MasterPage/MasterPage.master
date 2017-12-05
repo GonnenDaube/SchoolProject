@@ -63,7 +63,7 @@
         <script src="/Pages/HomePage/HomePageJs.js"></script>
         <div id="WorkingSpaceJs">
             <div id="glslShaders">
-                    <script type="x-shader/x-fragment" id="sphere-fragment-shader">
+                    <script type="x-shader/x-fragment" id="sphere-fragment-shader">#version 300 es
                         precision mediump float;
                         
                         uniform vec3 viewPos;
@@ -72,24 +72,26 @@
                         vec3 CalcDiffuse(vec3 lightDirection, vec3 lightColor, vec3 normal);
                         vec3 CalcSpecular(vec3 lightDirection, vec3 lightColor, vec3 normal, vec3 viewPos);
 
-                        varying vec3 FragPos;
-                        varying vec3 Normal;
-                        varying float ambientStrength;
-                        varying float diffuseStrength;
-                        varying float specularStrength;
-                        varying float shininess;
-                        varying vec3 objectColor;
+                        in vec3 FragPos;
+                        in vec3 Normal;
+                        in float ambientStrength;
+                        in float diffuseStrength;
+                        in float specularStrength;
+                        in float shininess;
+                        in vec3 objectColor;
+
+                        out vec4 color;
 
                         void main()
                         {
 	                        vec3 sunLightColor = vec3(1.0, 1.0, 1.0);
-	                        vec3 sunLightDirection = normalize(vec3(0.25, -1.0, 0.25));
+	                        vec3 sunLightDirection = normalize(vec3(0.0, -0.5, 0.1));
 
 	                        vec3 ambient = CalcAmbient(sunLightColor);
 	                        vec3 diffuse = CalcDiffuse(sunLightDirection, sunLightColor, Normal);
 	                        vec3 specular = CalcSpecular(sunLightDirection, sunLightColor, Normal, viewPos);
 
-	                        gl_FragColor = vec4((ambient + diffuse + specular) * objectColor, 1.0);
+	                        color = vec4((ambient + diffuse + specular) * objectColor, 1.0);
                         }
 
                         vec3 CalcAmbient(vec3 lightColor)
@@ -110,10 +112,10 @@
 	                        return specularStrength * specular * lightColor;  
                         }
                     </script>
-                    <script type="x-shader/x-vertex" id="sphere-vertex-shader">
+                    <script type="x-shader/x-vertex" id="sphere-vertex-shader">#version 300 es
                         precision mediump float;
 
-                        attribute vec3 SphereVertices;
+                        layout(location = 0) in vec3 SphereVertices;
 
                         vec3 CalcObjectColor();
                         float CalcShininess();
@@ -121,13 +123,13 @@
                         uniform mat4 vp_matrix;
                         uniform mat4 m_matrix;
 
-                        varying vec3 FragPos;
-                        varying vec3 Normal;
-                        varying float ambientStrength;
-                        varying float diffuseStrength;
-                        varying float specularStrength;
-                        varying float shininess;
-                        varying vec3 objectColor;
+                        out vec3 FragPos;
+                        out vec3 Normal;
+                        out float ambientStrength;
+                        out float diffuseStrength;
+                        out float specularStrength;
+                        out float shininess;
+                        out vec3 objectColor;
 
                         void main()
                         {
@@ -145,7 +147,7 @@
 
                         vec3 CalcObjectColor()
                         {
-	                        return vec3(0.41, 0.43, 0.12);
+	                        return vec3(0.41, 0.0, 0.67);
                         }
 
                         float CalcShininess()
@@ -153,24 +155,26 @@
                         	return 26.0;
                         }
                     </script>
-                    <script type="x-shader/x-fragment" id="frame-fragment-shader">
+                    <script type="x-shader/x-fragment" id="frame-fragment-shader">#version 300 es
                         precision mediump float;
-                        varying vec2 TexCoords;
+                        in vec2 TexCoords;
 
                         uniform sampler2D screenTexture;
 
+                        out vec4 color;
+
                         void main()
                         {
-                        	vec4 texColor = texture2D(screenTexture, TexCoords);
-                        	gl_FragColor = texColor;
+                        	vec4 texColor = texture(screenTexture, TexCoords);
+                        	color = texColor;
                         }
                     </script>
-                    <script type="x-shader/x-vertex" id="frame-vertex-shader">
+                    <script type="x-shader/x-vertex" id="frame-vertex-shader">#version 300 es
                         precision mediump float;
-                        attribute vec2 position;
-                        attribute vec2 texCoords;
+                        layout(location = 0) in vec2 position;
+                        layout(location = 1) in vec2 texCoords;
 
-                        varying vec2 TexCoords;
+                        out vec2 TexCoords;
 
                         void main()
                         {

@@ -15,24 +15,24 @@ class Renderer {
         this.scene = scene;
     }
     renderSceneToFramebuffer(display, gl) {
-        gl.bindFramebuffer(gl.FRAMEBUFFER, this.fbo);
+        //gl.bindFramebuffer(gl.FRAMEBUFFER, this.fbo);
 
         display.updateCanvas(gl);
 
         //this section renders spheres using the specific sphere shader
         this.sphereShader.useProgram(gl);
-        gl.uniformMatrix4fv(this.sphereShader.uniforms.vp_matrix, false, this.scene.camera.getVpMatrix());
-        gl.uniform3fv(this.sphereShader.uniforms.viewPos, this.scene.camera.position);
+        gl.uniformMatrix4fv(this.sphereShader.uniforms.vp_matrix, false, new Float32Array(this.scene.camera.getVpMatrix()));
+        gl.uniform3fv(this.sphereShader.uniforms.viewPos, new Float32Array(this.scene.camera.position));
         this.enableDepthTest(gl);
-        for (var i in this.scene.objects) {
+        for (let i of this.scene.objects) {
             if (i instanceof Sphere) {
-                gl.uniformMatrix4fv(this.sphereShader.uniforms.m_matrix, i.getTransformation());
+                gl.uniformMatrix4fv(this.sphereShader.uniforms.m_matrix, false, new Float32Array(i.getTransformation()));
                 i.draw();
             }
         }
         this.sphereShader.unUseProgram(gl);
 
-        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+        //gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     }
     renderFramebuffertoViewPort(display, gl) {
         display.updateCanvas(gl);

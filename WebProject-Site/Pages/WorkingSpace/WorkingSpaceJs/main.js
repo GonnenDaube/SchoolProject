@@ -56,7 +56,7 @@ function main() {
     var loop = function(timestamp){
         renderer.renderSceneToFramebuffer(display, gl);
 
-        renderer.renderFramebuffertoViewPort(display, gl);
+        //renderer.renderFramebuffertoViewPort(display, gl);
 
         fpsCounter.updateFps(timestamp);
 
@@ -96,12 +96,21 @@ function init() {
     //init PlayerInputDetector
     playerInputDetector = new PlayerInputDetector(scene, display);
 
+    window.onkeydown = keydown_callback;
+    window.onkeyup = keyup_callback;
+    window.onmousemove = mouse_callback;
+    display.canvas.onclick = mouse_rotation_true;
+
     //init renderer
     renderer = new Renderer(gl, canvas_const, scene);
 
     //add all objects to scene
-    for (var i = 0; i < 10; i++) {
-        scene.addObject(new Sphere(gl, 1, [i, 0, 0], renderer.sphereShader));
+    for (var i = 0; i < 20; i++) {
+        for(var j = 0; j<20; j++){
+            for(var k = 0; k<10; k++){
+                scene.addObject(new Sphere(gl, 1, [i * 5, j * 5, k * 5], renderer.sphereShader));
+            }
+        }
     }
 
     return gl;
@@ -116,10 +125,16 @@ function keyup_callback(){
 }
 
 function mouse_callback(){
-    playerInputDetector.mouse_callback(event);
+
+    if(playerInputDetector.first || !playerInputDetector.shouldRotateCamera){
+        playerInputDetector.setMousePosition(event);
+        playerInputDetector.first = false;
+    }
+    else{
+        playerInputDetector.mouse_callback(event);
+    }
 }
 
-
-window.onkeydown = keydown_callback;
-window.onkeyup = keyup_callback;
-window.onmousemove = mouse_callback;
+function mouse_rotation_true(){
+    playerInputDetector.shouldRotateCamera = true;
+}

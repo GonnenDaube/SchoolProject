@@ -8,14 +8,17 @@ var key_const = {
     SPACE: 32,
     SHIFT: 16,
     CTRL: 17,
+    ESC: 27,
 }
 
 class PlayerInputDetector {
     constructor(scene, display) {
         this.scene = scene;
         this.display = display;
-        this.cursorPosX = event.clientX;
-        this.cursorPosY = event.clientY;
+        this.cursorPosX = null;
+        this.cursorPosY = null;
+        this.first = true;
+        this.shouldRotateCamera = false;
     }
     key_callback_down(event) {
         switch (event.keyCode) {
@@ -40,6 +43,8 @@ class PlayerInputDetector {
             case key_const.SHIFT:
                 this.scene.camera.velocity = 40.0;
                 break;
+            case key_const.ESC:
+                this.shouldRotateCamera = false;
             default:
                 break;
         }
@@ -71,6 +76,12 @@ class PlayerInputDetector {
                 break;
         }
     }
+
+    setMousePosition(event){
+        this.cursorPosX = event.clientX;
+        this.cursorPosY = event.clientY;
+    }
+
     mouse_callback(event) {
         let mat = mat4.create();
         let xpos = event.clientX;
@@ -81,19 +92,17 @@ class PlayerInputDetector {
         if(!((yaw >= 0 && yaw <= glMatrix.toRadian(15.0) && diffY <= 0) || (yaw <= glMatrix.toRadian(180.0) && yaw >= glMatrix.toRadian(165.0) && diffY >= 0))){
             let angle = Math.atan2(this.scene.camera.lookingAt[0], this.scene.camera.lookingAt[2]);
             mat = mat4.rotate(mat, mat, angle, [0.0, 1.0, 0.0]);
-            mat = mat4.rotate(mat, mat, glMatrix.toRadian(-diffY / 10.0), [1.0, 0.0, 0.0]);
+            mat = mat4.rotate(mat, mat, glMatrix.toRadian(diffY / 10.0), [1.0, 0.0, 0.0]);
             mat = mat4.rotate(mat, mat, -angle, [0.0, 1.0, 0.0]);
 
-            //TODO : fix
             let v = this.scene.camera.lookingAt.slice();
             v[3] = 1.0;
             v = vec4.transformMat4(v, v, mat);
             this.scene.camera.lookingAt = [v[0], v[1], v[2]];
         }
 
-        mat = mat4.rotate(mat, mat, glMatrix.toRadian(diffX / 10.0), [0.0, 1.0, 0.0]);
+        mat = mat4.rotate(mat, mat, glMatrix.toRadian(-diffX / 10.0), [0.0, 1.0, 0.0]);
 
-        //TODO : fix
         let v2 = this.scene.camera.lookingAt.slice();
         v2[3] = 1.0;
         v2 = vec4.transformMat4(v2, v2, mat);
@@ -101,21 +110,6 @@ class PlayerInputDetector {
 
         this.cursorPosX = xpos;
         this.cursorPosY = ypos;
-    }
-
-    addMouseMoveEvent(func) {
-        var oldonmousemove = window.onmousemove;
-        if (typeof window.onmousemove != 'function') {
-            window.onmousemove = func;
-        }
-        else {
-            window.onmousemove = function () {
-                if (oldonmousemove) {
-                    oldonmousemove();
-                }
-                func();
-            }
-        }
     }
 }
 
