@@ -18,7 +18,7 @@ class PlayerInputDetector {
         this.cursorPosX = null;
         this.cursorPosY = null;
         this.first = true;
-        this.shouldRotateCamera = false;
+        this.isPaused = true;
     }
     key_callback_down(event) {
         switch (event.keyCode) {
@@ -44,7 +44,7 @@ class PlayerInputDetector {
                 this.scene.camera.velocity = 40.0;
                 break;
             case key_const.ESC:
-                this.shouldRotateCamera = false;
+                this.isPaused = true;
             default:
                 break;
         }

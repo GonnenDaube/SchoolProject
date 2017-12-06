@@ -182,6 +182,72 @@
 	                        TexCoords = texCoords;
                         }
                     </script>
+                    <script type="x-shader/x-fragment" id="blur-fragment-shader">#version 300 es
+                        precision mediump float;
+                        in vec2 TexCoords[11];
+
+                        uniform sampler2D screenTexture;
+
+                        out vec4 color;
+
+                        void main()
+                        {
+                        	color = vec4(0.0);
+                            color += texture(screenTexture, TexCoords[0]) * 0.0093;
+                            color += texture(screenTexture, TexCoords[1]) * 0.028002;
+                            color += texture(screenTexture, TexCoords[2]) * 0.065984;
+                            color += texture(screenTexture, TexCoords[3]) * 0.121703;
+                            color += texture(screenTexture, TexCoords[4]) * 0.175713;
+                            color += texture(screenTexture, TexCoords[5]) * 0.198596;
+                            color += texture(screenTexture, TexCoords[6]) * 0.175713;
+                            color += texture(screenTexture, TexCoords[7]) * 0.121703;
+                            color += texture(screenTexture, TexCoords[8]) * 0.065984;
+                            color += texture(screenTexture, TexCoords[9]) * 0.028002;
+                            color += texture(screenTexture, TexCoords[10]) * 0.0093;
+                        }
+                    </script>
+                    <script type="x-shader/x-vertex" id="vertical-vertex-shader">#version 300 es
+                        precision mediump float;
+                        layout(location = 0) in vec2 position;
+                        layout(location = 1) in vec2 texCoords;
+
+                        uniform float textureHeight;
+
+                        out vec2 TexCoords[11];
+
+                        void main()
+                        {
+                            float i_float;
+                            float pixelHeight = 1.0 / textureHeight;
+	                        gl_Position = vec4(position.x, position.y, 0.0, 1.0);
+	                        for(int i = -5; i< 5; i++)
+                            {
+                                i_float = float(i);
+                                TexCoords[i + 5] = texCoords + vec2(0.0, pixelHeight * i_float);
+                            }
+                        }
+                    </script>
+                    <script type="x-shader/x-vertex" id="horizontal-vertex-shader">#version 300 es
+                        precision mediump float;
+                        layout(location = 0) in vec2 position;
+                        layout(location = 1) in vec2 texCoords;
+
+                        uniform float textureWidth;
+
+                        out vec2 TexCoords[11];
+
+                        void main()
+                        {
+                            float i_float;
+                            float pixelWidth = 1.0 / textureWidth;
+	                        gl_Position = vec4(position.x, position.y, 0.0, 1.0);
+	                        for(int i = -5; i< 5; i++)
+                            {
+                                i_float = float(i);
+                                TexCoords[i + 5] = texCoords + vec2(pixelWidth * i_float, 0.0);
+                            }
+                        }
+                    </script>
                 </div>
             <script src="/Pages/WorkingSpace/WorkingSpaceJs/main.js" defer="defer" type="module"></script>
         </div>

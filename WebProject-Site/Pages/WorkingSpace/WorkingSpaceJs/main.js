@@ -56,7 +56,11 @@ function main() {
     var loop = function(timestamp){
         renderer.renderSceneToFramebuffer(display, gl);
 
-        //renderer.renderFramebuffertoViewPort(display, gl);
+        if(playerInputDetector.isPaused){
+            renderer.addBlurEffect(display, gl);
+        }
+
+        renderer.renderFramebuffertoViewPort(display, gl);
 
         fpsCounter.updateFps(timestamp);
 
@@ -99,19 +103,21 @@ function init() {
     window.onkeydown = keydown_callback;
     window.onkeyup = keyup_callback;
     window.onmousemove = mouse_callback;
-    display.canvas.onclick = mouse_rotation_true;
+    display.canvas.onclick = resume;
 
     //init renderer
     renderer = new Renderer(gl, canvas_const, scene);
 
     //add all objects to scene
-    for (var i = 0; i < 20; i++) {
-        for(var j = 0; j<20; j++){
-            for(var k = 0; k<10; k++){
-                scene.addObject(new Sphere(gl, 1, [i * 5, j * 5, k * 5], renderer.sphereShader));
-            }
-        }
-    }
+    //for (var i = 0; i < 20; i++) {
+    //    for(var j = 0; j<20; j++){
+    //        for(var k = 0; k<10; k++){
+    //            scene.addObject(new Sphere(gl, 1, [i * 5, j * 5, k * 5], renderer.sphereShader));
+    //        }
+    //    }
+    //}
+
+    scene.addObject(new Sphere(gl, 1, [0, 0, 0], renderer.sphereShader));
 
     return gl;
 }
@@ -126,7 +132,7 @@ function keyup_callback(){
 
 function mouse_callback(){
 
-    if(playerInputDetector.first || !playerInputDetector.shouldRotateCamera){
+    if(playerInputDetector.first || playerInputDetector.isPaused){
         playerInputDetector.setMousePosition(event);
         playerInputDetector.first = false;
     }
@@ -135,6 +141,6 @@ function mouse_callback(){
     }
 }
 
-function mouse_rotation_true(){
-    playerInputDetector.shouldRotateCamera = true;
+function resume(){
+    playerInputDetector.isPaused = false;
 }
