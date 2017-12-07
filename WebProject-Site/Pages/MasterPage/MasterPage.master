@@ -192,18 +192,21 @@
 
                         void main()
                         {
-                        	color = vec4(0.0);
-                            color += texture(screenTexture, TexCoords[0]) * 0.0093;
-                            color += texture(screenTexture, TexCoords[1]) * 0.028002;
-                            color += texture(screenTexture, TexCoords[2]) * 0.065984;
-                            color += texture(screenTexture, TexCoords[3]) * 0.121703;
-                            color += texture(screenTexture, TexCoords[4]) * 0.175713;
-                            color += texture(screenTexture, TexCoords[5]) * 0.198596;
-                            color += texture(screenTexture, TexCoords[6]) * 0.175713;
-                            color += texture(screenTexture, TexCoords[7]) * 0.121703;
-                            color += texture(screenTexture, TexCoords[8]) * 0.065984;
-                            color += texture(screenTexture, TexCoords[9]) * 0.028002;
-                            color += texture(screenTexture, TexCoords[10]) * 0.0093;
+                        	vec4 pixelColor = vec4(0.0);
+                            pixelColor += texture(screenTexture, TexCoords[0]) * 0.0093;
+                            pixelColor += texture(screenTexture, TexCoords[1]) * 0.028002;
+                            pixelColor += texture(screenTexture, TexCoords[2]) * 0.065984;
+                            pixelColor += texture(screenTexture, TexCoords[3]) * 0.121703;
+                            pixelColor += texture(screenTexture, TexCoords[4]) * 0.175713;
+                            pixelColor += texture(screenTexture, TexCoords[5]) * 0.198596;
+                            pixelColor += texture(screenTexture, TexCoords[6]) * 0.175713;
+                            pixelColor += texture(screenTexture, TexCoords[7]) * 0.121703;
+                            pixelColor += texture(screenTexture, TexCoords[8]) * 0.065984;
+                            pixelColor += texture(screenTexture, TexCoords[9]) * 0.028002;
+                            pixelColor += texture(screenTexture, TexCoords[10]) * 0.0093;
+
+                            color = pixelColor;
+                            color.a = 1.0f;
                         }
                     </script>
                     <script type="x-shader/x-vertex" id="vertical-vertex-shader">#version 300 es
@@ -223,7 +226,7 @@
 	                        for(int i = -5; i< 5; i++)
                             {
                                 i_float = float(i);
-                                TexCoords[i + 5] = texCoords + vec2(0.0, pixelHeight * i_float);
+                                TexCoords[i + 5] = texCoords + vec2(0.0 , pixelHeight * i_float);
                             }
                         }
                     </script>

@@ -23,28 +23,37 @@ class PlayerInputDetector {
     key_callback_down(event) {
         switch (event.keyCode) {
             case key_const.W:
+                if(!this.isPaused)
                 this.scene.camera.forward = true;
                 break;
             case key_const.S:
+                if(!this.isPaused)
                 this.scene.camera.backward = true;
                 break;
             case key_const.A:
+                if(!this.isPaused)
                 this.scene.camera.left = true;
                 break;
             case key_const.D:
+                if(!this.isPaused)
                 this.scene.camera.right = true;
                 break;
             case key_const.SPACE:
+                if(!this.isPaused)
                 this.scene.camera.up = true;
                 break;
             case key_const.CTRL:
+                if(!this.isPaused)
                 this.scene.camera.down = true;
                 break;
             case key_const.SHIFT:
+                if(!this.isPaused)
                 this.scene.camera.velocity = 40.0;
                 break;
             case key_const.ESC:
                 this.isPaused = true;
+                this.addPauseLabel();
+                break;
             default:
                 break;
         }
@@ -110,6 +119,14 @@ class PlayerInputDetector {
 
         this.cursorPosX = xpos;
         this.cursorPosY = ypos;
+    }
+
+    addPauseLabel(){
+        document.getElementById("pause-label").style.visibility = 'visible';
+    }
+
+    removePauseLabel(){
+        document.getElementById("pause-label").style.visibility = 'hidden';
     }
 }
 

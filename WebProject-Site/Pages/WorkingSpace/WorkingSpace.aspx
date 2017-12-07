@@ -4,8 +4,11 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">
     <p id="fpsLabel" class="fpsLabel AileronsFont"></p>
-    <canvas id="canvas" class="canvas">
+    <div id="canvas-view">
+        <canvas id="canvas" class="canvas">
         WebGL is not supported in your browser
     </canvas>
+    <p id="pause-label" class="AileronsFont pauseLabel">Paused</p>
+    </div>
 </asp:Content>
 

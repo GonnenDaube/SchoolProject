@@ -6,6 +6,7 @@ class Display {
         this.height = height;
         this.width = width;
         this.canvas = document.getElementById("canvas");
+        this.canvasView = document.getElementById("canvas-view");
         this.canvas.setAttribute("height", height);
         this.canvas.setAttribute("width", width);
         this.fpsLabel = document.getElementById("fpsLabel");

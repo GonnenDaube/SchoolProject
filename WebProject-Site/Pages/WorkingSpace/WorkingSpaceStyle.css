@@ -12,3 +12,18 @@
     margin-bottom:0%;
     font-size:1.5vw;
 }
+
+.pauseLabel{
+    position:absolute;
+    left:10%;
+    top:45%;
+    width:80%;
+    margin-top:0%;
+    margin-bottom:0%;
+    margin-left:auto;
+    margin-right:auto;
+    font-size:5vw;
+    color:white;
+    text-align:center;
+    cursor:default;
+}

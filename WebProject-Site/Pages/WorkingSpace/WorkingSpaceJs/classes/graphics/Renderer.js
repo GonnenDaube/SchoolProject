@@ -50,32 +50,32 @@ class Renderer {
     }
 
     addBlurEffect(display, gl){
-        this.horizontalBlur(display, gl);
-
         this.verticalBlur(display, gl);
+
+        this.horizontalBlur(display, gl);
     }
 
     horizontalBlur(display, gl){
-        gl.bindFramebuffer(gl.FRAMEBUFFER, this.blurFBO);
+        gl.bindFramebuffer(gl.FRAMEBUFFER, this.fbo);
 
         this.horBlurShader.useProgram(gl);
         gl.activeTexture(gl.TEXTURE0);
-        gl.bindTexture(gl.TEXTURE_2D, this.sceneTexture);
+        gl.bindTexture(gl.TEXTURE_2D, this.blurTexture);
         gl.uniform1i(this.horBlurShader.uniforms.screenTexture, 0);
-        gl.uniform1f(this.horBlurShader.uniforms.textureWidth, display.height);
+        gl.uniform1f(this.horBlurShader.uniforms.textureWidth, display.width);
         this.disableDepthTest(gl);
         this.frame.draw();
         this.horBlurShader.unUseProgram(gl);
     }
 
     verticalBlur(display, gl){
-        gl.bindFramebuffer(gl.FRAMEBUFFER, this.fbo);
+        gl.bindFramebuffer(gl.FRAMEBUFFER, this.blurFBO);
 
         this.vertBlurShader.useProgram(gl);
         gl.activeTexture(gl.TEXTURE0);
-        gl.bindTexture(gl.TEXTURE_2D, this.blurTexture);
+        gl.bindTexture(gl.TEXTURE_2D, this.sceneTexture);
         gl.uniform1i(this.vertBlurShader.uniforms.screenTexture, 0);
-        gl.uniform1f(this.vertBlurShader.uniforms.textureWidth, display.width);
+        gl.uniform1f(this.vertBlurShader.uniforms.textureHeight, display.height);
         this.disableDepthTest(gl);
         this.frame.draw();
         this.vertBlurShader.unUseProgram(gl);
