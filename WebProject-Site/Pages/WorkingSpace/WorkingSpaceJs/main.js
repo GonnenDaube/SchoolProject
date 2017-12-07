@@ -33,7 +33,7 @@ if (window.location.href.includes("WorkingSpace.aspx")) {
 }
 
 var canvas_const = {
-    WINDOW_HEIGHT: window.innerWidth * 0.4,
+    WINDOW_HEIGHT: window.innerWidth * 0.375,
     WINDOW_WIDTH: window.innerWidth * 0.8,
 };
 
@@ -109,9 +109,9 @@ function init() {
     renderer = new Renderer(gl, canvas_const, scene);
 
     //add all objects to scene
-    for (var i = 0; i < 20; i++) {
-        for(var j = 0; j<20; j++){
-            for(var k = 0; k<10; k++){
+    for (var i = 0; i < 5; i++) {
+        for(var j = 0; j< 5; j++){
+            for(var k = 0; k < 5; k++){
                 scene.addObject(new Sphere(gl, 1, [i * 5, j * 5, k * 5], renderer.sphereShader));
             }
         }
