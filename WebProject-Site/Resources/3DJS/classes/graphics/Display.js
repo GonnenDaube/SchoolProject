@@ -13,7 +13,7 @@ class Display {
     }
 
     updateCanvas(gl) {
-        gl.clearColor(0.25, 0.25, 0.25, 1.0);
+        gl.clearColor(255/255, 248/255, 233/255, 1.0);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     }
 

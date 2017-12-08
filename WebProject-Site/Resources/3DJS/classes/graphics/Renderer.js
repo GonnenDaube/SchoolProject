@@ -1,4 +1,5 @@
 ﻿import SphereShader from '../shaders/SphereShader.js';
+import TriangleShader from '../shaders/TriangleShader.js';
 import FrameShader from '../shaders/FrameShader.js';
 import HorBlurShader from '../shaders/HorBlurShader.js';
 import VertBlurShader from '../shaders/VertBlurShader.js';

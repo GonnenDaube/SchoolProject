@@ -20,4 +20,4 @@ class TriangleShader extends GLSLProgram {
     }
 }
 
-export default SphereShader;
+export default TriangleShader;
