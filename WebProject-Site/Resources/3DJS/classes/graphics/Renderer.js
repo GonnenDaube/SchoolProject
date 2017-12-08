@@ -8,6 +8,7 @@ import Sphere from '../objects/Sphere.js';
 class Renderer {
     constructor(gl, canvas_const, scene) {
         this.sphereShader = new SphereShader(gl);
+        this.triangleShader = new TriangleShader(gl);
         this.frameShader = new FrameShader(gl);
         this.horBlurShader = new HorBlurShader(gl);
         this.vertBlurShader = new VertBlurShader(gl);
@@ -23,12 +24,12 @@ class Renderer {
         gl.bindFramebuffer(gl.FRAMEBUFFER, this.fbo);
 
         display.updateCanvas(gl);
+        this.enableDepthTest(gl);
 
         //this section renders spheres using the specific sphere shader
         this.sphereShader.useProgram(gl);
         gl.uniformMatrix4fv(this.sphereShader.uniforms.vp_matrix, false, new Float32Array(this.scene.camera.getVpMatrix()));
         gl.uniform3fv(this.sphereShader.uniforms.viewPos, new Float32Array(this.scene.camera.position));
-        this.enableDepthTest(gl);
         for (let i of this.scene.objects) {
             if (i instanceof Sphere) {
                 gl.uniformMatrix4fv(this.sphereShader.uniforms.m_matrix, false, new Float32Array(i.getTransformation()));
@@ -36,6 +37,18 @@ class Renderer {
             }
         }
         this.sphereShader.unUseProgram(gl);
+
+        //this section renders triangle objects using the specific triangle object shader
+        this.triangleShader.useProgram(gl);
+
+        gl.uniformMatrix4fv(this.triangleShader.uniforms.vp_matrix, false, new Float32Array(this.scene.camera.getVpMatrix()));
+        gl.uniform3fv(this.triangleShader.uniforms.viewPos, new Float32Array(this.scene.camera.position));
+        for (let i of this.scene.objects) {
+            if (i instanceof TriangleObject) {
+                gl.uniformMatrix4fv(this.triangleShader.uniforms.m_matrix, false, new Float32Array(i.getTransformation()));
+                i.draw();
+            }
+        }
     }
     renderFramebuffertoViewPort(display, gl) {
         gl.bindFramebuffer(gl.FRAMEBUFFER, null);
@@ -89,7 +102,7 @@ class Renderer {
         //texture creation
         this.sceneTexture = gl.createTexture();
         gl.bindTexture(gl.TEXTURE_2D, this.sceneTexture);
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, canvas_const.WINDOW_WIDTH, canvas_const.WINDOW_HEIGHT, 0, gl.RGB, gl.UNSIGNED_BYTE, null);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, canvas_const.WINDOW_WIDTH * window.innerWidth, canvas_const.WINDOW_HEIGHT * window.innerWidth, 0, gl.RGB, gl.UNSIGNED_BYTE, null);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
@@ -106,7 +119,7 @@ class Renderer {
         gl.bindRenderbuffer(gl.RENDERBUFFER, this.rbo);
 
         //RenderBuffer storage
-        gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH24_STENCIL8, canvas_const.WINDOW_WIDTH, canvas_const.WINDOW_HEIGHT);
+        gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH24_STENCIL8, canvas_const.WINDOW_WIDTH * window.innerWidth, canvas_const.WINDOW_HEIGHT * window.innerWidth);
 
         //unbind renderbuffer
         gl.bindRenderbuffer(gl.RENDERBUFFER, null);
@@ -129,7 +142,7 @@ class Renderer {
         //texture creation
         this.blurTexture = gl.createTexture();
         gl.bindTexture(gl.TEXTURE_2D, this.blurTexture);
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, canvas_const.WINDOW_WIDTH, canvas_const.WINDOW_HEIGHT, 0, gl.RGB, gl.UNSIGNED_BYTE, null);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, canvas_const.WINDOW_WIDTH * window.innerWidth, canvas_const.WINDOW_HEIGHT * window.innerWidth, 0, gl.RGB, gl.UNSIGNED_BYTE, null);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
@@ -146,7 +159,7 @@ class Renderer {
         gl.bindRenderbuffer(gl.RENDERBUFFER, this.blurRBO);
 
         //RenderBuffer storage
-        gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH24_STENCIL8, canvas_const.WINDOW_WIDTH, canvas_const.WINDOW_HEIGHT);
+        gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH24_STENCIL8, canvas_const.WINDOW_WIDTH * window.innerWidth, canvas_const.WINDOW_HEIGHT * window.innerWidth);
 
         //unbind renderbuffer
         gl.bindRenderbuffer(gl.RENDERBUFFER, null);

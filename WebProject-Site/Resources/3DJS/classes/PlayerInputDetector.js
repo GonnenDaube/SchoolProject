@@ -1,4 +1,4 @@
-﻿import {mat4, vec4, glMatrix, vec3} from '/Pages/WorkingSpace/WorkingSpaceJs/libs/glMatrix/gl-matrix.js';
+﻿import {mat4, vec4, glMatrix, vec3} from '/Resources/3DJS/libs/glMatrix/gl-matrix.js';
 
 var key_const = {
     W: 87,
@@ -7,7 +7,7 @@ var key_const = {
     D: 68,
     SPACE: 32,
     SHIFT: 16,
-    CTRL: 17,
+    C: 67,
     ESC: 27,
 }
 
@@ -19,6 +19,7 @@ class PlayerInputDetector {
         this.cursorPosY = null;
         this.first = true;
         this.isPaused = true;
+        this.mouseRotation = false;
     }
     key_callback_down(event) {
         switch (event.keyCode) {
@@ -42,7 +43,7 @@ class PlayerInputDetector {
                 if(!this.isPaused)
                 this.scene.camera.up = true;
                 break;
-            case key_const.CTRL:
+            case key_const.C:
                 if(!this.isPaused)
                 this.scene.camera.down = true;
                 break;
@@ -75,7 +76,7 @@ class PlayerInputDetector {
             case key_const.SPACE:
                 this.scene.camera.up = false;
                 break;
-            case key_const.CTRL:
+            case key_const.C:
                 this.scene.camera.down = false;
                 break;
             case key_const.SHIFT:
@@ -127,6 +128,14 @@ class PlayerInputDetector {
 
     removePauseLabel(){
         document.getElementById("pause-label").style.visibility = 'hidden';
+    }
+
+    enableRotation(){
+        this.mouseRotation = true;
+    }
+
+    disableRotation(){
+        this.mouseRotation = false;
     }
 }
 

@@ -1,4 +1,4 @@
-﻿import {mat4, vec3, vec4} from '/Pages/WorkingSpace/WorkingSpaceJs/libs/glMatrix/gl-matrix.js';
+﻿import {mat4, vec3, vec4} from '/Resources/3DJS/libs/glMatrix/gl-matrix.js';
 
 class Model {
     constructor(vertices, indices, normals, num_vertices, isIndexed, color, mode) {

@@ -2,11 +2,12 @@
 import Model from './Model.js';
 
 class Sphere extends Object3D {
-    constructor(gl, radius, position, shader) {
+    constructor(gl, radius, position, rotation, shader) {
         super(Model.createSphereModel(10, gl));
         this.radius = radius;
         this.position = position;
         this.scale = [radius, radius, radius];
+        this.rotation = rotation;
         this.gl = gl;
         this.VAO = null;
         this.modelVBO = null;

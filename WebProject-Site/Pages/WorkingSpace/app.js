@@ -1,17 +1,17 @@
-﻿import * as glMatrix from './libs/glMatrix/gl-matrix.js';
-import Camera from './classes/graphics/Camera.js';
-import Display from './classes/graphics/Display.js';
-import Renderer from './classes/graphics/Renderer.js';
-import Object3D from './classes/objects/Object3D.js';
-import Frame from './classes/objects/Frame.js';
-import Sphere from './classes/objects/Sphere.js';
-import Model from './classes/objects/Model.js';
-import GLSLProgram from './classes/shaders/GLSLProgram.js';
-import FrameShader from './classes/shaders/FrameShader.js';
-import SphereShader from './classes/shaders/SphereShader.js';
-import FpsCounter from './classes/FpsCounter.js';
-import PlayerInputDetector from './classes/PlayerInputDetector.js';
-import Scene from './classes/Scene.js';
+﻿import * as glMatrix from '/Resources/3DJS/libs/glMatrix/gl-matrix.js';
+import Camera from '/Resources/3DJS/classes/graphics/Camera.js';
+import Display from '/Resources/3DJS/classes/graphics/Display.js';
+import Renderer from '/Resources/3DJS/classes/graphics/Renderer.js';
+import Object3D from '/Resources/3DJS/classes/objects/Object3D.js';
+import Frame from '/Resources/3DJS/classes/objects/Frame.js';
+import Sphere from '/Resources/3DJS/classes/objects/Sphere.js';
+import Model from '/Resources/3DJS/classes/objects/Model.js';
+import GLSLProgram from '/Resources/3DJS/classes/shaders/GLSLProgram.js';
+import FrameShader from '/Resources/3DJS/classes/shaders/FrameShader.js';
+import SphereShader from '/Resources/3DJS/classes/shaders/SphereShader.js';
+import FpsCounter from '/Resources/3DJS/classes/FpsCounter.js';
+import PlayerInputDetector from '/Resources/3DJS/classes/PlayerInputDetector.js';
+import Scene from '/Resources/3DJS/classes/Scene.js';
 
 function addLoadEvent(func) {
     var oldonload = window.onload;
@@ -28,13 +28,29 @@ function addLoadEvent(func) {
     }
 }
 
+function addResizeEvent(func) {
+    var oldonresize = window.onresize;
+    if (typeof window.onresize != 'function') {
+        window.onresize = func;
+    }
+    else {
+        window.onresize = function () {
+            if (oldonresize) {
+                oldonresize();
+            }
+            func();
+        }
+    }
+}
+
 if (window.location.href.includes("WorkingSpace.aspx")) {
     addLoadEvent(main);
+    addResizeEvent(updateDisplay);
 }
 
 var canvas_const = {
-    WINDOW_HEIGHT: window.innerWidth * 0.375,
-    WINDOW_WIDTH: window.innerWidth * 0.8,
+    WINDOW_HEIGHT: 0.375,
+    WINDOW_WIDTH: 0.8,
 };
 
 var camera_const = {
@@ -76,7 +92,7 @@ function main() {
 function init() {
 
     //init display
-    display = new Display(canvas_const.WINDOW_HEIGHT, canvas_const.WINDOW_WIDTH);
+    display = new Display(canvas_const.WINDOW_HEIGHT * window.innerWidth, canvas_const.WINDOW_WIDTH * window.innerWidth);
 
     //init webgl
     const gl = display.canvas.getContext("webgl2");
@@ -100,22 +116,17 @@ function init() {
     //init PlayerInputDetector
     playerInputDetector = new PlayerInputDetector(scene, display);
 
+    //event set up
     window.onkeydown = keydown_callback;
     window.onkeyup = keyup_callback;
     window.onmousemove = mouse_callback;
     display.canvasView.onclick = resume;
+    display.canvasView.onmousedown = mousedown;
+    display.canvasView.onmouseup = mouseup;
+    display.canvasView.oncontextmenu = contextmenu;
 
     //init renderer
     renderer = new Renderer(gl, canvas_const, scene);
-
-    //add all objects to scene
-    for (var i = 0; i < 5; i++) {
-        for(var j = 0; j< 5; j++){
-            for(var k = 0; k < 5; k++){
-                scene.addObject(new Sphere(gl, 1, [i * 5, j * 5, k * 5], renderer.sphereShader));
-            }
-        }
-    }
 
     return gl;
 }
@@ -130,7 +141,7 @@ function keyup_callback(){
 
 function mouse_callback(){
 
-    if(playerInputDetector.first || playerInputDetector.isPaused){
+    if(playerInputDetector.first || playerInputDetector.isPaused || !playerInputDetector.mouseRotation){
         playerInputDetector.setMousePosition(event);
         playerInputDetector.first = false;
     }
@@ -139,7 +150,27 @@ function mouse_callback(){
     }
 }
 
+function mousedown(){
+    if(event.which == 3){// right mouse button is being clicked
+        playerInputDetector.enableRotation();
+    }
+}
+
+function mouseup(){
+    if(event.which == 3){// right mouse button is released
+        playerInputDetector.disableRotation();
+    }
+}
+
 function resume(){
     playerInputDetector.isPaused = false;
     playerInputDetector.removePauseLabel();
+}
+
+function updateDisplay(){
+    display.updateDisplay(canvas_const.WINDOW_HEIGHT * window.innerWidth, canvas_const.WINDOW_WIDTH * window.innerWidth);
+}
+
+function contextmenu(){
+    return false;
 }

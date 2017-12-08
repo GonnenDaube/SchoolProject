@@ -1,4 +1,4 @@
-﻿import {mat4, vec4, vec3} from '/Pages/WorkingSpace/WorkingSpaceJs/libs/glMatrix/gl-matrix.js';
+﻿import {mat4, vec4, vec3} from '/Resources/3DJS/libs/glMatrix/gl-matrix.js';
 
 class Camera {
     constructor(camera_const) {

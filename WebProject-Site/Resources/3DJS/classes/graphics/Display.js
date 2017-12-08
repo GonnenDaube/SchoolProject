@@ -21,6 +21,13 @@ class Display {
         let str = fps + ' FPS';
         this.fpsLabel.innerHTML = str;
     }
+
+    updateDisplay(height, width){
+        this.height = height;
+        this.width = width;
+        this.canvas.setAttribute("height", height);
+        this.canvas.setAttribute("width", width);
+    }
 }
 
 export default Display;
