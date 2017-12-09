@@ -5,6 +5,7 @@ import HorBlurShader from '../shaders/HorBlurShader.js';
 import VertBlurShader from '../shaders/VertBlurShader.js';
 import Frame from '../objects/Frame.js';
 import Sphere from '../objects/Sphere.js';
+import TriangleObject from '../objects/TriangleObject.js';
 
 class Renderer {
     constructor(gl, canvas_const, scene) {

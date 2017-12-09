@@ -14,7 +14,7 @@ class FrameShader extends GLSLProgram {
     setupUniformsStruct(gl) {
         super.uniforms = {
             screenTexture: gl.getUniformLocation(this.shaderProgram, "screenTexture"),
-        }
+        };
     }
 }
 

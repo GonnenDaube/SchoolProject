@@ -10,6 +10,7 @@
     top:15%;
     width:80vw;
     height:37.5vw;
+    box-shadow: 0vw 1vw 2vw rgba(0,0,0,0.4);
 }
 
 .fpsLabel{
@@ -40,10 +41,83 @@
 }
 
 .left-btn-coll{
+    position:absolute;
+    left:7.5%;
+    top:15%;
+    width:2.5%;
+    height:37.5vw;
+}
+
+.right-btn-coll{
     position:fixed;
+    right:14%;
+    top:15%;
+    width:2.5%;
+    height:37.5vw;
+}
+
+.btn-left{
+    position:relative;
+    display:block;
+    left:0vw;
+    width:9.5vw;
+    height:7.5vw;
+    margin-bottom:0vw;
+    background-color:white;
+    border:solid;
+    border-color:white;
+    outline:none;
+    transition:0.5s;
+    cursor:pointer;
+}
+
+.btn-left:hover{
+    position:relative;
+    left:-6.5vw;
+    transition:0.5s;
+}
+
+.btn-left:focus{
+    height:6.5vw;
+    margin-bottom:0.5vw;
+    margin-top:0.5vw;
+    width:9vw;
+    left:0.5vw;
+}
+
+.btn-right{
+    position:relative;
+    display:block;
+    right:0vw;
+    width:9.5vw;
+    height:7.5vw;
+    margin-bottom:0vw;
+    background-color:white;
+    border:none;
+    outline:none;
+    transition:0.5s;
+    cursor:pointer;
+}
+
+.btn-right:hover{
+    position:relative;
+    right:-6vw;
+    transition:0.5s;
+}
+
+
+.btn-left-icon{
+    position:absolute;
     left:0%;
-    top:0%;
-    width:7.5%;
-    height:100%;
-    background-color:rgba(16, 12, 12, 0.9);
+    top:35%;
+    width:2.25vw;
+    height:2.25vw;
+}
+
+.btn-right-icon{
+    position:absolute;
+    right:0%;
+    top:35%;
+    width:2.25vw;
+    height:2.25vw;
 }

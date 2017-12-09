@@ -128,6 +128,12 @@ function init() {
     //init renderer
     renderer = new Renderer(gl, canvas_const, scene);
 
+    for(let i = 0; i < 10; i++){
+        for(let j = 0; j < 10; j++){
+            scene.addObject(new Sphere(gl, 1, [i * 5, j * 5, 0], [0, 0, 0], renderer.sphereShader));
+        }
+    }
+
     return gl;
 }
 
