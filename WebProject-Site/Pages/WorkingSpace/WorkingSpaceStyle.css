@@ -49,7 +49,7 @@
 }
 
 .right-btn-coll{
-    position:fixed;
+    position:absolute;
     right:14%;
     top:15%;
     width:2.5%;
@@ -77,7 +77,7 @@
     transition:0.5s;
 }
 
-.btn-left:focus{
+.checkable-left:focus{
     height:6.5vw;
     margin-bottom:0.5vw;
     margin-top:0.5vw;
@@ -105,6 +105,14 @@
     transition:0.5s;
 }
 
+.checkable-right:focus{
+    height:6.5vw;
+    margin-bottom:0.5vw;
+    margin-top:0.5vw;
+    width:9vw;
+    right:0vw;
+}
+
 
 .btn-left-icon{
     position:absolute;
@@ -116,8 +124,52 @@
 
 .btn-right-icon{
     position:absolute;
-    right:0%;
+    right:5%;
     top:35%;
     width:2.25vw;
     height:2.25vw;
+}
+
+.color-picker{
+    height:15vw;
+    cursor:default;
+}
+
+.bars{
+    position:absolute;
+    top:0%;
+    right:3vw;
+    height:100%;
+    width:6vw;
+    font-size:0vw;
+}
+
+.bar{
+    position:relative;
+    top:0%;
+    left:0%;
+    display:inline-block;
+    width:33.33%;
+    height:100%;
+    background-color:black;
+    border:solid;
+    border-color:black;
+}
+
+.selector{
+    height:0.5vw;
+    width:100%;
+    cursor:pointer;
+    background-image:url(/Resources/Icons/selector_icon.png);
+    background-size:cover;
+}
+
+.final-color{
+    position:absolute;
+    height:2.25vw;
+    width:2.25vw;
+    top:40%;
+    right:5%;
+    border:solid;
+    border-color:black;
 }

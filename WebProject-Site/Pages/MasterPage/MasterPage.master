@@ -55,12 +55,13 @@
                 </a>
             </div>
             <a id="profile_link" class="profile_div" href="/Pages/ProfilePage/ProfilePage.aspx" style="visibility:hidden" runat="server">
-                <img id="profile_img" src="/Resources/Icons/profile_icon.png" class="profile_img"/>
+                <img id="profile_img" src="" class="profile_img"/>
                 <p id="profile_txt" class="profile_txt" runat="server"></p>
             </a>
         </div>
         <script src="/Pages/MasterPage/MasterPageJs.js"></script>
         <script src="/Pages/HomePage/HomePageJs.js"></script>
+        <script src="/Pages/WorkingSpace/colorpicker.js"></script>
         <div id="glslShaders">
                     <script type="x-shader/x-fragment" id="sphere-fragment-shader">#version 300 es
                         precision mediump float;
