@@ -18,8 +18,9 @@ class PlayerInputDetector {
         this.cursorPosX = null;
         this.cursorPosY = null;
         this.first = true;
-        this.isPaused = true;
+        this.isPaused = false;
         this.mouseRotation = false;
+        this.removePauseLabel();
     }
     key_callback_down(event) {
         switch (event.keyCode) {

@@ -3,30 +3,60 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">
-    <div class="left-btn-coll">
-        <button id="triangle-mode" class="btn-left checkable-left">
+    <div id="temp-field" style="display:block; width:10vw;">
+        <input id="x-val" type="text" placeholder="x-value" value=""/>
+        <input id="y-val" type="text" placeholder="y-value" value=""/>
+        <input id="z-val" type="text" placeholder="z-value" value=""/>
+        <button id="add-vertex">add-vertex</button>
+    </div>
+    <div id="left-btn-coll" class="left-btn-coll">
+        <button id="triangle-mode" class="btn-left">
             <img id="triangle-icon" src="/Resources/Icons/triangle_icon.png" class="btn-left-icon"/>
+            <p class="btn-left-description TrenchFont">
+                Triangle Mode: every 3 vertices create a triangle
+            </p>
         </button>
-        <button id="triangle-strip-mode" class="btn-left checkable-left">
+        <button id="triangle-strip-mode" class="btn-left">
             <img id="triangle-strip-icon" src="/Resources/Icons/triangle_strip_icon.png" class="btn-left-icon"/>
+            <p class="btn-left-description TrenchFont">
+                Triangle Strip Mode: every vertex creates a new triangle with the previous 2 vertices
+            </p>
         </button>
-        <button id="line-mode" class="btn-left checkable-left">
+        <button id="line-mode" class="btn-left">
             <img id="line-icon" src="/Resources/Icons/line_icon.png" class="btn-left-icon"/>
+            <p class="btn-left-description TrenchFont">
+                Line Mode: every 2 vertices create a line
+            </p>
         </button>
-        <button id="line-strip-mode" class="btn-left checkable-left">
+        <button id="line-strip-mode" class="btn-left">
             <img id="line-strip-icon" src="/Resources/Icons/line_strip_icon.png" class="btn-left-icon"/>
+            <p class="btn-left-description TrenchFont">
+                Line Strip Mode: every vertex creates a new line with the previous vertex
+            </p>
         </button>
         <button class="btn-left"></button>
     </div>
-    <div class="right-btn-coll">
-        <button id="wireframe-mode" class="btn-right checkable-right">
+    <div id="right-btn-coll" class="right-btn-coll">
+        <button id="wireframe-mode" class="btn-right">
             <img id="wireframe-icon" src="/Resources/Icons/wireframe_icon.png" class="btn-right-icon"/>
+            <p class="btn-right-description TrenchFont">
+                Wireframe mode:
+                displays model as a wireframe.
+            </p>
         </button>
-        <button id="solid-mode" class="btn-right checkable-right">
+        <button id="solid-mode" class="btn-right">
             <img id="solid-icon" src="/Resources/Icons/solid_icon.png" class="btn-right-icon"/>
+            <p class="btn-right-description TrenchFont">
+                Solid mode:
+                displays model as a solid object with it's set color.
+            </p>
         </button>
-        <button id="lighting-mode" class="btn-right checkable-right">
+        <button id="lighting-mode" class="btn-right">
             <img id="lighting-icon" src="/Resources/Icons/phong_lighting_icon.png" class="btn-right-icon"/>
+            <p class="btn-right-description TrenchFont">
+                Lighting mode:
+                displays model as a solid object with dynamic phong lighting.
+            </p>
         </button>
         <div id="color-picker" class="btn-right color-picker">
             <div id="bars" class="bars">

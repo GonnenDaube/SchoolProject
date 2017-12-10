@@ -3,17 +3,21 @@ import Model from './Model.js';
 
 class TriangleObject extends Object3D {
     constructor(gl, shader) {
-        super(null);
+        super(new Model(null, null, null, null, null, null, null));
         this.gl = gl;
         this.VAO = null;
         this.positionVBO = null;
         this.normalVBO = null;
         this.colorVBO = null;
+        this.queuedPositions = Float32Array(9);
+        this.queuedColors = Float32Array(9);
+        this.queuedNormals = Float32Array(9);
+        this.qIndex = 0;
     }
 
     draw() {
         this.gl.bindVertexArray(this.VAO);
-        this.gl.drawArrays(this.gl.TRIANGLES, 0, this.model.numVertices);
+        this.gl.drawArrays(this.model.mode, 0, this.model.numVertices);
         this.gl.bindVertexArray(null);
     }
 
@@ -46,6 +50,22 @@ class TriangleObject extends Object3D {
 
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);
         this.gl.bindVertexArray(null);
+    }
+
+    addVertexToQueue(position, color, normal, mode){
+        this.queuedPositions[this.qIndex] = position[0];
+        this.queuedColors[this.qIndex] = color[0];
+        this.queuedNormals[this.qIndex++] = normal[0];
+
+        this.queuedPositions[this.qIndex] = position[1];
+        this.queuedColors[this.qIndex] = color[1];
+        this.queuedNormals[this.qIndex++] = normal[1];
+
+        this.queuedPositions[this.qIndex] = position[2];
+        this.queuedColors[this.qIndex] = color[2];
+        this.queuedNormals[this.qIndex++] = normal[2];
+
+        this.model.mode = mode;
     }
 }
 

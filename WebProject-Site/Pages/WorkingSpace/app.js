@@ -65,9 +65,13 @@ var renderer;
 var scene;
 var playerInputDetector;
 var fpsCounter;
+var leftButtons;
+var rightButtons;
+var currentMode;
+var gl;
 
 function main() {
-    let gl = init();
+    init();
 
     var loop = function(timestamp){
         renderer.renderSceneToFramebuffer(display, gl);
@@ -95,7 +99,7 @@ function init() {
     display = new Display(canvas_const.WINDOW_HEIGHT * window.innerWidth, canvas_const.WINDOW_WIDTH * window.innerWidth);
 
     //init webgl
-    const gl = display.canvas.getContext("webgl2");
+    gl = display.canvas.getContext("webgl2");
 
     if (!gl) {
         console.log("Unable to initialize WebGl. Your browser or machine may not support it.");
@@ -124,6 +128,18 @@ function init() {
     display.canvasView.onmousedown = mousedown;
     display.canvasView.onmouseup = mouseup;
     display.canvasView.oncontextmenu = contextmenu;
+    document.getElementById("add-vertex").onclick = addVertex;
+
+    leftButtons = document.getElementById('left-btn-coll').getElementsByTagName('button');
+    rightButtons = document.getElementById('right-btn-coll').getElementsByTagName('button');
+
+    for(let i = 0; i < leftButtons.length; i++){
+        leftButtons[i].onclick = setCreationMode;
+    }
+
+    for(let i = 0; i < rightButtons.length; i++){
+        rightButtons[i].onclick = setDrawMode;
+    }
 
     //init renderer
     renderer = new Renderer(gl, canvas_const, scene);
@@ -133,8 +149,37 @@ function init() {
             scene.addObject(new Sphere(gl, 1, [i * 5, j * 5, 0], [0, 0, 0], renderer.sphereShader));
         }
     }
+}
 
-    return gl;
+function addVertex(){
+    let x = document.getElementById("x-val").value;
+    let y = document.getElementById("y-val").value;
+    let z = document.getElementById("z-val").value;
+    let position = [x, y, z];
+    let normal = [1.0, 1.0, 1.0];
+    let color = document.getElementById("final-color").style.backgroundColor;
+    let r = parseFloat(color.substring(color.indexOf('(') + 1, color.indexOf(',')));
+    let g = parseFloat(color.substring(color.indexOf(',') + 1,color.indexOf(',',color.indexOf(',') + 1)));
+    let b = parseFloat(color.substring(color.lastIndexOf(',') + 1, color.indexOf(')')));
+    alert(color);
+    color = [r, g, b];
+    let mode;
+    switch(currentMode){
+        case 'triangle-mode':
+            mode = gl.TRIANGLES;
+            break;
+        case 'triangle-strip-mode':
+            mode = gl.TRIANGLE_STRIP;
+            break;
+        case 'line-mode':
+            mode = gl.LINES;
+            break;
+        case 'line-strip-mode':
+            mode = gl.LINE_STRIP;
+            break;
+    }
+
+    //add vertex to selected object
 }
 
 function keydown_callback(){
@@ -179,4 +224,26 @@ function updateDisplay(){
 
 function contextmenu(){
     return false;
+}
+
+function setCreationMode(){
+    currentMode = this.getAttribute('id');
+
+    for(let i = 0; i < leftButtons.length; i++){
+        if(leftButtons[i].classList.contains('checkable-left'))
+            leftButtons[i].classList.remove('checkable-left');
+    }
+
+    this.classList.add('checkable-left');
+}
+
+function setDrawMode(){
+    currentMode = this.getAttribute('id');
+
+    for(let i = 0; i < rightButtons.length; i++){
+        if(rightButtons[i].classList.contains('checkable-right'))
+            rightButtons[i].classList.remove('checkable-right');
+    }
+
+    this.classList.add('checkable-right');
 }
