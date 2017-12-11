@@ -183,7 +183,7 @@
 	                        vec3 diffuse = CalcDiffuse(sunLightDirection, sunLightColor, Normal);
 	                        vec3 specular = CalcSpecular(sunLightDirection, sunLightColor, Normal, viewPos);
 
-	                        color = vec4((ambient + diffuse + specular) * objectColor, 1.0);
+	                        color = vec4( objectColor, 1.0);
                         }
 
                         vec3 CalcAmbient(vec3 lightColor)
@@ -211,7 +211,6 @@
                         layout(location = 1) in vec3 normals;
                         layout(location = 2) in vec3 colors;
 
-                        vec3 CalcObjectColor();
                         float CalcShininess();
 
                         uniform mat4 vp_matrix;

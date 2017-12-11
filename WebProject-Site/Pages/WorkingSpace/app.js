@@ -5,10 +5,12 @@ import Renderer from '/Resources/3DJS/classes/graphics/Renderer.js';
 import Object3D from '/Resources/3DJS/classes/objects/Object3D.js';
 import Frame from '/Resources/3DJS/classes/objects/Frame.js';
 import Sphere from '/Resources/3DJS/classes/objects/Sphere.js';
+import TriangleObject from '/Resources/3DJS/classes/objects/TriangleObject.js';
 import Model from '/Resources/3DJS/classes/objects/Model.js';
 import GLSLProgram from '/Resources/3DJS/classes/shaders/GLSLProgram.js';
 import FrameShader from '/Resources/3DJS/classes/shaders/FrameShader.js';
 import SphereShader from '/Resources/3DJS/classes/shaders/SphereShader.js';
+import TriangleShader from '/Resources/3DJS/classes/shaders/TriangleShader.js';
 import FpsCounter from '/Resources/3DJS/classes/FpsCounter.js';
 import PlayerInputDetector from '/Resources/3DJS/classes/PlayerInputDetector.js';
 import Scene from '/Resources/3DJS/classes/Scene.js';
@@ -143,25 +145,18 @@ function init() {
 
     //init renderer
     renderer = new Renderer(gl, canvas_const, scene);
-
-    for(let i = 0; i < 10; i++){
-        for(let j = 0; j < 10; j++){
-            scene.addObject(new Sphere(gl, 1, [i * 5, j * 5, 0], [0, 0, 0], renderer.sphereShader));
-        }
-    }
 }
 
 function addVertex(){
-    let x = document.getElementById("x-val").value;
-    let y = document.getElementById("y-val").value;
-    let z = document.getElementById("z-val").value;
+    let x = parseFloat(document.getElementById("x-val").value);
+    let y = parseFloat(document.getElementById("y-val").value);
+    let z = parseFloat(document.getElementById("z-val").value);
     let position = [x, y, z];
     let normal = [1.0, 1.0, 1.0];
     let color = document.getElementById("final-color").style.backgroundColor;
     let r = parseFloat(color.substring(color.indexOf('(') + 1, color.indexOf(',')));
     let g = parseFloat(color.substring(color.indexOf(',') + 1,color.indexOf(',',color.indexOf(',') + 1)));
     let b = parseFloat(color.substring(color.lastIndexOf(',') + 1, color.indexOf(')')));
-    alert(color);
     color = [r, g, b];
     let mode;
     switch(currentMode){
@@ -180,6 +175,10 @@ function addVertex(){
     }
 
     //add vertex to selected object
+    if(scene.selectedObject == null){
+        scene.addObject(new TriangleObject(gl, renderer.triangleShader));   
+    }
+    scene.selectedObject.addVertex(position, color, normal, mode, gl);
 }
 
 function keydown_callback(){

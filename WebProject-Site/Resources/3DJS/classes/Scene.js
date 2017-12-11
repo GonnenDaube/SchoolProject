@@ -3,6 +3,7 @@
         this.fpsCounter = fpsCounter;
         this.objects = new Array();
         this.camera = null;
+        this.selectedObject = null;
     }
     
     updateScene() {
@@ -11,6 +12,10 @@
 
     addObject(object3d) {
         this.objects.push(object3d);
+
+        if(this.selectedObject == null){
+            this.selectedObject = object3d;
+        }
     }
 }
 

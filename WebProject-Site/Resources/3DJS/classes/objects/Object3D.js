@@ -4,7 +4,7 @@ class Object3D {
     constructor(model) {
         this.position = [0, 0, 0];
         this.rotation = [0, 0, 0];// vector of 3 angles (each for each axis)
-        this.scale = [0, 0, 0];
+        this.scale = [1, 1, 1];
         this.model = model;
     }
 

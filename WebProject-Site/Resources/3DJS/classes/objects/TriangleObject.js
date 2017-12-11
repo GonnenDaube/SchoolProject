@@ -9,19 +9,33 @@ class TriangleObject extends Object3D {
         this.positionVBO = null;
         this.normalVBO = null;
         this.colorVBO = null;
-        this.queuedPositions = Float32Array(9);
-        this.queuedColors = Float32Array(9);
-        this.queuedNormals = Float32Array(9);
-        this.qIndex = 0;
+        this.shader = shader;
     }
 
     draw() {
         this.gl.bindVertexArray(this.VAO);
-        this.gl.drawArrays(this.model.mode, 0, this.model.numVertices);
+        switch(this.model.mode){
+            case this.gl.TRIANGLES:
+                if(this.model.numVertices > 2)
+                    this.gl.drawArrays(this.gl.TRIANGLES, 0, this.model.numVertices - this.model.numVertices % 3);
+                break;
+            case this.gl.TRIANGLE_STRIP:
+                if(this.model.numVertices > 2)
+                    this.gl.drawArrays(this.gl.TRIANGLE_STRIP, 0, this.model.numVertices);
+                break;
+            case this.gl.LINES:
+                if(this.model.numVertices > 1)
+                    this.gl.drawArrays(this.gl.LINES, 0, this.model.numVertices - this.model.numVertices % 2);
+                break;
+            case this.gl.LINE_STRIP:
+                if(this.model.numVertices > 1)
+                    this.gl.drawArrays(this.gl.LINE_STRIP, 0, this.model.numVertices);
+                break;
+        }
         this.gl.bindVertexArray(null);
     }
 
-    updateBuffers(shader) { //should be called after every change done to mesh (other then transformations)
+    updateBuffers() { //should be called after every change done to mesh (other then transformations)
         this.VAO = this.gl.createVertexArray();
         this.positionVBO = this.gl.createBuffer();
         this.normalVBO = this.gl.createBuffer();
@@ -29,9 +43,9 @@ class TriangleObject extends Object3D {
 
         this.gl.bindVertexArray(this.VAO);
 
-        let positionAttrib = this.gl.getAttribLocation(shader.shaderProgram, "positions");
-        let normalAttrib = this.gl.getAttribLocation(shader.shaderProgram, "normals");
-        let colorAttrib = this.gl.getAttribLocation(shader.shaderProgram, "colors");
+        let positionAttrib = this.gl.getAttribLocation(this.shader.shaderProgram, "positions");
+        let normalAttrib = this.gl.getAttribLocation(this.shader.shaderProgram, "normals");
+        let colorAttrib = this.gl.getAttribLocation(this.shader.shaderProgram, "colors");
 
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.positionVBO);
         this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(this.model.vertices), this.gl.STATIC_DRAW);
@@ -44,7 +58,7 @@ class TriangleObject extends Object3D {
         this.gl.enableVertexAttribArray(normalAttrib);
 
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.colorVBO);
-        this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(this.model.colors), this.gl.STATIC_DRAW);
+        this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(this.model.color), this.gl.STATIC_DRAW);
         this.gl.vertexAttribPointer(colorAttrib, 3, this.gl.FLOAT, this.gl.FALSE, 3 * Float32Array.BYTES_PER_ELEMENT, 0);
         this.gl.enableVertexAttribArray(colorAttrib);
 
@@ -52,20 +66,28 @@ class TriangleObject extends Object3D {
         this.gl.bindVertexArray(null);
     }
 
-    addVertexToQueue(position, color, normal, mode){
-        this.queuedPositions[this.qIndex] = position[0];
-        this.queuedColors[this.qIndex] = color[0];
-        this.queuedNormals[this.qIndex++] = normal[0];
-
-        this.queuedPositions[this.qIndex] = position[1];
-        this.queuedColors[this.qIndex] = color[1];
-        this.queuedNormals[this.qIndex++] = normal[1];
-
-        this.queuedPositions[this.qIndex] = position[2];
-        this.queuedColors[this.qIndex] = color[2];
-        this.queuedNormals[this.qIndex++] = normal[2];
-
+    addVertex(position, color, normal, mode){
+        if(this.model.vertices == null){
+            this.model.vertices = position;
+            this.model.color = color;
+            this.model.normals = normal;
+        }
+        else{
+            this.model.vertices.push(position[0]);
+            this.model.vertices.push(position[1]);
+            this.model.vertices.push(position[2]);
+            this.model.color.push(color[0]);
+            this.model.color.push(color[1]);
+            this.model.color.push(color[2]);
+            this.model.normals.push(normal[0]);
+            this.model.normals.push(normal[1]);
+            this.model.normals.push(normal[2]);
+        }
         this.model.mode = mode;
+
+        this.model.numVertices++;
+
+        this.updateBuffers();
     }
 }
 
