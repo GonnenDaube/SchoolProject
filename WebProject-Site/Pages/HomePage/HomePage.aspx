@@ -6,16 +6,13 @@
     <form id="HomePageForm" runat="server">
     <div id="contentDiv" style="position:absolute; visibility:hidden; z-index:1" class="scrollGroup" onscroll="updateUserLocation();">
         <!--Put all welcome elements here -->
-        <div id="welcomeDiv" style="position:absolute; background-color: rgba(255, 248, 233,0.9)"> 
-            <p id="welcomePos" style="position:absolute; font-size:1px; visibility:hidden">hidden-text</p>
-            <div id="welcomeHeader" style="position:absolute;top:30%; width:100%; height:100%; margin-left:auto; margin-right:auto; text-align:center;">
+        <div id="welcomeDiv" style="position:absolute; background-color: rgba(255, 248, 233,0.0)"> 
+            <p id="welcomePos" style="position:absolute; font-size:1px; visibility:hidden;">hidden-text</p>
+            <div id="welcomeHeader" style="position:absolute;top:30%; width:100%; height:100%; margin-left:auto; margin-right:auto; text-align:center; color:white">
                 <p id ="welcomeTxt" style="font-size:10vw; margin-top:0%; margin-bottom:0%;">Welcome</p>
                 <p id="subTxt" style="position:relative;top:0% ;font-size:2vw; margin-top:0%; margin-bottom:0%;" class="subTxt">The Model Makertron 2100 - v2.0</p>
             </div>
             <asp:Panel ID="WelcomeMessage" runat="server"></asp:Panel>
-            <svg height="10" width="0" style="position:absolute;left:5%;top:100%; z-index:3" class="breakLine">
-                <line x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(0,0,0);stroke-width:2; " class="line"/>
-            </svg>
         </div>
         <!--Put all login elements here -->
         <div id="loginDiv" style="position:absolute; background-color: rgba(255, 248, 233,0.9)">

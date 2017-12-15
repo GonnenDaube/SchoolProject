@@ -9,10 +9,17 @@ class TriangleObject extends Object3D {
         this.positionVBO = null;
         this.normalVBO = null;
         this.colorVBO = null;
+
+        this.wiredVAO = null;
+        this.wiredPositionVBO = null;
+        this.wiredNormalVBO = null;
+        this.wiredColorVBO = null;
+
         this.shader = shader;
+        this.wireframeModel = new Model(null, null, null, null, null, null, null);
     }
 
-    draw() {
+    draw(drawMode) {
         this.gl.bindVertexArray(this.VAO);
         switch(this.model.mode){
             case this.gl.TRIANGLES:
@@ -71,6 +78,9 @@ class TriangleObject extends Object3D {
             this.model.vertices = position;
             this.model.color = color;
             this.model.normals = normal;
+            this.wireframeModel.vertices = position;
+            this.wireframeModel.color = color;
+            this.wireframeModel.normals = normal;
         }
         else{
             this.model.vertices.push(position[0]);

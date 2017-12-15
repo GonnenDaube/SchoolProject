@@ -70,13 +70,14 @@ var fpsCounter;
 var leftButtons;
 var rightButtons;
 var currentMode;
+var currentDrawMode;
 var gl;
 
 function main() {
     init();
 
     var loop = function(timestamp){
-        renderer.renderSceneToFramebuffer(display, gl);
+        renderer.renderSceneToFramebuffer(display, gl, currentDrawMode);
 
         if(playerInputDetector.isPaused){
             renderer.addBlurEffect(display, gl);
@@ -157,7 +158,7 @@ function addVertex(){
     let r = parseFloat(color.substring(color.indexOf('(') + 1, color.indexOf(',')));
     let g = parseFloat(color.substring(color.indexOf(',') + 1,color.indexOf(',',color.indexOf(',') + 1)));
     let b = parseFloat(color.substring(color.lastIndexOf(',') + 1, color.indexOf(')')));
-    color = [r, g, b];
+    color = [r/255.0, g/255.0, b/255.0];
     let mode;
     switch(currentMode){
         case 'triangle-mode':
@@ -237,7 +238,7 @@ function setCreationMode(){
 }
 
 function setDrawMode(){
-    currentMode = this.getAttribute('id');
+    currentDrawMode = this.getAttribute('id');
 
     for(let i = 0; i < rightButtons.length; i++){
         if(rightButtons[i].classList.contains('checkable-right'))
