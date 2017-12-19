@@ -115,11 +115,11 @@ public partial class Pages_HomePage_HomePage : System.Web.UI.Page
     private string ColorGenerator()
     {
         string[] colors = new string[5];
-        colors[0] = "rgb(255,0,0)";
-        colors[1] = "rgb(0,255,0)";
-        colors[2] = "rgb(0,0,255)";
-        colors[3] = "rgb(255,0,255)";
-        colors[4] = "rgb(0,255,255)";
+        colors[0] = "rgb(10, 16, 13)";
+        colors[1] = "rgb(176, 186, 0)";
+        colors[2] = "rgb(216, 203, 62)";
+        colors[3] = "rgb(162, 44, 41)";
+        colors[4] = "rgb(144, 41, 35)";
         Random rnd = new Random();
         return colors[rnd.Next(colors.Length)];
     }
