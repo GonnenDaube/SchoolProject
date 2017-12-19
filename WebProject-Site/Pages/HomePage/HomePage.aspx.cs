@@ -43,10 +43,11 @@ public partial class Pages_HomePage_HomePage : System.Web.UI.Page
             reader.Close();
             //Generate Id
             int key = KeyGenerator();
+            string color = ColorGenerator();
 
             //Submit form
 
-            sqlCmd = "INSERT INTO [Users] VALUES(@username,@password,@email,@content_creator,@content_consumer,'False',@key);";
+            sqlCmd = "INSERT INTO [Users] VALUES(@username,@password,@email,@content_creator,@content_consumer,'False',@key,@color,'False');";
             sqlCommand = new SqlCommand(sqlCmd, sqlConnection);
             sqlCommand.Parameters.AddWithValue("@username", usernameBox.Text);
             sqlCommand.Parameters.AddWithValue("@password", passwordBox.Text);
@@ -54,6 +55,7 @@ public partial class Pages_HomePage_HomePage : System.Web.UI.Page
             sqlCommand.Parameters.AddWithValue("@content_creator", content_creator.Text);
             sqlCommand.Parameters.AddWithValue("@content_consumer", content_consumer.Text);
             sqlCommand.Parameters.AddWithValue("@key", key);//random key used for validation
+            sqlCommand.Parameters.AddWithValue("@color", color);
             sqlCommand.ExecuteNonQuery();
 
             //send verification email
@@ -110,11 +112,23 @@ public partial class Pages_HomePage_HomePage : System.Web.UI.Page
         }
     }
 
+    private string ColorGenerator()
+    {
+        string[] colors = new string[5];
+        colors[0] = "rgb(255,0,0)";
+        colors[1] = "rgb(0,255,0)";
+        colors[2] = "rgb(0,0,255)";
+        colors[3] = "rgb(255,0,255)";
+        colors[4] = "rgb(0,255,255)";
+        Random rnd = new Random();
+        return colors[rnd.Next(colors.Length)];
+    }
+
     protected void Login(object sender, EventArgs e)
     {
         SqlConnection sqlConnection = new SqlConnection(resources.ResourceManager.GetString("Connection_String"));
         sqlConnection.Open();
-        string sqlCmd = "SELECT id FROM [Users] WHERE password = @password AND email = @email AND validated = 'True';";
+        string sqlCmd = "SELECT * FROM [Users] WHERE password = @password AND email = @email AND validated = 'True';";
         SqlCommand sqlCommand = new SqlCommand(sqlCmd, sqlConnection);
         sqlCommand.Parameters.AddWithValue("@password", passwordLogInBox.Text);
         sqlCommand.Parameters.AddWithValue("@email", emailLogInBox.Text);
@@ -123,11 +137,15 @@ public partial class Pages_HomePage_HomePage : System.Web.UI.Page
         {
             if (reader.Read())
             {
-                Session["UserId"] = reader.GetInt32(0);//from user id we can safely retrieve all of user's information when needed 
+                Session["user-id"] = reader.GetInt32(0);
+                Session["username"] = reader.GetString(1);
+                Session["user-color"] = reader.GetString(8);
+                Session["admin"] = reader.GetBoolean(9);
             }
             reader.Close();
             sqlConnection.Close();
             loginMessage.Controls.Clear();
+            Response.Redirect("http://localhost:57143/Pages/HomePage/HomePage.aspx");
         }
         else
         {

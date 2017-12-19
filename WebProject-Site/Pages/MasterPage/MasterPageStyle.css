@@ -181,3 +181,81 @@ body{
     top:0%;
     left:0%;
 }
+
+.profile_div{
+    position:fixed;
+    left:92%;
+    top:2vw;
+    height:5vw;
+    width:5vw;
+    transition:0.5s;
+}
+
+.profile_div:hover{
+    left:91.5%;
+    top:1.5vw;
+    height:6vw;
+    width:6vw;
+}
+
+.profile_div:hover .profile_letter{
+    font-size:3.5vw;
+}
+
+.profile_div #profile-background{
+    position:absolute;
+    left:0%;
+    top:0%;
+    height:100%;
+    width:100%;
+    z-index:5;
+}
+
+.profile_color{
+    position:absolute;
+    left:17.5%;
+    top:17.5%;
+    width:65%;
+    height:65%;
+    z-index:3;
+}
+
+.profile_letter{
+    position:absolute;
+    left:10%;
+    top:10%;
+    width:80%;
+    height:80%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:0vw;
+    margin-bottom:0vw;
+    text-align:center;
+    font-size:3vw;
+    color:white;
+    z-index:7;
+    transition:0.5s;
+}
+
+.admin-div{
+    position:absolute;
+    left:35%;
+    top:35%;
+    width:30%;
+    height:30%;
+    z-index:0;
+}
+
+.admin-link{
+    position:absolute;
+    -webkit-transform:rotate(0deg) translate(0%,-100%);
+    background-image:url(/Resources/Icons/admin_pic.png);
+    background-size:cover;
+    width:100%;
+    height:100%;
+    transition:0.5s;
+}
+
+.profile_div:hover .admin-link{
+    -webkit-transform:rotate(-90deg) translate(0%,-180%);
+}

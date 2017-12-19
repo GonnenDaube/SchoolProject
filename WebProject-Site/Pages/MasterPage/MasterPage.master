@@ -54,10 +54,16 @@
                     <img src="/Resources/Icons/pagelink_icon.png" id="libraryLinkIcon" style="visibility:hidden" class="menuIcon"/>
                 </a>
             </div>
-            <a id="profile_link" class="profile_div" href="/Pages/ProfilePage/ProfilePage.aspx" style="visibility:hidden" runat="server">
-                <img id="profile_img" src="" class="profile_img"/>
-                <p id="profile_txt" class="profile_txt" runat="server"></p>
-            </a>
+            <div id="profile_div" class="profile_div" style="visibility:hidden" runat="server">
+                <a id="profile_link" href="/Pages/ProfilePage/ProfilePage.aspx">
+                    <img id="profile-background" src="/Resources/Icons/profile_background.png"/>
+                    <div id="profile_color" class="profile_color" runat="server"></div>
+                    <p runat="server" id="profile_letter" class="profile_letter AileronsFont"></p>
+                </a>
+                <div id="admin_div" class="admin-div" style="visibility:hidden" runat="server">
+                    <a id="admin-link" class="admin-link" href="/Pages/AdminPage/AdminPage.aspx"></a>
+                </div>
+            </div>
         </div>
         <script src="/Pages/MasterPage/MasterPageJs.js"></script>
         <script src="/Pages/HomePage/HomePageJs.js"></script>
