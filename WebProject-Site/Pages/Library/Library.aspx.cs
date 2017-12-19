@@ -65,7 +65,7 @@ public partial class Pages_Library_Library : System.Web.UI.Page
     {// gets asset id and generates a link button that redirects for asset page
         HtmlGenericControl expand = new HtmlGenericControl("a");
         expand.Attributes["class"] = "ExpandBtn";
-        expand.Attributes["href"] = "/Pages/AssetPage/AssetPage.aspx";//adds item id to the end of the url
+        expand.Attributes["href"] = "/Pages/AssetPage/AssetPage.aspx?Template";//adds item id to the end of the url
 
         HtmlGenericControl icon = new HtmlGenericControl("img");
         icon.Attributes["class"] = "ExpandIcon";

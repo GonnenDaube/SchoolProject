@@ -13,9 +13,16 @@ public partial class Pages_AssetPage_AssetPage : System.Web.UI.Page
         string url = Request.Url.AbsoluteUri;// /Pages/AssetPage.aspx?item_id=200134
         if (!url.Contains('?'))//url does not contain item id
         {
+            HtmlGenericControl errorCover = new HtmlGenericControl("div");
+            errorCover.Attributes["style"] = "position:absolute; left:0%; top:0%; width:100%; height:100%; background-color:rgba(0,0,0,0.75);";
+            HtmlGenericControl errorDiv = new HtmlGenericControl("div");
+            errorDiv.Attributes["class"] = "errorPos panelColor";
             HtmlGenericControl errorMessage = new HtmlGenericControl("p");
             errorMessage.InnerHtml = "Error 404: it seems like this asset does not exist anymore!";
-            ErrorMessage.Controls.Add(errorMessage);
+            errorDiv.Controls.Add(errorMessage);
+            ErrorMessage.Controls.Add(errorCover);
+            ErrorMessage.Controls.Add(errorDiv);
+            ErrorMessage.CssClass = "ErrorMessage";
         }
         else
         {
@@ -23,6 +30,10 @@ public partial class Pages_AssetPage_AssetPage : System.Web.UI.Page
             string item_id = extension.Substring(extension.IndexOf('=') + 1);
 
             //Get Asset content from web service using item_id
+            if (item_id.Equals("Template"))
+            {
+                Rating.Text = "4.5";
+            }
         }
     }
 }

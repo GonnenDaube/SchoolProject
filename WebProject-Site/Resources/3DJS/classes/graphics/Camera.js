@@ -15,13 +15,13 @@ class Camera {
         lookAtMat = mat4.lookAt(lookAtMat, this.position, [this.position[0] + this.lookingAt[0], this.position[1] + this.lookingAt[1], this.position[2] + this.lookingAt[2]], this.lookingUp);
         return lookAtMat;
     }
-    getPerspective() {
+    getPerspective(windowHeight, windowWidth) {
         let perspectiveMat = mat4.create();
-        perspectiveMat = mat4.perspective(perspectiveMat, this.fov, 16.0 / 9.0, 0.1, 5000.0);
+        perspectiveMat = mat4.perspective(perspectiveMat, this.fov, windowWidth / windowHeight, 0.1, 5000.0);
         return perspectiveMat;
     }
-    getVpMatrix() {
-        let mat = mat4.multiply(mat4.create() ,this.getPerspective() , this.getLookAt());
+    getVpMatrix(windowHeight, windowWidth) {
+        let mat = mat4.multiply(mat4.create() ,this.getPerspective(windowHeight, windowWidth) , this.getLookAt());
         return mat;
     }
     moveForward() {
