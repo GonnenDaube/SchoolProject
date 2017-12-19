@@ -137,7 +137,9 @@
 	                        gl_Position = vp_matrix * m_matrix * p;
 
 	                        FragPos = vec3(m_matrix * p);
-	                        Normal = normalize( -SphereVertices);
+                            vec3 normal = normalize( - SphereVertices);
+                            vec4 norm = m_matrix * vec4(normal, 1.0f);
+                            Normal = norm.xyz;
 	                        ambientStrength = 0.3;
 	                        diffuseStrength = 0.5;
 	                        specularStrength = 0.5;
@@ -230,7 +232,8 @@
 	                        gl_Position = vp_matrix * m_matrix * p;
 
 	                        FragPos = vec3(m_matrix * p);
-	                        Normal = normals;
+                            vec4 normal = m_matrix * vec4(normals, 1.0f);
+                            Normal = normal.xyz;
 	                        ambientStrength = 0.3;
 	                        diffuseStrength = 0.5;
 	                        specularStrength = 0.5;

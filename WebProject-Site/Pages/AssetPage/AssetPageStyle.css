@@ -117,3 +117,74 @@
     opacity:0;
     transition:0.25s;
 }
+
+.download-button{
+    position:absolute; 
+    outline:none; 
+    border:solid;
+    border-color:rgb(120, 51, 39); 
+    color:rgb(120, 51, 39); 
+    border-width:0.1vw; 
+    font-size:2vw;
+    cursor:pointer;
+    background-color:rgba(0,0,0,0.0);
+    transition:0.5s;
+    left:35%;
+    width:30%;
+    top:80%;
+    height:15%;
+}
+
+.download-button:hover{
+    border-color:white; 
+    color:white; 
+    transition:0.5s;
+}
+
+.asset-name{
+    position:absolute;
+    left:10%;
+    top:10%;
+    font-size:1.75vw;
+    color:rgb(120, 51, 39);
+    max-width:40%;
+    max-height:10%;
+    overflow:hidden;
+}
+
+.creator-name{
+    position:absolute;
+    left:50%;
+    top:10%;
+    font-size:1.75vw;
+    color:rgb(131, 108, 108);
+    max-width:40%;
+    max-height:10%;
+    overflow:hidden;
+}
+
+.asset-desc{
+    position:absolute;
+    left:10%;
+    top:30%;
+    max-width:80%;
+    max-height:40%;
+    color:rgb(131, 108, 108);
+    overflow-x:hidden;
+    overflow-y:scroll;
+    font-size: 1.25vw;
+}
+
+.asset-desc::-webkit-scrollbar { 
+    display:none;
+}
+
+.info-break-line{
+    position:absolute;
+    left:48%;
+    top:6%;
+    font-size:3vw;
+    color:rgb(120, 51, 39);
+    margin-top:0%;
+    margin-bottom:0%;
+}

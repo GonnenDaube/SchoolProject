@@ -33,7 +33,18 @@ public partial class Pages_AssetPage_AssetPage : System.Web.UI.Page
             if (item_id.Equals("Template"))
             {
                 Rating.Text = "4.5";
+                CreatorsName.Text = "Template Creator's Name";
+                AssetName.Text = "Template Asset Name";
+                AssetDescription.Text = "Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description";
+
+                CreatorsName.ToolTip = "Template Creator's Name";
+                AssetName.ToolTip = "Template Asset Name";
             }
         }
+    }
+
+    protected void Download_Btn_Click(object sender, EventArgs e)
+    {
+
     }
 }

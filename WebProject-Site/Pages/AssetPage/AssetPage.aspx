@@ -13,7 +13,11 @@
             <p id="pause-label" class="AileronsFont pauseLabel">Paused</p>
         </div>
         <div id="asset-info" class="asset-info">
-
+            <asp:Label ID="AssetName" runat="server" Text="" CssClass="asset-name AileronsFont"></asp:Label>
+            <p id="breakLine" class="info-break-line AileronsFont">|</p>
+            <asp:Label ID="CreatorsName" runat="server" Text="" CssClass="creator-name AileronsFont"></asp:Label>
+            <asp:Label ID="AssetDescription" runat="server" Text="" CssClass="asset-desc TrenchFont"></asp:Label>
+            <asp:Button ID="Download_Btn" runat="server" Text="Download" OnClick="Download_Btn_Click" CssClass="AileronsFont download-button"/>
         </div>
         <div id="asset-rating" class="asset-rating">
             <div id="overall-rate" class="overall-rate AileronsFont">

@@ -17,6 +17,14 @@ class Object3D {
         transform = mat4.scale(transform, transform, this.scale);
         return transform;
     }
+
+    getRotation(){
+        let rotate = mat4.create();
+        rotate = mat4.rotate(rotate, rotate, this.rotation[0], [1, 0, 0]);
+        rotate = mat4.rotate(rotate, rotate, this.rotation[1], [0, 1, 0]);
+        rotate = mat4.rotate(rotate, rotate, this.rotation[2], [0, 0, 1]);
+        return rotate;
+    }
 }
 
 export default Object3D;
