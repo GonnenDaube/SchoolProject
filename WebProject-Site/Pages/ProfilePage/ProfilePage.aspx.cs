@@ -90,7 +90,7 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
 
         HtmlGenericControl rating = new HtmlGenericControl("p");
         rating.Attributes["id"] = "asset-rate-" + index;
-        rating.Attributes["class"] = "asset-rate AileronsFont";
+        rating.Attributes["class"] = "asset-rate Report1942Font";
         rating.InnerHtml = (Math.Floor(rnd.NextDouble()*5*10) / 10).ToString() + "/5";
 
         HtmlGenericControl graph = GenerateAssetGraph(index);
@@ -111,7 +111,7 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
         HtmlGenericControl p = new HtmlGenericControl("p");
         HtmlGenericControl selected_img = new HtmlGenericControl("img");
         p.InnerHtml = name;
-        p.Attributes["class"] = "AileronsFont";
+        p.Attributes["class"] = "Report1942Font";
         selected_img.Attributes["src"] = "/Resources/Icons/button-selected.png";
 
         button.Controls.Add(p);

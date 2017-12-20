@@ -103,7 +103,7 @@
     margin-left:auto;
     margin-right:auto;
     text-align:center;
-    margin-top:0%;
+    margin-top:5%;
     margin-bottom:30%;
     font-size:2vw;
 }
@@ -124,8 +124,12 @@
 
 .asset-rate{
     position:absolute;
-    left:60%;
-    top:20%;
+    left:50%;
+    top:15%;
+    width:45%;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
     font-size:5vw;
     color:rgba(7,9,7,0.8);
     margin-top:0;
