@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="VB" MasterPageFile="~/Pages/MasterPage/MasterPage.master" AutoEventWireup="false" CodeFile="ProfilePage.aspx.vb" Inherits="Pages_ProfilePage_ProfilePage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Pages/MasterPage/MasterPage.master" AutoEventWireup="true" CodeFile="ProfilePage.aspx.cs" Inherits="Pages_ProfilePage_ProfilePage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">
-
+    <asp:Panel ID="Asset_Holder" runat="server"></asp:Panel>
 </asp:Content>
 

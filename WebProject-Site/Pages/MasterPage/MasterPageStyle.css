@@ -8,22 +8,34 @@
     src: url(/Resources/fonts/trench100free.otf);
 }
 
+@font-face{
+    font-family:Report1942;
+    src: url(/Resources/fonts/Report1942.ttf);
+}
+
 /* color1 : rgb(16, 11, 11) */
 
 /* color2 : rgb(120, 51, 39) */
 
 
+/* color scheme :
+    color:rgb(216, 216, 216);
+    color:rgb(252, 246, 189);
+    color:rgb(208, 244, 222);
+    color:rgb(222, 246, 202);
+    color:rgb(248, 189, 196);
+*/
+
 .AileronsFont{
     font-family:Ailerons;
-    color:rgb(10, 16, 13);
-    color:rgb(176, 186, 0);
-    color:rgb(216, 203, 62);
-    color:rgb(162, 44, 41);
-    color:rgb(144, 41, 35);
 }
 
 .TrenchFont{
     font-family:Trench;
+}
+
+.Report1942Font{
+    font-family:Report1942;
 }
 
 .subTxt{
