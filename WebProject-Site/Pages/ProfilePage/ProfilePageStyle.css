@@ -9,11 +9,11 @@
 }
 
 .asset-back-up-div:hover{
-    top:10vw;
+    top:10.5vw;
 }
 
 .asset-back-down-div:hover{
-    top:15vw;
+    top:14.5vw;
 }
 
 .asset-file-tab{
@@ -63,7 +63,7 @@
     transform:rotateX(180deg);
 }
 
-.thumbnail{
+.thumbnail-profile{
     position:absolute;
     left:5%;
     top:10%;

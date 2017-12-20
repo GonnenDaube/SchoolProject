@@ -83,7 +83,7 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
 
         HtmlGenericControl thumbnail = new HtmlGenericControl("img");
         thumbnail.Attributes["src"] = "/Resources/Images/polygon-mountain.jpg";
-        thumbnail.Attributes["class"] = "thumbnail";
+        thumbnail.Attributes["class"] = "thumbnail-profile";
 
         HtmlGenericControl edit_btn = GenerateButton("EDIT", "edit-btn");
         HtmlGenericControl delete_btn = GenerateButton("DELETE", "delete-btn");
