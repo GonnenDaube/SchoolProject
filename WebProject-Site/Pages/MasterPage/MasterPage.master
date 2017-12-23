@@ -61,7 +61,7 @@
                     <p runat="server" id="profile_letter" class="profile_letter AileronsFont"></p>
                 </a>
                 <div id="admin_div" class="admin-div" style="visibility:hidden" runat="server">
-                    <a id="admin-link" class="admin-link" href="/Pages/AdminPage/AdminPage.aspx"></a>
+                    <a id="admin-link" class="admin-link" href="/Pages/AdminPage/AdminDashboardPage.aspx"></a>
                 </div>
             </div>
         </div>
@@ -361,7 +361,7 @@
         <link href="/Pages/AssetPage/AssetPageStyle.css" rel="stylesheet" />
         <link href="/Pages/WorkingSpace/WorkingSpaceStyle.css" rel="stylesheet" />
         <link href="/Pages/ProfilePage/ProfilePageStyle.css" rel="stylesheet" />
-
+        <link href="/Pages/AdminPage/AdminPageStyle.css" rel="stylesheet" />
 
         <div id="content" class="content">
             <asp:ContentPlaceHolder id="body" runat="server"></asp:ContentPlaceHolder>

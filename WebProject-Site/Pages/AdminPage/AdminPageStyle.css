@@ -1,0 +1,169 @@
+﻿.card-holder{
+    position:absolute;
+    left:10vw;
+    top:7.5vw;
+    width:80vw;
+    height:35vw;
+}
+
+.card{
+    position:relative;
+    margin-left:0vw;
+    margin-right:3.3vw;
+    margin-bottom: 4vw;
+    display:inline-block;
+    width:16vw;
+    height:16vw;
+    border-radius:0.25vw 0.25vw 0.25vw 0.25vw;
+    opacity:0.75;
+    transition:0.2s;
+}
+
+.card:hover{
+    opacity:1;
+}
+
+.dash-icon{
+    opacity:0.9;
+    position:absolute;
+    left:40%;
+    top:30%;
+    width:3.5vw;
+    height:3.5vw;
+}
+
+.dash-txt{
+    position:absolute;
+    left:0%;
+    top:60%;
+    width:100%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:0vw;
+    text-align:center;
+    text-decoration:none;
+    color:black;
+    opacity:inherit;
+    font-size:2vw;
+}
+
+.table{
+    position:absolute;
+    left:10%;
+    top:30%;
+    width:80%;
+    background-color:rgb(252, 246, 189);
+    border-radius:0.5vw 0.5vw 0.5vw 0.5vw;
+    padding-top:1vw;
+    padding-bottom:3vw;
+    padding-left:1vw;
+    padding-right:1vw;
+    border-spacing:2vw;
+}
+
+.users-table{
+    left:3.5%;
+    width:93%;
+}
+
+.table-header-cell{
+    color:black;
+    opacity:1;
+    font-size:1.5vw;
+}
+
+.table-cell{
+    max-width:100%;
+    overflow-x:hidden;
+}
+
+.checkbox{
+    position:relative;
+    left:42.5%;
+}
+
+.title{
+    position:absolute;
+    left:0%;
+    top:3%;
+    width:100%;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+    font-size:5vw;
+    color:white;
+}
+
+.textbox-admin{
+    border:none;
+    background-color:rgba(0,0,0,0);
+    font-size:1vw;
+    color:black;
+    opacity:0.8;
+    width:100%;
+    outline:none;
+}
+
+.return-btn{
+    position:absolute;
+    left:10%;
+    top:5%;
+    height:2.5vw;
+    width:2.5vw;
+}
+
+.return-btn img{
+    position:absolute;
+    left:0%;
+    top:0%;
+    height:2.5vw;
+    width:2.5vw;
+    transform:rotate(0deg);
+    transition:0.5s;
+}
+
+.return-btn:hover img{
+    transform:rotate(-360deg);
+}
+
+.save-btn{
+    position:absolute;
+    right:10%;
+    width:2.5vw;
+    height:2.5vw;
+    top:5%;
+    border:none;
+    background-image:url(/Resources/Icons/save-icon.png);
+    background-size:cover;
+    background-color:rgba(0,0,0,0);
+    outline:none;
+    transform:rotate(0deg);
+    transition:0.5s;
+    cursor:pointer;
+}
+
+.save-btn:hover{
+    transform:rotate(-360deg);
+}
+
+.table-footer-cell .textbox-admin{
+    border-bottom:solid;
+    border-color:black;
+    border-width:0.05vw;
+}
+
+.delete-btn-admin{
+    position:relative;
+    border:none;
+    background-color:rgba(0,0,0,0);
+    height:1vw;
+    width:1vw;
+    left:-5%;
+    opacity:0.5;
+    transition:0.5s;
+    cursor:pointer;
+}
+
+.delete-btn-admin:hover{
+    opacity:0.9;
+}
