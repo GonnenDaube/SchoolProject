@@ -26,7 +26,7 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
         colors[4] = "rgb(248, 189, 196)";
         rnd = new Random();
 
-        int size = 5;
+        int size = 50;
 
         for(int i = 0; i < size; i++)// get asset list from web service and loop through
         {

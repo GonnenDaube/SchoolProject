@@ -274,3 +274,7 @@
     color:rgb(120, 51, 39);
     cursor:grab;
 }
+
+.error p{
+    color:indianred;
+}

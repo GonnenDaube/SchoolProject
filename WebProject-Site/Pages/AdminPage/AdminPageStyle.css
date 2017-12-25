@@ -167,3 +167,20 @@
 .delete-btn-admin:hover{
     opacity:0.9;
 }
+
+.admin-action-img{
+    position:relative;
+    border:none;
+    background-color:rgba(0,0,0,0);
+    height:1vw;
+    width:1vw;
+    transition:0.5s;
+}
+
+.not-changed{
+    opacity:0;
+}
+
+.changed{
+    opacity:1;
+}

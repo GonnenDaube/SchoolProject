@@ -148,7 +148,7 @@
                     Contact Us:
                 </p>
                 <p>
-                    If there are any problem with copyright, bugs, etc... please contact us via email.<br />
+                    If there is any problem with copyright, bugs, etc... please contact us via email.<br />
                     Our email address:<br />
                     model.makertron@gmail.com
                 </p>

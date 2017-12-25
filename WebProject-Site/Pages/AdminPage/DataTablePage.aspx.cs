@@ -65,23 +65,28 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
                 case "System.Int32":
                     cell.Controls.Add(GenerateTextBox(reader.GetInt32(i).ToString()));
                     cell.ToolTip = reader.GetInt32(i).ToString();
+                    ((TextBox)cell.Controls[0]).TextChanged += new EventHandler(text_changed);
                     break;
                 case "System.String":
                     cell.Controls.Add(GenerateTextBox(reader.GetString(i)));
                     cell.ToolTip = reader.GetString(i).ToString();
+                    ((TextBox)cell.Controls[0]).TextChanged += new EventHandler(text_changed);
                     break;
                 case "System.Boolean":
                     cell.Controls.Add(GenerateCheckBox(reader.GetBoolean(i)));
+                    ((CheckBox)cell.Controls[0]).CheckedChanged += new EventHandler(checked_changed);
                     break;
             }
             cell.CssClass = "table-cell";
             cell.ID = "row" + index + "cell" + i;
             row.Controls.Add(cell);
         }
-        TableCell deleteCell = new TableCell();
-        deleteCell.CssClass = "table-cell";
-        deleteCell.Controls.Add(GenerateImgButton("/Resources/Icons/delete-icon.png", new ImageClickEventHandler(delete_btn_Click), "delete-btn" + index));
-        row.Controls.Add(deleteCell);
+        TableCell actionCell = new TableCell();
+        actionCell.CssClass = "table-cell";
+        actionCell.Controls.Add(GenerateImgButton("/Resources/Icons/delete-icon.png", new ImageClickEventHandler(delete_btn_Click), "delete-btn" + index));
+        actionCell.Controls.Add(GenerateImage("/Resources/Icons/changed-icon.png", "changed" + index));
+        actionCell.ID = "row" + index + "cell-action";
+        row.Controls.Add(actionCell);
         row.ID = "row" + index;
         return row;
     }
@@ -156,6 +161,15 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
         return btn;
     }
 
+    private Image GenerateImage(string path, string id)
+    {
+        Image img = new Image();
+        img.ID = id;
+        img.CssClass = "admin-action-img not-changed";
+        img.Attributes["src"] = path;
+        return img;
+    }
+
     protected void save_btn_Click(object sender, EventArgs e)
     {
     }
@@ -191,5 +205,27 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
                 Response.Redirect(Request.Url.AbsoluteUri);
             }
         }
+    }
+
+    protected void text_changed(object sender, EventArgs e)
+    {
+        TableCell senderCell = (TableCell)((TextBox)sender).Parent;
+        string cellId = senderCell.ID;
+        string rowId = cellId.Substring(cellId.IndexOf("row") + 3);
+        rowId = rowId.Remove(rowId.IndexOf("cell"));
+        int rowNumber = int.Parse(rowId);
+
+        ((Image)table.FindControl("row" + rowId + "cell-action").Controls[1]).CssClass = "changed";
+    }
+
+    protected void checked_changed(object sender, EventArgs e)
+    {
+        TableCell senderCell = (TableCell)((CheckBox)sender).Parent;
+        string cellId = senderCell.ID;
+        string rowId = cellId.Substring(cellId.IndexOf("row") + 3);
+        rowId = rowId.Remove(rowId.IndexOf("cell"));
+        int rowNumber = int.Parse(rowId);
+
+        ((Image)table.FindControl("row" + rowId + "cell-action").Controls[1]).CssClass = "admin-action-img changed";
     }
 }

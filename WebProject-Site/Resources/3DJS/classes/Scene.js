@@ -4,16 +4,14 @@
         this.objects = new Array();
         this.camera = null;
         this.selectedObject = null;
-        this.counter = 0;
     }
     
     updateScene() {
         this.camera.updateMovement(this.fpsCounter.fps);
 
         for(let i = 0; i < this.objects.length; i++){
-            this.objects[i].rotation = [0, this.counter / this.fpsCounter.fps, 0];
+            this.objects[i].rotation[1] += 1 / this.fpsCounter.fps;
         }
-        this.counter++;
     }
 
     addObject(object3d) {

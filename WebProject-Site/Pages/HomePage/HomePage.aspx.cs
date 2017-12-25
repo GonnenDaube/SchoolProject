@@ -78,15 +78,26 @@ public partial class Pages_HomePage_HomePage : System.Web.UI.Page
             smtp.UseDefaultCredentials = true;
             smtp.Credentials = networkCred;
             smtp.Port = 587;
-            smtp.Send(mail);
-
-            //print verification message
-            HtmlGenericControl registrationMessageDiv = new HtmlGenericControl("div");
-            registrationMessageDiv.Attributes["class"] = "TrenchFont WelcomeMessage";
-            HtmlGenericControl registrationMessageP = new HtmlGenericControl("p");
-            registrationMessageP.InnerHtml = "Verification Email has been sent to your email account!";
-            registrationMessageDiv.Controls.Add(registrationMessageP);
-            WelcomeMessage.Controls.Add(registrationMessageDiv);
+            try
+            {
+                smtp.Send(mail);
+                //print verification message
+                HtmlGenericControl registrationMessageDiv = new HtmlGenericControl("div");
+                registrationMessageDiv.Attributes["class"] = "TrenchFont WelcomeMessage";
+                HtmlGenericControl registrationMessageP = new HtmlGenericControl("p");
+                registrationMessageP.InnerHtml = "Verification Email has been sent to your email account!";
+                registrationMessageDiv.Controls.Add(registrationMessageP);
+                WelcomeMessage.Controls.Add(registrationMessageDiv);
+            }
+            catch
+            {
+                HtmlGenericControl error = new HtmlGenericControl("div");
+                error.Attributes["class"] = "TrenchFont WelcomeMessage error";
+                HtmlGenericControl errorP = new HtmlGenericControl("p");
+                errorP.InnerHtml = "Email address is not correct!";
+                error.Controls.Add(errorP);
+                WelcomeMessage.Controls.Add(error);
+            }
         }
         sqlConnection.Close();
 
@@ -121,7 +132,8 @@ public partial class Pages_HomePage_HomePage : System.Web.UI.Page
         colors[3] = "rgb(162, 44, 41)";
         colors[4] = "rgb(144, 41, 35)";
         Random rnd = new Random();
-        return colors[rnd.Next(colors.Length)];
+        int pos = rnd.Next(0, colors.Length);
+        return colors[pos];
     }
 
     protected void Login(object sender, EventArgs e)
