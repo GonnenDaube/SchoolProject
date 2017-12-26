@@ -31,16 +31,17 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
 
             TableFooterRow footer_row = new TableFooterRow();
 
+            int i = 0;
+            int counter = 0;
+
             if (reader.Read())
             {
-                footer_row = GenerateFooterRow(reader);
+                footer_row = GenerateFooterRow(reader, ref counter);
             }
-
-            int i = 0;
 
             do
             {
-                table.Controls.Add(GenerateTableRow(reader, i));
+                table.Controls.Add(GenerateTableRow(reader, i, ref counter));
                 i++;
             } while (reader.Read());
             reader.Close();
@@ -52,7 +53,7 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
         }
     }
 
-    private TableRow GenerateTableRow(SqlDataReader reader, int index)
+    private TableRow GenerateTableRow(SqlDataReader reader, int index, ref int counter)
     {
         TableRow row = new TableRow();
         row.CssClass = "table-row";
@@ -63,18 +64,17 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
             switch (reader.GetFieldType(i).ToString())
             {
                 case "System.Int32":
-                    cell.Controls.Add(GenerateTextBox(reader.GetInt32(i).ToString()));
+                    cell.Controls.Add(GenerateTextBox(reader.GetInt32(i).ToString(), counter++));
+                    cell.Controls.Add(GenerateTextBoxValidator((TextBox)cell.Controls[0]));
                     cell.ToolTip = reader.GetInt32(i).ToString();
-                    ((TextBox)cell.Controls[0]).TextChanged += new EventHandler(text_changed);
                     break;
                 case "System.String":
-                    cell.Controls.Add(GenerateTextBox(reader.GetString(i)));
+                    cell.Controls.Add(GenerateTextBox(reader.GetString(i), counter++));
+                    cell.Controls.Add(GenerateTextBoxValidator((TextBox)cell.Controls[0]));
                     cell.ToolTip = reader.GetString(i).ToString();
-                    ((TextBox)cell.Controls[0]).TextChanged += new EventHandler(text_changed);
                     break;
                 case "System.Boolean":
                     cell.Controls.Add(GenerateCheckBox(reader.GetBoolean(i)));
-                    ((CheckBox)cell.Controls[0]).CheckedChanged += new EventHandler(checked_changed);
                     break;
             }
             cell.CssClass = "table-cell";
@@ -113,18 +113,33 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
         CheckBox cb = new CheckBox();
         cb.Checked = initialState;
         cb.Attributes["class"] = "checkbox";
+        cb.CheckedChanged += new EventHandler(checked_changed);
+        cb.AutoPostBack = true;
         return cb;
     }
 
-    private TextBox GenerateTextBox(string text)
+    private TextBox GenerateTextBox(string text, int index)
     {
         TextBox tb = new TextBox();
         tb.Text = text;
         tb.CssClass = "textbox-admin Report1942Font";
+        tb.TextChanged += new EventHandler(text_changed);
+        tb.AutoPostBack = true;
+        tb.ID = "textBox" + index;
+        tb.CausesValidation = true;
         return tb;
     }
 
-    private TableFooterRow GenerateFooterRow(SqlDataReader reader)
+    private RequiredFieldValidator GenerateTextBoxValidator(TextBox controlToValidate)
+    {
+        RequiredFieldValidator validator = new RequiredFieldValidator();
+        validator.ControlToValidate = controlToValidate.ID;
+        validator.Text = "*";
+        validator.CssClass = "validator-admin";
+        return validator;
+    }
+
+    private TableFooterRow GenerateFooterRow(SqlDataReader reader, ref int counter)
     {
         TableFooterRow row = new TableFooterRow();
         TableCell cell;
@@ -134,11 +149,11 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
             switch (reader.GetFieldType(i).ToString())
             {
                 case "System.Int32":
-                    cell.Controls.Add(GenerateTextBox(""));
+                    cell.Controls.Add(GenerateTextBox("", counter++));
                     cell.ToolTip = "";
                     break;
                 case "System.String":
-                    cell.Controls.Add(GenerateTextBox(""));
+                    cell.Controls.Add(GenerateTextBox("", counter++));
                     cell.ToolTip = "";
                     break;
                 case "System.Boolean":
@@ -171,7 +186,47 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
     }
 
     protected void save_btn_Click(object sender, EventArgs e)
-    {
+    {//passed validation
+        if (dataTableName.Equals("users"))
+        {
+            sqlConnection.Open();
+            string sqlCmd = "UPDATE [Users] SET username = @newUsername, password = @newPassword, email = @newEmail, content_creator = @newContentCreator, content_consumer = @newContentConsumer, validated = @newValidated, RandomKey = @newRandomKey, user_color = @newUserColor, admin = @newAdmin Where Id = @oldId";
+            for (int i = 1; i < table.Controls.Count - 1; i++)
+            {// goes through all rows that are not Header or Footer
+                TableRow tr = (TableRow)table.Controls[i];
+                if (!((Image)tr.Controls[tr.Controls.Count - 1].Controls[1]).CssClass.Contains("not-changed"))
+                {// row is changed
+                    SqlCommand sqlCommand = new SqlCommand(sqlCmd, sqlConnection);
+                    //cannot change id
+                    sqlCommand.Parameters.AddWithValue("@newUsername", ((TextBox)tr.Controls[1].Controls[0]).Text);
+                    sqlCommand.Parameters.AddWithValue("@newPassword", ((TextBox)tr.Controls[2].Controls[0]).Text);
+                    sqlCommand.Parameters.AddWithValue("@newEmail", ((TextBox)tr.Controls[3].Controls[0]).Text);
+                    if (((CheckBox)tr.Controls[4].Controls[0]).Checked)
+                        sqlCommand.Parameters.AddWithValue("@newContentCreator", "True");
+                    else
+                        sqlCommand.Parameters.AddWithValue("@newContentCreator", "False");
+                    if (((CheckBox)tr.Controls[5].Controls[0]).Checked)
+                        sqlCommand.Parameters.AddWithValue("@newContentConsumer", "True");
+                    else
+                        sqlCommand.Parameters.AddWithValue("@newContentConsumer", "False");
+                    if (((CheckBox)tr.Controls[6].Controls[0]).Checked)
+                        sqlCommand.Parameters.AddWithValue("@newValidated", "True");
+                    else
+                        sqlCommand.Parameters.AddWithValue("@newValidated", "False");
+                    sqlCommand.Parameters.AddWithValue("@newRandomKey", ((TextBox)tr.Controls[7].Controls[0]).Text);
+                    sqlCommand.Parameters.AddWithValue("@newUserColor", ((TextBox)tr.Controls[8].Controls[0]).Text);
+                    if (((CheckBox)tr.Controls[9].Controls[0]).Checked)
+                        sqlCommand.Parameters.AddWithValue("@newAdmin", "True");
+                    else
+                        sqlCommand.Parameters.AddWithValue("@newAdmin", "False");
+                    sqlCommand.Parameters.AddWithValue("@oldId", ((TableCell)tr.Controls[0]).ToolTip);
+
+                    sqlCommand.ExecuteNonQuery();
+                }
+            }
+            sqlConnection.Close();
+            Response.Redirect(Request.Url.AbsoluteUri);
+        }
     }
 
     protected void delete_btn_Click(object sender, EventArgs e)
@@ -215,7 +270,7 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
         rowId = rowId.Remove(rowId.IndexOf("cell"));
         int rowNumber = int.Parse(rowId);
 
-        ((Image)table.FindControl("row" + rowId + "cell-action").Controls[1]).CssClass = "changed";
+        ((Image)table.FindControl("row" + rowId + "cell-action").Controls[1]).CssClass = "admin-action-img changed";
     }
 
     protected void checked_changed(object sender, EventArgs e)
