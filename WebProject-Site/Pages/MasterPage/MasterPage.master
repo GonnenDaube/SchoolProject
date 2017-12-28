@@ -10,7 +10,7 @@
 </head>
 <body onload="updateUpperBarSize();">
     <div>
-        <div id="Upper_Bar" class="upperbar" style="visibility:hidden">
+        <div id="Upper_Bar" class="upperbar pos1" style="visibility:hidden">
             <div id="homePage" class="upperbarItem dropdown">
                 <a id="homePage_btn" href="/Pages/HomePage/HomePage.aspx" class="upperbarlink">
                     <p>Home Page</p>

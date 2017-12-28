@@ -30,6 +30,9 @@
         <a id="card4" href="DataTablePage.aspx" class="card" style="background-color:rgb(248, 189, 196)">
 
         </a>
+        <a id="card5" href="DataTablePage.aspx" class="card" style="background-color:rgb(248, 189, 196)">
+
+        </a>
     </div>
 </asp:Content>
 
