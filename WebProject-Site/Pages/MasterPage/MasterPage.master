@@ -354,6 +354,7 @@
         <script src="/Pages/AssetPage/app.js" defer="defer" type="module"></script>
         <script src="/Pages/AssetPage/rating.js"></script>
         <script src="/Pages/ProfilePage/ProfilePageJS.js"></script>
+        <script src="/Pages/WorkingSpace/dial.js"></script>
 
         <link href="/Pages/MasterPage/MasterPageStyle.css" rel="stylesheet" />
         <link href="/Pages/HomePage/HomePageStyle.css" rel="stylesheet" />

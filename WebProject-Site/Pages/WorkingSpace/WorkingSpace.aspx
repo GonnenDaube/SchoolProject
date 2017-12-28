@@ -58,23 +58,6 @@
                 displays model as a solid object with dynamic phong lighting.
             </p>
         </button>
-        <div id="color-picker" class="btn-right color-picker">
-            <div id="bars" class="bars">
-                <div id="color" class="bar" style="background:linear-gradient(rgb(255, 0, 0), rgb(255, 255, 0), rgb(0,255,0), rgb(0, 255, 255), rgb(0,0,255), rgb(255, 0, 255), rgb(255, 0, 0));" onmousemove="moveColorSelector();">
-                    <div id="colorSelector" class="selector" style="position:absolute; left:0%; top:-1%" onmousedown="enableColorSelectorPositionChange();" onmouseup="disableColorSelectorPositionChange();">
-                    </div>
-                </div>
-                <div id="saturation" class="bar" style="background:linear-gradient(rgb(255, 0, 0), rgb(255,255,255));" onmousemove="moveSaturSelector();">
-                    <div id="saturSelector" class="selector" style="position:absolute; left:0%; top:-1%" onmousedown="enableSaturSelectorPositionChange();" onmouseup="disableSaturSelectorPositionChange();">
-                    </div>
-                </div>
-                <div id="brightness" class="bar" style="background:linear-gradient(rgb(255, 0, 0), rgb(0,255,0), rgb(0,0,255));" onmousemove="moveBrightSelector();">
-                    <div id="brightSelector" class="selector" style="position:absolute; left:0%; top:-1%" onmousedown="enableBrightSelectorPositionChange();" onmouseup="disableBrightSelectorPositionChange();">
-                    </div>
-                </div>
-            </div>
-            <div id="final-color" class="final-color" style="background-color:rgb(255,0,0)"></div>
-        </div>
     </div>
     <div id="canvas-view" class="canvas-div">
         <canvas id="canvas" class="canvas">
@@ -82,6 +65,39 @@
         </canvas>
         <p id="fpsLabel" class="fpsLabel AileronsFont"></p>
         <p id="pause-label" class="AileronsFont pauseLabel">Paused</p>
+    </div>
+    <div id="dial-wrapper" class="dial-wrapper" style="position:absolute; left:100px; top:100px">
+        <div id="main-dial" class="main-dial">
+            <svg id="main-dial-circle">
+                <circle cx="0" cy="0" r="0" stroke-width="0" style="fill: rgb(16, 11, 11)" />
+            </svg>
+        </div>
+        <div id="dial-group" class="dial-group">
+            <button id="colorpicker-btn" class="btn1">
+                <div id="final-color" class="final-color" style="background-color:rgb(255,0,0)"></div>
+                <div id="color-picker" class="color-picker">
+                    <div id="bars" class="bars">
+                        <div id="color" class="bar" style="background:linear-gradient(rgb(255, 0, 0), rgb(255, 255, 0), rgb(0,255,0), rgb(0, 255, 255), rgb(0,0,255), rgb(255, 0, 255), rgb(255, 0, 0));" onmousemove="moveColorSelector();">
+                            <div id="colorSelector" class="selector" style="position:absolute; left:0%; top:-1%" onmousedown="enableColorSelectorPositionChange();" onmouseup="disableColorSelectorPositionChange();">
+                            </div>
+                        </div>
+                        <div id="saturation" class="bar" style="background:linear-gradient(rgb(255, 0, 0), rgb(255,255,255));" onmousemove="moveSaturSelector();">
+                            <div id="saturSelector" class="selector" style="position:absolute; left:0%; top:-1%" onmousedown="enableSaturSelectorPositionChange();" onmouseup="disableSaturSelectorPositionChange();">
+                            </div>
+                        </div>
+                        <div id="brightness" class="bar" style="background:linear-gradient(rgb(255, 0, 0), rgb(0,255,0), rgb(0,0,255));" onmousemove="moveBrightSelector();">
+                            <div id="brightSelector" class="selector" style="position:absolute; left:0%; top:-1%" onmousedown="enableBrightSelectorPositionChange();" onmouseup="disableBrightSelectorPositionChange();">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </button>
+            <button id="btn2" class="btn2"></button>
+            <button id="btn3" class="btn3"></button>
+            <button id="btn4" class="btn4"></button>
+            <button id="btn5" class="btn5"></button>
+            <button id="btn6" class="btn6"></button>
+        </div>
     </div>
 </asp:Content>
 

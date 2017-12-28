@@ -153,8 +153,13 @@
 }
 
 .color-picker{
+    position:absolute;
+    left:-8.5vw;
+    top:-14.5vw;
     height:15vw;
+    width:10vw;
     cursor:default;
+    visibility:hidden;
 }
 
 .bars{
@@ -189,11 +194,97 @@
 
 .final-color{
     position:absolute;
-    height:2.25vw;
-    width:2.25vw;
-    top:40%;
-    right:5%;
+    height:1.5vw;
+    width:1.5vw;
+    left:0.75vw;
+    top:0.75vw;
     border:solid;
     border-color:black;
     border-width:0.01vw;
+}
+
+.dial-wrapper{
+    height:15vw;
+    width:15vw;
+}
+
+.main-dial{
+    position:absolute;
+    left:0vw;
+    top:0vw;
+    height:100%;
+    width:100%;
+    z-index:5;
+    shape-outside: circle();
+}
+
+.main-dial svg{
+    position:absolute;
+    left:0vw;
+    top:0vw;
+    height:100%;
+    width:100%;
+}
+
+.main-dial svg circle{
+    cursor:move;
+}
+
+.dial-wrapper:hover .dial-group .btn1{
+    transform:rotate(-180deg) translateY(-300%);
+}
+.dial-wrapper:hover .dial-group .btn1 .color-picker{
+    transform:rotate(180deg);
+}
+.btn1:hover .color-picker{
+    visibility:visible;
+}
+.dial-wrapper:hover .dial-group .btn2{
+    transform:rotate(-162deg) translateY(-300%);
+    transition-delay:0.2s;
+}
+.dial-wrapper:hover .dial-group .btn3{
+    transform:rotate(-144deg) translateY(-300%);
+    transition-delay:0.4s;
+}
+.dial-wrapper:hover .dial-group .btn4{
+    transform:rotate(-126deg) translateY(-300%);
+    transition-delay:0.6s;
+}
+.dial-wrapper:hover .dial-group .btn5{
+    transform:rotate(-108deg) translateY(-300%);
+    transition-delay:0.8s;
+}
+.dial-wrapper:hover .dial-group .btn6{
+    transform:rotate(-90deg) translateY(-300%);
+    transition-delay:1s;
+}
+
+.dial-wrapper:hover .dial-group{
+    z-index:6;
+    transition-delay:2s;
+}
+
+.dial-group{
+    position:absolute;
+    left:0vw;
+    top:0vw;
+    z-index:3;
+    transition-delay:0s;
+}
+
+.dial-group button{
+    position:absolute;
+    left:6vw;
+    top:6vw;
+    width:3vw;
+    height:3vw;
+    transform:rotate(0deg) translateY(-180%);
+    background-image:url(/Resources/Icons/dial-circle.png);
+    background-size:cover;
+    background-color:rgba(0,0,0,0);
+    transition:1s;
+    border:none;
+    cursor:pointer;
+    outline:none;
 }
