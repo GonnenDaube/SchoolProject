@@ -33,21 +33,32 @@ function moveDial() {
 if (window.location.href.includes("WorkingSpace.aspx")) {
     addLoadEvent(dialLoad);
     addResizeEvent(resizeDial);
+    document.getElementsByTagName("body")[0].style.overflowY = "hidden";
 }
 
 function dialLoad() {
     dial_wrapper = document.getElementById("dial-wrapper");
 
-    dial_circle = document.getElementById("main-dial-circle");
-    dial_circle.children[0].onmousedown = enableDialMovement;
-    dial_circle.children[0].onmouseup = disableDialMovement;
+    dial_circle = document.getElementById("dial-circles");
+    dial_circle.children[1].onmousedown = enableDialMovement;
+    dial_circle.children[1].onmouseup = disableDialMovement;
 
     let dial_rect = dial_circle.getBoundingClientRect();
 
-    dial_circle.children[0].setAttribute("cx", dial_rect.width / 2);
-    dial_circle.children[0].setAttribute("cy", dial_rect.height / 2);
-    dial_circle.children[0].setAttribute("r", dial_rect.width / 2);
+    dial_circle.children[1].setAttribute("cx", dial_rect.width / 2);
+    dial_circle.children[1].setAttribute("cy", dial_rect.height / 2);
+    dial_circle.children[1].setAttribute("r", dial_rect.width / 3);
+
+    let dial_group = dial_circle.children[0];
+
+    for (let i = 0; i < dial_group.children.length; i++) {
+        dial_group.children[i].setAttribute("r", dial_rect.width / 10);
+    }
     
+    dial_group.children[dial_group.children.length - 1].onmouseover = showColorPicker;
+    dial_group.children[dial_group.children.length - 1].onmouseout = hideColorPicker;
+    document.getElementById("color-picker").onmouseover = showColorPicker;
+    document.getElementById("color-picker").onmouseout = hideColorPicker;
 
     var body = document.getElementsByTagName("BODY")[0];
     body.onmousemove = moveDial;
@@ -56,9 +67,23 @@ function dialLoad() {
 function resizeDial() {
     let dial_rect = dial_circle.getBoundingClientRect();
 
-    dial_circle.children[0].setAttribute("cx", dial_rect.width / 2);
-    dial_circle.children[0].setAttribute("cy", dial_rect.height / 2);
-    dial_circle.children[0].setAttribute("r", dial_rect.width / 2);
+    dial_circle.children[1].setAttribute("cx", dial_rect.width / 2);
+    dial_circle.children[1].setAttribute("cy", dial_rect.height / 2);
+    dial_circle.children[1].setAttribute("r", dial_rect.width / 3);
+
+    let dial_group = dial_circle.children[0];
+
+    for (let i = 0; i < dial_group.children.length; i++) {
+        dial_group.children[i].setAttribute("r", dial_rect.width / 10);
+    }
+}
+
+function showColorPicker() {
+    document.getElementById("color-picker").style.visibility = "visible";
+}
+
+function hideColorPicker() {
+    document.getElementById("color-picker").style.visibility = "hidden";
 }
 
 

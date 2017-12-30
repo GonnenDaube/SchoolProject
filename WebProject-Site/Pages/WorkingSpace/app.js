@@ -67,17 +67,13 @@ var renderer;
 var scene;
 var playerInputDetector;
 var fpsCounter;
-var leftButtons;
-var rightButtons;
-var currentMode;
-var currentDrawMode;
 var gl;
 
 function main() {
     init();
 
     var loop = function(timestamp){
-        renderer.renderSceneToFramebuffer(display, gl, currentDrawMode);
+        renderer.renderSceneToFramebuffer(display, gl, gl.TRIANGLES);
 
         if(playerInputDetector.isPaused){
             renderer.addBlurEffect(display, gl);
@@ -132,17 +128,6 @@ function init() {
     display.canvasView.onmouseup = mouseup;
     display.canvasView.oncontextmenu = contextmenu;
     document.getElementById("add-vertex").onclick = addVertex;
-
-    leftButtons = document.getElementById('left-btn-coll').getElementsByTagName('button');
-    rightButtons = document.getElementById('right-btn-coll').getElementsByTagName('button');
-
-    for(let i = 0; i < leftButtons.length; i++){
-        leftButtons[i].onclick = setCreationMode;
-    }
-
-    for(let i = 0; i < rightButtons.length; i++){
-        rightButtons[i].onclick = setDrawMode;
-    }
 
     //init renderer
     renderer = new Renderer(gl, canvas_const, scene);
@@ -224,26 +209,4 @@ function updateDisplay(){
 
 function contextmenu(){
     return false;
-}
-
-function setCreationMode(){
-    currentMode = this.getAttribute('id');
-
-    for(let i = 0; i < leftButtons.length; i++){
-        if(leftButtons[i].classList.contains('checkable-left'))
-            leftButtons[i].classList.remove('checkable-left');
-    }
-
-    this.classList.add('checkable-left');
-}
-
-function setDrawMode(){
-    currentDrawMode = this.getAttribute('id');
-
-    for(let i = 0; i < rightButtons.length; i++){
-        if(rightButtons[i].classList.contains('checkable-right'))
-            rightButtons[i].classList.remove('checkable-right');
-    }
-
-    this.classList.add('checkable-right');
 }

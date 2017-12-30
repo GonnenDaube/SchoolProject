@@ -40,135 +40,23 @@
     cursor:default;
 }
 
-.left-btn-coll{
-    position:absolute;
-    left:7.5%;
-    top:15%;
-    width:2.5%;
-    height:37.5vw;
-}
-
-.right-btn-coll{
-    position:absolute;
-    right:14%;
-    top:15%;
-    width:2.5%;
-    height:37.5vw;
-}
-
-.btn-left{
-    position:relative;
-    display:block;
-    left:0vw;
-    width:9.5vw;
-    height:7.5vw;
-    margin-bottom:0vw;
-    background-color:white;
-    border:solid;
-    border-color:white;
-    outline:none;
-    transition:0.5s;
-    cursor:pointer;
-}
-
-.btn-left:hover{
-    position:relative;
-    left:-6.5vw;
-    transition:0.5s;
-}
-
-.checkable-left{
-    height:6.5vw;
-    margin-bottom:0.5vw;
-    margin-top:0.5vw;
-    width:9vw;
-    left:0.5vw;
-}
-
-.btn-right{
-    position:relative;
-    display:block;
-    right:0vw;
-    width:9.5vw;
-    height:7.5vw;
-    margin-bottom:0vw;
-    background-color:white;
-    border:none;
-    outline:none;
-    transition:0.5s;
-    cursor:pointer;
-}
-
-.btn-right:hover{
-    position:relative;
-    right:-6vw;
-    transition:0.5s;
-}
-
-.checkable-right{
-    height:6.5vw;
-    margin-bottom:0.5vw;
-    margin-top:0.5vw;
-    width:9vw;
-    right:0vw;
-}
-
-
-.btn-left-icon{
-    position:absolute;
-    left:0%;
-    top:35%;
-    width:2.25vw;
-    height:2.25vw;
-}
-
-.btn-left-description{
-    position:absolute;
-    left:2.35vw;
-    top:10%;
-    width:6.25vw;
-    max-width:6vw;
-    font-size:0.75vw;
-    height:4vw;
-    text-align:left;
-}
-
-.btn-right-description{
-    position:absolute;
-    right:2.7vw;
-    top:10%;
-    width:6.25vw;
-    max-width:6vw;
-    font-size:0.75vw;
-    height:4vw;
-    text-align:left;
-}
-
-.btn-right-icon{
-    position:absolute;
-    right:5%;
-    top:35%;
-    width:2.25vw;
-    height:2.25vw;
-}
-
 .color-picker{
     position:absolute;
-    left:-8.5vw;
-    top:-14.5vw;
+    left:7vw;
+    top:12vw;
+    width:8vw;
     height:15vw;
-    width:10vw;
-    cursor:default;
-    visibility:hidden;
+    cursor:pointer;
 }
 
 .bars{
     position:absolute;
-    top:0%;
-    right:3vw;
-    height:100%;
-    width:6vw;
+    top:10%;
+    left:10%;
+    height:80%;
+    width:80%;
     font-size:0vw;
+    cursor:default;
 }
 
 .bar{
@@ -190,17 +78,6 @@
     cursor:pointer;
     background-image:url(/Resources/Icons/selector_icon.png);
     background-size:cover;
-}
-
-.final-color{
-    position:absolute;
-    height:1.5vw;
-    width:1.5vw;
-    left:0.75vw;
-    top:0.75vw;
-    border:solid;
-    border-color:black;
-    border-width:0.01vw;
 }
 
 .dial-wrapper{
@@ -230,61 +107,24 @@
     cursor:move;
 }
 
-.dial-wrapper:hover .dial-group .btn1{
-    transform:rotate(-180deg) translateY(-300%);
+.main-dial #circles circle{
+    transform:translate(250%, 250%) rotate(0deg) translateY(-110%);
+    transition:1s;
+    cursor:pointer;
 }
-.dial-wrapper:hover .dial-group .btn1 .color-picker{
-    transform:rotate(180deg);
+
+.main-dial:hover #circles .circle0{
+    transform:translate(250%, 250%) rotate(-180deg) translateY(-180%);
 }
-.btn1:hover .color-picker{
-    visibility:visible;
-}
-.dial-wrapper:hover .dial-group .btn2{
-    transform:rotate(-162deg) translateY(-300%);
+
+.main-dial:hover #circles .circle1{
+    transform:translate(250%, 250%) rotate(-155deg) translateY(-180%);
     transition-delay:0.2s;
 }
-.dial-wrapper:hover .dial-group .btn3{
-    transform:rotate(-144deg) translateY(-300%);
+
+.main-dial:hover #circles .circle2{
+    transform:translate(250%, 250%) rotate(-130deg) translateY(-180%);
     transition-delay:0.4s;
 }
-.dial-wrapper:hover .dial-group .btn4{
-    transform:rotate(-126deg) translateY(-300%);
-    transition-delay:0.6s;
-}
-.dial-wrapper:hover .dial-group .btn5{
-    transform:rotate(-108deg) translateY(-300%);
-    transition-delay:0.8s;
-}
-.dial-wrapper:hover .dial-group .btn6{
-    transform:rotate(-90deg) translateY(-300%);
-    transition-delay:1s;
-}
 
-.dial-wrapper:hover .dial-group{
-    z-index:6;
-    transition-delay:2s;
-}
-
-.dial-group{
-    position:absolute;
-    left:0vw;
-    top:0vw;
-    z-index:3;
-    transition-delay:0s;
-}
-
-.dial-group button{
-    position:absolute;
-    left:6vw;
-    top:6vw;
-    width:3vw;
-    height:3vw;
-    transform:rotate(0deg) translateY(-180%);
-    background-image:url(/Resources/Icons/dial-circle.png);
-    background-size:cover;
-    background-color:rgba(0,0,0,0);
-    transition:1s;
-    border:none;
-    cursor:pointer;
-    outline:none;
-}
+/*delete old button css*/
