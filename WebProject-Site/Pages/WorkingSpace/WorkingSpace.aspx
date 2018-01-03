@@ -20,9 +20,9 @@
         <div id="main-dial" class="main-dial">
             <svg id="dial-circles" class="dial-svg">
                 <g id="circles">
-                    <circle id="circle-2" cx="0" cy="0" r="0" stroke-width="0" style="fill: rgb(120, 51, 39)" class="circle2"/>
-                    <circle id="circle-1" cx="0" cy="0" r="0" stroke-width="0" style="fill: rgb(120, 51, 39)" class="circle1"/>
-                    <circle id="final-color" cx="0" cy="0" r="0" stroke-width="3" style="stroke:rgb(120, 51, 39); fill: rgb(120, 51, 39)" class="circle0"/>
+                    <circle id="circle-2" r="0" stroke-width="0" style="fill: rgb(120, 51, 39)" class="circle2"/>
+                    <circle id="circle-1" r="0" stroke-width="0" style="fill: rgb(120, 51, 39)" class="circle1"/>
+                    <circle id="final-color" r="0" stroke-width="3" style="stroke:rgb(120, 51, 39); fill: rgb(120, 51, 39)" class="circle0"/>
                 </g>
                 <circle id="main-circle" cx="0" cy="0" r="0" stroke-width="0" style="fill: rgb(16, 11, 11);"/>
             </svg>
@@ -41,6 +41,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div id="selector">
+                
             </div>
         </div>
     </div>
