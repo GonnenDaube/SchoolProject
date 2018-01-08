@@ -218,6 +218,7 @@ body{
 
 .profile_div:hover .profile_letter{
     font-size:3.5vw;
+    transform:rotate(-360deg);
 }
 
 .profile_div #profile-background{
@@ -253,6 +254,7 @@ body{
     color:white;
     z-index:7;
     transition:0.5s;
+    transform:rotate(0deg);
 }
 
 .admin-div{

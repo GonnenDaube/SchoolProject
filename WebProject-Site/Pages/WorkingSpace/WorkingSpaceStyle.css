@@ -85,6 +85,10 @@
     width:15vw;
 }
 
+.dial-svg{
+    background: radial-gradient(rgba(0,0,0,0.75) 10%, rgba(0,0,0,0) 60%);
+}
+
 .main-dial{
     position:absolute;
     left:0vw;
