@@ -18,11 +18,22 @@
     </div>
     <div id="dial-wrapper" class="dial-wrapper" style="position:absolute; left:100px; top:100px">
         <div id="main-dial" class="main-dial">
+            <div id="icons" class="icon-wrapper">
+                <img src="/Resources/Icons/bucket_icon.png" class="icon0"/>
+                <img src="/Resources/Icons/add-vertex_icon.png" class="icon1"/>
+                <img src="/Resources/Icons/bucket_icon.png" class="icon2"/>
+                <img src="/Resources/Icons/bucket_icon.png" class="icon3"/>
+                <img src="/Resources/Icons/bucket_icon.png" class="icon4"/>
+                <img src="/Resources/Icons/bucket_icon.png" class="icon5"/>
+            </div>
             <svg id="dial-circles" class="dial-svg">
                 <g id="circles">
-                    <circle id="circle-2" r="0" stroke-width="0" style="fill: rgb(120, 51, 39)" class="circle2"/>
-                    <circle id="circle-1" r="0" stroke-width="0" style="fill: rgb(120, 51, 39)" class="circle1"/>
-                    <circle id="final-color" r="0" stroke-width="3" style="stroke:rgb(120, 51, 39); fill: rgb(120, 51, 39)" class="circle0"/>
+                    <circle id="circle-5" r="0" stroke-width="3" class="circle5"/>
+                    <circle id="circle-4" r="0" stroke-width="3" class="circle4"/>
+                    <circle id="circle-3" r="0" stroke-width="3" class="circle3"/>
+                    <circle id="circle-2" r="0" stroke-width="3" class="circle2"/>
+                    <circle id="add-vertex-circle" r="0" stroke-width="3" class="circle1"/>
+                    <circle id="final-color" r="0" stroke-width="3" style="fill: rgb(120, 51, 39)" class="circle0"/>
                 </g>
                 <circle id="main-circle" cx="0" cy="0" r="0" stroke-width="0" style="fill: rgb(16, 11, 11);"/>
             </svg>

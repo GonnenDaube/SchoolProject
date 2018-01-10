@@ -171,7 +171,7 @@ function updateColor() {
     blue = brightNum * blue;
 
     //update color
-    finalColor.setAttribute("style", "stroke:rgb(120, 51, 39); fill:rgb(" + Math.round(red) + "," + Math.round(green) + "," + Math.round(blue) + ");");
+    finalColor.setAttribute("style", "fill:rgb(" + Math.round(red) + "," + Math.round(green) + "," + Math.round(blue) + ");");
 }
 
 

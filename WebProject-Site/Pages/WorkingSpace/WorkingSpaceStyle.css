@@ -96,7 +96,6 @@
     height:100%;
     width:100%;
     z-index:5;
-    shape-outside: circle();
 }
 
 .main-dial svg{
@@ -112,9 +111,19 @@
 }
 
 .main-dial #circles circle{
+    fill:rgb(16, 11, 11);
+    stroke:rgb(16, 11, 11);
+    fill-opacity:0.5;
+}
+
+.main-dial #circles circle{
     transform:translate(250%, 250%) rotate(0deg) translateY(-110%);
     transition:1s;
     cursor:pointer;
+}
+
+.main-dial #circles circle:hover{
+    fill:rgb(120, 51, 39);
 }
 
 .main-dial:hover #circles .circle0{
@@ -131,4 +140,62 @@
     transition-delay:0.4s;
 }
 
-/*delete old button css*/
+.main-dial:hover #circles .circle3{
+    transform:translate(250%, 250%) rotate(-105deg) translateY(-180%);
+    transition-delay:0.6s;
+}
+
+.main-dial:hover #circles .circle4{
+    transform:translate(250%, 250%) rotate(-80deg) translateY(-180%);
+    transition-delay:0.8s;
+}
+
+.main-dial:hover #circles .circle5{
+    transform:translate(250%, 250%) rotate(-55deg) translateY(-180%);
+    transition-delay:1.0s;
+}
+
+.icon-wrapper{
+    position:absolute;
+    left:0vw;
+    top:0vw;
+    height:100%;
+    width:100%;
+}
+
+.icon-wrapper img{
+    position:absolute;
+    transform:translate(450%, 450%) rotate(0deg) translateY(-250%);
+    transition:1s;
+    width:10%;
+    height:10%;
+}
+
+.main-dial:hover .icon0{
+    transform:translate(450%, 450%) rotate(-180deg) translateY(-380%);
+}
+
+.main-dial:hover .icon1{
+    transform:translate(450%, 450%) rotate(-155deg) translateY(-380%);
+    transition-delay:0.2s;
+}
+
+.main-dial:hover .icon2{
+    transform:translate(450%, 450%) rotate(-130deg) translateY(-380%);
+    transition-delay:0.4s;
+}
+
+.main-dial:hover .icon3{
+    transform:translate(450%, 450%) rotate(-105deg) translateY(-380%);
+    transition-delay:0.6s;
+}
+
+.main-dial:hover .icon4{
+    transform:translate(450%, 450%) rotate(-80deg) translateY(-380%);
+    transition-delay:0.8s;
+}
+
+.main-dial:hover .icon5{
+    transform:translate(450%, 450%) rotate(-55deg) translateY(-380%);
+    transition-delay:1.0s;
+}
