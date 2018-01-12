@@ -68,12 +68,15 @@ var scene;
 var playerInputDetector;
 var fpsCounter;
 var gl;
+var action;
+var mode;
+var selector_div;
 
 function main() {
     init();
 
     var loop = function(timestamp){
-        renderer.renderSceneToFramebuffer(display, gl, gl.TRIANGLES);
+        renderer.renderSceneToFramebuffer(display, gl, mode);
 
         if(playerInputDetector.isPaused){
             renderer.addBlurEffect(display, gl);
@@ -83,9 +86,11 @@ function main() {
 
         fpsCounter.updateFps(timestamp);
 
-        scene.updateScene();
+        scene.updateScene(false);
 
         display.setFpsCounter(fpsCounter.fps);
+
+        checkForModeChange();
 
         window.requestAnimationFrame(loop);
     };
@@ -120,23 +125,61 @@ function init() {
     playerInputDetector = new PlayerInputDetector(scene, display);
 
     //event set up
+    mode = "solid-mode";
+    action = "vertex-selector";
+    selector_div = document.getElementById("vertex-selector-div");
+
     window.onkeydown = keydown_callback;
     window.onkeyup = keyup_callback;
     window.onmousemove = mouse_callback;
     display.canvasView.onclick = resume;
     display.canvasView.onmousedown = mousedown;
     display.canvasView.onmouseup = mouseup;
+    selector_div.onmouseup = mouseup;
     display.canvasView.oncontextmenu = contextmenu;
-    document.getElementById("add-vertex").onclick = addVertex;
 
     //init renderer
     renderer = new Renderer(gl, canvas_const, scene);
 }
 
+function checkForModeChange(){
+    if(document.getElementById(mode).getAttribute("class").includes("deselected-group-btn")){
+        updateMode();
+    }
+    if(document.getElementById(action).getAttribute("class").includes("deselected-group-btn")){
+        updateAction();
+    }
+}
+
+function updateMode(){
+    if(!document.getElementById("solid-mode").getAttribute("class").includes("deselected-group-btn")){
+        mode = "solid-mode";
+    }
+    else if(!document.getElementById("lighting-mode").getAttribute("class").includes("deselected-group-btn")){
+        mode = "lighting-mode";
+    }
+    else if(!document.getElementById("wireframe-mode").getAttribute("class").includes("deselected-group-btn")){
+        mode = "wireframe-mode";
+    }
+    else if(!document.getElementById("normal-mode").getAttribute("class").includes("deselected-group-btn")){
+        mode = "normal-mode";
+    }
+}
+
+function updateAction(){
+    if(!document.getElementById("vertex-extruder").getAttribute("class").includes("deselected-group-btn")){
+        action = "vertex-extruder";
+    }
+    else if(!document.getElementById("vertex-adder").getAttribute("class").includes("deselected-group-btn")){
+        action = "vertex-adder";
+    }
+    else if(!document.getElementById("vertex-selector").getAttribute("class").includes("deselected-group-btn")){
+        action = "vertex-selector";
+    }
+}
+
 function addVertex(){
-    let x = parseFloat(document.getElementById("x-val").value);
-    let y = parseFloat(document.getElementById("y-val").value);
-    let z = parseFloat(document.getElementById("z-val").value);
+    let x,y,z;
     let position = [x, y, z];
     let normal = [1.0, 1.0, 1.0];
     let color = document.getElementById("final-color").style.backgroundColor;
@@ -144,27 +187,12 @@ function addVertex(){
     let g = parseFloat(color.substring(color.indexOf(',') + 1,color.indexOf(',',color.indexOf(',') + 1)));
     let b = parseFloat(color.substring(color.lastIndexOf(',') + 1, color.indexOf(')')));
     color = [r/255.0, g/255.0, b/255.0];
-    let mode;
-    switch(currentMode){
-        case 'triangle-mode':
-            mode = gl.TRIANGLES;
-            break;
-        case 'triangle-strip-mode':
-            mode = gl.TRIANGLE_STRIP;
-            break;
-        case 'line-mode':
-            mode = gl.LINES;
-            break;
-        case 'line-strip-mode':
-            mode = gl.LINE_STRIP;
-            break;
-    }
 
     //add vertex to selected object
     if(scene.selectedObject == null){
-        scene.addObject(new TriangleObject(gl, renderer.triangleShader));   
+        scene.main = new TriangleObject(gl, renderer.triangleShader);
     }
-    scene.selectedObject.addVertex(position, color, normal, mode, gl);
+    scene.selectedObject.addVertex(position, color, normal, gl);
 }
 
 function keydown_callback(){
@@ -184,17 +212,38 @@ function mouse_callback(){
     else{
         playerInputDetector.mouse_callback(event);
     }
+
+    if(playerInputDetector.selector){
+        playerInputDetector.updateSelector(selector_div);
+    }
 }
 
 function mousedown(){
     if(event.which == 3){// right mouse button is being clicked
         playerInputDetector.enableRotation();
     }
+    if(event.which == 1){// left mouse button is being clicked
+        if(action == "vertex-selector"){
+            selector_div.style.visibility = "visible";
+            selector_div.style.left = event.clientX + "px";
+            selector_div.style.top = event.clientY + "px";
+            selector_div.style.height = "0px";
+            selector_div.style.width = "0px";
+            playerInputDetector.clickPos = [event.clientX, event.clientY];
+            playerInputDetector.enableSelector();
+        }
+    }
 }
 
 function mouseup(){
     if(event.which == 3){// right mouse button is released
         playerInputDetector.disableRotation();
+    }
+    if(event.which == 1){// left mouse button is being released
+        if(action == "vertex-selector"){
+            selector_div.style.visibility = "hidden";
+            playerInputDetector.disableSelector();
+        }
     }
 }
 

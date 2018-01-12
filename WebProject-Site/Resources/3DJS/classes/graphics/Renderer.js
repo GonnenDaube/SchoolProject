@@ -22,7 +22,8 @@ class Renderer {
         this.genBlurFrameBuffer(gl, canvas_const);
         this.scene = scene;
     }
-    renderSceneToFramebuffer(display, gl, drawMode) {
+    renderSceneToFramebuffer(display, gl, mode) {
+
         gl.bindFramebuffer(gl.FRAMEBUFFER, this.fbo);
 
         display.updateCanvas(gl);
@@ -48,7 +49,7 @@ class Renderer {
         for (let i of this.scene.objects) {
             if (i instanceof TriangleObject) {
                 gl.uniformMatrix4fv(this.triangleShader.uniforms.m_matrix, false, new Float32Array(i.getTransformation()));
-                i.draw(drawMode);
+                i.draw(mode);
             }
         }
     }

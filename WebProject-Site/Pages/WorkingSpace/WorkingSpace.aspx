@@ -3,12 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">
-    <div id="temp-field" style="display:block; width:10vw;">
-        <input id="x-val" type="text" placeholder="x-value" value=""/>
-        <input id="y-val" type="text" placeholder="y-value" value=""/>
-        <input id="z-val" type="text" placeholder="z-value" value=""/>
-        <button id="add-vertex">add-vertex</button>
-    </div>
     <div id="canvas-view" class="canvas-div">
         <canvas id="canvas" class="canvas">
             WebGL is not supported in your browser
@@ -16,24 +10,31 @@
         <p id="fpsLabel" class="fpsLabel AileronsFont"></p>
         <p id="pause-label" class="AileronsFont pauseLabel">Paused</p>
     </div>
+    <div id="vertex-selector-div" style="position:absolute; left:0px; top:0px; width:100px; height:100px; visibility:hidden" class="vertex-selector"></div>
     <div id="dial-wrapper" class="dial-wrapper" style="position:absolute; left:100px; top:100px">
         <div id="main-dial" class="main-dial">
             <div id="icons" class="icon-wrapper">
                 <img src="/Resources/Icons/bucket_icon.png" class="icon0"/>
-                <img src="/Resources/Icons/add-vertex_icon.png" class="icon1"/>
-                <img src="/Resources/Icons/bucket_icon.png" class="icon2"/>
-                <img src="/Resources/Icons/bucket_icon.png" class="icon3"/>
-                <img src="/Resources/Icons/bucket_icon.png" class="icon4"/>
-                <img src="/Resources/Icons/bucket_icon.png" class="icon5"/>
+                <img src="/Resources/Icons/vertex-selector-icon.png" class="icon1"/>
+                <img src="/Resources/Icons/add-vertex_icon.png" class="icon2"/>
+                <img src="/Resources/Icons/extrude-vertex-icon.png" class="icon3"/>
+                <img src="/Resources/Icons/wireframe_icon.png" class="icon4"/>
+                <img src="/Resources/Icons/solid_icon.png" class="icon5"/>
+                <img src="/Resources/Icons/phong_lighting_icon.png" class="icon6"/>
+                <img src="/Resources/Icons/normal_icon.png" class="icon7"/>
+                <img src="/Resources/Icons/shape-preset_icon.png" class="icon8"/>
             </div>
             <svg id="dial-circles" class="dial-svg">
                 <g id="circles">
-                    <circle id="circle-5" r="0" stroke-width="3" class="circle5"/>
-                    <circle id="circle-4" r="0" stroke-width="3" class="circle4"/>
-                    <circle id="circle-3" r="0" stroke-width="3" class="circle3"/>
-                    <circle id="circle-2" r="0" stroke-width="3" class="circle2"/>
-                    <circle id="add-vertex-circle" r="0" stroke-width="3" class="circle1"/>
-                    <circle id="final-color" r="0" stroke-width="3" style="fill: rgb(120, 51, 39)" class="circle0"/>
+                    <circle id="shape-preset" r="0" stroke-width="3" class="circle8 dial-button deselected-group-btn"/>
+                    <circle id="normal-mode" r="0" stroke-width="3" class="circle7 dial-mode deselected-group-btn"/>
+                    <circle id="lighting-mode" r="0" stroke-width="3" class="circle6 dial-mode deselected-group-btn"/>
+                    <circle id="solid-mode" r="0" stroke-width="3" class="circle5 dial-mode selected-group-btn"/>
+                    <circle id="wireframe-mode" r="0" stroke-width="3" class="circle4 dial-mode deselected-group-btn"/>
+                    <circle id="vertex-extruder" r="0" stroke-width="3" class="circle3 dial-action deselected-group-btn"/>
+                    <circle id="vertex-adder" r="0" stroke-width="3" class="circle2 dial-action deselected-group-btn"/>
+                    <circle id="vertex-selector" r="0" stroke-width="3" class="circle1 dial-action selected-group-btn"/>
+                    <circle id="final-color" r="0" stroke-width="3" style="fill: rgb(120, 51, 39)" class="circle0 deselected-group-btn"/>
                 </g>
                 <circle id="main-circle" cx="0" cy="0" r="0" stroke-width="0" style="fill: rgb(16, 11, 11);"/>
             </svg>

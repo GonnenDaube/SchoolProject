@@ -5,6 +5,10 @@ var dialMovementEnabled = false;
 
 var clickPoint;
 
+var actionGroup;
+var modeGroup;
+var defGroup;
+
 function enableDialMovement() {
     dialMovementEnabled = true;
     clickPoint = [event.clientX, event.clientY];
@@ -26,7 +30,6 @@ function moveDial() {
         let currentDialPosY = Number(dial_wrapper.style.top.replace("px", ""));
         dial_wrapper.style.left = (currentDialPosX + difference[0]) + "px";
         dial_wrapper.style.top = (currentDialPosY + difference[1]) + "px";
-        console.log(dial_wrapper.style.left);
     }
 }
 
@@ -60,8 +63,50 @@ function dialLoad() {
     document.getElementById("color-picker").onmouseover = showColorPicker;
     document.getElementById("color-picker").onmouseout = hideColorPicker;
 
+    actionGroup = document.getElementsByClassName("dial-action");
+    modeGroup = document.getElementsByClassName("dial-mode");
+
+    for (let i = 0; i < actionGroup.length; i++) {
+        actionGroup[i].onclick = setSelectedButton;
+    }
+
+    for (let i = 0; i < actionGroup.length + 1; i++) {
+        modeGroup[i].onclick = setSelectedButton;
+    }
+
     var body = document.getElementsByTagName("BODY")[0];
     body.onmousemove = moveDial;
+}
+
+function setSelectedButton() {
+    let sender = event.srcElement;
+    let groupName;
+    if (sender.getAttribute("class").includes("dial-mode")) {
+        groupName = 'mode';
+    }
+    else if (sender.getAttribute("class").includes("dial-action")) {
+        groupName = 'action';
+    }
+    switch (groupName) {
+        case 'action':
+            for (let i = 0; i < actionGroup.length; i++) {
+                actionGroup[i].classList.remove("selected-group-btn");
+                actionGroup[i].classList.add("deselected-group-btn");
+            }
+            sender.classList.remove("deselected-group-btn");
+            sender.classList.add("selected-group-btn");
+            break;
+        case 'mode':
+            for (let i = 0; i < modeGroup.length; i++) {
+                modeGroup[i].classList.remove("selected-group-btn");
+                modeGroup[i].classList.add("deselected-group-btn");
+            }
+            sender.classList.remove("deselected-group-btn");
+            sender.classList.add("selected-group-btn");
+            break;
+        default:
+            break;
+    }
 }
 
 function resizeDial() {

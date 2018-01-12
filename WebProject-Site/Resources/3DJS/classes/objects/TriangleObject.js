@@ -19,25 +19,15 @@ class TriangleObject extends Object3D {
         this.wireframeModel = new Model(null, null, null, null, null, null, null);
     }
 
-    draw(drawMode) {
-        this.gl.bindVertexArray(this.VAO);
-        switch(this.model.mode){
-            case this.gl.TRIANGLES:
-                if(this.model.numVertices > 2)
-                    this.gl.drawArrays(this.gl.TRIANGLES, 0, this.model.numVertices - this.model.numVertices % 3);
-                break;
-            case this.gl.TRIANGLE_STRIP:
-                if(this.model.numVertices > 2)
-                    this.gl.drawArrays(this.gl.TRIANGLE_STRIP, 0, this.model.numVertices);
-                break;
-            case this.gl.LINES:
-                if(this.model.numVertices > 1)
-                    this.gl.drawArrays(this.gl.LINES, 0, this.model.numVertices - this.model.numVertices % 2);
-                break;
-            case this.gl.LINE_STRIP:
-                if(this.model.numVertices > 1)
-                    this.gl.drawArrays(this.gl.LINE_STRIP, 0, this.model.numVertices);
-                break;
+    draw(mode) {
+        this.gl.bindVertexArray(this.VAO)
+        if( mode == 'solid' || mode == 'lighting' ){
+            if(this.model.numVertices > 2)
+                this.gl.drawArrays(this.gl.TRIANGLES, 0, this.model.numVertices - this.model.numVertices % 3);
+        }
+        else if(mode == 'wireframe'){
+            if(this.model.numVertices > 1)
+                this.gl.drawArrays(this.gl.LINES, 0, this.model.numVertices - this.model.numVertices % 2);
         }
         this.gl.bindVertexArray(null);
     }
@@ -73,7 +63,7 @@ class TriangleObject extends Object3D {
         this.gl.bindVertexArray(null);
     }
 
-    addVertex(position, color, normal, mode){
+    addVertex(position, color, normal){
         if(this.model.vertices == null){
             this.model.vertices = position;
             this.model.color = color;
@@ -83,6 +73,38 @@ class TriangleObject extends Object3D {
             this.wireframeModel.normals = normal;
         }
         else{
+            if(this.model.vertices.length == 3){//only 1 vertex
+                this.wireframeModel.vertices.push(position[0]);
+                this.wireframeModel.vertices.push(position[1]);
+                this.wireframeModel.vertices.push(position[2]);
+                this.wireframeModel.color.push(color[0]);
+                this.wireframeModel.color.push(color[1]);
+                this.wireframeModel.color.push(color[2]);
+                this.wireframeModel.normals.push(normal[0]);
+                this.wireframeModel.normals.push(normal[1]);
+                this.wireframeModel.normals.push(normal[2]);
+            }
+            else{//need to double the last vertex in order to create a new line
+                this.wireframeModel.vertices.push(this.wireframeModel.vertices[this.wireframeModel.vertices.length - 3]);
+                this.wireframeModel.vertices.push(this.wireframeModel.vertices[this.wireframeModel.vertices.length - 2]);
+                this.wireframeModel.vertices.push(this.wireframeModel.vertices[this.wireframeModel.vertices.length - 1]);
+                this.wireframeModel.color.push(this.wireframeModel.color[this.wireframeModel.color.length - 3]);
+                this.wireframeModel.color.push(this.wireframeModel.color[this.wireframeModel.color.length - 2]);
+                this.wireframeModel.color.push(this.wireframeModel.color[this.wireframeModel.color.length - 1]);
+                this.wireframeModel.normals.push(this.wireframeModel.normals[this.wireframeModel.normals.length - 3]);
+                this.wireframeModel.normals.push(this.wireframeModel.normals[this.wireframeModel.normals.length - 2]);
+                this.wireframeModel.normals.push(this.wireframeModel.normals[this.wireframeModel.normals.length - 1]);
+
+                this.wireframeModel.vertices.push(position[0]);
+                this.wireframeModel.vertices.push(position[1]);
+                this.wireframeModel.vertices.push(position[2]);
+                this.wireframeModel.color.push(color[0]);
+                this.wireframeModel.color.push(color[1]);
+                this.wireframeModel.color.push(color[2]);
+                this.wireframeModel.normals.push(normal[0]);
+                this.wireframeModel.normals.push(normal[1]);
+                this.wireframeModel.normals.push(normal[2]);
+            }
             this.model.vertices.push(position[0]);
             this.model.vertices.push(position[1]);
             this.model.vertices.push(position[2]);
@@ -93,7 +115,6 @@ class TriangleObject extends Object3D {
             this.model.normals.push(normal[1]);
             this.model.normals.push(normal[2]);
         }
-        this.model.mode = mode;
 
         this.model.numVertices++;
 

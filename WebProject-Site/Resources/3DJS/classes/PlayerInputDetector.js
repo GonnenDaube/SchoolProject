@@ -20,7 +20,9 @@ class PlayerInputDetector {
         this.first = true;
         this.isPaused = false;
         this.mouseRotation = false;
+        this.selector = false;
         this.removePauseLabel();
+        this.clickPos = null;
     }
     key_callback_down(event) {
         switch (event.keyCode) {
@@ -93,6 +95,25 @@ class PlayerInputDetector {
         this.cursorPosY = event.clientY;
     }
 
+    updateSelector(selector){
+        let width = this.cursorPosX - this.clickPos[0];
+        let height = this.cursorPosY - this.clickPos[1];
+        if(width >= 0){
+            selector.style.width = width + "px"; 
+        }
+        else{
+            selector.style.left = (this.clickPos[0] + width) + "px"; 
+            selector.style.width = (-width) + "px"; 
+        }
+        if(height >= 0){
+            selector.style.height = height + "px"; 
+        }
+        else{
+            selector.style.top = (this.clickPos[1] + height) + "px"; 
+            selector.style.height = (-height) + "px"; 
+        }
+    }
+
     mouse_callback(event) {
         let mat = mat4.create();
         let xpos = event.clientX;
@@ -137,6 +158,14 @@ class PlayerInputDetector {
 
     disableRotation(){
         this.mouseRotation = false;
+    }
+
+    enableSelector(){
+        this.selector = true;
+    }
+
+    disableSelector(){
+        this.selector = false;
     }
 }
 

@@ -87,7 +87,7 @@ function main() {
 
         fpsCounter.updateFps(timestamp);
 
-        scene.updateScene();
+        scene.updateScene(true);
 
         display.setFpsCounter(fpsCounter.fps);
 
