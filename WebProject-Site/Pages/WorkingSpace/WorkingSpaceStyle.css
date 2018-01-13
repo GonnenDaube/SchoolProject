@@ -308,7 +308,7 @@
 
 .vertex-selector{
     background-color:rgba(0, 0, 255, 0.3);
-    border:dashed;
+    border:solid;
     border-color:rgba(0, 0, 255, 0.5);
     border-width:0.075vw;
 }

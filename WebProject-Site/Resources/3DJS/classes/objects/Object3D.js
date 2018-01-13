@@ -1,11 +1,12 @@
 ﻿import {mat4} from '/Resources/3DJS/libs/glMatrix/gl-matrix.js';
 
 class Object3D {
-    constructor(model) {
+    constructor(model, wireframeModel) {
         this.position = [0, 0, 0];
         this.rotation = [0, 0, 0];// vector of 3 angles (each for each axis)
         this.scale = [1, 1, 1];
         this.model = model;
+        this.wireframeModel = wireframeModel;
     }
 
     getTransformation() {

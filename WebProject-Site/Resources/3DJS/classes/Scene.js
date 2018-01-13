@@ -4,6 +4,7 @@
         this.objects = new Array();
         this.camera = null;
         this.mainObject = null;
+        this.previewObject = null;
     }
     
     updateScene(onDisplay) {
@@ -20,6 +21,14 @@
 
     addObject(object3d) {
         this.objects.push(object3d);
+    }
+
+    addPreviewObject(object3d){
+        this.previewObject = object3d;
+    }
+
+    deletePreviewObject(){
+        this.previewObject = null;
     }
 }
 

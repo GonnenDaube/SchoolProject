@@ -3,7 +3,7 @@ import Model from './Model.js';
 
 class Sphere extends Object3D {
     constructor(gl, radius, position, rotation, shader) {
-        super(Model.createSphereModel(10, gl));
+        super(Model.createSphereModel(10, gl), new Model(null, null, null, null, null, null, null));
         this.radius = radius;
         this.position = position;
         this.scale = [radius, radius, radius];

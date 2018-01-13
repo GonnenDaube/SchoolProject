@@ -1,5 +1,6 @@
 ﻿import SphereShader from '../shaders/SphereShader.js';
 import TriangleShader from '../shaders/TriangleShader.js';
+import PreviewShader from '../shaders/PreviewShader.js';
 import FrameShader from '../shaders/FrameShader.js';
 import HorBlurShader from '../shaders/HorBlurShader.js';
 import VertBlurShader from '../shaders/VertBlurShader.js';
@@ -11,6 +12,7 @@ class Renderer {
     constructor(gl, canvas_const, scene) {
         this.sphereShader = new SphereShader(gl);
         this.triangleShader = new TriangleShader(gl);
+        this.previewShader = new PreviewShader(gl);
         this.frameShader = new FrameShader(gl);
         this.horBlurShader = new HorBlurShader(gl);
         this.vertBlurShader = new VertBlurShader(gl);
@@ -51,6 +53,20 @@ class Renderer {
                 gl.uniformMatrix4fv(this.triangleShader.uniforms.m_matrix, false, new Float32Array(i.getTransformation()));
                 i.draw(mode);
             }
+        }
+        if(this.scene.main != null){
+            gl.uniformMatrix4fv(this.triangleShader.uniforms.m_matrix, false, new Float32Array(this.scene.main.getTransformation()));
+            this.scene.main.draw(mode);
+        }
+
+        this.previewShader.useProgram(gl);
+
+        gl.uniformMatrix4fv(this.previewShader.uniforms.vp_matrix, false, new Float32Array(this.scene.camera.getVpMatrix(display.height, display.width)));
+        gl.uniform3fv(this.previewShader.uniforms.viewPos, new Float32Array(this.scene.camera.position));
+
+        if(this.scene.previewObject != null){
+            gl.uniformMatrix4fv(this.previewShader.uniforms.m_matrix, false, new Float32Array(this.scene.previewObject.getTransformation()));
+            this.scene.previewObject.draw();
         }
     }
     renderFramebuffertoViewPort(display, gl) {

@@ -6,6 +6,7 @@ import Object3D from '/Resources/3DJS/classes/objects/Object3D.js';
 import Frame from '/Resources/3DJS/classes/objects/Frame.js';
 import Sphere from '/Resources/3DJS/classes/objects/Sphere.js';
 import TriangleObject from '/Resources/3DJS/classes/objects/TriangleObject.js';
+import PreviewObject from '/Resources/3DJS/classes/objects/PreviewObject.js';
 import Model from '/Resources/3DJS/classes/objects/Model.js';
 import GLSLProgram from '/Resources/3DJS/classes/shaders/GLSLProgram.js';
 import FrameShader from '/Resources/3DJS/classes/shaders/FrameShader.js';
@@ -178,23 +179,6 @@ function updateAction(){
     }
 }
 
-function addVertex(){
-    let x,y,z;
-    let position = [x, y, z];
-    let normal = [1.0, 1.0, 1.0];
-    let color = document.getElementById("final-color").style.backgroundColor;
-    let r = parseFloat(color.substring(color.indexOf('(') + 1, color.indexOf(',')));
-    let g = parseFloat(color.substring(color.indexOf(',') + 1,color.indexOf(',',color.indexOf(',') + 1)));
-    let b = parseFloat(color.substring(color.lastIndexOf(',') + 1, color.indexOf(')')));
-    color = [r/255.0, g/255.0, b/255.0];
-
-    //add vertex to selected object
-    if(scene.selectedObject == null){
-        scene.main = new TriangleObject(gl, renderer.triangleShader);
-    }
-    scene.selectedObject.addVertex(position, color, normal, gl);
-}
-
 function keydown_callback(){
     playerInputDetector.key_callback_down(event);
 }
@@ -231,6 +215,41 @@ function mousedown(){
             selector_div.style.width = "0px";
             playerInputDetector.clickPos = [event.clientX, event.clientY];
             playerInputDetector.enableSelector();
+        }
+        if(action == "vertex-adder"){
+            //get requested position
+            let canvasRect = display.canvasView.getBoundingClientRect();
+            let clickPoint = [event.clientX - canvasRect.left, event.clientY - canvasRect.top];
+            let pos = scene.camera.convert2DpointTo3Dpoint(clickPoint, 0.0, [canvasRect.width, canvasRect.height]);
+
+            //get requested color
+            let color = document.getElementById("final-color").style.fill;
+            let r = parseFloat(color.substring(color.indexOf('(') + 1, color.indexOf(',')));
+            let g = parseFloat(color.substring(color.indexOf(',') + 1,color.indexOf(',',color.indexOf(',') + 1)));
+            let b = parseFloat(color.substring(color.lastIndexOf(',') + 1, color.indexOf(')')));
+            color = [r/255.0, g/255.0, b/255.0];
+
+            //set normal vector to (1,1,1) as default
+            let normal = [1.0, 1.0, 1.0];
+
+            //add vertex to main object
+            if(scene.main == null){
+                scene.main = new TriangleObject(gl, renderer.triangleShader);
+            }
+            scene.main.addVertex(pos, color, normal, gl);
+
+            if(scene.main.model.numVertices % 3 == 1){
+                scene.addPreviewObject(new PreviewObject(gl, pos, [1, 0, 1], renderer.previewShader));
+                console.log("added point");
+            }
+            if(scene.main.model.numVertices % 3 == 2){
+                scene.previewObject.addSecondVertex(pos, [1, 0, 1]);
+                console.log("added preview line");
+            }
+            if(scene.main.model.numVertices % 3 == 0){
+                scene.deletePreviewObject();
+                console.log("deleted preview");
+            }
         }
     }
 }
