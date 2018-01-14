@@ -38,6 +38,7 @@ class Renderer {
         for (let i of this.scene.objects) {
             if (i instanceof Sphere) {
                 gl.uniformMatrix4fv(this.sphereShader.uniforms.m_matrix, false, new Float32Array(i.getTransformation()));
+                gl.uniformMatrix4fv(this.sphereShader.uniforms.rotation_matrix, false, new Float32Array(i.getRotation()));
                 i.draw();
             }
         }

@@ -101,19 +101,31 @@ class Camera {
     }
 
     convert2DpointTo3Dpoint(point, distance, viewportSize){
-        let x = 2.0 * point[0] / viewportSize[0] - 1;
-        let y = 2.0 * point[1] / viewportSize[1] - 1;
+        let x = 2.0 * point[0] / viewportSize[0] - 1.0;
+        let y = 2.0 * point[1] / viewportSize[1] - 1.0;
 
-        let matInverse = mat4.identity(mat4.create());
-        matInverse = mat4.invert(matInverse, this.getVpMatrix(viewportSize[1], viewportSize[0]));
-        let point4d = [x, y, distance, 1.0];
-        console.log(point4d);
-        point4d = vec4.transformMat4(point4d, point4d, matInverse);
-        console.log(point4d);
-        let point3d = [0, 0, 0];
-        point3d[0] = point4d[0];
-        point3d[1] = point4d[1];
-        point3d[2] = point4d[2];
+        //calculate the angles of the click-view vector from looking-at vector
+        let alpha = x * this.fov;
+        let beta = y * this.fov * viewportSize[1] / viewportSize[0];
+
+        //rotate looking-at vector with these angles to get click-view vector
+        let clickViewVec = new Array(4);
+        clickViewVec[0] = this.lookingAt[0];
+        clickViewVec[1] = this.lookingAt[1];
+        clickViewVec[2] = this.lookingAt[2];
+        clickViewVec[3] = 0;
+
+        let rotationMat = mat4.create();
+        rotationMat = mat4.rotate(rotationMat, rotationMat, alpha, [0, 1, 0]);
+        rotationMat = mat4.rotate(rotationMat, rotationMat, beta, [1, 0, 0]);
+
+        clickViewVec = vec4.transformMat4(clickViewVec, clickViewVec, rotationMat);
+
+        clickViewVec = vec4.normalize(clickViewVec, clickViewVec);
+
+        //enlarge clickViewVec by distance and add camera pos
+        let point3d = [clickViewVec[0] * distance + this.position[0], clickViewVec[1] * distance + this.position[0], clickViewVec[2] * distance + this.position[0]];
+
         return point3d;
     }
 }

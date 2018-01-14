@@ -98,7 +98,7 @@
 	                        vec3 diffuse = CalcDiffuse(sunLightDirection, sunLightColor, Normal);
 	                        vec3 specular = CalcSpecular(sunLightDirection, sunLightColor, Normal, viewPos);
 
-	                        color = vec4((ambient + diffuse + specular) * objectColor, 1.0);
+	                        color = vec4((ambient + diffuse) * objectColor, 1.0);
                         }
 
                         vec3 CalcAmbient(vec3 lightColor)
@@ -129,6 +129,7 @@
 
                         uniform mat4 vp_matrix;
                         uniform mat4 m_matrix;
+                        uniform mat4 rotation_matrix;
 
                         out vec3 FragPos;
                         out vec3 Normal;
@@ -145,7 +146,7 @@
 
 	                        FragPos = vec3(m_matrix * p);
                             vec3 normal = normalize( - SphereVertices);
-                            vec4 norm = m_matrix * vec4(normal, 1.0f);
+                            vec4 norm = rotation_matrix * vec4(normal, 1.0f);
                             Normal = norm.xyz;
 	                        ambientStrength = 0.3;
 	                        diffuseStrength = 0.5;
@@ -161,7 +162,7 @@
 
                         float CalcShininess()
                         {
-                        	return 26.0;
+                        	return 8.0;
                         }
                     </script>
             <script type="x-shader/x-fragment" id="preview-fragment-shader">#version 300 es

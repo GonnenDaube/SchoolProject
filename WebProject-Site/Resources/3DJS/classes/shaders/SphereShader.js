@@ -16,6 +16,7 @@ class SphereShader extends GLSLProgram {
             vp_matrix: gl.getUniformLocation(this.shaderProgram, "vp_matrix"),
             viewPos: gl.getUniformLocation(this.shaderProgram, "viewPos"),
             m_matrix: gl.getUniformLocation(this.shaderProgram, "m_matrix"),
+            rotation_matrix: gl.getUniformLocation(this.shaderProgram, "rotation_matrix"),
         }
     }
 }
