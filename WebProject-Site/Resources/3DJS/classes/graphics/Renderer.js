@@ -33,7 +33,7 @@ class Renderer {
 
         //this section renders spheres using the specific sphere shader
         this.sphereShader.useProgram(gl);
-        gl.uniformMatrix4fv(this.sphereShader.uniforms.vp_matrix, false, new Float32Array(this.scene.camera.getVpMatrix(display.height, display.width)));
+        gl.uniformMatrix4fv(this.sphereShader.uniforms.vp_matrix, false, new Float32Array(this.scene.camera.getVpMatrix(display.height, display.width, 1.0)));
         gl.uniform3fv(this.sphereShader.uniforms.viewPos, new Float32Array(this.scene.camera.position));
         for (let i of this.scene.objects) {
             if (i instanceof Sphere) {
@@ -47,7 +47,7 @@ class Renderer {
         //this section renders triangle objects using the specific triangle object shader
         this.triangleShader.useProgram(gl);
 
-        gl.uniformMatrix4fv(this.triangleShader.uniforms.vp_matrix, false, new Float32Array(this.scene.camera.getVpMatrix(display.height, display.width)));
+        gl.uniformMatrix4fv(this.triangleShader.uniforms.vp_matrix, false, new Float32Array(this.scene.camera.getVpMatrix(display.height, display.width, 1.0)));
         gl.uniform3fv(this.triangleShader.uniforms.viewPos, new Float32Array(this.scene.camera.position));
         for (let i of this.scene.objects) {
             if (i instanceof TriangleObject) {
@@ -62,7 +62,7 @@ class Renderer {
 
         this.previewShader.useProgram(gl);
 
-        gl.uniformMatrix4fv(this.previewShader.uniforms.vp_matrix, false, new Float32Array(this.scene.camera.getVpMatrix(display.height, display.width)));
+        gl.uniformMatrix4fv(this.previewShader.uniforms.vp_matrix, false, new Float32Array(this.scene.camera.getVpMatrix(display.height, display.width, 1.0)));
         gl.uniform3fv(this.previewShader.uniforms.viewPos, new Float32Array(this.scene.camera.position));
 
         if(this.scene.previewObject != null){

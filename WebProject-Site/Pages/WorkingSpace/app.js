@@ -142,13 +142,13 @@ function init() {
     //init renderer
     renderer = new Renderer(gl, canvas_const, scene);
 
-    for(let i = 0; i < 20; i++){
-        for(let k = 0; k < 20; k++){
-            for(let j = 0; j < 20; j++){
-                scene.addObject(new Sphere(gl, 1.0, [i*5, k*5, j*5], [0, 1, 0], renderer.sphereShader));
-            }
-        }
-    }
+    //for(let i = 0; i < 20; i++){
+    //    for(let k = 0; k < 20; k++){
+    //        for(let j = 0; j < 20; j++){
+    //            scene.addObject(new Sphere(gl, 1.0, [i*5, k*5, j*5], [0, 1, 0], renderer.sphereShader));
+    //        }
+    //    }
+    //}
 }
 
 function checkForModeChange(){
@@ -228,8 +228,8 @@ function mousedown(){
             //get requested position
             let canvasRect = display.canvasView.getBoundingClientRect();
             let clickPoint = [event.clientX - canvasRect.left, event.clientY - canvasRect.top];
-            let pos = scene.camera.convert2DpointTo3Dpoint(clickPoint, 20.0, [canvasRect.width, canvasRect.height]);
-            console.log(pos);
+            let position = scene.camera.convert2DpointTo3Dpoint(clickPoint, 10.0, [canvasRect.width, canvasRect.height]);
+            let pos = [position[0], position[1], position[2]];
 
             //get requested color
             let color = document.getElementById("final-color").style.fill;
