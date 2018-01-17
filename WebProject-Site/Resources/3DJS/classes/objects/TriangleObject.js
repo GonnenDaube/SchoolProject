@@ -2,7 +2,7 @@
 import Model from './Model.js';
 
 class TriangleObject extends Object3D {
-    constructor(gl, shader) {
+    constructor(gl, shader, solidShader) {
         super(new Model(null, null, null, null, null, null, null), new Model(null, null, null, null, null, null, null));
         this.gl = gl;
         this.VAO = null;
@@ -10,28 +10,41 @@ class TriangleObject extends Object3D {
         this.normalVBO = null;
         this.colorVBO = null;
 
+        this.solidVAO = null;
+        this.solidPositionVBO = null;
+        this.solidColorVBO = null;
+
         this.wiredVAO = null;
         this.wiredPositionVBO = null;
-        this.wiredNormalVBO = null;
         this.wiredColorVBO = null;
 
         this.shader = shader;
+        this.solidShader = solidShader;
     }
 
     draw(mode) {
-        this.gl.bindVertexArray(this.VAO);
-        if( mode == 'solid-mode' || mode == 'lighting-mode' ){
+        if(mode == 'solid-mode'){
+            this.gl.bindVertexArray(this.solidVAO);
             if(this.model.numVertices > 2)
                 this.gl.drawArrays(this.gl.TRIANGLES, 0, this.model.numVertices - this.model.numVertices % 3);
+            this.gl.bindVertexArray(null);
+        }
+        else if(mode == 'lighting-mode'){
+            this.gl.bindVertexArray(this.VAO);
+            if(this.model.numVertices > 2)
+                this.gl.drawArrays(this.gl.TRIANGLES, 0, this.model.numVertices - this.model.numVertices % 3);
+            this.gl.bindVertexArray(null);
         }
         else if(mode == 'wireframe-mode'){
-            if(this.model.numVertices > 1)
-                this.gl.drawArrays(this.gl.LINES, 0, this.model.numVertices - this.model.numVertices % 2);
+            this.gl.bindVertexArray(this.wiredVAO);
+            if(this.wireframeModel.numVertices > 1)
+                this.gl.drawArrays(this.gl.LINES, 0, this.wireframeModel.numVertices - this.wireframeModel.numVertices % 2);
+            this.gl.bindVertexArray(null);
         }
-        this.gl.bindVertexArray(null);
     }
 
     updateBuffers() { //should be called after every change done to mesh (other then transformations)
+        //lighting shader
         this.VAO = this.gl.createVertexArray();
         this.positionVBO = this.gl.createBuffer();
         this.normalVBO = this.gl.createBuffer();
@@ -60,16 +73,64 @@ class TriangleObject extends Object3D {
 
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);
         this.gl.bindVertexArray(null);
+
+        //solid shader
+        this.solidVAO = this.gl.createVertexArray();
+        this.solidPositionVBO = this.gl.createBuffer();
+        this.solidColorVBO = this.gl.createBuffer();
+
+        this.gl.bindVertexArray(this.solidVAO);
+
+        let solidPositionAttrib = this.gl.getAttribLocation(this.solidShader.shaderProgram, "positions");
+        let solidColorAttrib = this.gl.getAttribLocation(this.solidShader.shaderProgram, "colors");
+
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.solidPositionVBO);
+        this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(this.model.vertices), this.gl.STATIC_DRAW);
+        this.gl.vertexAttribPointer(solidPositionAttrib, 3, this.gl.FLOAT, this.gl.FALSE, 3 * Float32Array.BYTES_PER_ELEMENT, 0);
+        this.gl.enableVertexAttribArray(solidPositionAttrib);
+
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.solidColorVBO);
+        this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(this.model.color), this.gl.STATIC_DRAW);
+        this.gl.vertexAttribPointer(solidColorAttrib, 3, this.gl.FLOAT, this.gl.FALSE, 3 * Float32Array.BYTES_PER_ELEMENT, 0);
+        this.gl.enableVertexAttribArray(solidColorAttrib);
+
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);
+        this.gl.bindVertexArray(null);
+
+        //wireframe shader
+        this.wireVAO = this.gl.createVertexArray();
+        this.wirePositionVBO = this.gl.createBuffer();
+        this.wireColorVBO = this.gl.createBuffer();
+
+        this.gl.bindVertexArray(this.wireVAO);
+
+        let wirePositionAttrib = this.gl.getAttribLocation(this.solidShader.shaderProgram, "positions");
+        let wireColorAttrib = this.gl.getAttribLocation(this.solidShader.shaderProgram, "colors");
+
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.wirePositionVBO);
+        this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(this.wireframeModel.vertices), this.gl.STATIC_DRAW);
+        this.gl.vertexAttribPointer(wirePositionAttrib, 3, this.gl.FLOAT, this.gl.FALSE, 3 * Float32Array.BYTES_PER_ELEMENT, 0);
+        this.gl.enableVertexAttribArray(wirePositionAttrib);
+
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.wireColorVBO);
+        this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(this.wireframeModel.color), this.gl.STATIC_DRAW);
+        this.gl.vertexAttribPointer(wireColorAttrib, 3, this.gl.FLOAT, this.gl.FALSE, 3 * Float32Array.BYTES_PER_ELEMENT, 0);
+        this.gl.enableVertexAttribArray(wireColorAttrib);
+
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);
+        this.gl.bindVertexArray(null);
     }
 
     addVertex(position, color, normal){
         if(this.model.vertices == null){
-            this.model.vertices = position;
-            this.model.color = color;
-            this.model.normals = normal;
-            this.wireframeModel.vertices = position;
-            this.wireframeModel.color = color;
-            this.wireframeModel.normals = normal;
+            this.model.vertices = [position[0], position[1], position[2]];
+            this.model.color = [color[0], color[1], color[2]];
+            this.model.normals = [normal[0], normal[1], normal[2]];
+            this.wireframeModel.vertices = [position[0], position[1], position[2]];
+            this.wireframeModel.color = [color[0], color[1], color[2]];
+
+            this.model.numVertices = 1;
+            this.wireframeModel.numVertices = 1;
         }
         else{
             if(this.model.vertices.length % 9 == 3){//only 1 vertex
@@ -79,9 +140,6 @@ class TriangleObject extends Object3D {
                 this.wireframeModel.color.push(color[0]);
                 this.wireframeModel.color.push(color[1]);
                 this.wireframeModel.color.push(color[2]);
-                this.wireframeModel.normals.push(normal[0]);
-                this.wireframeModel.normals.push(normal[1]);
-                this.wireframeModel.normals.push(normal[2]);
 
                 this.wireframeModel.numVertices++;
             }
@@ -94,9 +152,6 @@ class TriangleObject extends Object3D {
                 this.wireframeModel.color.push(this.wireframeModel.color[this.wireframeModel.color.length - 3]);
                 this.wireframeModel.color.push(this.wireframeModel.color[this.wireframeModel.color.length - 2]);
                 this.wireframeModel.color.push(this.wireframeModel.color[this.wireframeModel.color.length - 1]);
-                this.wireframeModel.normals.push(this.wireframeModel.normals[this.wireframeModel.normals.length - 3]);
-                this.wireframeModel.normals.push(this.wireframeModel.normals[this.wireframeModel.normals.length - 2]);
-                this.wireframeModel.normals.push(this.wireframeModel.normals[this.wireframeModel.normals.length - 1]);
 
                 this.wireframeModel.numVertices++;
 
@@ -108,9 +163,6 @@ class TriangleObject extends Object3D {
                 this.wireframeModel.color.push(color[0]);
                 this.wireframeModel.color.push(color[1]);
                 this.wireframeModel.color.push(color[2]);
-                this.wireframeModel.normals.push(normal[0]);
-                this.wireframeModel.normals.push(normal[1]);
-                this.wireframeModel.normals.push(normal[2]);
 
                 this.wireframeModel.numVertices++;
 
@@ -122,9 +174,6 @@ class TriangleObject extends Object3D {
                 this.wireframeModel.color.push(this.wireframeModel.color[this.wireframeModel.color.length - 3]);
                 this.wireframeModel.color.push(this.wireframeModel.color[this.wireframeModel.color.length - 2]);
                 this.wireframeModel.color.push(this.wireframeModel.color[this.wireframeModel.color.length - 1]);
-                this.wireframeModel.normals.push(this.wireframeModel.normals[this.wireframeModel.normals.length - 3]);
-                this.wireframeModel.normals.push(this.wireframeModel.normals[this.wireframeModel.normals.length - 2]);
-                this.wireframeModel.normals.push(this.wireframeModel.normals[this.wireframeModel.normals.length - 1]);
 
                 this.wireframeModel.numVertices++;
 
@@ -136,9 +185,6 @@ class TriangleObject extends Object3D {
                 this.wireframeModel.color.push(this.model.color[this.model.color.length - 6]);
                 this.wireframeModel.color.push(this.model.color[this.model.color.length - 5]);
                 this.wireframeModel.color.push(this.model.color[this.model.color.length - 4]);
-                this.wireframeModel.normals.push(this.model.normal[this.model.vertices.length - 6]);
-                this.wireframeModel.normals.push(this.model.normal[this.model.vertices.length - 5]);
-                this.wireframeModel.normals.push(this.model.normal[this.model.vertices.length - 4]);
 
                 this.wireframeModel.numVertices++;
             }
@@ -151,9 +197,9 @@ class TriangleObject extends Object3D {
             this.model.normals.push(normal[0]);
             this.model.normals.push(normal[1]);
             this.model.normals.push(normal[2]);
-        }
 
-        this.model.numVertices++;
+            this.model.numVertices++;
+        }
 
         this.updateBuffers();
     }

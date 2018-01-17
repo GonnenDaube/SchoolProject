@@ -268,7 +268,7 @@ function mousedown(){
 
             //add vertex to main object
             if(scene.main == null){
-                scene.main = new TriangleObject(gl, renderer.triangleShader);
+                scene.main = new TriangleObject(gl, renderer.triangleShader, renderer.previewShader);
             }
             scene.main.addVertex(pos, color, normal, gl);
 
