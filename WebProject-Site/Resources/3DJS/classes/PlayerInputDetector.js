@@ -23,6 +23,7 @@ class PlayerInputDetector {
         this.selector = false;
         this.removePauseLabel();
         this.clickPos = null;
+        this.previewPoint = false;
     }
     key_callback_down(event) {
         switch (event.keyCode) {

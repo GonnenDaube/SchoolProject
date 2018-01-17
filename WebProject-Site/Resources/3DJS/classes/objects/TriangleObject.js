@@ -72,7 +72,7 @@ class TriangleObject extends Object3D {
             this.wireframeModel.normals = normal;
         }
         else{
-            if(this.model.vertices.length == 3){//only 1 vertex
+            if(this.model.vertices.length % 9 == 3){//only 1 vertex
                 this.wireframeModel.vertices.push(position[0]);
                 this.wireframeModel.vertices.push(position[1]);
                 this.wireframeModel.vertices.push(position[2]);
@@ -85,7 +85,9 @@ class TriangleObject extends Object3D {
 
                 this.wireframeModel.numVertices++;
             }
-            else{//need to double the last vertex in order to create a new line
+            else if(this.model.vertices.length % 9 == 6){//connect all 3 points into 3 lines
+
+                //duplicate 2nd point
                 this.wireframeModel.vertices.push(this.wireframeModel.vertices[this.wireframeModel.vertices.length - 3]);
                 this.wireframeModel.vertices.push(this.wireframeModel.vertices[this.wireframeModel.vertices.length - 2]);
                 this.wireframeModel.vertices.push(this.wireframeModel.vertices[this.wireframeModel.vertices.length - 1]);
@@ -98,6 +100,8 @@ class TriangleObject extends Object3D {
 
                 this.wireframeModel.numVertices++;
 
+
+                //add 3rd point
                 this.wireframeModel.vertices.push(position[0]);
                 this.wireframeModel.vertices.push(position[1]);
                 this.wireframeModel.vertices.push(position[2]);
@@ -107,6 +111,34 @@ class TriangleObject extends Object3D {
                 this.wireframeModel.normals.push(normal[0]);
                 this.wireframeModel.normals.push(normal[1]);
                 this.wireframeModel.normals.push(normal[2]);
+
+                this.wireframeModel.numVertices++;
+
+
+                //duplicate 3rd point
+                this.wireframeModel.vertices.push(this.wireframeModel.vertices[this.wireframeModel.vertices.length - 3]);
+                this.wireframeModel.vertices.push(this.wireframeModel.vertices[this.wireframeModel.vertices.length - 2]);
+                this.wireframeModel.vertices.push(this.wireframeModel.vertices[this.wireframeModel.vertices.length - 1]);
+                this.wireframeModel.color.push(this.wireframeModel.color[this.wireframeModel.color.length - 3]);
+                this.wireframeModel.color.push(this.wireframeModel.color[this.wireframeModel.color.length - 2]);
+                this.wireframeModel.color.push(this.wireframeModel.color[this.wireframeModel.color.length - 1]);
+                this.wireframeModel.normals.push(this.wireframeModel.normals[this.wireframeModel.normals.length - 3]);
+                this.wireframeModel.normals.push(this.wireframeModel.normals[this.wireframeModel.normals.length - 2]);
+                this.wireframeModel.normals.push(this.wireframeModel.normals[this.wireframeModel.normals.length - 1]);
+
+                this.wireframeModel.numVertices++;
+
+
+                //duplicate 1st point
+                this.wireframeModel.vertices.push(this.model.vertices[this.model.vertices.length - 6]);
+                this.wireframeModel.vertices.push(this.model.vertices[this.model.vertices.length - 5]);
+                this.wireframeModel.vertices.push(this.model.vertices[this.model.vertices.length - 4]);
+                this.wireframeModel.color.push(this.model.color[this.model.color.length - 6]);
+                this.wireframeModel.color.push(this.model.color[this.model.color.length - 5]);
+                this.wireframeModel.color.push(this.model.color[this.model.color.length - 4]);
+                this.wireframeModel.normals.push(this.model.normal[this.model.vertices.length - 6]);
+                this.wireframeModel.normals.push(this.model.normal[this.model.vertices.length - 5]);
+                this.wireframeModel.normals.push(this.model.normal[this.model.vertices.length - 4]);
 
                 this.wireframeModel.numVertices++;
             }

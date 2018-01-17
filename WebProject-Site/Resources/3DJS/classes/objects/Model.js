@@ -12,7 +12,7 @@ class Model {
         this.texCoords = null;
     }
 
-    static createSphereModel(smoothness, gl) {
+    static createSphereModel(smoothness) {
         var model = new Model(null, null, null, null, null, null, null);
         
         model.vertices = [
@@ -72,6 +72,20 @@ class Model {
 
         model.numVertices = model.vertices.length / 3;
 
+        return model;
+    }
+
+    static createLineModel(point1, point2, color){
+        var model = new Model(null, null, null, null, null, null, null);
+        model.vertices = [
+            point1[0], point1[1], point1[2],
+            point2[0], point2[1], point2[2]
+        ];
+        model.color = [
+            color[0], color[1], color[2],
+            color[0], color[1], color[2]
+        ];
+        model.numVertices = 2;
         return model;
     }
 

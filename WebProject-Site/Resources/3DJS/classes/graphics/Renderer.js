@@ -6,6 +6,7 @@ import HorBlurShader from '../shaders/HorBlurShader.js';
 import VertBlurShader from '../shaders/VertBlurShader.js';
 import Frame from '../objects/Frame.js';
 import Sphere from '../objects/Sphere.js';
+import LineObject from '../objects/LineObject.js';
 import TriangleObject from '../objects/TriangleObject.js';
 
 class Renderer {
@@ -46,16 +47,9 @@ class Renderer {
 
         //this section renders triangle objects using the specific triangle object shader
         this.triangleShader.useProgram(gl);
-
-        gl.uniformMatrix4fv(this.triangleShader.uniforms.vp_matrix, false, new Float32Array(this.scene.camera.getVpMatrix(display.height, display.width, 1.0)));
-        gl.uniform3fv(this.triangleShader.uniforms.viewPos, new Float32Array(this.scene.camera.position));
-        for (let i of this.scene.objects) {
-            if (i instanceof TriangleObject) {
-                gl.uniformMatrix4fv(this.triangleShader.uniforms.m_matrix, false, new Float32Array(i.getTransformation()));
-                i.draw(mode);
-            }
-        }
-        if(this.scene.main != null){
+        if(this.scene.main != null && mode == "lighting-mode"){
+            gl.uniformMatrix4fv(this.triangleShader.uniforms.vp_matrix, false, new Float32Array(this.scene.camera.getVpMatrix(display.height, display.width, 1.0)));
+            gl.uniform3fv(this.triangleShader.uniforms.viewPos, new Float32Array(this.scene.camera.position));
             gl.uniformMatrix4fv(this.triangleShader.uniforms.m_matrix, false, new Float32Array(this.scene.main.getTransformation()));
             this.scene.main.draw(mode);
         }
@@ -65,9 +59,20 @@ class Renderer {
         gl.uniformMatrix4fv(this.previewShader.uniforms.vp_matrix, false, new Float32Array(this.scene.camera.getVpMatrix(display.height, display.width, 1.0)));
         gl.uniform3fv(this.previewShader.uniforms.viewPos, new Float32Array(this.scene.camera.position));
 
+        if(this.scene.main != null && (mode == "solid-mode" || mode == "wireframe-mode" || mode == "normal-mode")){
+            gl.uniformMatrix4fv(this.previewShader.uniforms.m_matrix, false, new Float32Array(this.scene.main.getTransformation()));
+            this.scene.main.draw(mode);
+        }
+
         if(this.scene.previewObject != null){
             gl.uniformMatrix4fv(this.previewShader.uniforms.m_matrix, false, new Float32Array(this.scene.previewObject.getTransformation()));
             this.scene.previewObject.draw();
+        }
+        for (let i of this.scene.objects) {
+            if (i instanceof LineObject) {
+                gl.uniformMatrix4fv(this.previewShader.uniforms.m_matrix, false, new Float32Array(i.getTransformation()));
+                i.draw();
+            }
         }
     }
     renderFramebuffertoViewPort(display, gl) {

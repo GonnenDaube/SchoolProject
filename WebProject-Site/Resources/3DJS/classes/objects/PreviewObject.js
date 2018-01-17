@@ -25,8 +25,11 @@ class PreviewObject extends Object3D {
         if(this.model.numVertices >= 1){
             this.gl.drawArrays(this.gl.POINTS, 0, this.model.numVertices);
         }
-        if(this.model.numVertices == 2){
+        if(this.model.numVertices >= 2){
             this.gl.drawArrays(this.gl.LINES, 0, this.model.numVertices);
+        }
+        if(this.model.numVertices == 3){
+            this.gl.drawArrays(this.gl.TRIANGLES, 0, this.model.numVertices);
         }
         this.gl.bindVertexArray(null);
     }
@@ -55,14 +58,22 @@ class PreviewObject extends Object3D {
         this.gl.bindVertexArray(null);
     }
 
-    addSecondVertex(position, color){
+    addVertex(position, color){
         this.model.vertices.push(position[0]);
         this.model.vertices.push(position[1]);
         this.model.vertices.push(position[2]);
         this.model.color.push(color[0]);
         this.model.color.push(color[1]);
         this.model.color.push(color[2]);
-        this.model.numVertices = 2;
+        this.model.numVertices++;
+
+        this.updateBuffers();
+    }
+
+    replaceLastPos(position){
+        this.model.vertices[this.model.vertices.length - 3] = position[0];
+        this.model.vertices[this.model.vertices.length - 2] = position[1];
+        this.model.vertices[this.model.vertices.length - 1] = position[2];
 
         this.updateBuffers();
     }

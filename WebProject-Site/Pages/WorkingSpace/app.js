@@ -5,6 +5,7 @@ import Renderer from '/Resources/3DJS/classes/graphics/Renderer.js';
 import Object3D from '/Resources/3DJS/classes/objects/Object3D.js';
 import Frame from '/Resources/3DJS/classes/objects/Frame.js';
 import Sphere from '/Resources/3DJS/classes/objects/Sphere.js';
+import LineObject from '/Resources/3DJS/classes/objects/LineObject.js';
 import TriangleObject from '/Resources/3DJS/classes/objects/TriangleObject.js';
 import PreviewObject from '/Resources/3DJS/classes/objects/PreviewObject.js';
 import Model from '/Resources/3DJS/classes/objects/Model.js';
@@ -142,6 +143,22 @@ function init() {
     //init renderer
     renderer = new Renderer(gl, canvas_const, scene);
 
+    scene.addObject(new LineObject(gl, [-1000, 0, 0], [1000, 0, 0], [1, 0, 0], renderer.previewShader));
+    scene.addObject(new LineObject(gl, [0, -1000, 0], [0, 1000, 0], [0, 1, 0], renderer.previewShader));
+    scene.addObject(new LineObject(gl, [0, 0, -1000], [0, 0, 1000], [0, 0, 1], renderer.previewShader));
+
+    for(let i = -50; i <= 50; i++){
+        if(i == 0)
+            i++;
+        scene.addObject(new LineObject(gl, [i, 0, -50], [i, 0, 50], [0.75, 0.75, 0.75], renderer.previewShader));
+    }
+
+    for(let i = -50; i <= 50; i++){
+        if(i == 0)
+            i++;
+        scene.addObject(new LineObject(gl, [-50, 0, i], [50, 0, i], [0.75, 0.75, 0.75], renderer.previewShader));
+    }
+
     //for(let i = 0; i < 20; i++){
     //    for(let k = 0; k < 20; k++){
     //        for(let j = 0; j < 20; j++){
@@ -208,6 +225,14 @@ function mouse_callback(){
     if(playerInputDetector.selector){
         playerInputDetector.updateSelector(selector_div);
     }
+
+    if(playerInputDetector.previewPoint && action == "vertex-adder"){
+        let canvasRect = display.canvasView.getBoundingClientRect();
+        let clickPoint = [event.clientX - canvasRect.left, event.clientY - canvasRect.top];
+        let position = scene.camera.convert2DpointTo3Dpoint(clickPoint, 10.0, [canvasRect.width, canvasRect.height]);
+        let pos = [position[0], position[1], position[2]];
+        scene.previewObject.replaceLastPos(pos);
+    }
 }
 
 function mousedown(){
@@ -248,16 +273,17 @@ function mousedown(){
             scene.main.addVertex(pos, color, normal, gl);
 
             if(scene.main.model.numVertices % 3 == 1){
+                scene.deletePreviewObject();
                 scene.addPreviewObject(new PreviewObject(gl, pos, [1, 0, 1], renderer.previewShader));
-                console.log("added point");
+                playerInputDetector.previewPoint = true;
+                scene.previewObject.addVertex(pos, [1, 0, 1]);
             }
             if(scene.main.model.numVertices % 3 == 2){
-                scene.previewObject.addSecondVertex(pos, [1, 0, 1]);
-                console.log("added preview line");
+                scene.previewObject.addVertex(pos, [1, 0, 1]);
             }
             if(scene.main.model.numVertices % 3 == 0){
+                playerInputDetector.previewPoint = false;
                 scene.deletePreviewObject();
-                console.log("deleted preview");
             }
         }
     }
