@@ -39,6 +39,7 @@ class TriangleObject extends Object3D {
             this.gl.bindVertexArray(this.wiredVAO);
             if(this.wireframeModel.numVertices > 1)
                 this.gl.drawArrays(this.gl.LINES, 0, this.wireframeModel.numVertices - this.wireframeModel.numVertices % 2);
+            console.log("draw wireframe model");
             this.gl.bindVertexArray(null);
         }
     }
@@ -98,11 +99,11 @@ class TriangleObject extends Object3D {
         this.gl.bindVertexArray(null);
 
         //wireframe shader
-        this.wireVAO = this.gl.createVertexArray();
+        this.wiredVAO = this.gl.createVertexArray();
         this.wirePositionVBO = this.gl.createBuffer();
         this.wireColorVBO = this.gl.createBuffer();
 
-        this.gl.bindVertexArray(this.wireVAO);
+        this.gl.bindVertexArray(this.wiredVAO);
 
         let wirePositionAttrib = this.gl.getAttribLocation(this.solidShader.shaderProgram, "positions");
         let wireColorAttrib = this.gl.getAttribLocation(this.solidShader.shaderProgram, "colors");
@@ -133,7 +134,7 @@ class TriangleObject extends Object3D {
             this.wireframeModel.numVertices = 1;
         }
         else{
-            if(this.model.vertices.length % 9 == 3){//only 1 vertex
+            if(this.model.vertices.length % 9 <= 3){//0 or 1 vertex
                 this.wireframeModel.vertices.push(position[0]);
                 this.wireframeModel.vertices.push(position[1]);
                 this.wireframeModel.vertices.push(position[2]);
@@ -144,19 +145,17 @@ class TriangleObject extends Object3D {
                 this.wireframeModel.numVertices++;
             }
             else if(this.model.vertices.length % 9 == 6){//connect all 3 points into 3 lines
-
-                //duplicate 2nd point
-                this.wireframeModel.vertices.push(this.wireframeModel.vertices[this.wireframeModel.vertices.length - 3]);
-                this.wireframeModel.vertices.push(this.wireframeModel.vertices[this.wireframeModel.vertices.length - 2]);
-                this.wireframeModel.vertices.push(this.wireframeModel.vertices[this.wireframeModel.vertices.length - 1]);
-                this.wireframeModel.color.push(this.wireframeModel.color[this.wireframeModel.color.length - 3]);
-                this.wireframeModel.color.push(this.wireframeModel.color[this.wireframeModel.color.length - 2]);
-                this.wireframeModel.color.push(this.wireframeModel.color[this.wireframeModel.color.length - 1]);
+                //add 2nd vertex
+                this.wireframeModel.vertices.push(this.model.vertices[this.model.vertices.length - 3]);
+                this.wireframeModel.vertices.push(this.model.vertices[this.model.vertices.length - 2]);
+                this.wireframeModel.vertices.push(this.model.vertices[this.model.vertices.length - 1]);
+                this.wireframeModel.color.push(this.model.color[this.model.color.length - 3]);
+                this.wireframeModel.color.push(this.model.color[this.model.color.length - 2]);
+                this.wireframeModel.color.push(this.model.color[this.model.color.length - 1]);
 
                 this.wireframeModel.numVertices++;
 
-
-                //add 3rd point
+                //add 3rd vertex
                 this.wireframeModel.vertices.push(position[0]);
                 this.wireframeModel.vertices.push(position[1]);
                 this.wireframeModel.vertices.push(position[2]);
@@ -166,19 +165,17 @@ class TriangleObject extends Object3D {
 
                 this.wireframeModel.numVertices++;
 
-
-                //duplicate 3rd point
-                this.wireframeModel.vertices.push(this.wireframeModel.vertices[this.wireframeModel.vertices.length - 3]);
-                this.wireframeModel.vertices.push(this.wireframeModel.vertices[this.wireframeModel.vertices.length - 2]);
-                this.wireframeModel.vertices.push(this.wireframeModel.vertices[this.wireframeModel.vertices.length - 1]);
-                this.wireframeModel.color.push(this.wireframeModel.color[this.wireframeModel.color.length - 3]);
-                this.wireframeModel.color.push(this.wireframeModel.color[this.wireframeModel.color.length - 2]);
-                this.wireframeModel.color.push(this.wireframeModel.color[this.wireframeModel.color.length - 1]);
+                //add 3rd vertex
+                this.wireframeModel.vertices.push(position[0]);
+                this.wireframeModel.vertices.push(position[1]);
+                this.wireframeModel.vertices.push(position[2]);
+                this.wireframeModel.color.push(color[0]);
+                this.wireframeModel.color.push(color[1]);
+                this.wireframeModel.color.push(color[2]);
 
                 this.wireframeModel.numVertices++;
 
-
-                //duplicate 1st point
+                //add 1st vertex
                 this.wireframeModel.vertices.push(this.model.vertices[this.model.vertices.length - 6]);
                 this.wireframeModel.vertices.push(this.model.vertices[this.model.vertices.length - 5]);
                 this.wireframeModel.vertices.push(this.model.vertices[this.model.vertices.length - 4]);
