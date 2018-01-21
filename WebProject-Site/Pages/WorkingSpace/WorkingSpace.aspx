@@ -8,7 +8,11 @@
             WebGL is not supported in your browser
         </canvas>
         <p id="fpsLabel" class="fpsLabel AileronsFont"></p>
-        <p id="pause-label" class="AileronsFont pauseLabel">Paused</p>
+        <form runat="server" class="form-size">
+            <div id="pause-label" class="AileronsFont pauseLabel">
+                <asp:Button ID="upload" CssClass="upload-btn AileronsFont" runat="server" OnClick="upload_Click" Text="UPLOAD"/>
+            </div>
+        </form>
     </div>
     <div id="vertex-selector-div" style="position:absolute; left:0px; top:0px; width:100px; height:100px; visibility:hidden" class="vertex-selector"></div>
     <div id="dial-wrapper" class="dial-wrapper" style="position:absolute; left:100px; top:100px">
@@ -44,7 +48,7 @@
                         <div id="colorSelector" class="selector" style="position:absolute; left:0%; top:-1%" onmousedown="enableColorSelectorPositionChange();" onmouseup="disableColorSelectorPositionChange();">
                         </div>
                     </div>
-                        <div id="saturation" class="bar" style="background:linear-gradient(rgb(255, 0, 0), rgb(255,255,255));" onmousemove="moveSaturSelector();">
+                    <div id="saturation" class="bar" style="background:linear-gradient(rgb(255, 0, 0), rgb(255,255,255));" onmousemove="moveSaturSelector();">
                         <div id="saturSelector" class="selector" style="position:absolute; left:0%; top:-1%" onmousedown="enableSaturSelectorPositionChange();" onmouseup="disableSaturSelectorPositionChange();">
                         </div>
                     </div>
@@ -54,9 +58,12 @@
                     </div>
                 </div>
             </div>
-            <div id="selector">
-                
-            </div>
+            <p id="model_position_data" runat="server" style="visibility:hidden">
+            </p>
+            <p id="model_color_data" runat="server" style="visibility:hidden">
+            </p>
+            <p id="model_normal_data" runat="server" style="visibility:hidden">
+            </p>
         </div>
     </div>
 </asp:Content>

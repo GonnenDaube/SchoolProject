@@ -134,7 +134,6 @@ function init() {
     window.onkeydown = keydown_callback;
     window.onkeyup = keyup_callback;
     window.onmousemove = mouse_callback;
-    display.canvasView.onclick = resume;
     display.canvasView.onmousedown = mousedown;
     display.canvasView.onmouseup = mouseup;
     selector_div.onmouseup = mouseup;
@@ -256,6 +255,8 @@ function mousedown(){
             let position = scene.camera.convert2DpointTo3Dpoint(clickPoint, 10.0, [canvasRect.width, canvasRect.height]);
             let pos = [position[0], position[1], position[2]];
 
+            pos = scene.clickPointInteractions(clickPoint, pos, [canvasRect.width, canvasRect.height]);
+
             //get requested color
             let color = document.getElementById("final-color").style.fill;
             let r = parseFloat(color.substring(color.indexOf('(') + 1, color.indexOf(',')));
@@ -271,6 +272,7 @@ function mousedown(){
                 scene.main = new TriangleObject(gl, renderer.triangleShader, renderer.previewShader);
             }
             scene.main.addVertex(pos, color, normal, gl);
+            scene.updateData();
 
             if(scene.main.model.numVertices % 3 == 1){
                 scene.deletePreviewObject();
@@ -284,7 +286,11 @@ function mousedown(){
             if(scene.main.model.numVertices % 3 == 0){
                 playerInputDetector.previewPoint = false;
                 scene.deletePreviewObject();
+                scene.main.updateNormal();
             }
+        }
+        if(playerInputDetector.isPaused){
+            resume();
         }
     }
 }
