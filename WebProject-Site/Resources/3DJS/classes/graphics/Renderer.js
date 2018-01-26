@@ -10,7 +10,7 @@ import LineObject from '../objects/LineObject.js';
 import TriangleObject from '../objects/TriangleObject.js';
 
 class Renderer {
-    constructor(gl, canvas_const, scene) {
+    constructor(gl, canvas_const, scene, display) {
         this.sphereShader = new SphereShader(gl);
         this.triangleShader = new TriangleShader(gl);
         this.previewShader = new PreviewShader(gl);
@@ -24,6 +24,8 @@ class Renderer {
         this.genFrameBuffer(gl, canvas_const);
         this.genBlurFrameBuffer(gl, canvas_const);
         this.scene = scene;
+        this.gl = gl;
+        this.display = display;
     }
     renderSceneToFramebuffer(display, gl, mode) {
 

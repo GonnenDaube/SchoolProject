@@ -12,6 +12,209 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="OpenConnection">
+        <s:complexType />
+      </s:element>
+      <s:element name="OpenConnectionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OpenConnectionResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CloseConnection">
+        <s:complexType />
+      </s:element>
+      <s:element name="CloseConnectionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CloseConnectionResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenericVoidQuery">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="query" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenericVoidQueryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GenericVoidQueryResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenericReaderQuery">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="query" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenericReaderQueryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GenericReaderQueryResult" type="tns:XmlReader" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="XmlReader" abstract="true" />
+      <s:element name="InsertUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="InsertUserResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertModel">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="user_id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="description" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="positions" type="tns:ArrayOfFloat" />
+            <s:element minOccurs="0" maxOccurs="1" name="colors" type="tns:ArrayOfFloat" />
+            <s:element minOccurs="0" maxOccurs="1" name="normals" type="tns:ArrayOfFloat" />
+            <s:element minOccurs="0" maxOccurs="1" name="cameraPos" type="tns:ArrayOfFloat" />
+            <s:element minOccurs="0" maxOccurs="1" name="lookingat" type="tns:ArrayOfFloat" />
+            <s:element minOccurs="0" maxOccurs="1" name="thumbnail" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfFloat">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="float" type="s:float" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="InsertModelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="InsertModelResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetXMLFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="location" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetXMLFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetXMLFileResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertDownload">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="user_id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="model_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertDownloadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="InsertDownloadResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertRating">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="user_id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="model_id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="rate" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertRatingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="InsertRatingResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetModelInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="model_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetModelInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetModelInfoResult" type="tns:XmlReader" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetModelsList">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetModelsListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetModelsListResult" type="tns:XmlReader" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="model_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetRateResult" type="s:float" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDownloadCountArray">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="model_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDownloadCountArrayResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDownloadCountArrayResult" type="tns:ArrayOfArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ArrayOfString" nillable="true" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="HelloWorldSoapIn">
@@ -20,10 +223,140 @@
   <wsdl:message name="HelloWorldSoapOut">
     <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
   </wsdl:message>
+  <wsdl:message name="OpenConnectionSoapIn">
+    <wsdl:part name="parameters" element="tns:OpenConnection" />
+  </wsdl:message>
+  <wsdl:message name="OpenConnectionSoapOut">
+    <wsdl:part name="parameters" element="tns:OpenConnectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="CloseConnectionSoapIn">
+    <wsdl:part name="parameters" element="tns:CloseConnection" />
+  </wsdl:message>
+  <wsdl:message name="CloseConnectionSoapOut">
+    <wsdl:part name="parameters" element="tns:CloseConnectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenericVoidQuerySoapIn">
+    <wsdl:part name="parameters" element="tns:GenericVoidQuery" />
+  </wsdl:message>
+  <wsdl:message name="GenericVoidQuerySoapOut">
+    <wsdl:part name="parameters" element="tns:GenericVoidQueryResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenericReaderQuerySoapIn">
+    <wsdl:part name="parameters" element="tns:GenericReaderQuery" />
+  </wsdl:message>
+  <wsdl:message name="GenericReaderQuerySoapOut">
+    <wsdl:part name="parameters" element="tns:GenericReaderQueryResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertUserSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertUser" />
+  </wsdl:message>
+  <wsdl:message name="InsertUserSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertModelSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertModel" />
+  </wsdl:message>
+  <wsdl:message name="InsertModelSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertModelResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetXMLFileSoapIn">
+    <wsdl:part name="parameters" element="tns:GetXMLFile" />
+  </wsdl:message>
+  <wsdl:message name="GetXMLFileSoapOut">
+    <wsdl:part name="parameters" element="tns:GetXMLFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertDownloadSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertDownload" />
+  </wsdl:message>
+  <wsdl:message name="InsertDownloadSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertDownloadResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertRatingSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertRating" />
+  </wsdl:message>
+  <wsdl:message name="InsertRatingSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertRatingResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetModelInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetModelInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetModelInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetModelInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetModelsListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetModelsList" />
+  </wsdl:message>
+  <wsdl:message name="GetModelsListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetModelsListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRate" />
+  </wsdl:message>
+  <wsdl:message name="GetRateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDownloadCountArraySoapIn">
+    <wsdl:part name="parameters" element="tns:GetDownloadCountArray" />
+  </wsdl:message>
+  <wsdl:message name="GetDownloadCountArraySoapOut">
+    <wsdl:part name="parameters" element="tns:GetDownloadCountArrayResponse" />
+  </wsdl:message>
   <wsdl:portType name="WebServiceSoap">
     <wsdl:operation name="HelloWorld">
       <wsdl:input message="tns:HelloWorldSoapIn" />
       <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OpenConnection">
+      <wsdl:input message="tns:OpenConnectionSoapIn" />
+      <wsdl:output message="tns:OpenConnectionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CloseConnection">
+      <wsdl:input message="tns:CloseConnectionSoapIn" />
+      <wsdl:output message="tns:CloseConnectionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenericVoidQuery">
+      <wsdl:input message="tns:GenericVoidQuerySoapIn" />
+      <wsdl:output message="tns:GenericVoidQuerySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenericReaderQuery">
+      <wsdl:input message="tns:GenericReaderQuerySoapIn" />
+      <wsdl:output message="tns:GenericReaderQuerySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertUser">
+      <wsdl:input message="tns:InsertUserSoapIn" />
+      <wsdl:output message="tns:InsertUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertModel">
+      <wsdl:input message="tns:InsertModelSoapIn" />
+      <wsdl:output message="tns:InsertModelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetXMLFile">
+      <wsdl:input message="tns:GetXMLFileSoapIn" />
+      <wsdl:output message="tns:GetXMLFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertDownload">
+      <wsdl:input message="tns:InsertDownloadSoapIn" />
+      <wsdl:output message="tns:InsertDownloadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertRating">
+      <wsdl:input message="tns:InsertRatingSoapIn" />
+      <wsdl:output message="tns:InsertRatingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetModelInfo">
+      <wsdl:input message="tns:GetModelInfoSoapIn" />
+      <wsdl:output message="tns:GetModelInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetModelsList">
+      <wsdl:input message="tns:GetModelsListSoapIn" />
+      <wsdl:output message="tns:GetModelsListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRate">
+      <wsdl:input message="tns:GetRateSoapIn" />
+      <wsdl:output message="tns:GetRateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDownloadCountArray">
+      <wsdl:input message="tns:GetDownloadCountArraySoapIn" />
+      <wsdl:output message="tns:GetDownloadCountArraySoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
@@ -37,11 +370,245 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="OpenConnection">
+      <soap:operation soapAction="http://tempuri.org/OpenConnection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloseConnection">
+      <soap:operation soapAction="http://tempuri.org/CloseConnection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenericVoidQuery">
+      <soap:operation soapAction="http://tempuri.org/GenericVoidQuery" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenericReaderQuery">
+      <soap:operation soapAction="http://tempuri.org/GenericReaderQuery" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertUser">
+      <soap:operation soapAction="http://tempuri.org/InsertUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertModel">
+      <soap:operation soapAction="http://tempuri.org/InsertModel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetXMLFile">
+      <soap:operation soapAction="http://tempuri.org/GetXMLFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertDownload">
+      <soap:operation soapAction="http://tempuri.org/InsertDownload" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertRating">
+      <soap:operation soapAction="http://tempuri.org/InsertRating" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModelInfo">
+      <soap:operation soapAction="http://tempuri.org/GetModelInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModelsList">
+      <soap:operation soapAction="http://tempuri.org/GetModelsList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRate">
+      <soap:operation soapAction="http://tempuri.org/GetRate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDownloadCountArray">
+      <soap:operation soapAction="http://tempuri.org/GetDownloadCountArray" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebServiceSoap12" type="tns:WebServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="HelloWorld">
       <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OpenConnection">
+      <soap12:operation soapAction="http://tempuri.org/OpenConnection" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloseConnection">
+      <soap12:operation soapAction="http://tempuri.org/CloseConnection" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenericVoidQuery">
+      <soap12:operation soapAction="http://tempuri.org/GenericVoidQuery" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenericReaderQuery">
+      <soap12:operation soapAction="http://tempuri.org/GenericReaderQuery" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertUser">
+      <soap12:operation soapAction="http://tempuri.org/InsertUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertModel">
+      <soap12:operation soapAction="http://tempuri.org/InsertModel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetXMLFile">
+      <soap12:operation soapAction="http://tempuri.org/GetXMLFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertDownload">
+      <soap12:operation soapAction="http://tempuri.org/InsertDownload" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertRating">
+      <soap12:operation soapAction="http://tempuri.org/InsertRating" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModelInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetModelInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModelsList">
+      <soap12:operation soapAction="http://tempuri.org/GetModelsList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRate">
+      <soap12:operation soapAction="http://tempuri.org/GetRate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDownloadCountArray">
+      <soap12:operation soapAction="http://tempuri.org/GetDownloadCountArray" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

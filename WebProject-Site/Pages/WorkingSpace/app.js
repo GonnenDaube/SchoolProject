@@ -105,7 +105,7 @@ function init() {
     display = new Display(canvas_const.WINDOW_HEIGHT * window.innerWidth, canvas_const.WINDOW_WIDTH * window.innerWidth);
 
     //init webgl
-    gl = display.canvas.getContext("webgl2");
+    gl = display.canvas.getContext("webgl2", {preserveDrawingBuffer: true});
 
     if (!gl) {
         console.log("Unable to initialize WebGl. Your browser or machine may not support it.");
@@ -138,9 +138,11 @@ function init() {
     display.canvasView.onmouseup = mouseup;
     selector_div.onmouseup = mouseup;
     display.canvasView.oncontextmenu = contextmenu;
+    let uploadBtn = document.getElementById("body_upload");
+    uploadBtn.onclick = saveImageToCanvas;
 
     //init renderer
-    renderer = new Renderer(gl, canvas_const, scene);
+    renderer = new Renderer(gl, canvas_const, scene, display);
 
     scene.addObject(new LineObject(gl, [-1000, 0, 0], [1000, 0, 0], [1, 0, 0], renderer.previewShader));
     scene.addObject(new LineObject(gl, [0, -1000, 0], [0, 1000, 0], [0, 1, 0], renderer.previewShader));
@@ -235,10 +237,10 @@ function mouse_callback(){
 }
 
 function mousedown(){
-    if(event.which == 3){// right mouse button is being clicked
+    if(event.which == 3 && !playerInputDetector.isPaused){// right mouse button is being clicked
         playerInputDetector.enableRotation();
     }
-    if(event.which == 1){// left mouse button is being clicked
+    if(event.which == 1 && !playerInputDetector.isPaused){// left mouse button is being clicked
         if(action == "vertex-selector"){
             selector_div.style.visibility = "visible";
             selector_div.style.left = event.clientX + "px";
@@ -289,22 +291,47 @@ function mousedown(){
                 scene.main.updateNormal();
             }
         }
-        if(playerInputDetector.isPaused){
-            resume();
-        }
+    }
+    if(event.which == 1 && playerInputDetector.isPaused && event.target != document.getElementById("body_upload")){
+        resume();
     }
 }
 
 function mouseup(){
-    if(event.which == 3){// right mouse button is released
+    if(event.which == 3 && !playerInputDetector.isPaused){// right mouse button is released
         playerInputDetector.disableRotation();
     }
-    if(event.which == 1){// left mouse button is being released
+    if(event.which == 1 && !playerInputDetector.isPaused){// left mouse button is being released
         if(action == "vertex-selector"){
             selector_div.style.visibility = "hidden";
             playerInputDetector.disableSelector();
         }
     }
+}
+
+function saveImageToCanvas(){
+    //render to fbo unblurred texture
+    renderer.renderSceneToFramebuffer(display, gl, "lighting-mode");
+
+    gl.bindFramebuffer(gl.FRAMEBUFFER, renderer.fbo);
+
+    gl.readBuffer(gl.COLOR_ATTACHMENT0);
+
+    let data = new Uint8Array(display.width * display.height * Float32Array.BYTES_PER_ELEMENT);
+    gl.readPixels(0, 0, display.width, display.height, gl.RGBA, gl.UNSIGNED_BYTE, data);
+
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+
+    let canvas = document.createElement('canvas');
+    canvas.width = display.width;
+    canvas.height = display.height;
+    let context = canvas.getContext('2d');
+
+    // Copy the pixels to a 2D canvas
+    let imageData = context.createImageData(display.width, display.height);
+    imageData.data.set(data);
+    context.putImageData(imageData, 0, 0);
+    document.getElementById("image").src = canvas.toDataURL();
 }
 
 function resume(){

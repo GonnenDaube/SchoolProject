@@ -53,6 +53,7 @@
     border:none;
     outline:none;
     transition: background-color ease-in-out 0.25s;
+    cursor:pointer;
 }
 
 

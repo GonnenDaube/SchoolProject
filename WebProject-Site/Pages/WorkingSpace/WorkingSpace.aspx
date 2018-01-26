@@ -8,11 +8,11 @@
             WebGL is not supported in your browser
         </canvas>
         <p id="fpsLabel" class="fpsLabel AileronsFont"></p>
-        <form runat="server" class="form-size">
+        <div runat="server" class="form-size">
             <div id="pause-label" class="AileronsFont pauseLabel">
-                <asp:Button ID="upload" CssClass="upload-btn AileronsFont" runat="server" OnClick="upload_Click" Text="UPLOAD"/>
+                <button id="upload" class="upload-btn AileronsFont" runat="server">UPLOAD</button>
             </div>
-        </form>
+        </div>
     </div>
     <div id="vertex-selector-div" style="position:absolute; left:0px; top:0px; width:100px; height:100px; visibility:hidden" class="vertex-selector"></div>
     <div id="dial-wrapper" class="dial-wrapper" style="position:absolute; left:100px; top:100px">
@@ -66,5 +66,6 @@
             </p>
         </div>
     </div>
+    <img id="image" src="/Resources/Images/polygon-mountain.jpg" height="500" width="500"/>
 </asp:Content>
 
