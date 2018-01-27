@@ -14,5 +14,6 @@ public partial class Pages_WorkingSpace_WorkingSpace : System.Web.UI.Page
 
     protected void upload_Click(object sender, EventArgs e)
     {
+        //HttpContext.Current.Request.Form["thumbnail"];
     }
 }

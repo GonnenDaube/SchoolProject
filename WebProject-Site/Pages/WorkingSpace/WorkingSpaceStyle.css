@@ -56,6 +56,17 @@
     cursor:pointer;
 }
 
+.submit-btn{
+    position:absolute;
+    left:30vw;
+    top:30vw;
+    width:10vw;
+    height:10vw;
+    border:none;
+    background-color:rgb(16, 12, 12);
+    color:white;
+}
+
 
 .form-size{
     position:absolute;

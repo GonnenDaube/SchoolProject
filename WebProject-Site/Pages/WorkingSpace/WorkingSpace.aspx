@@ -3,6 +3,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">
+    <form id="form" runat="server">
+        <asp:Button ID="Submit" runat="server" Text="UPLOAD" CssClass="submit-btn AileronsFont"/>
+    </form>
     <div id="canvas-view" class="canvas-div">
         <canvas id="canvas" class="canvas">
             WebGL is not supported in your browser
@@ -10,7 +13,7 @@
         <p id="fpsLabel" class="fpsLabel AileronsFont"></p>
         <div runat="server" class="form-size">
             <div id="pause-label" class="AileronsFont pauseLabel">
-                <button id="upload" class="upload-btn AileronsFont" runat="server">UPLOAD</button>
+                <button id="upload" class="upload-btn AileronsFont" runat="server">Take Screenshot</button>
             </div>
         </div>
     </div>
@@ -66,6 +69,5 @@
             </p>
         </div>
     </div>
-    <img id="image" src="/Resources/Images/polygon-mountain.jpg" height="500" width="500"/>
 </asp:Content>
 
