@@ -100,6 +100,12 @@ class Camera {
             this.moveUp();
         if (this.down)
             this.moveDown();
+
+
+        //update html data
+
+        document.getElementById("body_camera_pos").value = this.position;
+        document.getElementById("body_looking_at").value = this.lookingAt;
     }
 
     convert2DpointTo3Dpoint(point, distance, viewportSize){

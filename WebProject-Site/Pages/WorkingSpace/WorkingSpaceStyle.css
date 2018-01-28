@@ -7,10 +7,109 @@
 .canvas-div{
     position:absolute;
     left:10%;
-    top:15%;
+    top:17.5%;
     width:80vw;
     height:37.5vw;
-    box-shadow: 0vw 1vw 2vw rgba(0,0,0,0.4);
+    box-shadow: 0vw 1.5vw 2vw rgba(0,0,0,0.4);
+}
+
+.details-div{
+    position:absolute;
+    left:10%;
+    top:17.5%;
+    width:80vw;
+    height:37.5vw;
+    box-shadow: 0vw 1.5vw 2vw rgba(0,0,0,0.4);
+    background-color:rgb(16, 12, 12);
+}
+
+.tab-wrapper{
+    position:absolute;
+    left:10%;
+    top:12.5%;
+    width:80vw;
+    height:10vw;
+}
+
+.name-validator{
+    position:absolute;
+    top:11.5%;
+    left:8%;
+    font-size:1.5vw;
+    color:indianred;
+}
+
+.desc-validator{
+    position:absolute;
+    top:30%;
+    left:8%;
+    font-size:1.5vw;
+    color:indianred;
+}
+
+.thumbnail-validator{
+    position:absolute;
+    top:82.5%;
+    left:10%;
+    font-size:1.5vw;
+    color:indianred;
+}
+
+.canvas-tab{
+    position:absolute;
+    left:0%;
+    top:0%;
+    width:40%;
+    height:100%;
+    background-color:rgb(255, 248, 233);
+    cursor:pointer;
+}
+
+.canvas-tab p{
+    position:absolute;
+    left:0%;
+    top:0%;
+    width:100%;
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:1%;
+    font-size:1.5vw;
+    color:black;
+
+    transition:color ease-in-out 0.25s;
+}
+
+.desc-tab{
+    position:absolute;
+    left:60%;
+    top:0%;
+    width:40%;
+    height:100%;
+    background-color:rgb(16, 12, 12);
+    cursor:pointer;
+}
+
+.desc-tab p{
+    position:absolute;
+    left:0%;
+    top:0%;
+    width:100%;
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:1%;
+    font-size:1.5vw;
+    color:rgb(120, 51, 39);
+    transition:color ease-in-out 0.25s;
+}
+
+.canvas-tab:hover p{
+    color:rgb(120, 51, 39);
+}
+
+.desc-tab:hover p{
+    color:white;
 }
 
 .fpsLabel{
@@ -58,21 +157,73 @@
 
 .submit-btn{
     position:absolute;
-    left:10vw;
-    top:3vw;
-    width:12.5vw;
+    left:40%;
+    top:30vw;
+    width:20%;
     height:5vw;
-    border:none;
-    background-color:rgb(16, 12, 12);
-    color:white;
+    border:solid;
+    border-color:rgb(120, 51, 39);
+    background-color:rgba(0,0,0,0);
+    color:rgb(120, 51, 39);
     cursor:pointer;
     font-size:1.5vw;
     transition: ease-in-out 0.25s;
+    outline:none;
+}
+
+.model-name{
+    position:absolute;
+    left:20%;
+    top:10%;
+    width:60%;
+    font-size:2vw;
+    border-bottom:solid;
+    border-top:none;
+    border-left:none;
+    border-right:none;
+    border-bottom-color:rgb(120, 51, 39);
+    outline:none;
+    background-color:rgba(0,0,0,0);
+    caret-color:white;
+    color:white;
+    text-align:center;
+    transition:0.25s;
+}
+
+.model-name:focus{
+    border-bottom-color:rgba(255,255,255,0.75);
+    width:80%;
+    left:10%;
+}
+
+.desc-textarea{
+    position:absolute;
+    left:10%;
+    top:25%;
+    width:80%;
+    height:50%;
+    caret-color:white;
+    background-color:rgba(0,0,0,0);
+    color:rgb(128, 128, 128);
+    border:solid;
+    border-color:rgb(120, 51, 39);
+    outline:none;
+    font-size:1vw;
+    resize:none;
+    transition:0.25s;
+}
+
+.desc-textarea::-webkit-scrollbar { 
+    display:none;
+}
+
+.desc-textarea:focus{
+    border-color:rgba(255,255,255,0.75);
 }
 
 .submit-btn:hover{
-    top:2.5vw;
-    background-color:rgb(120, 51, 39);
+    border-color:white;
+    color:white;
 }
 
 

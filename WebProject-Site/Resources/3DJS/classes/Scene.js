@@ -69,13 +69,13 @@ class Scene {
     updateData(){
         if(this.main != null){
             let posVal = document.getElementById("body_model_position_data");
-            posVal.innerHTML = this.arrayToString(this.main.model.vertices);
+            posVal.value = this.arrayToString(this.main.model.vertices);
 
             let colorVal = document.getElementById("body_model_color_data");
-            colorVal.innerHTML = this.arrayToString(this.main.model.color);
+            colorVal.value = this.arrayToString(this.main.model.color);
 
             let normalVal = document.getElementById("body_model_normal_data");
-            normalVal.innerHTML = this.arrayToString(this.main.model.normals);
+            normalVal.value = this.arrayToString(this.main.model.normals);
         }
     }
 

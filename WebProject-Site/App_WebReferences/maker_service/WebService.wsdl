@@ -86,7 +86,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="normals" type="tns:ArrayOfFloat" />
             <s:element minOccurs="0" maxOccurs="1" name="cameraPos" type="tns:ArrayOfFloat" />
             <s:element minOccurs="0" maxOccurs="1" name="lookingat" type="tns:ArrayOfFloat" />
-            <s:element minOccurs="0" maxOccurs="1" name="thumbnail" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="thumbnail_url" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>

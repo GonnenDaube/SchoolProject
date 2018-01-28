@@ -7,6 +7,9 @@ using System.Data.SqlClient;
 using Resources;
 using System.Data;
 using System.Xml;
+using System.Net;
+using System.IO;
+using System.Text.RegularExpressions;
 
 /// <summary>
 /// Summary description for WebService
@@ -144,10 +147,21 @@ public class WebService : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public int InsertModel(int user_id, string name, string description, float[] positions, float[] colors, float[] normals, float[] cameraPos, float[] lookingat, string thumbnail)
+    public int InsertModel(int user_id, string name, string description, float[] positions, float[] colors, float[] normals, float[] cameraPos, float[] lookingat, string thumbnail_url)
     {
         try
         {
+            string location = (@"\DB_Files\Model_Thumbnails\Thumbnail" + DateTime.Now.ToString().Replace('/', '-').Replace(' ', '-').Replace(':', '-') + ".png");
+            location = Server.MapPath(location);
+            using (WebClient client = new WebClient())
+            {
+                string base64Data = Regex.Match(thumbnail_url, @"data:image/(?<type>.+?),(?<data>.+)").Groups["data"].Value;
+                byte[] binData = Convert.FromBase64String(base64Data);
+                if (!File.Exists(location))
+                {
+                    File.WriteAllBytes(location, binData);
+                }
+            }
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
                 OpenConnection();
             string query = "INSERT INTO [Models] VALUES(@user_id, @Creation_Date, @XML_LINK, @name, @desc, @thumbnail);";
@@ -157,7 +171,7 @@ public class WebService : System.Web.Services.WebService
             cmd.Parameters.AddWithValue("@XML_LINK", CreateModelXMLFile(positions, colors, normals, cameraPos, lookingat));
             cmd.Parameters.AddWithValue("@name", name);
             cmd.Parameters.AddWithValue("@desc", description);
-            cmd.Parameters.AddWithValue("@thumbnail", thumbnail);
+            cmd.Parameters.AddWithValue("@thumbnail", location);
             cmd.ExecuteNonQuery();
             return 1;
         }
@@ -171,7 +185,7 @@ public class WebService : System.Web.Services.WebService
     {
         try
         {
-            string location = @"/DB_Files/Model_Files/Model_XML" + DateTime.Now.ToString();
+            string location = @"/DB_Files/Model_Files/Model_XML" + DateTime.Now.ToString().Replace('/', '-').Replace(' ', '-').Replace(':', '-') + ".xml";
 
             XmlDocument document = new XmlDocument();
 
@@ -179,12 +193,12 @@ public class WebService : System.Web.Services.WebService
             document.AppendChild(docNode);
 
             #region camera
-            XmlNode cameraValues = document.CreateElement("camera-values");
+            XmlNode cameraValues = document.CreateAttribute("camera-values");
 
-            XmlNode cameraPosition = document.CreateElement("camera-position");
+            XmlNode cameraPosition = document.CreateAttribute("camera-position");
             cameraPosition.Value = ConvertFloatArrayToString(cameraPos);
 
-            XmlNode cameraLookingAt = document.CreateElement("camera-looking-at");
+            XmlNode cameraLookingAt = document.CreateAttribute("camera-looking-at");
             cameraLookingAt.Value = ConvertFloatArrayToString(lookingat);
 
             cameraValues.AppendChild(cameraPosition);
@@ -194,10 +208,10 @@ public class WebService : System.Web.Services.WebService
             #endregion
 
             #region model
-            XmlNode model = document.CreateElement("model-attributes");
+            XmlNode model = document.CreateAttribute("model-attributes");
 
             #region positions
-            XmlNode positionsAtr = document.CreateElement("position-attribute");
+            XmlNode positionsAtr = document.CreateAttribute("position-attribute");
 
             for (int i = 0; i < positions.Length; i += 3)
             {
@@ -208,7 +222,7 @@ public class WebService : System.Web.Services.WebService
 
                 string vertexVal = ConvertFloatArrayToString(arr);
 
-                XmlNode posVertex = document.CreateElement("vertex" + i / 3);
+                XmlNode posVertex = document.CreateAttribute("vertex" + i / 3);
                 posVertex.Value = vertexVal;
 
                 positionsAtr.AppendChild(posVertex);
@@ -217,7 +231,7 @@ public class WebService : System.Web.Services.WebService
             #endregion
 
             #region colors
-            XmlNode colorsAtr = document.CreateElement("color-attribute");
+            XmlNode colorsAtr = document.CreateAttribute("color-attribute");
 
             for (int i = 0; i < colors.Length; i += 3)
             {
@@ -228,7 +242,7 @@ public class WebService : System.Web.Services.WebService
 
                 string vertexVal = ConvertFloatArrayToString(arr);
 
-                XmlNode colorVertex = document.CreateElement("vertex" + i / 3);
+                XmlNode colorVertex = document.CreateAttribute("vertex" + i / 3);
                 colorVertex.Value = vertexVal;
 
                 colorsAtr.AppendChild(colorVertex);
@@ -237,7 +251,7 @@ public class WebService : System.Web.Services.WebService
             #endregion
 
             #region normals
-            XmlNode normalsAtr = document.CreateElement("normal-attribute");
+            XmlNode normalsAtr = document.CreateAttribute("normal-attribute");
 
             for (int i = 0; i < normals.Length; i += 3)
             {
@@ -248,7 +262,7 @@ public class WebService : System.Web.Services.WebService
 
                 string vertexVal = ConvertFloatArrayToString(arr);
 
-                XmlNode normalVertex = document.CreateElement("vertex" + i / 3);
+                XmlNode normalVertex = document.CreateAttribute("vertex" + i / 3);
                 normalVertex.Value = vertexVal;
 
                 colorsAtr.AppendChild(normalVertex);

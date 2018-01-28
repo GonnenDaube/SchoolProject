@@ -3,19 +3,41 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">
-    <form id="form" runat="server">
-        <asp:Button ID="Submit" runat="server" Text="UPLOAD" CssClass="submit-btn AileronsFont"/>
-    </form>
-    <div id="canvas-view" class="canvas-div">
+    <div id="tabs" class="tab-wrapper">
+        <div id="canvas-tab" class="canvas-tab">
+            <p>Model View</p>
+        </div>
+        <div id="desc-tab" class="desc-tab">
+            <p>Details</p>
+        </div>
+    </div>
+    <div id="canvas-view" class="canvas-div" style="z-index:2">
         <canvas id="canvas" class="canvas">
             WebGL is not supported in your browser
         </canvas>
         <p id="fpsLabel" class="fpsLabel AileronsFont"></p>
-        <div runat="server" class="form-size">
+        <div class="form-size">
             <div id="pause-label" class="AileronsFont pauseLabel">
                 <button id="upload" class="upload-btn AileronsFont" runat="server">Take Screenshot</button>
             </div>
         </div>
+    </div>
+    <div id="details-view" class="details-div" style="z-index:1">
+        <form id="form" runat="server">
+            <asp:TextBox ID="model_name" runat="server" CssClass="model-name AileronsFont"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="model_name_validator" runat="server" ErrorMessage="*" ControlToValidate="model_name" CssClass="name-validator"></asp:RequiredFieldValidator>
+            <textarea id="description" runat="server" cols="50" rows="10" class="desc-textarea TrenchFont"></textarea>
+            <asp:RequiredFieldValidator ID="description_validator" runat="server" ErrorMessage="*" ControlToValidate="description" CssClass="desc-validator"></asp:RequiredFieldValidator>
+            <asp:TextBox ID="thumbnail_url" runat="server" style="visibility:hidden"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="thumbnail_validator" runat="server" ErrorMessage="Thumbnail Required" ToolTip="(In model view -> press Esc -> click 'Take Screenshot')" ControlToValidate="thumbnail_url" CssClass="thumbnail-validator TrenchFont"></asp:RequiredFieldValidator>
+            <asp:Button ID="Submit" runat="server" Text="UPLOAD" CssClass="submit-btn AileronsFont" OnClick="Upload_Click"/>
+
+            <asp:TextBox ID="model_position_data" runat="server" style="visibility:hidden"></asp:TextBox>
+            <asp:TextBox ID="model_color_data" runat="server" style="visibility:hidden"></asp:TextBox>
+            <asp:TextBox ID="model_normal_data" runat="server" style="visibility:hidden"></asp:TextBox>
+            <asp:TextBox ID="camera_pos" runat="server" style="visibility:hidden"></asp:TextBox>
+            <asp:TextBox ID="looking_at" runat="server" style="visibility:hidden"></asp:TextBox>
+        </form>
     </div>
     <div id="vertex-selector-div" style="position:absolute; left:0px; top:0px; width:100px; height:100px; visibility:hidden" class="vertex-selector"></div>
     <div id="dial-wrapper" class="dial-wrapper" style="position:absolute; left:100px; top:100px">
@@ -61,12 +83,6 @@
                     </div>
                 </div>
             </div>
-            <p id="model_position_data" runat="server" style="visibility:hidden">
-            </p>
-            <p id="model_color_data" runat="server" style="visibility:hidden">
-            </p>
-            <p id="model_normal_data" runat="server" style="visibility:hidden">
-            </p>
         </div>
     </div>
 </asp:Content>
