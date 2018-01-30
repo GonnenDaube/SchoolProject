@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<rootElement>
+  <camera-values>
+    <camera-position>0.871959, 9.391039, -17.18157</camera-position>
+    <camera-looking-at>-0.2606848, -0.4035032, 0.8770543</camera-looking-at>
+  </camera-values>
+  <model-attributes>
+    <position-attribute>
+      <vertex0>4.173942, 3.022163, -0.04479323</vertex0>
+      <vertex1>5.263575, 0.7787023, -0.3876649</vertex1>
+      <vertex2>-4.195279, 1.574256, 0.2255317</vertex2>
+      <vertex3>5.263575, 0.7787023, -0.3876649</vertex3>
+      <vertex4>0.7508739, 0.1110444, -5.278773</vertex4>
+      <vertex5>-4.195279, 1.574256, 0.2255317</vertex5>
+      <vertex6>0.7508739, 0.1110444, -5.278773</vertex6>
+      <vertex7>-4.43068, 0.154482, -6.883552</vertex7>
+      <vertex8>-4.195279, 1.574256, 0.2255317</vertex8>
+      <vertex9>-4.43068, 0.154482, -6.883552</vertex9>
+      <vertex10>-12.97696, 8.643139, -5.037018</vertex10>
+      <vertex11>-4.195279, 1.574256, 0.2255317</vertex11>
+      <vertex12>-12.97696, 8.643139, -5.037018</vertex12>
+      <vertex13>-4.195279, 1.574256, 0.2255317</vertex13>
+      <vertex14>4.173942, 3.022163, -0.04479323</vertex14>
+      <vertex15>5.263575, 0.7787023, -0.3876649</vertex15>
+      <vertex16>0.7508739, 0.1110444, -5.278773</vertex16>
+      <vertex17>4.173942, 3.022163, -0.04479323</vertex17>
+    </position-attribute>
+    <color-attribute>
+      <vertex0>0, 0.03921569, 1</vertex0>
+      <vertex1>0, 0.03921569, 1</vertex1>
+      <vertex2>0, 0.03921569, 1</vertex2>
+      <vertex3>0, 0.03921569, 1</vertex3>
+      <vertex4>0, 0.03921569, 1</vertex4>
+      <vertex5>0, 0.03921569, 1</vertex5>
+      <vertex6>0, 0.03921569, 1</vertex6>
+      <vertex7>0, 0.03921569, 1</vertex7>
+      <vertex8>0, 0.03921569, 1</vertex8>
+      <vertex9>0, 0.03921569, 1</vertex9>
+      <vertex10>0, 0.03921569, 1</vertex10>
+      <vertex11>0, 0.03921569, 1</vertex11>
+      <vertex12>0, 0.03921569, 1</vertex12>
+      <vertex13>0, 0.03921569, 1</vertex13>
+      <vertex14>0, 0.03921569, 1</vertex14>
+      <vertex15>0, 0.03921569, 1</vertex15>
+      <vertex16>0, 0.03921569, 1</vertex16>
+      <vertex17>0, 0.03921569, 1</vertex17>
+    </color-attribute>
+    <normal-attribute>
+      <vertex0>0.1026551, 0.6225451, 0.7758218</vertex0>
+      <vertex1>0.1026551, 0.6225451, 0.7758218</vertex1>
+      <vertex2>0.1026551, 0.6225451, 0.7758218</vertex2>
+      <vertex3>0.7539774, 0.1172695, 0.6463481</vertex3>
+      <vertex4>0.7539774, 0.1172695, 0.6463481</vertex4>
+      <vertex5>0.7539774, 0.1172695, 0.6463481</vertex5>
+      <vertex6>0.8754264, -0.478738, 0.06662226</vertex6>
+      <vertex7>0.8754264, -0.478738, 0.06662226</vertex7>
+      <vertex8>0.8754264, -0.478738, 0.06662226</vertex8>
+      <vertex9>-0.1933139, -0.7290044, -0.6566448</vertex9>
+      <vertex10>-0.1933139, -0.7290044, -0.6566448</vertex10>
+      <vertex11>-0.1933139, -0.7290044, -0.6566448</vertex11>
+      <vertex12>0.1411582, -0.6819377, 0.7176597</vertex12>
+      <vertex13>0.1411582, -0.6819377, 0.7176597</vertex13>
+      <vertex14>0.1411582, -0.6819377, 0.7176597</vertex14>
+      <vertex15>1, 1, 1</vertex15>
+      <vertex16>1, 1, 1</vertex16>
+      <vertex17>1, 1, 1</vertex17>
+    </normal-attribute>
+  </model-attributes>
+</rootElement>

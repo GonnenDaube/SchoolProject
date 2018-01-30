@@ -147,9 +147,11 @@
     top:10%;
     font-size:1.75vw;
     color:rgb(120, 51, 39);
-    max-width:40%;
+    max-width:37%;
     max-height:10%;
+    width:37%;
     overflow:hidden;
+    text-align:right;
 }
 
 .creator-name{
@@ -159,8 +161,10 @@
     font-size:1.75vw;
     color:rgb(131, 108, 108);
     max-width:40%;
+    width:40%;
     max-height:10%;
     overflow:hidden;
+    text-align:left;
 }
 
 .asset-desc{

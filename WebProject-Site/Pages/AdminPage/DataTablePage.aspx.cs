@@ -262,6 +262,19 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
                     sqlCommand.Parameters.AddWithValue("@newAdmin", "False");
 
                 sqlCommand.ExecuteNonQuery();
+
+                //Update WebService
+                int id = 0;
+                sqlCmd = "SELECT Id FROM [Users] WHERE username = @username;";
+                sqlCommand = new SqlCommand(sqlCmd, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@username", ((TextBox)footerRow.Controls[1].Controls[0]).Text);
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                if (reader.Read())
+                {
+                    id = reader.GetInt32(0);
+                }
+                maker_service.WebService ws = new maker_service.WebService();
+                ws.InsertUser(id);
             }
 
             sqlConnection.Close();

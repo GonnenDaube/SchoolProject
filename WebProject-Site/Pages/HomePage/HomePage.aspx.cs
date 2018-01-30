@@ -58,6 +58,20 @@ public partial class Pages_HomePage_HomePage : System.Web.UI.Page
             sqlCommand.Parameters.AddWithValue("@color", color);
             sqlCommand.ExecuteNonQuery();
 
+            //Update WebService
+            int id = 0;
+            sqlCmd = "SELECT Id FROM [Users] WHERE username = @username;";
+            sqlCommand = new SqlCommand(sqlCmd, sqlConnection);
+            sqlCommand.Parameters.AddWithValue("@username", usernameBox.Text);
+            reader = sqlCommand.ExecuteReader();
+            if (reader.Read())
+            {
+                id = reader.GetInt32(0);
+            }
+            maker_service.WebService ws = new maker_service.WebService();
+            ws.InsertUser(id);
+
+
             //send verification email
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress(resources.ResourceManager.GetString("Site_Email_Address"), "Model Makertron 2100 - v2.0");

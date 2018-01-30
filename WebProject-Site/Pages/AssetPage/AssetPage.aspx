@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">
     <form runat="server">
         <asp:Panel ID="ErrorMessage" runat="server"></asp:Panel>
-        <div id="canvas-view" class="panelPos">
+        <div id="canvas-view" class="panelPos" style="z-index:2">
             <canvas id="canvas" class="canvas">
                 WebGL is not supported in your browser
             </canvas>
@@ -19,6 +19,7 @@
             <asp:Label ID="AssetDescription" runat="server" Text="" CssClass="asset-desc TrenchFont"></asp:Label>
             <asp:Button ID="Download_Btn" runat="server" Text="Download" OnClick="Download_Btn_Click" CssClass="AileronsFont download-button"/>
         </div>
+        <p id="should-update" style="visibility:hidden"></p>
         <div id="asset-rating" class="asset-rating">
             <div id="overall-rate" class="overall-rate AileronsFont">
                 <asp:Label ID="Rating" runat="server" Text=""></asp:Label>

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<rootElement>
+  <camera-values>
+    <camera-position>-8.298563, 7.958444, -23.48285</camera-position>
+    <camera-looking-at>0.2404087, -0.2454474, 0.9391242</camera-looking-at>
+  </camera-values>
+  <model-attributes>
+    <position-attribute>
+      <vertex0>7.511432, 1.898014, -7.937634</vertex0>
+      <vertex1>8.216569, 5.702509, -7.199424</vertex1>
+      <vertex2>-4.057055, 5.733951, -6.678159</vertex2>
+      <vertex3>7.511432, 1.898014, -7.937634</vertex3>
+      <vertex4>-4.422226, 0.561725, -7.706597</vertex4>
+      <vertex5>-4.057055, 5.733951, -6.678159</vertex5>
+      <vertex6>-4.422226, 0.561725, -7.706597</vertex6>
+      <vertex7>-11.92421, 5.901994, -1.701708</vertex7>
+      <vertex8>-4.057055, 5.733951, -6.678159</vertex8>
+      <vertex9>-4.057055, 5.733951, -6.678159</vertex9>
+      <vertex10>-6.060146, 8.01206, -3.686146</vertex10>
+      <vertex11>-11.92421, 5.901994, -1.701708</vertex11>
+    </position-attribute>
+    <color-attribute>
+      <vertex0>1, 0, 0</vertex0>
+      <vertex1>1, 0, 0</vertex1>
+      <vertex2>1, 0, 0</vertex2>
+      <vertex3>0.8588235, 1, 0</vertex3>
+      <vertex4>0, 0.3411765, 1</vertex4>
+      <vertex5>1, 0, 0.4196078</vertex5>
+      <vertex6>1, 0, 0.4196078</vertex6>
+      <vertex7>1, 0, 0.4196078</vertex7>
+      <vertex8>1, 0, 0.4196078</vertex8>
+      <vertex9>1, 0, 0.4196078</vertex9>
+      <vertex10>1, 0, 0.4196078</vertex10>
+      <vertex11>1, 0, 0.4196078</vertex11>
+    </color-attribute>
+    <normal-attribute>
+      <vertex0>0.0365931, 0.5597532, 0.827851</vertex0>
+      <vertex1>0.0365931, 0.5597532, 0.827851</vertex1>
+      <vertex2>0.0365931, 0.5597532, 0.827851</vertex2>
+      <vertex3>0.9493421, -0.1244047, 0.2885707</vertex3>
+      <vertex4>0.9493421, -0.1244047, 0.2885707</vertex4>
+      <vertex5>0.9493421, -0.1244047, 0.2885707</vertex5>
+      <vertex6>0.3755798, 0.7315255, 0.5690432</vertex6>
+      <vertex7>0.3755798, 0.7315255, 0.5690432</vertex7>
+      <vertex8>0.3755798, 0.7315255, 0.5690432</vertex8>
+      <vertex9>1, 1, 1</vertex9>
+      <vertex10>1, 1, 1</vertex10>
+      <vertex11>1, 1, 1</vertex11>
+    </normal-attribute>
+  </model-attributes>
+</rootElement>

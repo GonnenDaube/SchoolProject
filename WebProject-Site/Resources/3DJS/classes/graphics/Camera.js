@@ -103,9 +103,10 @@ class Camera {
 
 
         //update html data
-
-        document.getElementById("body_camera_pos").value = this.position;
-        document.getElementById("body_looking_at").value = this.lookingAt;
+        if(document.getElementById("should-update") == undefined){
+            document.getElementById("body_camera_pos").value = this.position;
+            document.getElementById("body_looking_at").value = this.lookingAt;
+        }
     }
 
     convert2DpointTo3Dpoint(point, distance, viewportSize){

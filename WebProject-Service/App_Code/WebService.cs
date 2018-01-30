@@ -152,23 +152,24 @@ public class WebService : System.Web.Services.WebService
         try
         {
             string location = (@"\DB_Files\Model_Thumbnails\Thumbnail" + DateTime.Now.ToString().Replace('/', '-').Replace(' ', '-').Replace(':', '-') + ".png");
-            location = Server.MapPath(location);
+            string path = Server.MapPath(location);
             using (WebClient client = new WebClient())
             {
                 string base64Data = Regex.Match(thumbnail_url, @"data:image/(?<type>.+?),(?<data>.+)").Groups["data"].Value;
                 byte[] binData = Convert.FromBase64String(base64Data);
-                if (!File.Exists(location))
+                if (!File.Exists(path))
                 {
-                    File.WriteAllBytes(location, binData);
+                    File.WriteAllBytes(path, binData);
                 }
             }
+            string xml_location = CreateModelXMLFile(positions, colors, normals, cameraPos, lookingat);
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
                 OpenConnection();
             string query = "INSERT INTO [Models] VALUES(@user_id, @Creation_Date, @XML_LINK, @name, @desc, @thumbnail);";
             SqlCommand cmd = new SqlCommand(query, sqlConnection);
             cmd.Parameters.AddWithValue("@user_id", user_id);
             cmd.Parameters.AddWithValue("@Creation_Date", DateTime.Now);
-            cmd.Parameters.AddWithValue("@XML_LINK", CreateModelXMLFile(positions, colors, normals, cameraPos, lookingat));
+            cmd.Parameters.AddWithValue("@XML_LINK", xml_location);
             cmd.Parameters.AddWithValue("@name", name);
             cmd.Parameters.AddWithValue("@desc", description);
             cmd.Parameters.AddWithValue("@thumbnail", location);
@@ -187,31 +188,35 @@ public class WebService : System.Web.Services.WebService
         {
             string location = @"/DB_Files/Model_Files/Model_XML" + DateTime.Now.ToString().Replace('/', '-').Replace(' ', '-').Replace(':', '-') + ".xml";
 
+            string path = Server.MapPath(location);
+
             XmlDocument document = new XmlDocument();
 
             XmlNode docNode = document.CreateXmlDeclaration("1.0", "UTF-8", null);
             document.AppendChild(docNode);
 
+            XmlNode rootNode = document.CreateElement("rootElement");
+
             #region camera
-            XmlNode cameraValues = document.CreateAttribute("camera-values");
+            XmlNode cameraValues = document.CreateElement("camera-values");
 
-            XmlNode cameraPosition = document.CreateAttribute("camera-position");
-            cameraPosition.Value = ConvertFloatArrayToString(cameraPos);
+            XmlNode cameraPosition = document.CreateElement("camera-position");
+            cameraPosition.InnerText = ConvertFloatArrayToString(cameraPos);
 
-            XmlNode cameraLookingAt = document.CreateAttribute("camera-looking-at");
-            cameraLookingAt.Value = ConvertFloatArrayToString(lookingat);
+            XmlNode cameraLookingAt = document.CreateElement("camera-looking-at");
+            cameraLookingAt.InnerText = ConvertFloatArrayToString(lookingat);
 
             cameraValues.AppendChild(cameraPosition);
             cameraValues.AppendChild(cameraLookingAt);
 
-            document.AppendChild(cameraValues);
+            rootNode.AppendChild(cameraValues);
             #endregion
 
             #region model
-            XmlNode model = document.CreateAttribute("model-attributes");
+            XmlNode model = document.CreateElement("model-attributes");
 
             #region positions
-            XmlNode positionsAtr = document.CreateAttribute("position-attribute");
+            XmlNode positionsAtr = document.CreateElement("position-attribute");
 
             for (int i = 0; i < positions.Length; i += 3)
             {
@@ -222,8 +227,8 @@ public class WebService : System.Web.Services.WebService
 
                 string vertexVal = ConvertFloatArrayToString(arr);
 
-                XmlNode posVertex = document.CreateAttribute("vertex" + i / 3);
-                posVertex.Value = vertexVal;
+                XmlNode posVertex = document.CreateElement("vertex" + i / 3);
+                posVertex.InnerText = vertexVal;
 
                 positionsAtr.AppendChild(posVertex);
             }
@@ -231,7 +236,7 @@ public class WebService : System.Web.Services.WebService
             #endregion
 
             #region colors
-            XmlNode colorsAtr = document.CreateAttribute("color-attribute");
+            XmlNode colorsAtr = document.CreateElement("color-attribute");
 
             for (int i = 0; i < colors.Length; i += 3)
             {
@@ -242,16 +247,16 @@ public class WebService : System.Web.Services.WebService
 
                 string vertexVal = ConvertFloatArrayToString(arr);
 
-                XmlNode colorVertex = document.CreateAttribute("vertex" + i / 3);
-                colorVertex.Value = vertexVal;
+                XmlNode posVertex = document.CreateElement("vertex" + i / 3);
+                posVertex.InnerText = vertexVal;
 
-                colorsAtr.AppendChild(colorVertex);
+                colorsAtr.AppendChild(posVertex);
             }
 
             #endregion
 
             #region normals
-            XmlNode normalsAtr = document.CreateAttribute("normal-attribute");
+            XmlNode normalsAtr = document.CreateElement("normal-attribute");
 
             for (int i = 0; i < normals.Length; i += 3)
             {
@@ -262,10 +267,10 @@ public class WebService : System.Web.Services.WebService
 
                 string vertexVal = ConvertFloatArrayToString(arr);
 
-                XmlNode normalVertex = document.CreateAttribute("vertex" + i / 3);
-                normalVertex.Value = vertexVal;
+                XmlNode posVertex = document.CreateElement("vertex" + i / 3);
+                posVertex.InnerText = vertexVal;
 
-                colorsAtr.AppendChild(normalVertex);
+                normalsAtr.AppendChild(posVertex);
             }
 
             #endregion
@@ -274,11 +279,13 @@ public class WebService : System.Web.Services.WebService
             model.AppendChild(colorsAtr);
             model.AppendChild(normalsAtr);
 
-            document.AppendChild(model);
+            rootNode.AppendChild(model);
 
             #endregion
 
-            document.Save(location);
+            document.AppendChild(rootNode);
+
+            document.Save(path);
 
             return location;
         }
@@ -295,6 +302,37 @@ public class WebService : System.Web.Services.WebService
         XmlDocument document = new XmlDocument();
         document.Load(Server.MapPath(location));
         return document;
+    }
+
+
+    [WebMethod]
+    public int[] GetModelIds()
+    {
+        try
+        {
+            if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
+                OpenConnection();
+            string query = "SELECT Model_Id FROM [Models]";
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<int> idsList = new List<int>();
+            while (reader.Read())
+            {
+                idsList.Add(reader.GetInt32(0));
+            }
+
+            int[] ids = new int[idsList.Count];
+
+            for(int i = 0; i < ids.Length; i++)
+            {
+                ids[i] = idsList.ElementAt(i);
+            }
+            return ids;
+        }
+        catch
+        {
+            return null;
+        }
     }
 
     /// <summary>
@@ -396,7 +434,7 @@ public class WebService : System.Web.Services.WebService
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
                 OpenConnection();
-            string query = "SELECT * FROM [Models] WHERE Model_Id = @model);";
+            string query = "SELECT * FROM [Models] WHERE Model_Id = @model;";
             SqlCommand cmd = new SqlCommand(query, sqlConnection);
             cmd.Parameters.AddWithValue("@model", model_id);
             XmlReader reader = cmd.ExecuteXmlReader();
@@ -407,6 +445,164 @@ public class WebService : System.Web.Services.WebService
 
         }
         return null;
+    }
+
+    [WebMethod]
+    public int GetCreatorUserId(int model_id)
+    {
+        try
+        {
+            if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
+                OpenConnection();
+            string query = "SELECT User_Id FROM [Models] WHERE Model_Id = @model;";
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
+            cmd.Parameters.AddWithValue("@model", model_id);
+            SqlDataReader reader = cmd.ExecuteReader();
+            int id = -1;
+            if (reader.Read())
+            {
+                id = reader.GetInt32(0);
+            }
+            return id;
+        }
+        catch
+        {
+
+        }
+        return -1;
+    }
+
+    [WebMethod]
+    public DateTime GetModelCreationDate(int model_id)
+    {
+        try
+        {
+            if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
+                OpenConnection();
+            string query = "SELECT Creation_Date FROM [Models] WHERE Model_Id = @model;";
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
+            cmd.Parameters.AddWithValue("@model", model_id);
+            SqlDataReader reader = cmd.ExecuteReader();
+            DateTime datetime;
+            if (reader.Read())
+            {
+                datetime = reader.GetDateTime(0);
+            }
+            return DateTime.Now;
+        }
+        catch
+        {
+
+        }
+        return DateTime.Now;
+    }
+
+    [WebMethod]
+    public XmlDocument GetModelXMLFile(int model_id)
+    {
+        try
+        {
+            if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
+                OpenConnection();
+            string query = "SELECT XML_File_Link FROM [Models] WHERE Model_Id = @model;";
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
+            cmd.Parameters.AddWithValue("@model", model_id);
+            SqlDataReader reader = cmd.ExecuteReader();
+            string location = null;
+            if (reader.Read())
+            {
+                location = reader.GetString(0);
+            }
+            return GetXMLFile(location);
+        }
+        catch
+        {
+
+        }
+        return null;
+    }
+
+    [WebMethod]
+    public string GetModelName(int model_id)
+    {
+        try
+        {
+            if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
+                OpenConnection();
+            string query = "SELECT Name FROM [Models] WHERE Model_Id = @model;";
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
+            cmd.Parameters.AddWithValue("@model", model_id);
+            SqlDataReader reader = cmd.ExecuteReader();
+            string name = null;
+            if (reader.Read())
+            {
+                name = reader.GetString(0);
+            }
+            return name;
+        }
+        catch
+        {
+
+        }
+        return null;
+    }
+
+    [WebMethod]
+    public string GetModelDescription(int model_id)
+    {
+        try
+        {
+            if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
+                OpenConnection();
+            string query = "SELECT Description FROM [Models] WHERE Model_Id = @model;";
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
+            cmd.Parameters.AddWithValue("@model", model_id);
+            SqlDataReader reader = cmd.ExecuteReader();
+            string desc = null;
+            if (reader.Read())
+            {
+                desc = reader.GetString(0);
+            }
+            return desc;
+        }
+        catch
+        {
+
+        }
+        return null;
+    }
+
+    [WebMethod]
+    public string GetModelThumbnail(int model_id)
+    {
+        try
+        {
+            if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
+                OpenConnection();
+            string query = "SELECT thumbnail FROM [Models] WHERE Model_Id = @model;";
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
+            cmd.Parameters.AddWithValue("@model", model_id);
+            SqlDataReader reader = cmd.ExecuteReader();
+            string thumb = null;
+            if (reader.Read())
+            {
+                thumb = reader.GetString(0);
+            }
+            string dataUrl = ConvertToDataUrl(thumb);
+            return dataUrl;
+        }
+        catch
+        {
+
+        }
+        return null;
+    }
+
+    private string ConvertToDataUrl(string location)
+    {
+        byte[] binaryData = File.ReadAllBytes(Server.MapPath(location));
+        string base64 = Convert.ToBase64String(binaryData);
+        return "data:image/png;base64," + base64;
     }
 
 

@@ -122,6 +122,21 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetModelIds">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetModelIdsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetModelIdsResult" type="tns:ArrayOfInt" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="InsertDownload">
         <s:complexType>
           <s:sequence>
@@ -164,6 +179,96 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="GetModelInfoResult" type="tns:XmlReader" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCreatorUserId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="model_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCreatorUserIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetCreatorUserIdResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetModelCreationDate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="model_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetModelCreationDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetModelCreationDateResult" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetModelXMLFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="model_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetModelXMLFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetModelXMLFileResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetModelName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="model_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetModelNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetModelNameResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetModelDescription">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="model_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetModelDescriptionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetModelDescriptionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetModelThumbnail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="model_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetModelThumbnailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetModelThumbnailResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -265,6 +370,12 @@
   <wsdl:message name="GetXMLFileSoapOut">
     <wsdl:part name="parameters" element="tns:GetXMLFileResponse" />
   </wsdl:message>
+  <wsdl:message name="GetModelIdsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetModelIds" />
+  </wsdl:message>
+  <wsdl:message name="GetModelIdsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetModelIdsResponse" />
+  </wsdl:message>
   <wsdl:message name="InsertDownloadSoapIn">
     <wsdl:part name="parameters" element="tns:InsertDownload" />
   </wsdl:message>
@@ -282,6 +393,42 @@
   </wsdl:message>
   <wsdl:message name="GetModelInfoSoapOut">
     <wsdl:part name="parameters" element="tns:GetModelInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCreatorUserIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCreatorUserId" />
+  </wsdl:message>
+  <wsdl:message name="GetCreatorUserIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCreatorUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetModelCreationDateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetModelCreationDate" />
+  </wsdl:message>
+  <wsdl:message name="GetModelCreationDateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetModelCreationDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetModelXMLFileSoapIn">
+    <wsdl:part name="parameters" element="tns:GetModelXMLFile" />
+  </wsdl:message>
+  <wsdl:message name="GetModelXMLFileSoapOut">
+    <wsdl:part name="parameters" element="tns:GetModelXMLFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetModelNameSoapIn">
+    <wsdl:part name="parameters" element="tns:GetModelName" />
+  </wsdl:message>
+  <wsdl:message name="GetModelNameSoapOut">
+    <wsdl:part name="parameters" element="tns:GetModelNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetModelDescriptionSoapIn">
+    <wsdl:part name="parameters" element="tns:GetModelDescription" />
+  </wsdl:message>
+  <wsdl:message name="GetModelDescriptionSoapOut">
+    <wsdl:part name="parameters" element="tns:GetModelDescriptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetModelThumbnailSoapIn">
+    <wsdl:part name="parameters" element="tns:GetModelThumbnail" />
+  </wsdl:message>
+  <wsdl:message name="GetModelThumbnailSoapOut">
+    <wsdl:part name="parameters" element="tns:GetModelThumbnailResponse" />
   </wsdl:message>
   <wsdl:message name="GetModelsListSoapIn">
     <wsdl:part name="parameters" element="tns:GetModelsList" />
@@ -334,6 +481,10 @@
       <wsdl:input message="tns:GetXMLFileSoapIn" />
       <wsdl:output message="tns:GetXMLFileSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetModelIds">
+      <wsdl:input message="tns:GetModelIdsSoapIn" />
+      <wsdl:output message="tns:GetModelIdsSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="InsertDownload">
       <wsdl:input message="tns:InsertDownloadSoapIn" />
       <wsdl:output message="tns:InsertDownloadSoapOut" />
@@ -345,6 +496,30 @@
     <wsdl:operation name="GetModelInfo">
       <wsdl:input message="tns:GetModelInfoSoapIn" />
       <wsdl:output message="tns:GetModelInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCreatorUserId">
+      <wsdl:input message="tns:GetCreatorUserIdSoapIn" />
+      <wsdl:output message="tns:GetCreatorUserIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetModelCreationDate">
+      <wsdl:input message="tns:GetModelCreationDateSoapIn" />
+      <wsdl:output message="tns:GetModelCreationDateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetModelXMLFile">
+      <wsdl:input message="tns:GetModelXMLFileSoapIn" />
+      <wsdl:output message="tns:GetModelXMLFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetModelName">
+      <wsdl:input message="tns:GetModelNameSoapIn" />
+      <wsdl:output message="tns:GetModelNameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetModelDescription">
+      <wsdl:input message="tns:GetModelDescriptionSoapIn" />
+      <wsdl:output message="tns:GetModelDescriptionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetModelThumbnail">
+      <wsdl:input message="tns:GetModelThumbnailSoapIn" />
+      <wsdl:output message="tns:GetModelThumbnailSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetModelsList">
       <wsdl:input message="tns:GetModelsListSoapIn" />
@@ -433,6 +608,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetModelIds">
+      <soap:operation soapAction="http://tempuri.org/GetModelIds" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="InsertDownload">
       <soap:operation soapAction="http://tempuri.org/InsertDownload" style="document" />
       <wsdl:input>
@@ -453,6 +637,60 @@
     </wsdl:operation>
     <wsdl:operation name="GetModelInfo">
       <soap:operation soapAction="http://tempuri.org/GetModelInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCreatorUserId">
+      <soap:operation soapAction="http://tempuri.org/GetCreatorUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModelCreationDate">
+      <soap:operation soapAction="http://tempuri.org/GetModelCreationDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModelXMLFile">
+      <soap:operation soapAction="http://tempuri.org/GetModelXMLFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModelName">
+      <soap:operation soapAction="http://tempuri.org/GetModelName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModelDescription">
+      <soap:operation soapAction="http://tempuri.org/GetModelDescription" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModelThumbnail">
+      <soap:operation soapAction="http://tempuri.org/GetModelThumbnail" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -562,6 +800,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetModelIds">
+      <soap12:operation soapAction="http://tempuri.org/GetModelIds" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="InsertDownload">
       <soap12:operation soapAction="http://tempuri.org/InsertDownload" style="document" />
       <wsdl:input>
@@ -582,6 +829,60 @@
     </wsdl:operation>
     <wsdl:operation name="GetModelInfo">
       <soap12:operation soapAction="http://tempuri.org/GetModelInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCreatorUserId">
+      <soap12:operation soapAction="http://tempuri.org/GetCreatorUserId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModelCreationDate">
+      <soap12:operation soapAction="http://tempuri.org/GetModelCreationDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModelXMLFile">
+      <soap12:operation soapAction="http://tempuri.org/GetModelXMLFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModelName">
+      <soap12:operation soapAction="http://tempuri.org/GetModelName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModelDescription">
+      <soap12:operation soapAction="http://tempuri.org/GetModelDescription" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModelThumbnail">
+      <soap12:operation soapAction="http://tempuri.org/GetModelThumbnail" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
