@@ -118,6 +118,10 @@
     transition:0.25s;
 }
 
+.hiddenField{
+    visibility:hidden;
+}
+
 .download-button{
     position:absolute; 
     outline:none; 

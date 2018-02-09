@@ -26,6 +26,8 @@ public partial class Pages_WorkingSpace_WorkingSpace : System.Web.UI.Page
 
         maker_service.WebService service = new maker_service.WebService();
         service.InsertModel((int)Session["user-id"], name, desc, positions, colors, normals, cameraPos, lookingAt, thumbnail);
+
+        service.CloseConnection();
     }
 
     private float[] ConvertStringToFloatArray(string str)

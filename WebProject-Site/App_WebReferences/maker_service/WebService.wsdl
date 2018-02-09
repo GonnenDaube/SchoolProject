@@ -196,6 +196,21 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetModelUserRate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="model_id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="user_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetModelUserRateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetModelUserRateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="GetModelCreationDate">
         <s:complexType>
           <s:sequence>
@@ -400,6 +415,12 @@
   <wsdl:message name="GetCreatorUserIdSoapOut">
     <wsdl:part name="parameters" element="tns:GetCreatorUserIdResponse" />
   </wsdl:message>
+  <wsdl:message name="GetModelUserRateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetModelUserRate" />
+  </wsdl:message>
+  <wsdl:message name="GetModelUserRateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetModelUserRateResponse" />
+  </wsdl:message>
   <wsdl:message name="GetModelCreationDateSoapIn">
     <wsdl:part name="parameters" element="tns:GetModelCreationDate" />
   </wsdl:message>
@@ -500,6 +521,10 @@
     <wsdl:operation name="GetCreatorUserId">
       <wsdl:input message="tns:GetCreatorUserIdSoapIn" />
       <wsdl:output message="tns:GetCreatorUserIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetModelUserRate">
+      <wsdl:input message="tns:GetModelUserRateSoapIn" />
+      <wsdl:output message="tns:GetModelUserRateSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetModelCreationDate">
       <wsdl:input message="tns:GetModelCreationDateSoapIn" />
@@ -646,6 +671,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetCreatorUserId">
       <soap:operation soapAction="http://tempuri.org/GetCreatorUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModelUserRate">
+      <soap:operation soapAction="http://tempuri.org/GetModelUserRate" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -838,6 +872,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetCreatorUserId">
       <soap12:operation soapAction="http://tempuri.org/GetCreatorUserId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModelUserRate">
+      <soap12:operation soapAction="http://tempuri.org/GetModelUserRate" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

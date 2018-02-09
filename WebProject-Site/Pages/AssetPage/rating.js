@@ -5,6 +5,7 @@ var star3;
 var star4;
 var stars;
 var selected;
+var userRate;
 
 function addLoadEvent(func) {
     var oldonload = window.onload;
@@ -43,11 +44,11 @@ if (window.location.href.includes("AssetPage.aspx")) {
 }
 
 function rateSetUp() {
-    star0 = document.getElementById("star0");
-    star1 = document.getElementById("star1");
-    star2 = document.getElementById("star2");
-    star3 = document.getElementById("star3");
-    star4 = document.getElementById("star4");
+    star0 = document.getElementById("body_star0");
+    star1 = document.getElementById("body_star1");
+    star2 = document.getElementById("body_star2");
+    star3 = document.getElementById("body_star3");
+    star4 = document.getElementById("body_star4");
 
     selected = 0;
 
@@ -75,6 +76,8 @@ function rateSetUp() {
     star2.onclick = function () { selectStars(3); return false; };
     star3.onclick = function () { selectStars(4); return false; };
     star4.onclick = function () { selectStars(5); return false; };
+
+    userRate = document.getElementById("body_user_rate");
 }
 
 function resizeBreakLine() {

@@ -23,6 +23,8 @@ public partial class Pages_Library_Library : System.Web.UI.Page
         {
             AssetPanel.Controls.Add(GenerateAssetControl(i, ids[i]));//would get asset id
         }
+
+        ws.CloseConnection();
     }
 
     private HtmlGenericControl GenerateAssetControl(int index, int model_id)

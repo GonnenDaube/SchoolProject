@@ -11,6 +11,7 @@ using Resources;
 public partial class Pages_AssetPage_AssetPage : System.Web.UI.Page
 {
     maker_service.WebService ws;
+    int model_id;
 
 
     protected void Page_Load(object sender, EventArgs e)
@@ -18,7 +19,7 @@ public partial class Pages_AssetPage_AssetPage : System.Web.UI.Page
         string url = Request.Url.AbsoluteUri;// /Pages/AssetPage.aspx?item_id=200134
         try
         {
-            int model_id = int.Parse(url.Substring(url.IndexOf('?') + 1));
+            model_id = int.Parse(url.Substring(url.IndexOf('?') + 1));
 
             ws = new maker_service.WebService();
 
@@ -28,6 +29,9 @@ public partial class Pages_AssetPage_AssetPage : System.Web.UI.Page
             AssetName.ToolTip = AssetName.Text;
             AssetDescription.Text = ws.GetModelDescription(model_id);
             Rating.Text = ws.GetRate(model_id).ToString();
+            user_rate.InnerHtml = ws.GetModelUserRate(model_id, (int)Session["user-id"]).ToString();
+
+            
         }
         catch//if anything failed print Error 404
         {
@@ -73,5 +77,12 @@ public partial class Pages_AssetPage_AssetPage : System.Web.UI.Page
     protected void Download_Btn_Click(object sender, EventArgs e)
     {
 
+    }
+
+    protected void UpdateRating(object sender, EventArgs e)
+    {
+        string senderId = ((HtmlButton)sender).ID;
+        int rate = int.Parse(senderId.Substring(senderId.IndexOf('r') + 1));
+        ws.InsertRating((int)Session["user-id"], model_id, rate);
     }
 }

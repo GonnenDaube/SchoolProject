@@ -473,6 +473,32 @@ public class WebService : System.Web.Services.WebService
     }
 
     [WebMethod]
+    public int GetModelUserRate(int model_id, int user_id)
+    {
+        try
+        {
+            if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
+                OpenConnection();
+            string query = "SELECT Values FROM [Ratings] WHERE Model_Id = @model AND User_Id = @user;";
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
+            cmd.Parameters.AddWithValue("@model", model_id);
+            cmd.Parameters.AddWithValue("@user", user_id);
+            SqlDataReader reader = cmd.ExecuteReader();
+            int rate = 0;
+            if (reader.Read())
+            {
+                rate = reader.GetInt32(0);
+            }
+            return rate;
+        }
+        catch
+        {
+
+        }
+        return 0;
+    }
+
+    [WebMethod]
     public DateTime GetModelCreationDate(int model_id)
     {
         try
