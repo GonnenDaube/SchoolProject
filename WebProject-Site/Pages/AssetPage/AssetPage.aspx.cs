@@ -29,9 +29,28 @@ public partial class Pages_AssetPage_AssetPage : System.Web.UI.Page
             AssetName.ToolTip = AssetName.Text;
             AssetDescription.Text = ws.GetModelDescription(model_id);
             Rating.Text = ws.GetRate(model_id).ToString();
-            user_rate.InnerHtml = ws.GetModelUserRate(model_id, (int)Session["user-id"]).ToString();
+            int userRate = ws.GetModelUserRate(model_id, (int)Session["user-id"]);
 
-            
+            if(userRate > 0)
+            {
+                selectedImg0.CssClass = "shownImg";
+            }
+            if (userRate > 1)
+            {
+                selectedImg1.CssClass = "shownImg";
+            }
+            if (userRate > 2)
+            {
+                selectedImg2.CssClass = "shownImg";
+            }
+            if (userRate > 3)
+            {
+                selectedImg3.CssClass = "shownImg";
+            }
+            if (userRate > 4)
+            {
+                selectedImg4.CssClass = "shownImg";
+            }
         }
         catch//if anything failed print Error 404
         {
@@ -81,8 +100,10 @@ public partial class Pages_AssetPage_AssetPage : System.Web.UI.Page
 
     protected void UpdateRating(object sender, EventArgs e)
     {
-        string senderId = ((HtmlButton)sender).ID;
-        int rate = int.Parse(senderId.Substring(senderId.IndexOf('r') + 1));
+        string senderId = ((ImageButton)sender).ID;
+        int rate = int.Parse(senderId.Substring(senderId.IndexOf('n') + 1)) + 1;
         ws.InsertRating((int)Session["user-id"], model_id, rate);
+
+
     }
 }

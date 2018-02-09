@@ -28,31 +28,26 @@
                 <line id="rate-break-line" x1="0" x2="0" y1="0" y2="0" style="stroke:rgb(120, 51, 39); stroke-width:0.25vw"></line>
             </svg>
             <div id="star-list" class="star-list">
-                <button id="star0" runat="server" class="star" onServerClick="UpdateRating">
-                    <img src="/Resources/Icons/star.png" class="shown"/>
-                    <img id="checked0" src="/Resources/Icons/star-checked.png" class="hidden"/>
-                    <img id="selected0" src="/Resources/Icons/star-border.png" class="hidden"/>
-                </button>
-                <button id="star1" runat="server" class="star" onServerClick="UpdateRating">
-                    <img src="/Resources/Icons/star.png" class="shown"/>
-                    <img id="checked1" src="/Resources/Icons/star-checked.png" class="hidden"/>
-                    <img id="selected1" src="/Resources/Icons/star-border.png" class="hidden"/>
-                </button>
-                <button id="star2" runat="server" class="star" onServerClick="UpdateRating">
-                    <img src="/Resources/Icons/star.png" class="shown"/>
-                    <img id="checked2" src="/Resources/Icons/star-checked.png" class="hidden"/>
-                    <img id="selected2" src="/Resources/Icons/star-border.png" class="hidden"/>
-                </button>
-                <button id="star3" runat="server" class="star" onServerClick="UpdateRating">
-                    <img src="/Resources/Icons/star.png"  class="shown"/>
-                    <img id="checked3" src="/Resources/Icons/star-checked.png" class="hidden"/>
-                    <img id="selected3" src="/Resources/Icons/star-border.png" class="hidden"/>
-                </button>
-                <button id="star4" runat="server" class="star" onServerClick="UpdateRating">
-                    <img src="/Resources/Icons/star.png" class="shown"/>
-                    <img id="checked4" src="/Resources/Icons/star-checked.png" class="hidden"/>
-                    <img id="selected4" src="/Resources/Icons/star-border.png" class="hidden"/>
-                </button>
+                <div id="star0" class="star">
+                    <asp:Image ID="selectedImg0" CssClass="hiddenImg" ImageUrl="/Resources/Icons/star-checked.png" runat="server" />
+                    <asp:ImageButton ID="rate_btn0" runat="server" ImageUrl="/Resources/Icons/star.png" OnClick="UpdateRating"/>
+                </div>
+                <div id="star1" class="star">
+                    <asp:Image ID="selectedImg1" CssClass="hiddenImg" ImageUrl="/Resources/Icons/star-checked.png" runat="server" />
+                    <asp:ImageButton ID="rate_btn1" runat="server" ImageUrl="/Resources/Icons/star.png" OnClick="UpdateRating"/>
+                </div>
+                <div id="star2" class="star">
+                    <asp:Image ID="selectedImg2" CssClass="hiddenImg" ImageUrl="/Resources/Icons/star-checked.png" runat="server" />
+                    <asp:ImageButton ID="rate_btn2" runat="server" ImageUrl="/Resources/Icons/star.png" OnClick="UpdateRating"/>
+                </div>
+                <div id="star3" class="star">
+                    <asp:Image ID="selectedImg3" CssClass="hiddenImg" ImageUrl="/Resources/Icons/star-checked.png" runat="server" />
+                    <asp:ImageButton ID="rate_btn3" runat="server" ImageUrl="/Resources/Icons/star.png" OnClick="UpdateRating"/>
+                </div>
+                <div id="star4" class="star">
+                    <asp:Image ID="selectedImg4" CssClass="hiddenImg" ImageUrl="/Resources/Icons/star-checked.png" runat="server" />
+                    <asp:ImageButton ID="rate_btn4" runat="server" ImageUrl="/Resources/Icons/star.png" OnClick="UpdateRating"/>
+                </div>
             </div>
             <p runat="server" id="user_rate" class="HiddenField"></p>
         </div>

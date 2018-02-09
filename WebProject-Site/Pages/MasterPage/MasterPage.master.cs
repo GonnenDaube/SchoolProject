@@ -10,7 +10,7 @@ public partial class Pages_MasterPage_MasterPage : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(Session["user-id"] == null && (!(Request.Url.AbsolutePath.Contains("HomePage.aspx") || Request.Url.AbsolutePath.Contains("Library.aspx") || Request.Url.AbsolutePath.Contains("AssetPage.aspx")))  || (Request.Url.AbsolutePath.Contains("AdminPage") && Session["admin"] != null && !(bool)Session["admin"]))
+        if(Session["user-id"] == null && (!(Request.Url.AbsolutePath.Contains("HomePage.aspx") || Request.Url.AbsolutePath.Contains("Library.aspx")) || (Request.Url.AbsolutePath.Contains("AdminPage") && Session["admin"] != null && !(bool)Session["admin"])))
         {
             Response.Redirect("http://localhost:57143/Pages/HomePage/HomePage.aspx");
         }

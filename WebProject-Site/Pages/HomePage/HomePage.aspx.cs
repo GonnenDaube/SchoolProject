@@ -91,9 +91,9 @@ public partial class Pages_HomePage_HomePage : System.Web.UI.Page
             NetworkCredential networkCred = new NetworkCredential(resources.ResourceManager.GetString("Site_Email_Address"), resources.ResourceManager.GetString("Site_Email_Password"));
             smtp.UseDefaultCredentials = true;
             smtp.Credentials = networkCred;
-            smtp.Port = 587;
             try
             {
+                smtp.Port = 587;
                 smtp.Send(mail);
                 //print verification message
                 HtmlGenericControl registrationMessageDiv = new HtmlGenericControl("div");
@@ -105,12 +105,27 @@ public partial class Pages_HomePage_HomePage : System.Web.UI.Page
             }
             catch
             {
-                HtmlGenericControl error = new HtmlGenericControl("div");
-                error.Attributes["class"] = "TrenchFont WelcomeMessage error";
-                HtmlGenericControl errorP = new HtmlGenericControl("p");
-                errorP.InnerHtml = "Email address is not correct!";
-                error.Controls.Add(errorP);
-                WelcomeMessage.Controls.Add(error);
+                try
+                {// make sure email sending did not fail because of port issues
+                    smtp.Port = 465;
+                    smtp.Send(mail);
+                    //print verification message
+                    HtmlGenericControl registrationMessageDiv = new HtmlGenericControl("div");
+                    registrationMessageDiv.Attributes["class"] = "TrenchFont WelcomeMessage";
+                    HtmlGenericControl registrationMessageP = new HtmlGenericControl("p");
+                    registrationMessageP.InnerHtml = "Verification Email has been sent to your email account!";
+                    registrationMessageDiv.Controls.Add(registrationMessageP);
+                    WelcomeMessage.Controls.Add(registrationMessageDiv);
+                }
+                catch
+                {// something is wrong with email address
+                    HtmlGenericControl error = new HtmlGenericControl("div");
+                    error.Attributes["class"] = "TrenchFont WelcomeMessage error";
+                    HtmlGenericControl errorP = new HtmlGenericControl("p");
+                    errorP.InnerHtml = "Email address is not correct!";
+                    error.Controls.Add(errorP);
+                    WelcomeMessage.Controls.Add(error);
+                }
             }
         }
         sqlConnection.Close();

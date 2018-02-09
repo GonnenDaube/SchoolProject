@@ -400,7 +400,7 @@ public class WebService : System.Web.Services.WebService
                 OpenConnection();
 
             //delete last rating of this model and user
-            string query = "DELETE FROM [Ratings] WHERE Model_Id = @model AND User_Id = @user);";
+            string query = "DELETE FROM [Ratings] WHERE Model_Id = @model AND User_Id = @user;";
             SqlCommand cmd = new SqlCommand(query, sqlConnection);
             cmd.Parameters.AddWithValue("@user", user_id);
             cmd.Parameters.AddWithValue("@model", model_id);
@@ -479,7 +479,7 @@ public class WebService : System.Web.Services.WebService
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
                 OpenConnection();
-            string query = "SELECT Values FROM [Ratings] WHERE Model_Id = @model AND User_Id = @user;";
+            string query = "SELECT Value FROM [Ratings] WHERE Model_Id = @model AND User_Id = @user;";
             SqlCommand cmd = new SqlCommand(query, sqlConnection);
             cmd.Parameters.AddWithValue("@model", model_id);
             cmd.Parameters.AddWithValue("@user", user_id);

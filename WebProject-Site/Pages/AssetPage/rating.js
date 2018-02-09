@@ -51,33 +51,6 @@ function rateSetUp() {
     star4 = document.getElementById("body_star4");
 
     selected = 0;
-
-    stars = new Array();
-    stars.push(star0);
-    stars.push(star1);
-    stars.push(star2);
-    stars.push(star3);
-    stars.push(star4);
-
-    star0.onmouseenter = function () { showStars(1); };
-    star1.onmouseenter = function () { showStars(2); };
-    star2.onmouseenter = function () { showStars(3); };
-    star3.onmouseenter = function () { showStars(4); };
-    star4.onmouseenter = function () { showStars(5); };
-
-    star0.onmouseleave = function () { hideStars(1); };
-    star1.onmouseleave = function () { hideStars(2); };
-    star2.onmouseleave = function () { hideStars(3); };
-    star3.onmouseleave = function () { hideStars(4); };
-    star4.onmouseleave = function () { hideStars(5); };
-
-    star0.onclick = function () { selectStars(1); return false; };
-    star1.onclick = function () { selectStars(2); return false; };
-    star2.onclick = function () { selectStars(3); return false; };
-    star3.onclick = function () { selectStars(4); return false; };
-    star4.onclick = function () { selectStars(5); return false; };
-
-    userRate = document.getElementById("body_user_rate");
 }
 
 function resizeBreakLine() {
