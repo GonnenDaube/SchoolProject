@@ -661,14 +661,29 @@ public class WebService : System.Web.Services.WebService
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
                 OpenConnection();
-            string query = "SELECT AVG(Value) FROM [Ratings] WHERE Model_Id = @model);";
+            string query = "SELECT SUM(Value) FROM [Ratings] WHERE Model_Id = @model;";
             SqlCommand cmd = new SqlCommand(query, sqlConnection);
             cmd.Parameters.AddWithValue("@model", model_id);
             SqlDataReader reader = cmd.ExecuteReader();
+            int sum = 0;
             if (reader.Read())
             {
-                return reader.GetFloat(0);
+                sum =  reader.GetInt32(0);
             }
+            query = "SELECT COUNT(Value) FROM [Ratings] WHERE Model_Id = @model;";
+            cmd = new SqlCommand(query, sqlConnection);
+            cmd.Parameters.AddWithValue("@model", model_id);
+            reader = cmd.ExecuteReader();
+            int count = 0;
+            if (reader.Read())
+            {
+                count = reader.GetInt32(0);
+            }
+            if(count == 0)
+            {
+                return 0;
+            }
+            return sum / count;
         }
         catch
         {

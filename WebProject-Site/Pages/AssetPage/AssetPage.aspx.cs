@@ -31,26 +31,34 @@ public partial class Pages_AssetPage_AssetPage : System.Web.UI.Page
             Rating.Text = ws.GetRate(model_id).ToString();
             int userRate = ws.GetModelUserRate(model_id, (int)Session["user-id"]);
 
-            if(userRate > 0)
+            selectedImg0.CssClass = "shownImg";
+            selectedImg1.CssClass = "shownImg";
+            selectedImg2.CssClass = "shownImg";
+            selectedImg3.CssClass = "shownImg";
+            selectedImg4.CssClass = "shownImg";
+
+            if(userRate < 5)
             {
-                selectedImg0.CssClass = "shownImg";
+                selectedImg4.CssClass = "hiddenImg";
             }
-            if (userRate > 1)
+            if(userRate < 4)
             {
-                selectedImg1.CssClass = "shownImg";
+                selectedImg3.CssClass = "hiddenImg";
             }
-            if (userRate > 2)
+            if(userRate < 3)
             {
-                selectedImg2.CssClass = "shownImg";
+                selectedImg2.CssClass = "hiddenImg";
             }
-            if (userRate > 3)
+            if(userRate < 2)
             {
-                selectedImg3.CssClass = "shownImg";
+                selectedImg1.CssClass = "hiddenImg";
             }
-            if (userRate > 4)
+            if(userRate < 1)
             {
-                selectedImg4.CssClass = "shownImg";
+                selectedImg0.CssClass = "hiddenImg";
             }
+
+            ws.CloseConnection();
         }
         catch//if anything failed print Error 404
         {
@@ -104,6 +112,36 @@ public partial class Pages_AssetPage_AssetPage : System.Web.UI.Page
         int rate = int.Parse(senderId.Substring(senderId.IndexOf('n') + 1)) + 1;
         ws.InsertRating((int)Session["user-id"], model_id, rate);
 
+        Rating.Text = ws.GetRate(model_id).ToString();
+        int userRate = ws.GetModelUserRate(model_id, (int)Session["user-id"]);
 
+        selectedImg0.CssClass = "shownImg";
+        selectedImg1.CssClass = "shownImg";
+        selectedImg2.CssClass = "shownImg";
+        selectedImg3.CssClass = "shownImg";
+        selectedImg4.CssClass = "shownImg";
+
+        if (userRate < 5)
+        {
+            selectedImg4.CssClass = "hiddenImg";
+        }
+        if (userRate < 4)
+        {
+            selectedImg3.CssClass = "hiddenImg";
+        }
+        if (userRate < 3)
+        {
+            selectedImg2.CssClass = "hiddenImg";
+        }
+        if (userRate < 2)
+        {
+            selectedImg1.CssClass = "hiddenImg";
+        }
+        if (userRate < 1)
+        {
+            selectedImg0.CssClass = "hiddenImg";
+        }
+
+        ws.CloseConnection();
     }
 }

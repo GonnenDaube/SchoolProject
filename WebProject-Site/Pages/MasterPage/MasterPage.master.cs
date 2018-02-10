@@ -12,7 +12,7 @@ public partial class Pages_MasterPage_MasterPage : System.Web.UI.MasterPage
     {
         if(Session["user-id"] == null && (!(Request.Url.AbsolutePath.Contains("HomePage.aspx") || Request.Url.AbsolutePath.Contains("Library.aspx")) || (Request.Url.AbsolutePath.Contains("AdminPage") && Session["admin"] != null && !(bool)Session["admin"])))
         {
-            Response.Redirect("http://localhost:57143/Pages/HomePage/HomePage.aspx");
+            Response.Redirect("http://localhost:57143/Pages/HomePage/HomePage.aspx#loginDiv");
         }
         if (Session["user-id"] != null && Session["user-id"].ToString().Length > 0 && Session["username"] != null && Session["admin"] != null)
         {
