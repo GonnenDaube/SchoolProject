@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using System.Data.SqlClient;
 using Resources;
+using System.Xml;
 
 public partial class Pages_AssetPage_AssetPage : System.Web.UI.Page
 {
@@ -30,6 +31,15 @@ public partial class Pages_AssetPage_AssetPage : System.Web.UI.Page
             AssetDescription.Text = ws.GetModelDescription(model_id);
             Rating.Text = ws.GetRate(model_id).ToString();
             int userRate = ws.GetModelUserRate(model_id, (int)Session["user-id"]);
+            string[] info = ws.GetModelInfo(model_id);
+
+            camPos.Text = info[0];
+            camLookAt.Text = info[1];
+
+            positions.Text = info[2];
+            colors.Text = info[3];
+            normals.Text = info[4];
+
 
             selectedImg0.CssClass = "shownImg";
             selectedImg1.CssClass = "shownImg";

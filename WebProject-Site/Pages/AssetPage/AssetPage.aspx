@@ -51,6 +51,12 @@
             </div>
             <p runat="server" id="user_rate" class="HiddenField"></p>
         </div>
+        <asp:Label ID="positions" CssClass="hidden" runat="server" Text=""></asp:Label>
+        <asp:Label ID="colors" CssClass="hidden" runat="server" Text=""></asp:Label>
+        <asp:Label ID="normals" CssClass="hidden" runat="server" Text=""></asp:Label>
+
+        <asp:Label ID="camPos" CssClass="hidden" runat="server" Text=""></asp:Label>
+        <asp:Label ID="camLookAt" CssClass="hidden" runat="server" Text=""></asp:Label>
     </form>
 </asp:Content>
 

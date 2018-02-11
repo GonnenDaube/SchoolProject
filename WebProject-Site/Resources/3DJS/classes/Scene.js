@@ -17,7 +17,7 @@ class Scene {
                 this.objects[i].rotation[1] += 1 / this.fpsCounter.fps;
             }
             if(this.main != null)
-                this.mainObject.rotation[1] += 1 / this.fpsCounter.fps;
+                this.main.rotation[1] += 1 / this.fpsCounter.fps;
         }
     }
 

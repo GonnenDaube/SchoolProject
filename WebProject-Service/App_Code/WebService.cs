@@ -297,11 +297,9 @@ public class WebService : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public XmlDocument GetXMLFile(string location)
+    public XmlReader GetXMLFile(string location)
     {
-        XmlDocument document = new XmlDocument();
-        document.Load(Server.MapPath(location));
-        return document;
+        return XmlReader.Create(Server.MapPath(location));
     }
 
 
@@ -383,6 +381,61 @@ public class WebService : System.Web.Services.WebService
         }
     }
 
+
+    /// <summary>
+    /// Converting Xml file for model into string array
+    /// </summary>
+    /// <param name="model_id"></param>
+    /// <returns></returns>
+    [WebMethod]
+    public string[] GetModelInfo(int model_id)
+    {
+        XmlReader info = GetModelXMLFile(model_id);
+        XmlReader camera;
+        XmlReader model;
+        XmlReader array;
+
+        string[] arr = new string[5];
+        int count = 0;
+
+        info.MoveToContent();
+
+        if (info.Read())
+        {
+            info.MoveToContent();
+            camera = info.ReadSubtree();
+            camera.Read();
+            while (camera.Read())
+            {
+                if(camera.MoveToContent() != XmlNodeType.EndElement)
+                    arr[count++] = camera.ReadInnerXml();
+            }
+        }
+        if (info.Read())
+        {
+            info.MoveToContent();
+            model = info.ReadSubtree();
+            model.Read();
+            while (model.Read())
+            {
+                if (model.MoveToContent() != XmlNodeType.EndElement)
+                {
+                    array = model.ReadSubtree();
+                    arr[count] = "";
+                    array.Read();
+                    while (array.Read())
+                    {
+                        if(array.MoveToContent() != XmlNodeType.EndElement)
+                            arr[count] += array.ReadInnerXml() + ",";
+                    }
+                    count++;
+                }
+            }
+        }
+
+        return arr;
+    }
+
     /// <summary>
     /// Insert Rating log into db, if rate for user and model already exist
     /// replace rating with new one
@@ -400,7 +453,7 @@ public class WebService : System.Web.Services.WebService
                 OpenConnection();
 
             //delete last rating of this model and user
-            string query = "DELETE FROM [Ratings] WHERE Model_Id = @model AND User_Id = @user;";
+            string query = "DELETE TOP (100) PERCENT FROM [Ratings] WHERE Model_Id = @model AND User_Id = @user;";
             SqlCommand cmd = new SqlCommand(query, sqlConnection);
             cmd.Parameters.AddWithValue("@user", user_id);
             cmd.Parameters.AddWithValue("@model", model_id);
@@ -427,8 +480,7 @@ public class WebService : System.Web.Services.WebService
     /// </summary>
     /// <param name="model_id"></param>
     /// <returns>string containing link</returns>
-    [WebMethod]
-    public XmlReader GetModelInfo(int model_id)
+    public XmlReader GetModelXMLReader(int model_id)
     {
         try
         {
@@ -524,7 +576,7 @@ public class WebService : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public XmlDocument GetModelXMLFile(int model_id)
+    public XmlReader GetModelXMLFile(int model_id)
     {
         try
         {
@@ -539,6 +591,7 @@ public class WebService : System.Web.Services.WebService
             {
                 location = reader.GetString(0);
             }
+            
             return GetXMLFile(location);
         }
         catch
@@ -670,6 +723,7 @@ public class WebService : System.Web.Services.WebService
             {
                 sum =  reader.GetInt32(0);
             }
+            reader.Close();
             query = "SELECT COUNT(Value) FROM [Ratings] WHERE Model_Id = @model;";
             cmd = new SqlCommand(query, sqlConnection);
             cmd.Parameters.AddWithValue("@model", model_id);
@@ -679,11 +733,12 @@ public class WebService : System.Web.Services.WebService
             {
                 count = reader.GetInt32(0);
             }
+            reader.Close();
             if(count == 0)
             {
                 return 0;
             }
-            return sum / count;
+            return (float)sum / count;
         }
         catch
         {

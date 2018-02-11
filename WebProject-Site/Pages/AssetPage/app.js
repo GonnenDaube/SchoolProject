@@ -135,7 +135,46 @@ function init() {
     //init renderer
     renderer = new Renderer(gl, canvas_const, scene);
 
-    scene.addObject(new Sphere(gl, 1, [0, 0, 0], [0, 0.5, 0], renderer.sphereShader));
+    let positions = convertToFloatArray(document.getElementById("body_positions").innerHTML);
+    let colors = convertToFloatArray(document.getElementById("body_colors").innerHTML);
+    let normals = convertToFloatArray(document.getElementById("body_normals").innerHTML);
+
+    scene.main = new TriangleObject(gl, renderer.triangleShader, renderer.previewShader);
+
+    let pos, color, normal;
+
+    for(let i = 0; i<positions.length; i+=3){
+        pos = [positions[i], positions[i + 1], positions[i + 2]];
+        color = [colors[i], colors[i + 1], colors[i + 2]];
+        normal = [normals[i], normals[i + 1], normals[i + 2]];
+        scene.main.addVertex(pos, color, normal, gl);
+    }
+
+    let cameraPos = convertToFloatArray(document.getElementById("body_camPos").innerHTML);
+    let cameraLookAt = convertToFloatArray(document.getElementById("body_camLookAt").innerHTML);
+
+    scene.camera.position = cameraPos;
+    scene.camera.lookingAt = cameraLookAt;
+
+    currentDrawMode = "lighting-mode";
+}
+
+function convertToFloatArray(str){
+    let arr = [];
+    while(str.length != 0){
+        let value;
+        if(!str.includes(','))
+            value = str;
+        else
+            value = str.slice(0,str.indexOf(','));
+        arr.push(Number(value));
+        if(!str.includes(','))
+            str = '';
+        else
+            str = str.slice(str.indexOf(',') + 1, str.length);
+    }
+
+    return arr;
 }
 
 function keydown_callback(){

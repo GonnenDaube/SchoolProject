@@ -112,13 +112,7 @@
       <s:element name="GetXMLFileResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetXMLFileResult">
-              <s:complexType mixed="true">
-                <s:sequence>
-                  <s:any />
-                </s:sequence>
-              </s:complexType>
-            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="GetXMLFileResult" type="tns:XmlReader" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -152,6 +146,25 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetModelInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="model_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetModelInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetModelInfoResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="InsertRating">
         <s:complexType>
           <s:sequence>
@@ -165,20 +178,6 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="1" maxOccurs="1" name="InsertRatingResult" type="s:int" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetModelInfo">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="model_id" type="s:int" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetModelInfoResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetModelInfoResult" type="tns:XmlReader" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -235,13 +234,7 @@
       <s:element name="GetModelXMLFileResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetModelXMLFileResult">
-              <s:complexType mixed="true">
-                <s:sequence>
-                  <s:any />
-                </s:sequence>
-              </s:complexType>
-            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="GetModelXMLFileResult" type="tns:XmlReader" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -330,11 +323,6 @@
           <s:element minOccurs="0" maxOccurs="unbounded" name="ArrayOfString" nillable="true" type="tns:ArrayOfString" />
         </s:sequence>
       </s:complexType>
-      <s:complexType name="ArrayOfString">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
-        </s:sequence>
-      </s:complexType>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="HelloWorldSoapIn">
@@ -397,17 +385,17 @@
   <wsdl:message name="InsertDownloadSoapOut">
     <wsdl:part name="parameters" element="tns:InsertDownloadResponse" />
   </wsdl:message>
-  <wsdl:message name="InsertRatingSoapIn">
-    <wsdl:part name="parameters" element="tns:InsertRating" />
-  </wsdl:message>
-  <wsdl:message name="InsertRatingSoapOut">
-    <wsdl:part name="parameters" element="tns:InsertRatingResponse" />
-  </wsdl:message>
   <wsdl:message name="GetModelInfoSoapIn">
     <wsdl:part name="parameters" element="tns:GetModelInfo" />
   </wsdl:message>
   <wsdl:message name="GetModelInfoSoapOut">
     <wsdl:part name="parameters" element="tns:GetModelInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertRatingSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertRating" />
+  </wsdl:message>
+  <wsdl:message name="InsertRatingSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertRatingResponse" />
   </wsdl:message>
   <wsdl:message name="GetCreatorUserIdSoapIn">
     <wsdl:part name="parameters" element="tns:GetCreatorUserId" />
@@ -510,13 +498,13 @@
       <wsdl:input message="tns:InsertDownloadSoapIn" />
       <wsdl:output message="tns:InsertDownloadSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="InsertRating">
-      <wsdl:input message="tns:InsertRatingSoapIn" />
-      <wsdl:output message="tns:InsertRatingSoapOut" />
-    </wsdl:operation>
     <wsdl:operation name="GetModelInfo">
       <wsdl:input message="tns:GetModelInfoSoapIn" />
       <wsdl:output message="tns:GetModelInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertRating">
+      <wsdl:input message="tns:InsertRatingSoapIn" />
+      <wsdl:output message="tns:InsertRatingSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetCreatorUserId">
       <wsdl:input message="tns:GetCreatorUserIdSoapIn" />
@@ -651,8 +639,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="InsertRating">
-      <soap:operation soapAction="http://tempuri.org/InsertRating" style="document" />
+    <wsdl:operation name="GetModelInfo">
+      <soap:operation soapAction="http://tempuri.org/GetModelInfo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -660,8 +648,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetModelInfo">
-      <soap:operation soapAction="http://tempuri.org/GetModelInfo" style="document" />
+    <wsdl:operation name="InsertRating">
+      <soap:operation soapAction="http://tempuri.org/InsertRating" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -852,8 +840,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="InsertRating">
-      <soap12:operation soapAction="http://tempuri.org/InsertRating" style="document" />
+    <wsdl:operation name="GetModelInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetModelInfo" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -861,8 +849,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetModelInfo">
-      <soap12:operation soapAction="http://tempuri.org/GetModelInfo" style="document" />
+    <wsdl:operation name="InsertRating">
+      <soap12:operation soapAction="http://tempuri.org/InsertRating" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
