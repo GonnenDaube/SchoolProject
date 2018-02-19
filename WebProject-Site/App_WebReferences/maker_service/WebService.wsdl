@@ -116,6 +116,25 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetModelIdsByUserId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="user_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetModelIdsByUserIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetModelIdsByUserIdResult" type="tns:ArrayOfInt" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="GetModelIds">
         <s:complexType />
       </s:element>
@@ -126,11 +145,6 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:complexType name="ArrayOfInt">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
-        </s:sequence>
-      </s:complexType>
       <s:element name="InsertDownload">
         <s:complexType>
           <s:sequence>
@@ -373,6 +387,12 @@
   <wsdl:message name="GetXMLFileSoapOut">
     <wsdl:part name="parameters" element="tns:GetXMLFileResponse" />
   </wsdl:message>
+  <wsdl:message name="GetModelIdsByUserIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetModelIdsByUserId" />
+  </wsdl:message>
+  <wsdl:message name="GetModelIdsByUserIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetModelIdsByUserIdResponse" />
+  </wsdl:message>
   <wsdl:message name="GetModelIdsSoapIn">
     <wsdl:part name="parameters" element="tns:GetModelIds" />
   </wsdl:message>
@@ -489,6 +509,10 @@
     <wsdl:operation name="GetXMLFile">
       <wsdl:input message="tns:GetXMLFileSoapIn" />
       <wsdl:output message="tns:GetXMLFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetModelIdsByUserId">
+      <wsdl:input message="tns:GetModelIdsByUserIdSoapIn" />
+      <wsdl:output message="tns:GetModelIdsByUserIdSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetModelIds">
       <wsdl:input message="tns:GetModelIdsSoapIn" />
@@ -614,6 +638,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetXMLFile">
       <soap:operation soapAction="http://tempuri.org/GetXMLFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModelIdsByUserId">
+      <soap:operation soapAction="http://tempuri.org/GetModelIdsByUserId" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -815,6 +848,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetXMLFile">
       <soap12:operation soapAction="http://tempuri.org/GetXMLFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModelIdsByUserId">
+      <soap12:operation soapAction="http://tempuri.org/GetModelIdsByUserId" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

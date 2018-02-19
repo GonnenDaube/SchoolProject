@@ -304,6 +304,37 @@ public class WebService : System.Web.Services.WebService
 
 
     [WebMethod]
+    public int[] GetModelIdsByUserId(int user_id)
+    {
+        try
+        {
+            if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
+                OpenConnection();
+            string query = "SELECT Model_Id FROM [Models] Where User_Id = @user";
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
+            cmd.Parameters.AddWithValue("@user", user_id);
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<int> idsList = new List<int>();
+            while (reader.Read())
+            {
+                idsList.Add(reader.GetInt32(0));
+            }
+
+            int[] ids = new int[idsList.Count];
+
+            for (int i = 0; i < ids.Length; i++)
+            {
+                ids[i] = idsList.ElementAt(i);
+            }
+            return ids;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    [WebMethod]
     public int[] GetModelIds()
     {
         try

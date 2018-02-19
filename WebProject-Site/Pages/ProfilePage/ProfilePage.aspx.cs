@@ -10,9 +10,13 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
 {
     private string[] colors;
     Random rnd;
+    maker_service.WebService ws;
 
     protected void Page_Load(object sender, EventArgs e)
     {
+
+
+
         //color: rgb(216, 216, 216);
         //color: rgb(252, 246, 189);
         //color: rgb(208, 244, 222);
@@ -26,15 +30,19 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
         colors[4] = "rgb(248, 189, 196)";
         rnd = new Random();
 
-        int size = 50;
+        ws = new maker_service.WebService();
 
-        for(int i = 0; i < size; i++)// get asset list from web service and loop through
+        int[] ids = ws.GetModelIdsByUserId((int)Session["user-id"]);
+
+        for(int i = 0; i < ids.Length; i++)// get asset list from web service and loop through
         {
-            Asset_Holder.Controls.Add(GenerateAssetFile(i, size));
+            Asset_Holder.Controls.Add(GenerateAssetFile(i, ids.Length, ids[i]));
         }
+
+        ws.CloseConnection();
     }
 
-    private HtmlGenericControl GenerateAssetFile(int index, int total)
+    private HtmlGenericControl GenerateAssetFile(int index, int total, int model_id)
     {
         HtmlGenericControl file_div = new HtmlGenericControl("div");
         file_div.ID = "file-div-" + index;
@@ -48,12 +56,12 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
         }
         file_div.Attributes["style"] = "z-index:" + (total - index);
         string color = colors[index % colors.Length];
-        file_div.Controls.Add(GenerateTab(index, total, color));
-        file_div.Controls.Add(GenerateFile(index, color));
+        file_div.Controls.Add(GenerateTab(index, total, color, model_id));
+        file_div.Controls.Add(GenerateFile(index, color, model_id));
         return file_div;
     }
 
-    private HtmlGenericControl GenerateTab(int index, int total, string color)
+    private HtmlGenericControl GenerateTab(int index, int total, string color, int model_id)
     {
         HtmlGenericControl tab = new HtmlGenericControl("div");
         tab.ID = "file-tab-" + index;
@@ -68,13 +76,13 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
         tab.Attributes["onclick"] = "putInfront(" + index + ");";
 
         HtmlGenericControl tabTxt = new HtmlGenericControl("p");
-        tabTxt.InnerHtml = "Asset Name";
+        tabTxt.InnerHtml = ws.GetModelName(model_id);
         tabTxt.Attributes["class"] = "tab-txt Report1942Font";
         tab.Controls.Add(tabTxt);
         return tab;
     }
 
-    private HtmlGenericControl GenerateFile(int index, string color)
+    private HtmlGenericControl GenerateFile(int index, string color, int model_id)
     {
         HtmlGenericControl file = new HtmlGenericControl("div");
         file.Attributes["class"] = "asset-file-color";
@@ -82,7 +90,7 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
         file.Attributes["onclick"] = "putInfront(" + index + ");";
 
         HtmlGenericControl thumbnail = new HtmlGenericControl("img");
-        thumbnail.Attributes["src"] = "/Resources/Images/polygon-mountain.jpg";
+        thumbnail.Attributes["src"] = ws.GetModelThumbnail(model_id);
         thumbnail.Attributes["class"] = "thumbnail-profile";
 
         HtmlGenericControl edit_btn = GenerateButton("EDIT", "edit-btn");
@@ -91,7 +99,7 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
         HtmlGenericControl rating = new HtmlGenericControl("p");
         rating.Attributes["id"] = "asset-rate-" + index;
         rating.Attributes["class"] = "asset-rate Report1942Font";
-        rating.InnerHtml = (Math.Floor(rnd.NextDouble()*5*10) / 10).ToString() + "/5";
+        rating.InnerHtml = ws.GetRate(model_id).ToString() + "/5";
 
         HtmlGenericControl graph = GenerateAssetGraph(index);
 

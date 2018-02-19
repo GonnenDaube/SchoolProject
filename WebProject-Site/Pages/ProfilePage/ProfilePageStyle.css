@@ -69,6 +69,7 @@
     top:10%;
     width:25vw;
     height:12.5vw;
+    transform:scaleY(-1);
 }
 
 .edit-btn{
