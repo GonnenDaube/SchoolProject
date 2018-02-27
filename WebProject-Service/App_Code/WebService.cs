@@ -786,28 +786,28 @@ public class WebService : System.Web.Services.WebService
     /// <param name="model_id"></param>
     /// <returns></returns>
     [WebMethod]
-    public string[][] GetDownloadCountArray(int model_id)
+    public string[] GetDownloadCountArray(int model_id)
     {
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
                 OpenConnection();
-            string query = "SELECT DISTINCT Download_Date FROM [Downloads] WHERE Model_Id = @model;";
+            string query = "SELECT COUNT(1), CONVERT(date, Download_Date) FROM [Downloads] WHERE Model_Id = @model GROUP BY CONVERT(date, Download_Date);";
             SqlCommand cmd = new SqlCommand(query, sqlConnection);
             cmd.Parameters.AddWithValue("@model", model_id);
             SqlDataReader reader = cmd.ExecuteReader();
-            List<DateTime> dates = new List<DateTime>();
+            Dictionary<DateTime, int> dateCount = new Dictionary<DateTime, int>();
             while (reader.Read())
             {
-                dates.Add(reader.GetDateTime(0));
+                dateCount.Add(reader.GetDateTime(1), reader.GetInt32(0));
             }
 
-            string[][] mat = new string[dates.Count][];
+            string[] mat = new string[dateCount.Count * 2];
 
-            for (int i = 0; i < dates.Count; i++)
+            for (int i = 0; i < dateCount.Count; i++)
             {
-                mat[i][1] = dates[i].ToString();
-                mat[i][2] = CountDownloadByDate(dates[i]).ToString();
+                mat[i] = dateCount.ElementAt(i).Key.ToString();
+                mat[dateCount.Count + i] = dateCount.ElementAt(i).Value.ToString();
             }
 
             return mat;
@@ -816,19 +816,6 @@ public class WebService : System.Web.Services.WebService
         {
             return null;
         }
-    }
-
-    private int CountDownloadByDate(DateTime date)
-    {
-        string query = "SELECT COUNT(*) FROM [Downloads] WHERE Download_Date = @date";
-        SqlCommand cmd = new SqlCommand(query, sqlConnection);
-        cmd.Parameters.AddWithValue("@date", date);
-        SqlDataReader reader = cmd.ExecuteReader();
-        if (reader.Read())
-        {
-            return reader.GetInt32(0);
-        }
-        return 0;
     }
     
 

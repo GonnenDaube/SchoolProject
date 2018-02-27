@@ -101,7 +101,7 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
         rating.Attributes["class"] = "asset-rate Report1942Font";
         rating.InnerHtml = ws.GetRate(model_id).ToString() + "/5";
 
-        HtmlGenericControl graph = GenerateAssetGraph(index);
+        HtmlGenericControl graph = GenerateAssetGraph(index, model_id);
 
         file.Controls.Add(thumbnail);
         file.Controls.Add(edit_btn);
@@ -128,11 +128,72 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
         return button;
     }
 
-    private HtmlGenericControl GenerateAssetGraph(int index)
+    private HtmlGenericControl GenerateAssetGraph(int index, int model_id)
     {
         HtmlGenericControl svg = new HtmlGenericControl("svg");
         svg.Attributes["class"] = "asset-graph";
 
+        string[] mat = ws.GetDownloadCountArray(model_id);
+
+        if(mat.Length > 0)
+        {
+            Dictionary<DateTime, int> dateCount = new Dictionary<DateTime, int>();
+
+            for (int i = 0; i < mat.Length / 2; i++)
+            {
+                dateCount.Add(ConvertToDate(mat[i]), int.Parse(mat[mat.Length / 2 + i]));
+            }
+
+            Dictionary<TimeSpan, int> timeCount = new Dictionary<TimeSpan, int>();
+
+            //offset from first date
+
+            DateTime reference = dateCount.First().Key;
+
+            for (int i = 0; i < dateCount.Count; i++)
+            {
+                timeCount.Add(dateCount.ElementAt(i).Key.Subtract(reference), dateCount.ElementAt(i).Value);
+            }
+
+            //multiply years by 365 and months by 30
+
+            HtmlGenericControl xAxis = new HtmlGenericControl("polyline");
+            xAxis.Attributes["fill"] = "none";
+            xAxis.Attributes["stroke"] = "black";
+
+            xAxis.Attributes["points"] = "1,0 0,0 0,1";
+
+
+            HtmlGenericControl polyline = new HtmlGenericControl("polyline");
+            polyline.Attributes["fill"] = "none";
+            polyline.Attributes["stroke"] = "rgb(0, 255, 0)";
+
+
+            polyline.Attributes["points"] = "";
+            for (int i = 0; i < dateCount.Count; i++)
+            {
+                polyline.Attributes["points"] += timeCount.ElementAt(i).Key.TotalDays + "," + timeCount.ElementAt(i).Value + " ";
+            }
+
+            svg.Controls.Add(polyline);
+            svg.Controls.Add(xAxis);
+        }
+
         return svg;
+    }
+
+    private DateTime ConvertToDate(string date)
+    {
+        int day, month, year;
+
+        day = int.Parse(date.Substring(0, date.IndexOf('/')));
+        date = date.Substring(date.IndexOf('/') + 1);
+
+        month = int.Parse(date.Substring(0, date.IndexOf('/')));
+        date = date.Substring(date.IndexOf('/') + 1);
+
+        year = int.Parse(date.Substring(0, date.IndexOf(" ")));
+
+        return new DateTime(year, month, day);
     }
 }
