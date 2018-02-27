@@ -8,6 +8,7 @@ using System.Web.UI.HtmlControls;
 using System.Data.SqlClient;
 using Resources;
 using System.Xml;
+using System.IO;
 
 public partial class Pages_AssetPage_AssetPage : System.Web.UI.Page
 {
@@ -17,6 +18,14 @@ public partial class Pages_AssetPage_AssetPage : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        //clear TempModels file
+        DirectoryInfo temp = new DirectoryInfo(Server.MapPath("/Resources/TempModels/"));
+        foreach(FileInfo f in temp.GetFiles())
+        {
+            f.Delete();
+        }
+
         string url = Request.Url.AbsoluteUri;// /Pages/AssetPage.aspx?item_id=200134
         try
         {
@@ -113,7 +122,118 @@ public partial class Pages_AssetPage_AssetPage : System.Web.UI.Page
 
     protected void Download_Btn_Click(object sender, EventArgs e)
     {
+        //log downloads
+        ws.InsertDownload((int)Session["user-id"], model_id);
 
+        //construct download file
+        string path = Server.MapPath("/Resources/TempModels/" + (AssetName.Text).Replace(' ', '_').Replace('.', '_').Replace('-','_').Replace(',','_') + ".obj");
+
+        //generate string lines array
+        List<string> linesList = new List<string>();
+        linesList.Add("#model-makertron 2100 - v2.0 model");
+        linesList.Add("#created by - " + CreatorsName.Text);
+        linesList.Add("o " + (AssetName.Text).Replace(' ', '_').Replace('.', '_').Replace('-', '_').Replace(',', '_'));
+
+        string posText = positions.Text;
+        string colText = colors.Text;
+        string norText = normals.Text;
+
+        int numVert = 0;
+        char[] cArr = posText.ToCharArray();
+        for(int i = 0; i < cArr.Length; i++)
+        {
+            if (cArr[i].Equals(','))
+                numVert++;
+        }
+        numVert /= 3;
+
+        float val1, val2, val3;
+        val1 = val2 = val3 = 0;
+
+        //insert v's into file
+        for(int i = 0; i < numVert; i++)
+        {
+            val1 = float.Parse(posText.Substring(0, posText.IndexOf(',')));
+            posText = posText.Substring(posText.IndexOf(',') + 1);
+
+            val2 = float.Parse(posText.Substring(0, posText.IndexOf(',')));
+            posText = posText.Substring(posText.IndexOf(',') + 1);
+
+            val3 = float.Parse(posText.Substring(0, posText.IndexOf(',')));
+            posText = posText.Substring(posText.IndexOf(',') + 1);
+
+            linesList.Add("v " + val1 + " " + val2 + " " + val3);
+        }
+
+        //insert vn's into file
+        for (int i = 0; i < numVert; i++)
+        {
+            val1 = float.Parse(norText.Substring(0, norText.IndexOf(',')));
+            norText = norText.Substring(norText.IndexOf(',') + 1);
+
+            val2 = float.Parse(norText.Substring(0, norText.IndexOf(',')));
+            norText = norText.Substring(norText.IndexOf(',') + 1);
+
+            val3 = float.Parse(norText.Substring(0, norText.IndexOf(',')));
+            norText = norText.Substring(norText.IndexOf(',') + 1);
+
+            linesList.Add("vn " + val1 + " " + val2 + " " + val3);
+        }
+
+        //insert vc's into file
+        for (int i = 0; i < numVert; i++)
+        {
+            val1 = float.Parse(colText.Substring(0, colText.IndexOf(',')));
+            colText = colText.Substring(colText.IndexOf(',') + 1);
+
+            val2 = float.Parse(colText.Substring(0, colText.IndexOf(',')));
+            colText = colText.Substring(colText.IndexOf(',') + 1);
+
+            val3 = float.Parse(colText.Substring(0, colText.IndexOf(',')));
+            colText = colText.Substring(colText.IndexOf(',') + 1);
+
+            linesList.Add("vc " + val1 + " " + val2 + " " + val3);
+        }
+
+        for(int i = 0; i < numVert; i += 3)
+        {
+            linesList.Add("f " + i + "/" + i + "/" + i + " " + (i + 1) + "/" + (i + 1) + "/" + (i + 1) + " " + (i + 2) + "/" + (i + 2) + "/" + (i + 2));
+        }
+
+
+        ws.CloseConnection();
+
+        //convert to string array
+        string[] arr = new string[linesList.Count];
+        for(int i = 0; i<arr.Length; i++)
+        {
+            arr[i] = linesList[i];
+        }
+
+        if(!File.Exists(path))
+            File.WriteAllLines(path, arr);
+
+        FileInfo file = new FileInfo(path);
+        
+        if (file.Exists)
+        {
+            try
+            {
+                Response.Clear();
+                Response.ClearHeaders();
+                Response.ClearContent();
+                Response.AddHeader("Content-Disposition", "attachment; filename=" + file.Name);
+                Response.AddHeader("Content-Length", file.Length.ToString());
+                Response.ContentType = "text/plain";
+                Response.Flush();
+                Response.TransmitFile(file.FullName);
+                Response.End();
+            }
+            catch
+            {
+
+            }
+        }
     }
 
     protected void UpdateRating(object sender, EventArgs e)
