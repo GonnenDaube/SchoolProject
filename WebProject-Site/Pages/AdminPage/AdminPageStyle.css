@@ -1,9 +1,9 @@
 ﻿.card-holder{
     position:absolute;
     left:10vw;
-    top:11vw;
+    top:17.5vw;
     width:80vw;
-    height:35vw;
+    height:20vw;
 }
 
 .card{
@@ -124,6 +124,8 @@
     height:2.5vw;
     width:2.5vw;
     transform:rotate(0deg);
+    background-color:rgba(255,255,255,1);
+    border-radius:0.25vw 0.25vw 0.25vw 0.25vw;
     transition:0.5s;
 }
 
@@ -140,7 +142,8 @@
     border:none;
     background-image:url(/Resources/Icons/save-icon.png);
     background-size:cover;
-    background-color:rgba(0,0,0,0);
+    background-color:rgba(255,255,255,1);
+    border-radius:0.25vw 0.25vw 0.25vw 0.25vw;
     outline:none;
     transform:rotate(0deg);
     transition:0.5s;

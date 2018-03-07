@@ -92,6 +92,85 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
 
             table.Controls.Add(footer_row);
         }
+
+
+        if (dataTableName.Equals("downloads"))
+        {
+            table.CssClass = "table models-table Report1942Font";
+
+            ws = new maker_service.WebService();
+
+            string[] titles = { "Download ID", "User ID", "Model ID", "Download Date" };
+
+            GenerateHeaderRow(titles);
+
+            ws.OpenConnection();
+
+            DataSet dataset = ws.GenericReaderQuery("SELECT * FROM [Downloads]");
+
+            TableFooterRow footer_row = new TableFooterRow();
+
+            int i = 0;
+            int counter = 0;
+
+            DataTableReader reader = dataset.Tables[0].CreateDataReader();
+
+            if (reader.Read())
+            {
+                footer_row = GenerateFooterRow(reader, ref counter);
+            }
+
+            do
+            {
+                table.Controls.Add(GenerateTableRow(reader, i, ref counter));
+                i++;
+            } while (reader.Read());
+            reader.Close();
+            ws.CloseConnection();
+
+            title.InnerHtml = "Downloads";
+
+            table.Controls.Add(footer_row);
+        }
+
+        if (dataTableName.Equals("ratings"))
+        {
+            table.CssClass = "table models-table Report1942Font";
+
+            ws = new maker_service.WebService();
+
+            string[] titles = { "Rate ID", "User ID", "Model ID", "Value" };
+
+            GenerateHeaderRow(titles);
+
+            ws.OpenConnection();
+
+            DataSet dataset = ws.GenericReaderQuery("SELECT * FROM [Ratings]");
+
+            TableFooterRow footer_row = new TableFooterRow();
+
+            int i = 0;
+            int counter = 0;
+
+            DataTableReader reader = dataset.Tables[0].CreateDataReader();
+
+            if (reader.Read())
+            {
+                footer_row = GenerateFooterRow(reader, ref counter);
+            }
+
+            do
+            {
+                table.Controls.Add(GenerateTableRow(reader, i, ref counter));
+                i++;
+            } while (reader.Read());
+            reader.Close();
+            ws.CloseConnection();
+
+            title.InnerHtml = "Ratings";
+
+            table.Controls.Add(footer_row);
+        }
     }
 
     private TableRow GenerateTableRow(SqlDataReader reader, int index, ref int counter)
@@ -156,6 +235,11 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
                     cell.Controls.Add(GenerateTextBox(reader.GetString(i), counter++, true));
                     cell.Controls.Add(GenerateTextBoxValidator((TextBox)cell.Controls[0]));
                     cell.ToolTip = reader.GetString(i).ToString();
+                    break;
+                case "System.DateTime":
+                    cell.Controls.Add(GenerateTextBox(reader.GetDateTime(i).ToString(), counter++, true));
+                    cell.Controls.Add(GenerateTextBoxValidator((TextBox)cell.Controls[0]));
+                    cell.ToolTip = reader.GetDateTime(i).ToString();
                     break;
                 case "System.Boolean":
                     cell.Controls.Add(GenerateCheckBox(reader.GetBoolean(i), true));
@@ -278,6 +362,10 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
                         cell.Controls.Add(GenerateTextBox("", counter++, false));
                         cell.ToolTip = "";
                         break;
+                    case "System.DateTime":
+                        cell.Controls.Add(GenerateTextBox("", counter++, false));
+                        cell.ToolTip = "";
+                        break;
                     case "System.Boolean":
                         cell.Controls.Add(GenerateCheckBox(false, false));
                         break;
@@ -394,6 +482,149 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
             sqlConnection.Close();
             Response.Redirect(Request.Url.AbsoluteUri);
         }
+        if (dataTableName.Equals("models"))
+        {
+            ws.OpenConnection();
+
+            string sqlCmd = "UPDATE [Models] SET User_Id = @newUser_Id, Creation_Date = @newCreation_Date, XML_File_Link = @newXML, name = @newName, description = @newDescription, Thumbnail = @newThumbnail Where Model_Id = @oldId";
+            for (int i = 1; i < table.Controls.Count - 1; i++)
+            {// goes through all rows that are not Header or Footer
+                TableRow tr = (TableRow)table.Controls[i];
+                if (!((Image)tr.Controls[tr.Controls.Count - 1].Controls[1]).CssClass.Contains("not-changed"))
+                {// row is changed
+                    string[] parameterNames = { "@newUser_Id", "@newCreation_Date", "@newXML", "@newName", "@newDescription", "@newThumbnail", "@oldId" };
+                    string[] parameterValues = new string[parameterNames.Length];
+                    //cannot change id
+                    parameterValues[0] = ((TextBox)tr.Controls[1].Controls[0]).Text;
+                    parameterValues[1] = ((TextBox)tr.Controls[2].Controls[0]).Text;
+                    parameterValues[2] = ((TextBox)tr.Controls[3].Controls[0]).Text;
+                    parameterValues[3] = ((TextBox)tr.Controls[4].Controls[0]).Text;
+                    parameterValues[4] = ((TextBox)tr.Controls[5].Controls[0]).Text;
+                    parameterValues[5] = ((TextBox)tr.Controls[6].Controls[0]).Text;
+                    parameterValues[6] = ((TableCell)tr.Controls[0]).ToolTip;
+
+                    string[] parameterTypes = { "string", "datetime", "string", "string", "string", "string", "string" };
+
+                    ws.GenericVoidQueryWithParameters(sqlCmd, parameterNames, parameterValues, parameterTypes);
+                }
+            }
+            TableFooterRow footerRow = (TableFooterRow)table.Controls[table.Controls.Count - 1];
+            if (((TextBox)footerRow.Controls[1].Controls[0]).Text.Length > 0 && InsertRowFull(footerRow, 1))
+            {
+
+                string[] parameterNames = { "@newUser_Id", "@newCreation_Date", "@newXML", "@newName", "@newDescription", "@newThumbnail", "@oldId" };
+                string[] parameterValues = new string[parameterNames.Length];
+                //cannot change id
+                parameterValues[0] = ((TextBox)footerRow.Controls[1].Controls[0]).Text;
+                parameterValues[1] = ((TextBox)footerRow.Controls[2].Controls[0]).Text;
+                parameterValues[2] = ((TextBox)footerRow.Controls[3].Controls[0]).Text;
+                parameterValues[3] = ((TextBox)footerRow.Controls[4].Controls[0]).Text;
+                parameterValues[4] = ((TextBox)footerRow.Controls[5].Controls[0]).Text;
+                parameterValues[5] = ((TextBox)footerRow.Controls[6].Controls[0]).Text;
+                parameterValues[6] = ((TableCell)footerRow.Controls[0]).ToolTip;
+
+                string[] parameterTypes = { "int", "datetime", "string", "string", "string", "string", "int" };
+
+                string insertCommand = "INSERT INTO [Models] VALUES(@newUser_Id, @newCreation_Date, @newXML, @newName, @newDescription, @newThumbnail);";
+
+                ws.GenericVoidQueryWithParameters(insertCommand, parameterNames, parameterValues, parameterTypes);
+            }
+
+            ws.CloseConnection();
+            Response.Redirect(Request.Url.AbsoluteUri);
+        }
+
+
+
+        if (dataTableName.Equals("downloads"))
+        {
+            ws.OpenConnection();
+
+            string sqlCmd = "UPDATE [Downloads] SET User_Id = @newUser_Id, Model_Id = @newModel_Id, Download_Date = @newDownload_Date WHERE Download_Id = @oldId";
+            for (int i = 1; i < table.Controls.Count - 1; i++)
+            {// goes through all rows that are not Header or Footer
+                TableRow tr = (TableRow)table.Controls[i];
+                if (!((Image)tr.Controls[tr.Controls.Count - 1].Controls[1]).CssClass.Contains("not-changed"))
+                {// row is changed
+                    string[] parameterNames = { "@newUser_Id", "@newModel_Id", "@newDownload_Date", "@oldId" };
+                    string[] parameterValues = new string[parameterNames.Length];
+                    //cannot change id
+                    parameterValues[0] = ((TextBox)tr.Controls[1].Controls[0]).Text;
+                    parameterValues[1] = ((TextBox)tr.Controls[2].Controls[0]).Text;
+                    parameterValues[2] = ((TextBox)tr.Controls[3].Controls[0]).Text;
+                    parameterValues[3] = ((TableCell)tr.Controls[0]).ToolTip;
+
+                    string[] parameterTypes = { "int", "int", "datetime", "int" };
+
+                    ws.GenericVoidQueryWithParameters(sqlCmd, parameterNames, parameterValues, parameterTypes);
+                }
+            }
+            TableFooterRow footerRow = (TableFooterRow)table.Controls[table.Controls.Count - 1];
+            if (((TextBox)footerRow.Controls[1].Controls[0]).Text.Length > 0 && InsertRowFull(footerRow, 1))
+            {
+
+                string[] parameterNames = { "@newUser_Id", "@newModel_Id", "@newDownload_Date"};
+                string[] parameterValues = new string[parameterNames.Length];
+                //cannot change id
+                parameterValues[0] = ((TextBox)footerRow.Controls[1].Controls[0]).Text;
+                parameterValues[1] = ((TextBox)footerRow.Controls[2].Controls[0]).Text;
+                parameterValues[2] = ((TextBox)footerRow.Controls[3].Controls[0]).Text;
+
+                string[] parameterTypes = { "int", "int", "datetime"};
+
+                string insertCommand = "INSERT INTO [Downloads] VALUES(@newUser_Id, @newModel_Id, @newDownload_Date);";
+
+                ws.GenericVoidQueryWithParameters(insertCommand, parameterNames, parameterValues, parameterTypes);
+            }
+
+            ws.CloseConnection();
+            Response.Redirect(Request.Url.AbsoluteUri);
+        }
+
+        if (dataTableName.Equals("ratings"))
+        {
+            ws.OpenConnection();
+
+            string sqlCmd = "UPDATE [Ratings] SET User_Id = @newUser_Id, Model_Id = @newModel_Id, Value = @newValue WHERE Rate_Id = @oldId";
+            for (int i = 1; i < table.Controls.Count - 1; i++)
+            {// goes through all rows that are not Header or Footer
+                TableRow tr = (TableRow)table.Controls[i];
+                if (!((Image)tr.Controls[tr.Controls.Count - 1].Controls[1]).CssClass.Contains("not-changed"))
+                {// row is changed
+                    string[] parameterNames = { "@newUser_Id", "@newModel_Id", "@newValue", "@oldId" };
+                    string[] parameterValues = new string[parameterNames.Length];
+                    //cannot change id
+                    parameterValues[0] = ((TextBox)tr.Controls[1].Controls[0]).Text;
+                    parameterValues[1] = ((TextBox)tr.Controls[2].Controls[0]).Text;
+                    parameterValues[2] = ((TextBox)tr.Controls[3].Controls[0]).Text;
+                    parameterValues[3] = ((TableCell)tr.Controls[0]).ToolTip;
+
+                    string[] parameterTypes = { "int", "int", "int", "int" };
+
+                    ws.GenericVoidQueryWithParameters(sqlCmd, parameterNames, parameterValues, parameterTypes);
+                }
+            }
+            TableFooterRow footerRow = (TableFooterRow)table.Controls[table.Controls.Count - 1];
+            if (((TextBox)footerRow.Controls[1].Controls[0]).Text.Length > 0 && InsertRowFull(footerRow, 1))
+            {
+
+                string[] parameterNames = { "@newUser_Id", "@newModel_Id", "@newValue" };
+                string[] parameterValues = new string[parameterNames.Length];
+                //cannot change id
+                parameterValues[0] = ((TextBox)footerRow.Controls[1].Controls[0]).Text;
+                parameterValues[1] = ((TextBox)footerRow.Controls[2].Controls[0]).Text;
+                parameterValues[2] = ((TextBox)footerRow.Controls[3].Controls[0]).Text;
+
+                string[] parameterTypes = { "int", "int", "int" };
+
+                string insertCommand = "INSERT INTO [Ratings] VALUES(@newUser_Id, @newModel_Id, @newValue);";
+
+                ws.GenericVoidQueryWithParameters(insertCommand, parameterNames, parameterValues, parameterTypes);
+            }
+
+            ws.CloseConnection();
+            Response.Redirect(Request.Url.AbsoluteUri);
+        }
     }
 
     protected void delete_btn_Click(object sender, EventArgs e)
@@ -423,6 +654,85 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
                 sqlCommand.ExecuteNonQuery();
 
                 sqlConnection.Close();
+
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+
+            if (dataTableName.Equals("models"))
+            {
+                ws.OpenConnection();
+
+                ImageButton btn = (ImageButton)sender;
+                string id = btn.ID;
+                int rowNumber = int.Parse(id.Substring(id.IndexOf("btn") + 3));
+
+                TableCell tc = (TableCell)table.FindControl("row" + rowNumber + "cell0");
+
+                int user_id = int.Parse(tc.ToolTip);
+
+                string cleanup0 = "DELETE FROM [Downloads] WHERE Model_Id = @userID;";
+                string cleanup1 = "DELETE FROM [Ratings] WHERE Model_Id = @userID;";
+
+                string sqlCmd = "DELETE FROM [Models] WHERE Model_Id = @userID;";
+
+                string[] pNames = { "@userID" };
+                string[] pValues = { user_id.ToString() };
+                string[] pTypes = { "int" };
+
+                ws.GenericVoidQueryWithParameters(cleanup0, pNames, pValues, pTypes);
+                ws.GenericVoidQueryWithParameters(cleanup1, pNames, pValues, pTypes);
+                ws.GenericVoidQueryWithParameters(sqlCmd, pNames, pValues, pTypes);
+
+                ws.CloseConnection();
+
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+
+            if (dataTableName.Equals("downloads"))
+            {
+                ws.OpenConnection();
+
+                ImageButton btn = (ImageButton)sender;
+                string id = btn.ID;
+                int rowNumber = int.Parse(id.Substring(id.IndexOf("btn") + 3));
+
+                TableCell tc = (TableCell)table.FindControl("row" + rowNumber + "cell0");
+
+                int user_id = int.Parse(tc.ToolTip);
+
+                string cleanup0 = "DELETE FROM [Downloads] WHERE Download_Id = @userID;";
+
+                string[] pNames = { "@userID" };
+                string[] pValues = { user_id.ToString() };
+                string[] pTypes = { "int" };
+
+                ws.GenericVoidQueryWithParameters(cleanup0, pNames, pValues, pTypes);
+
+                ws.CloseConnection();
+
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            if (dataTableName.Equals("ratings"))
+            {
+                ws.OpenConnection();
+
+                ImageButton btn = (ImageButton)sender;
+                string id = btn.ID;
+                int rowNumber = int.Parse(id.Substring(id.IndexOf("btn") + 3));
+
+                TableCell tc = (TableCell)table.FindControl("row" + rowNumber + "cell0");
+
+                int user_id = int.Parse(tc.ToolTip);
+
+                string cleanup0 = "DELETE FROM [Ratings] WHERE Rate_Id = @userID;";
+
+                string[] pNames = { "@userID" };
+                string[] pValues = { user_id.ToString() };
+                string[] pTypes = { "int" };
+
+                ws.GenericVoidQueryWithParameters(cleanup0, pNames, pValues, pTypes);
+
+                ws.CloseConnection();
 
                 Response.Redirect(Request.Url.AbsoluteUri);
             }

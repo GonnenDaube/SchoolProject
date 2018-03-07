@@ -99,6 +99,38 @@ public class WebService : System.Web.Services.WebService
         }
     }
 
+    [WebMethod]
+    public int GenericVoidQueryWithParameters(string query, string[] parametersNames, string[] parametersValues, string[] parameterTypes)
+    {
+        try
+        {
+            if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
+                OpenConnection();
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
+            for(int i = 0; i<parametersNames.Length; i++)
+            {
+                switch (parameterTypes[i])
+                {
+                    case "string":
+                        cmd.Parameters.AddWithValue(parametersNames[i], parametersValues[i]);
+                        break;
+                    case "datetime":
+                        cmd.Parameters.AddWithValue(parametersNames[i], DateTime.Parse(parametersValues[i]));
+                        break;
+                    case "int":
+                        cmd.Parameters.AddWithValue(parametersNames[i], int.Parse(parametersValues[i]));
+                        break;
+                }
+            }
+            cmd.ExecuteNonQuery();
+            return 1;
+        }
+        catch
+        {
+            return 0;
+        }
+    }
+
     /// <summary>
     /// A generic query function with reader return value to interact with
     /// the data base
