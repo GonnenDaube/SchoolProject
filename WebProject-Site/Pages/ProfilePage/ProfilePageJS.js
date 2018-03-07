@@ -81,6 +81,16 @@ function graphSetUp() {
         graphs[i].children[0].setAttribute('points', str);
 
         graphs[i].children[1].setAttribute('points', (0.1 * width) + "," + (0.05 * height) + " " + (0.1 * width) + "," + (0.9 * height) + " " + (0.95 * width) + "," + (0.9 * height));
+
+        for (let k = 2; k < graphs[i].children.length / 2 + 1; k++) {
+            let max_size = (graphs[i].children.length - 2) / 2;
+            graphs[i].children[k].setAttribute('points', (0.1 * width) + "," + (k - 1) * 0.9 * height / (max_size + 1) + " " + 0.9 * width + "," + (k - 1) * 0.9 * height / (max_size + 1));
+        }
+
+        for (let k = graphs[i].children.length / 2 + 1; k < graphs[i].children.length; k++) {
+            let max_size = (graphs[i].children.length - 2) / 2;
+            graphs[i].children[k].setAttribute('points', (1.5 + (k - (graphs[i].children.length / 2 + 1))) * 0.9 * width / (max_size + 1) + "," + 0.1 * height + " " + (1.5 +(k - (graphs[i].children.length / 2 + 1))) * 0.9 * width / (max_size + 1) + "," + 0.9 * height);
+        }
     }
 }
 

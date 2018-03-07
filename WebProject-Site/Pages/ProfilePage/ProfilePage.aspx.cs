@@ -163,6 +163,17 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
 
             xAxis.Attributes["points"] = "1,0 0,0 0,1";
 
+            HtmlGenericControl[] marks = new HtmlGenericControl[10];
+
+            for(int i = 0; i < marks.Length; i++)
+            {
+                marks[i] = new HtmlGenericControl("polyline");
+                marks[i].Attributes["fill"] = "none";
+                marks[i].Attributes["stroke"] = "lightgray";
+
+                marks[i].Attributes["points"] = "0,0 1,0";
+            }
+
 
             HtmlGenericControl polyline = new HtmlGenericControl("polyline");
             polyline.Attributes["fill"] = "none";
@@ -177,6 +188,11 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
 
             svg.Controls.Add(polyline);
             svg.Controls.Add(xAxis);
+
+            for(int i = 0; i < marks.Length; i++)
+            {
+                svg.Controls.Add(marks[i]);
+            }
         }
 
         return svg;
