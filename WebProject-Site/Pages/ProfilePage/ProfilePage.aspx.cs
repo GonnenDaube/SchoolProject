@@ -200,16 +200,23 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
 
     private DateTime ConvertToDate(string date)
     {
-        int day, month, year;
+        DateTime result;
+        if (DateTime.TryParse(date, out result))
+            // in DD/MM/YYYY format
+            return result;
+        else
+        {// in MM/DD/YYYY format
+            int month, day, year;
+            month = int.Parse(date.Substring(0, date.IndexOf("/")));
+            date = date.Substring(date.IndexOf("/") + 1);
 
-        day = int.Parse(date.Substring(0, date.IndexOf('/')));
-        date = date.Substring(date.IndexOf('/') + 1);
+            day = int.Parse(date.Substring(0, date.IndexOf("/")));
+            date = date.Substring(date.IndexOf("/") + 1);
 
-        month = int.Parse(date.Substring(0, date.IndexOf('/')));
-        date = date.Substring(date.IndexOf('/') + 1);
+            year = int.Parse(date.Substring(0, date.IndexOf(" ")));
 
-        year = int.Parse(date.Substring(0, date.IndexOf(" ")));
-
-        return new DateTime(year, month, day);
+            return new DateTime(year, month, day);
+        }
+            
     }
 }
