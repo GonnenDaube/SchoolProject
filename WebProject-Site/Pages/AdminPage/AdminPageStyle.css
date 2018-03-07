@@ -1,7 +1,7 @@
 ﻿.card-holder{
     position:absolute;
     left:10vw;
-    top:7.5vw;
+    top:11vw;
     width:80vw;
     height:35vw;
 }
@@ -62,6 +62,11 @@
 }
 
 .users-table{
+    left:3.5%;
+    width:93%;
+}
+
+.models-table{
     left:3.5%;
     width:93%;
 }

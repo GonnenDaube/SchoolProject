@@ -15,23 +15,17 @@
             <img src="/Resources/Icons/users_icon.png" class="dash-icon"/>
             <p class="dash-txt">USERS</p>
         </a>
-        <a id="card0" href="DataTablePage.aspx" class="card" style="background-color:rgb(252, 246, 189)">
-
+        <a id="card0" href="DataTablePage.aspx?table=models" class="card" style="background-color:rgb(252, 246, 189)">
+            <img src="/Resources/Icons/model_icon.png" class="dash-icon"/>
+            <p class="dash-txt">Models</p>
         </a>
-        <a id="card1" href="DataTablePage.aspx" class="card" style="background-color:rgb(208, 244, 222)">
-
+        <a id="card1" href="DataTablePage.aspx?table=downloads" class="card" style="background-color:rgb(208, 244, 222)">
+            <img src="/Resources/Icons/download_icon.png" class="dash-icon"/>
+            <p class="dash-txt">Downloads</p>
         </a>
-        <a id="card2" href="DataTablePage.aspx" class="card" style="background-color:rgb(222, 246, 202)">
-
-        </a>
-        <a id="card3" href="DataTablePage.aspx" class="card" style="background-color:rgb(248, 189, 196)">
-
-        </a>
-        <a id="card4" href="DataTablePage.aspx" class="card" style="background-color:rgb(248, 189, 196)">
-
-        </a>
-        <a id="card5" href="DataTablePage.aspx" class="card" style="background-color:rgb(248, 189, 196)">
-
+        <a id="card2" href="DataTablePage.aspx?table=ratings" class="card" style="background-color:rgb(222, 246, 202)">
+            <img src="/Resources/Icons/rating_icon.png" class="dash-icon"/>
+            <p class="dash-txt">Ratings</p>
         </a>
     </div>
 </asp:Content>

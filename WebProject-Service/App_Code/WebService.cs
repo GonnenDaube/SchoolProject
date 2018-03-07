@@ -106,15 +106,17 @@ public class WebService : System.Web.Services.WebService
     /// <param name="query"></param>
     /// <returns>reader of query</returns>
     [WebMethod]
-    public XmlReader GenericReaderQuery(string query)
+    public DataSet GenericReaderQuery(string query)
     {
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
                 OpenConnection();
             SqlCommand cmd = new SqlCommand(query, sqlConnection);
-            XmlReader reader = cmd.ExecuteXmlReader();
-            return reader;
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            DataSet dataset = new DataSet();
+            adapter.Fill(dataset);
+            return dataset;
         }
         catch
         {

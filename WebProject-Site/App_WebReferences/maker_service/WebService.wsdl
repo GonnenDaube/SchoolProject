@@ -56,11 +56,17 @@
       <s:element name="GenericReaderQueryResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GenericReaderQueryResult" type="tns:XmlReader" />
+            <s:element minOccurs="0" maxOccurs="1" name="GenericReaderQueryResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:complexType name="XmlReader" abstract="true" />
       <s:element name="InsertUser">
         <s:complexType>
           <s:sequence>
@@ -116,6 +122,7 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:complexType name="XmlReader" abstract="true" />
       <s:element name="GetModelIdsByUserId">
         <s:complexType>
           <s:sequence>

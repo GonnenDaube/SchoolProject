@@ -7,12 +7,15 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using System.Data.SqlClient;
 using Resources;
+using System.Xml;
+using System.Data;
 
 public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
 {
 
     SqlConnection sqlConnection;
     string dataTableName;
+    maker_service.WebService ws;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -51,6 +54,44 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
 
             table.Controls.Add(footer_row);
         }
+        if (dataTableName.Equals("models"))
+        {
+            table.CssClass = "table models-table Report1942Font";
+
+            ws = new maker_service.WebService();
+
+            string[] titles = { "Model ID", "User ID", "Date", "Data Path", "Name", "Description", "Thumbnail" };
+
+            GenerateHeaderRow(titles);
+
+            ws.OpenConnection();
+
+            DataSet dataset = ws.GenericReaderQuery("SELECT * FROM [Models]");
+
+            TableFooterRow footer_row = new TableFooterRow();
+
+            int i = 0;
+            int counter = 0;
+
+            DataTableReader reader = dataset.Tables[0].CreateDataReader();
+
+            if (reader.Read())
+            {
+                footer_row = GenerateFooterRow(reader, ref counter);
+            }
+
+            do
+            {
+                table.Controls.Add(GenerateTableRow(reader, i, ref counter));
+                i++;
+            } while (reader.Read());
+            reader.Close();
+            ws.CloseConnection();
+
+            title.InnerHtml = "MODELS";
+
+            table.Controls.Add(footer_row);
+        }
     }
 
     private TableRow GenerateTableRow(SqlDataReader reader, int index, ref int counter)
@@ -59,6 +100,49 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
         row.CssClass = "table-row";
         TableCell cell;
         for(int i = 0;i< reader.FieldCount; i++)
+        {
+            cell = new TableCell();
+            switch (reader.GetFieldType(i).ToString())
+            {
+                case "System.Int32":
+                    cell.Controls.Add(GenerateTextBox(reader.GetInt32(i).ToString(), counter++, true));
+                    cell.Controls.Add(GenerateTextBoxValidator((TextBox)cell.Controls[0]));
+                    cell.ToolTip = reader.GetInt32(i).ToString();
+                    break;
+                case "System.String":
+                    cell.Controls.Add(GenerateTextBox(reader.GetString(i), counter++, true));
+                    cell.Controls.Add(GenerateTextBoxValidator((TextBox)cell.Controls[0]));
+                    cell.ToolTip = reader.GetString(i).ToString();
+                    break;
+                case "System.DateTime":
+                    cell.Controls.Add(GenerateTextBox(reader.GetDateTime(i).ToString(), counter++, true));
+                    cell.Controls.Add(GenerateTextBoxValidator((TextBox)cell.Controls[0]));
+                    cell.ToolTip = reader.GetDateTime(i).ToString();
+                    break;
+                case "System.Boolean":
+                    cell.Controls.Add(GenerateCheckBox(reader.GetBoolean(i), true));
+                    break;
+            }
+            cell.CssClass = "table-cell";
+            cell.ID = "row" + index + "cell" + i;
+            row.Controls.Add(cell);
+        }
+        TableCell actionCell = new TableCell();
+        actionCell.CssClass = "table-cell";
+        actionCell.Controls.Add(GenerateImgButton("/Resources/Icons/delete-icon.png", new ImageClickEventHandler(delete_btn_Click), "delete-btn" + index));
+        actionCell.Controls.Add(GenerateImage("/Resources/Icons/changed-icon.png", "changed" + index));
+        actionCell.ID = "row" + index + "cell-action";
+        row.Controls.Add(actionCell);
+        row.ID = "row" + index;
+        return row;
+    }
+
+    private TableRow GenerateTableRow(DataTableReader reader, int index, ref int counter)
+    {
+        TableRow row = new TableRow();
+        row.CssClass = "table-row";
+        TableCell cell;
+        for (int i = 0; i < reader.FieldCount; i++)
         {
             cell = new TableCell();
             switch (reader.GetFieldType(i).ToString())
@@ -153,6 +237,36 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
         {
             cell = new TableCell();
             if(i > 0)
+            {
+                switch (reader.GetFieldType(i).ToString())
+                {
+                    case "System.Int32":
+                        cell.Controls.Add(GenerateTextBox("", counter++, false));
+                        cell.ToolTip = "";
+                        break;
+                    case "System.String":
+                        cell.Controls.Add(GenerateTextBox("", counter++, false));
+                        cell.ToolTip = "";
+                        break;
+                    case "System.Boolean":
+                        cell.Controls.Add(GenerateCheckBox(false, false));
+                        break;
+                }
+            }
+            cell.CssClass = "table-footer-cell";
+            row.Controls.Add(cell);
+        }
+        return row;
+    }
+
+    private TableFooterRow GenerateFooterRow(DataTableReader reader, ref int counter)
+    {
+        TableFooterRow row = new TableFooterRow();
+        TableCell cell;
+        for (int i = 0; i < reader.FieldCount; i++)
+        {
+            cell = new TableCell();
+            if (i > 0)
             {
                 switch (reader.GetFieldType(i).ToString())
                 {
