@@ -138,9 +138,84 @@
 
 .asset-graph{
     position:absolute;
-    left:50%;
+    left:54%;
     top:45%;
     height:50%;
     width:45%;
     background-color:rgba(255,255,255,0.8);
+}
+
+.label-y0{
+    position:absolute;
+    left:59%;
+    top:93%;
+    font-size:0.8vw;
+    background-color:white;
+    transform:rotate(15deg);
+}
+
+.label-y1{
+    position:absolute;
+    left:67%;
+    top:93%;
+    font-size:0.8vw;
+    background-color:white;
+    transform:rotate(15deg);
+}
+
+.label-y2{
+    position:absolute;
+    left:75%;
+    top:93%;
+    font-size:0.8vw;
+    background-color:white;
+    transform:rotate(15deg);
+}
+
+.label-y3{
+    position:absolute;
+    left:83%;
+    top:93%;
+    font-size:0.8vw;
+    background-color:white;
+    transform:rotate(15deg);
+}
+.label-y4{
+    position:absolute;
+    left:91%;
+    top:93%;
+    font-size:0.8vw;
+    background-color:white;
+    transform:rotate(15deg);
+}
+
+.label-x0{
+    position:absolute;
+    left:55%;
+    top:81%;
+    font-size:0.8vw;
+}
+.label-x1{
+    position:absolute;
+    left:55%;
+    top:73%;
+    font-size:0.8vw;
+}
+.label-x2{
+    position:absolute;
+    left:55%;
+    top:65%;
+    font-size:0.8vw;
+}
+.label-x3{
+    position:absolute;
+    left:55%;
+    top:57%;
+    font-size:0.8vw;
+}
+.label-x4{
+    position:absolute;
+    left:55%;
+    top:49%;
+    font-size:0.8vw;
 }

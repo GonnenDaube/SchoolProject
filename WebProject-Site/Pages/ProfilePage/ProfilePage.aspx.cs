@@ -99,15 +99,24 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
         HtmlGenericControl rating = new HtmlGenericControl("p");
         rating.Attributes["id"] = "asset-rate-" + index;
         rating.Attributes["class"] = "asset-rate Report1942Font";
-        rating.InnerHtml = ws.GetRate(model_id).ToString() + "/5";
+        rating.InnerHtml = (Math.Floor(ws.GetRate(model_id) * 100) / 100).ToString() + "/5";
 
-        HtmlGenericControl graph = GenerateAssetGraph(index, model_id);
+        Label[] labelX, labelY;
+        HtmlGenericControl graph = GenerateAssetGraph(index, model_id, out labelX, out labelY);
 
         file.Controls.Add(thumbnail);
         file.Controls.Add(edit_btn);
         file.Controls.Add(delete_btn);
         file.Controls.Add(rating);
         file.Controls.Add(graph);
+        foreach(Label lbl in labelX)
+        {
+            file.Controls.Add(lbl);
+        }
+        foreach (Label lbl in labelY)
+        {
+            file.Controls.Add(lbl);
+        }
         return file;
     }
 
@@ -128,14 +137,23 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
         return button;
     }
 
-    private HtmlGenericControl GenerateAssetGraph(int index, int model_id)
+    private HtmlGenericControl GenerateAssetGraph(int index, int model_id, out Label[] labelX, out Label[] labelY)
     {
         HtmlGenericControl svg = new HtmlGenericControl("svg");
         svg.Attributes["class"] = "asset-graph";
 
         string[] mat = ws.GetDownloadCountArray(model_id);
 
-        if(mat.Length > 0)
+        labelX = new Label[5];
+        labelY = new Label[5];
+
+        for(int i = 0; i < labelX.Length; i++)
+        {
+            labelX[i] = new Label();
+            labelY[i] = new Label();
+        }
+
+        if (mat.Length > 0)
         {
             Dictionary<DateTime, int> dateCount = new Dictionary<DateTime, int>();
 
@@ -174,6 +192,29 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
                 marks[i].Attributes["points"] = "0,0 1,0";
             }
 
+            DateTime first = dateCount.First().Key;
+            int max_value = CalcMaxCount(timeCount);
+            TimeSpan offset = CalcAxisOffset(dateCount);
+
+            for(int i = 0; i < labelX.Length; i++)
+            {
+                labelX[i] = new Label();
+                labelX[i].Text = ((i + 1) * max_value / labelX.Length).ToString();
+                labelX[i].CssClass = "label-x" + i;
+            }
+
+            for (int i = 0; i < labelY.Length; i++)
+            {
+                DateTime date = first;
+                for(int k = 0; k < i; k++)
+                {
+                    date = date.Add(offset);
+                }
+                labelY[i] = new Label();
+                labelY[i].Text = (date).ToShortDateString();
+                labelY[i].CssClass = "label-y" + i;
+            }
+
 
             HtmlGenericControl polyline = new HtmlGenericControl("polyline");
             polyline.Attributes["fill"] = "none";
@@ -194,8 +235,64 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
                 svg.Controls.Add(marks[i]);
             }
         }
+        else
+        {
+            HtmlGenericControl xAxis = new HtmlGenericControl("polyline");
+            xAxis.Attributes["fill"] = "none";
+            xAxis.Attributes["stroke"] = "black";
+
+            xAxis.Attributes["points"] = "1,0 0,0 0,1";
+
+            HtmlGenericControl[] marks = new HtmlGenericControl[10];
+
+            for (int i = 0; i < marks.Length; i++)
+            {
+                marks[i] = new HtmlGenericControl("polyline");
+                marks[i].Attributes["fill"] = "none";
+                marks[i].Attributes["stroke"] = "lightgray";
+
+                marks[i].Attributes["points"] = "0,0 1,0";
+            }
+
+            HtmlGenericControl polyline = new HtmlGenericControl("polyline");
+            polyline.Attributes["fill"] = "none";
+            polyline.Attributes["stroke"] = "rgb(0, 255, 0)";
+
+
+            polyline.Attributes["points"] = "0,0 0,0 ";
+
+            svg.Controls.Add(polyline);
+
+            svg.Controls.Add(xAxis);
+
+            for (int i = 0; i < marks.Length; i++)
+            {
+                svg.Controls.Add(marks[i]);
+            }
+        }
 
         return svg;
+    }
+
+    private TimeSpan CalcAxisOffset(Dictionary<DateTime, int> timeCount)
+    {
+        DateTime first = timeCount.First().Key;
+        DateTime last = timeCount.Last().Key;
+
+        TimeSpan offset = last.Subtract(first);
+        TimeSpan smallOffset = TimeSpan.FromDays(offset.TotalDays);
+        return smallOffset;
+    }
+
+    private int CalcMaxCount(Dictionary<TimeSpan, int> timeCount)
+    {
+        int max = 0;
+        for(int i = 0; i<timeCount.Count; i++)
+        {
+            if (max < timeCount.ElementAt(i).Value)
+                max = timeCount.ElementAt(i).Value;
+        }
+        return max;
     }
 
     private DateTime ConvertToDate(string date)

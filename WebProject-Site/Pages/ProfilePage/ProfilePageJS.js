@@ -52,14 +52,15 @@ function graphSetUp() {
 
     let str;
     let x, y;
-    x = [];
-    y = [];
     let count;
 
     //resize graph values to 100%
     for (let i = 0; i < graphs.length; i++) {
         str = graphs[i].children[0].getAttribute('points');
         count = 0;
+
+        x = [];
+        y = [];
 
         while(str.length != 0){
             x[count] = Number(str.substring(0, str.indexOf(',')));
@@ -74,6 +75,11 @@ function graphSetUp() {
         let coex = 0.8 * width / Math.max(...x);
         let coey = 0.8 * height / Math.max(...y);
 
+        if (coex == Infinity)
+            coex = 1;
+        if (coey == Infinity)
+            coey = 1;
+
         for (let k = 0; k < x.length; k++) {
             str += 0.1 * width + coex * x[k] + "," + (0.9 * height - coey * y[k]) + " ";
         }
@@ -84,12 +90,12 @@ function graphSetUp() {
 
         for (let k = 2; k < graphs[i].children.length / 2 + 1; k++) {
             let max_size = (graphs[i].children.length - 2) / 2;
-            graphs[i].children[k].setAttribute('points', (0.1 * width) + "," + (k - 1) * 0.9 * height / (max_size + 1) + " " + 0.9 * width + "," + (k - 1) * 0.9 * height / (max_size + 1));
+            graphs[i].children[k].setAttribute('points', (0.1 * width) + "," + (0.1 * height + (k - 2) * 0.8 * height / max_size) + " " + 0.9 * width + "," + (0.1 * height + (k - 2) * 0.8 * height / max_size));
         }
 
         for (let k = graphs[i].children.length / 2 + 1; k < graphs[i].children.length; k++) {
             let max_size = (graphs[i].children.length - 2) / 2;
-            graphs[i].children[k].setAttribute('points', (1.5 + (k - (graphs[i].children.length / 2 + 1))) * 0.9 * width / (max_size + 1) + "," + 0.1 * height + " " + (1.5 +(k - (graphs[i].children.length / 2 + 1))) * 0.9 * width / (max_size + 1) + "," + 0.9 * height);
+            graphs[i].children[k].setAttribute('points', (0.1 * width + (k - 1 - max_size) * 0.8 * width / max_size) + "," + 0.1 * height + " " + (0.1 * width + (k - 1 - max_size) * 0.8 * width / max_size) + "," + 0.9 * height);
         }
     }
 }

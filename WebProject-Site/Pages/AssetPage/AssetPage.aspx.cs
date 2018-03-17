@@ -38,7 +38,7 @@ public partial class Pages_AssetPage_AssetPage : System.Web.UI.Page
             AssetName.Text = ws.GetModelName(model_id);
             AssetName.ToolTip = AssetName.Text;
             AssetDescription.Text = ws.GetModelDescription(model_id);
-            Rating.Text = ws.GetRate(model_id).ToString();
+            Rating.Text = (Math.Floor(ws.GetRate(model_id) * 100) / 100).ToString();
             int userRate = ws.GetModelUserRate(model_id, (int)Session["user-id"]);
             string[] info = ws.GetModelInfo(model_id);
 
