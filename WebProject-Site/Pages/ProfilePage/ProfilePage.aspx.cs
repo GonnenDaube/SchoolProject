@@ -178,7 +178,7 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
             HtmlGenericControl xAxis = new HtmlGenericControl("polyline");
             xAxis.Attributes["fill"] = "none";
             xAxis.Attributes["stroke"] = "black";
-
+            xAxis.Attributes["stroke-width"] = "2";
             xAxis.Attributes["points"] = "1,0 0,0 0,1";
 
             HtmlGenericControl[] marks = new HtmlGenericControl[10];
@@ -188,7 +188,7 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
                 marks[i] = new HtmlGenericControl("polyline");
                 marks[i].Attributes["fill"] = "none";
                 marks[i].Attributes["stroke"] = "lightgray";
-
+                marks[i].Attributes["stroke-width"] = "2";
                 marks[i].Attributes["points"] = "0,0 1,0";
             }
 
@@ -206,7 +206,7 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
             for (int i = 0; i < labelY.Length; i++)
             {
                 DateTime date = first;
-                for(int k = 0; k < i; k++)
+                for(int k = 0; k <= i; k++)
                 {
                     date = date.Add(offset);
                 }
@@ -219,7 +219,7 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
             HtmlGenericControl polyline = new HtmlGenericControl("polyline");
             polyline.Attributes["fill"] = "none";
             polyline.Attributes["stroke"] = "rgb(0, 255, 0)";
-
+            polyline.Attributes["stroke-width"] = "3";
 
             polyline.Attributes["points"] = "";
             for (int i = 0; i < dateCount.Count; i++)
@@ -280,7 +280,7 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
         DateTime last = timeCount.Last().Key;
 
         TimeSpan offset = last.Subtract(first);
-        TimeSpan smallOffset = TimeSpan.FromDays(offset.TotalDays);
+        TimeSpan smallOffset = TimeSpan.FromDays(offset.TotalDays / 5);
         return smallOffset;
     }
 
