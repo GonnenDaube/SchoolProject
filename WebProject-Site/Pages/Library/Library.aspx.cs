@@ -14,6 +14,7 @@ public partial class Pages_Library_Library : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //generates models list
         //Gets asstes id's
         ws = new maker_service.WebService();
 
@@ -72,6 +73,7 @@ public partial class Pages_Library_Library : System.Web.UI.Page
 
     private string GetUserName(int model_id)
     {
+        //get user name from model id
         int userId = ws.GetCreatorUserId(model_id);
 
         SqlConnection sqlConnection = new SqlConnection(resources.ResourceManager.GetString("Connection_String"));

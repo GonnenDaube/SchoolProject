@@ -18,6 +18,7 @@ public partial class Pages_VerificationPage_VerificationPage : System.Web.UI.Pag
 
     protected void verificationButton_Click(object sender, EventArgs e)
     {
+        //verifys if the correct key was entered in the url
         string url = Request.Url.AbsoluteUri;
         bool isCorrectKey = false;
         if (url.Contains('?') && IsNumeric(url.Substring(url.IndexOf('?') + 1)))
@@ -66,6 +67,7 @@ public partial class Pages_VerificationPage_VerificationPage : System.Web.UI.Pag
 
     private bool IsNumeric(string str)
     {
+        //verifys a string is a number
         try
         {
             int.Parse(str);

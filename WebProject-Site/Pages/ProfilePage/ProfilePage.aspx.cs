@@ -16,7 +16,6 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
     {
 
 
-
         //color: rgb(216, 216, 216);
         //color: rgb(252, 246, 189);
         //color: rgb(208, 244, 222);
@@ -44,6 +43,7 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
 
     private HtmlGenericControl GenerateAssetFile(int index, int total, int model_id)
     {
+        //generates a "file" containing asset information and a tab
         HtmlGenericControl file_div = new HtmlGenericControl("div");
         file_div.ID = "file-div-" + index;
         if(index != 0)
@@ -63,6 +63,7 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
 
     private HtmlGenericControl GenerateTab(int index, int total, string color, int model_id)
     {
+        //generates a tab that can be clicked in order to show model info
         HtmlGenericControl tab = new HtmlGenericControl("div");
         tab.ID = "file-tab-" + index;
         tab.Attributes["class"] = "asset-file-tab";
@@ -84,6 +85,7 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
 
     private HtmlGenericControl GenerateFile(int index, string color, int model_id)
     {
+        //generate a file containing model info
         HtmlGenericControl file = new HtmlGenericControl("div");
         file.Attributes["class"] = "asset-file-color";
         file.Attributes["style"] = "background-color:" + color;
@@ -93,8 +95,8 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
         thumbnail.Attributes["src"] = ws.GetModelThumbnail(model_id);
         thumbnail.Attributes["class"] = "thumbnail-profile";
 
-        HtmlGenericControl edit_btn = GenerateButton("EDIT", "edit-btn");
-        HtmlGenericControl delete_btn = GenerateButton("DELETE", "delete-btn");
+        Button edit_btn = GenerateButton("VIEW", "view-btn", model_id);
+        Button delete_btn = GenerateButton("DELETE", "delete-btn", model_id);
 
         HtmlGenericControl rating = new HtmlGenericControl("p");
         rating.Attributes["id"] = "asset-rate-" + index;
@@ -120,25 +122,50 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
         return file;
     }
 
-    private HtmlGenericControl GenerateButton(string name, string posClass)
+    private Button GenerateButton(string name, string posClass, int model_id)
     {
-        HtmlGenericControl button = new HtmlGenericControl("button");
-        button.Attributes["class"] = "profile-action-button " + posClass;
+        //generates a button
+        Button button = new Button();
+        button.CssClass = "profile-action-button Report1942Font " + posClass;
 
-        HtmlGenericControl p = new HtmlGenericControl("p");
-        HtmlGenericControl selected_img = new HtmlGenericControl("img");
-        p.InnerHtml = name;
-        p.Attributes["class"] = "Report1942Font";
-        selected_img.Attributes["src"] = "/Resources/Icons/button-selected.png";
+        button.Text = name;
 
-        button.Controls.Add(p);
-        button.Controls.Add(selected_img);
+        button.ToolTip = model_id.ToString();
 
+        if (name.Equals("DELETE"))
+            button.Click += new EventHandler(Delete_Model_Click);
+        if(name.Equals("VIEW"))
+            button.Click += new EventHandler(View_Model_Click);
         return button;
+    }
+
+    private void Delete_Model_Click(object sender, EventArgs e)
+    {
+        //called if delete button is clicked (deletes model)
+        int model_id = int.Parse(((Button)sender).ToolTip);
+
+        string[] name = { "@model_id" };
+        string[] value = { model_id.ToString() };
+        string[] type = { "int" };
+
+        ws.GenericVoidQueryWithParameters("DELETE FROM [Downloads] WHERE Model_Id = @model_id;", name, value, type);
+        ws.GenericVoidQueryWithParameters("DELETE FROM [Ratings] WHERE Model_Id = @model_id;", name, value, type);
+        ws.GenericVoidQueryWithParameters("DELETE FROM [Models] WHERE Model_Id = @model_id;", name, value, type);
+
+        Response.Redirect(Request.Url.AbsoluteUri);
+    }
+
+    private void View_Model_Click(object sender, EventArgs e)
+    {
+        //called if view button is clicked, redirects to model page
+        int model_id = int.Parse(((Button)sender).ToolTip);
+
+        Response.Redirect("http://localhost:57143/Pages/AssetPage/AssetPage.aspx?" + model_id);
     }
 
     private HtmlGenericControl GenerateAssetGraph(int index, int model_id, out Label[] labelX, out Label[] labelY)
     {
+        //generates a graph containing downloads per date
         HtmlGenericControl svg = new HtmlGenericControl("svg");
         svg.Attributes["class"] = "asset-graph";
 
@@ -276,6 +303,7 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
 
     private TimeSpan CalcAxisOffset(Dictionary<DateTime, int> timeCount)
     {
+        //calcs the offset between dates
         DateTime first = timeCount.First().Key;
         DateTime last = timeCount.Last().Key;
 
@@ -286,6 +314,7 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
 
     private int CalcMaxCount(Dictionary<TimeSpan, int> timeCount)
     {
+        //finds the max downloads per day
         int max = 0;
         for(int i = 0; i<timeCount.Count; i++)
         {
@@ -297,6 +326,7 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
 
     private DateTime ConvertToDate(string date)
     {
+        //converts date string into DateTime object
         DateTime result;
         if (DateTime.TryParse(date, out result))
             // in DD/MM/YYYY format

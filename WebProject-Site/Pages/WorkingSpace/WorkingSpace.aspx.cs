@@ -14,6 +14,7 @@ public partial class Pages_WorkingSpace_WorkingSpace : System.Web.UI.Page
 
     protected void Upload_Click(object sender, EventArgs e)
     {
+        //uploads model
         string thumbnail = thumbnail_url.Text;
         string name = model_name.Text;
         string desc = description.Value;
@@ -32,6 +33,7 @@ public partial class Pages_WorkingSpace_WorkingSpace : System.Web.UI.Page
 
     private float[] ConvertStringToFloatArray(string str)
     {
+        //converts string to float array
         int countComma = str.Count(s => s == ',');
         if(countComma <= 0)
         {

@@ -19,6 +19,7 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //create responsive table for each table by looking at the url
         dataTableName = GetDataTableName(Request.Url.AbsoluteUri);
         if(dataTableName.Equals("users"))
         {
@@ -175,6 +176,7 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
 
     private TableRow GenerateTableRow(SqlDataReader reader, int index, ref int counter)
     {
+        //generates a table row containing information from the data base and editable
         TableRow row = new TableRow();
         row.CssClass = "table-row";
         TableCell cell;
@@ -218,6 +220,7 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
 
     private TableRow GenerateTableRow(DataTableReader reader, int index, ref int counter)
     {
+        //overloaded function that used DataTableReader instead of SqlDataReader
         TableRow row = new TableRow();
         row.CssClass = "table-row";
         TableCell cell;
@@ -261,6 +264,7 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
 
     private void GenerateHeaderRow(string[] titles)
     {
+        //generates a header row containing column names
         TableHeaderCell cell;
         for(int i = 0; i < titles.Length; i++)
         {
@@ -273,11 +277,13 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
 
     private string GetDataTableName(string uri)
     {
+        //manipulates url to get table name
         return uri.Substring(uri.IndexOf("table=") + ("table=").Length);
     }
 
     private CheckBox GenerateCheckBox(bool initialState, bool shouldPostBack)
     {
+        //generate a generic checkbox with an initial state and a should post back boolean
         CheckBox cb = new CheckBox();
         cb.Checked = initialState;
         cb.Attributes["class"] = "checkbox";
@@ -291,6 +297,7 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
 
     private TextBox GenerateTextBox(string text, int index, bool shouldTextChanged)
     {
+        //generates a generic text box
         TextBox tb = new TextBox();
         tb.Text = text;
         tb.CssClass = "textbox-admin Report1942Font";
@@ -306,6 +313,7 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
 
     private RequiredFieldValidator GenerateTextBoxValidator(TextBox controlToValidate)
     {
+        //generates a text box validator with a text box to validate
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.ControlToValidate = controlToValidate.ID;
         validator.Text = "*";
@@ -315,6 +323,7 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
 
     private TableFooterRow GenerateFooterRow(SqlDataReader reader, ref int counter)
     {
+        //generates a footer row containing an insert functionality
         TableFooterRow row = new TableFooterRow();
         TableCell cell;
         for (int i = 0; i < reader.FieldCount; i++)
@@ -345,6 +354,7 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
 
     private TableFooterRow GenerateFooterRow(DataTableReader reader, ref int counter)
     {
+        //overloaded function using DataTableReader instead of SqlDataReader
         TableFooterRow row = new TableFooterRow();
         TableCell cell;
         for (int i = 0; i < reader.FieldCount; i++)
@@ -379,6 +389,7 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
 
     private ImageButton GenerateImgButton(string path, ImageClickEventHandler clickEvent, string id)
     {
+        //generates an image button
         ImageButton btn = new ImageButton();
         btn.CssClass = "delete-btn-admin";
         btn.ImageUrl = path;
@@ -389,6 +400,7 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
 
     private Image GenerateImage(string path, string id)
     {
+        //generates an image
         Image img = new Image();
         img.ID = id;
         img.CssClass = "admin-action-img not-changed";
@@ -397,7 +409,10 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
     }
 
     protected void save_btn_Click(object sender, EventArgs e)
-    {//passed validation
+    {
+        //saves changes into data base
+
+        //passed validation
         if (dataTableName.Equals("users"))
         {
             SqlCommand sqlCommand;
@@ -629,6 +644,7 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
 
     protected void delete_btn_Click(object sender, EventArgs e)
     {
+        //delete a row from the table
         if (sender.GetType().Equals(typeof(ImageButton)))
         {
             if (dataTableName.Equals("users"))
@@ -741,6 +757,8 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
 
     protected void text_changed(object sender, EventArgs e)
     {
+        //runs if text has changed at sender
+        //puts a flag to update row on save button click
         TableCell senderCell = (TableCell)((TextBox)sender).Parent;
         string cellId = senderCell.ID;
         string rowId = cellId.Substring(cellId.IndexOf("row") + 3);
@@ -752,6 +770,8 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
 
     protected void checked_changed(object sender, EventArgs e)
     {
+        //runs if checkbox has changed state at sender
+        //puts a flag to update row on save button click
         TableCell senderCell = (TableCell)((CheckBox)sender).Parent;
         string cellId = senderCell.ID;
         string rowId = cellId.Substring(cellId.IndexOf("row") + 3);
@@ -763,6 +783,7 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
 
     private bool InsertRowFull(TableFooterRow row, int index)
     {
+        //checks if insert row is full (recursively)
         if (index >= row.Controls.Count)
             return true;
         if(row.Controls[index].Controls[0] is TextBox)

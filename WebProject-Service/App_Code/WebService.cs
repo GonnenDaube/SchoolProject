@@ -30,12 +30,6 @@ public class WebService : System.Web.Services.WebService
         //InitializeComponent(); 
     }
 
-    [WebMethod]
-    public string HelloWorld()
-    {
-        return "Hello World";
-    }
-
     /// <summary>
     /// Opens The connection to the data base
     /// </summary>
@@ -43,6 +37,7 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     public int OpenConnection()
     {
+        //open connection to the data base
         try
         {
             if (sqlConnection == null)
@@ -63,6 +58,7 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     public int CloseConnection()
     {
+        //close connection to the data base
         try
         {
             if (sqlConnection == null)
@@ -85,6 +81,7 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     public int GenericVoidQuery(string query)
     {
+        //runs a generic sql void query
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -102,6 +99,7 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     public int GenericVoidQueryWithParameters(string query, string[] parametersNames, string[] parametersValues, string[] parameterTypes)
     {
+        //runs a generic sql void query with parameters
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -140,6 +138,7 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     public DataSet GenericReaderQuery(string query)
     {
+        //runs a generic sql reader query
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -164,6 +163,7 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     public int InsertUser(int id)
     {
+        //inserts a user into users table inside the webservice
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -183,6 +183,7 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     public int InsertModel(int user_id, string name, string description, float[] positions, float[] colors, float[] normals, float[] cameraPos, float[] lookingat, string thumbnail_url)
     {
+        //inserts a new model into the db
         try
         {
             string location = (@"\DB_Files\Model_Thumbnails\Thumbnail" + DateTime.Now.ToString().Replace('/', '-').Replace(' ', '-').Replace(':', '-') + ".png");
@@ -218,6 +219,7 @@ public class WebService : System.Web.Services.WebService
 
     private string CreateModelXMLFile(float[] positions, float[] colors, float[] normals, float[] cameraPos, float[] lookingat)
     {
+        //creates a xml file containing model information
         try
         {
             string location = @"/DB_Files/Model_Files/Model_XML" + DateTime.Now.ToString().Replace('/', '-').Replace(' ', '-').Replace(':', '-') + ".xml";
@@ -333,6 +335,7 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     public XmlReader GetXMLFile(string location)
     {
+        //returns an xml reader to read the xml file
         return XmlReader.Create(Server.MapPath(location));
     }
 
@@ -340,6 +343,7 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     public int[] GetModelIdsByUserId(int user_id)
     {
+        //gets model ids that a specific user created
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -371,6 +375,7 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     public int[] GetModelIds()
     {
+        //get models ids list
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -405,6 +410,7 @@ public class WebService : System.Web.Services.WebService
     /// <returns>string of values</returns>
     private string ConvertFloatArrayToString(float[] arr)
     {
+        //converts a float array into a string
         if(arr == null)
         {
             return "";
@@ -428,6 +434,7 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     public int InsertDownload(int user_id, int model_id)
     {
+        //inserts a download log into the db
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -455,6 +462,7 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     public string[] GetModelInfo(int model_id)
     {
+        //returns models info in string form
         XmlReader info = GetModelXMLFile(model_id);
         XmlReader camera;
         XmlReader model;
@@ -512,6 +520,7 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     public int InsertRating(int user_id, int model_id, int rate)
     {
+        //insert a rating into db
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -547,6 +556,7 @@ public class WebService : System.Web.Services.WebService
     /// <returns>string containing link</returns>
     public XmlReader GetModelXMLReader(int model_id)
     {
+        //get an xml reader to read information from sql query
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -567,6 +577,7 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     public int GetCreatorUserId(int model_id)
     {
+        //get creator id from model id
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -592,6 +603,7 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     public int GetModelUserRate(int model_id, int user_id)
     {
+        //get the rate of a certain user on a cetain model
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -618,6 +630,7 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     public DateTime GetModelCreationDate(int model_id)
     {
+        //gets model creation date from model id
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -643,6 +656,7 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     public XmlReader GetModelXMLFile(int model_id)
     {
+        //returns the xml file location from model id
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -669,6 +683,7 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     public string GetModelName(int model_id)
     {
+        //returns model name from model id
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -694,6 +709,7 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     public string GetModelDescription(int model_id)
     {
+        //returns model description from model id
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -719,6 +735,7 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     public string GetModelThumbnail(int model_id)
     {
+        //returns model thumbnail in base64 form
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -744,6 +761,7 @@ public class WebService : System.Web.Services.WebService
 
     private string ConvertToDataUrl(string location)
     {
+        //converts binary data from png file into base64 form and adds a prefix
         byte[] binaryData = File.ReadAllBytes(Server.MapPath(location));
         string base64 = Convert.ToBase64String(binaryData);
         return "data:image/png;base64," + base64;
@@ -753,6 +771,7 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     public XmlReader GetModelsList()
     {
+        //returns a list of all the models
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -775,6 +794,7 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     public float GetRate(int model_id)
     {
+        //calculate the average rate of a model
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -822,6 +842,7 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     public string[] GetDownloadCountArray(int model_id)
     {
+        //returns a string array containing the dates and amount of downloads at each date
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)

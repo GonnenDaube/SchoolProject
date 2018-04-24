@@ -21,6 +21,7 @@ public partial class Pages_HomePage_HomePage : System.Web.UI.Page
 
     protected void SignUp(object sender, EventArgs e)
     {
+        //sign up functionality
         SqlConnection sqlConnection = new SqlConnection(resources.ResourceManager.GetString("Connection_String"));
         sqlConnection.Open();
         string sqlCmd = "SELECT * FROM [Users] WHERE username = @username;";
@@ -141,6 +142,7 @@ public partial class Pages_HomePage_HomePage : System.Web.UI.Page
 
     private int KeyGenerator()
     {
+        //generates a random key to be checked on validation
         using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
         {
             // Buffer storage.
@@ -154,6 +156,7 @@ public partial class Pages_HomePage_HomePage : System.Web.UI.Page
 
     private string ColorGenerator()
     {
+        //generates a random color for each user
         string[] colors = new string[5];
         colors[0] = "rgb(10, 16, 13)";
         colors[1] = "rgb(176, 186, 0)";
@@ -167,6 +170,7 @@ public partial class Pages_HomePage_HomePage : System.Web.UI.Page
 
     protected void Login(object sender, EventArgs e)
     {
+        //login functionality
         SqlConnection sqlConnection = new SqlConnection(resources.ResourceManager.GetString("Connection_String"));
         sqlConnection.Open();
         string sqlCmd = "SELECT * FROM [Users] WHERE password = @password AND email = @email AND validated = 'True';";
@@ -202,6 +206,7 @@ public partial class Pages_HomePage_HomePage : System.Web.UI.Page
 
     protected void usernameBox_TextChanged(object sender, EventArgs e)
     {
+        //checks if username is already taken and puts an error message
         SqlConnection sqlConnection = new SqlConnection(resources.ResourceManager.GetString("Connection_String"));
         sqlConnection.Open();
         string sqlCmd = "SELECT * FROM [Users] WHERE username = @username;";
