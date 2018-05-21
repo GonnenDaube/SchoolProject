@@ -12,8 +12,8 @@ using System.IO;
 
 public partial class Pages_AssetPage_AssetPage : System.Web.UI.Page
 {
-    maker_service.WebService ws;
-    int model_id;
+    private maker_service.WebService ws;
+    private int model_id;
 
 
     protected void Page_Load(object sender, EventArgs e)

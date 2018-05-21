@@ -9,8 +9,8 @@ using System.Web.UI.HtmlControls;
 public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
 {
     private string[] colors;
-    Random rnd;
-    maker_service.WebService ws;
+    private Random rnd;
+    private maker_service.WebService ws;
 
     protected void Page_Load(object sender, EventArgs e)
     {

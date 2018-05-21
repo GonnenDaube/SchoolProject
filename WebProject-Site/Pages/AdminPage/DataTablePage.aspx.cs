@@ -13,9 +13,9 @@ using System.Data;
 public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
 {
 
-    SqlConnection sqlConnection;
-    string dataTableName;
-    maker_service.WebService ws;
+    private SqlConnection sqlConnection;
+    private string dataTableName;
+    private maker_service.WebService ws;
 
     protected void Page_Load(object sender, EventArgs e)
     {
