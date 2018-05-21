@@ -4,7 +4,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Verification</title>
+    <link rel="icon" href="../../Resources/Icons/model_icon.png" />
 </head>
 <body>
     <link href="VerificationPageStyle.css" rel="stylesheet" />
