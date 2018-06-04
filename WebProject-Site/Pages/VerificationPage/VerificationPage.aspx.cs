@@ -11,14 +11,23 @@ using System.Web.UI.WebControls;
 
 public partial class Pages_VerificationPage_VerificationPage : System.Web.UI.Page
 {
+    /// <summary>
+    /// No function logic
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void Page_Load(object sender, EventArgs e)
     {
 
     }
 
+    /// <summary>
+    /// verifys if the correct key was entered in the url
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void verificationButton_Click(object sender, EventArgs e)
     {
-        //verifys if the correct key was entered in the url
         string url = Request.Url.AbsoluteUri;
         bool isCorrectKey = false;
         if (url.Contains('?') && IsNumeric(url.Substring(url.IndexOf('?') + 1)))
@@ -65,9 +74,13 @@ public partial class Pages_VerificationPage_VerificationPage : System.Web.UI.Pag
         }
     }
 
+    /// <summary>
+    /// verifys a string is a number
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns></returns>
     private bool IsNumeric(string str)
     {
-        //verifys a string is a number
         try
         {
             int.Parse(str);

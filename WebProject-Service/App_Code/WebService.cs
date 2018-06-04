@@ -96,10 +96,17 @@ public class WebService : System.Web.Services.WebService
         }
     }
 
+    /// <summary>
+    /// runs a generic sql void query with parameters
+    /// </summary>
+    /// <param name="query"></param>
+    /// <param name="parametersNames"></param>
+    /// <param name="parametersValues"></param>
+    /// <param name="parameterTypes"></param>
+    /// <returns></returns>
     [WebMethod]
     public int GenericVoidQueryWithParameters(string query, string[] parametersNames, string[] parametersValues, string[] parameterTypes)
     {
-        //runs a generic sql void query with parameters
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -180,10 +187,22 @@ public class WebService : System.Web.Services.WebService
         }
     }
 
+    /// <summary>
+    /// inserts a new model into the db
+    /// </summary>
+    /// <param name="user_id"></param>
+    /// <param name="name"></param>
+    /// <param name="description"></param>
+    /// <param name="positions"></param>
+    /// <param name="colors"></param>
+    /// <param name="normals"></param>
+    /// <param name="cameraPos"></param>
+    /// <param name="lookingat"></param>
+    /// <param name="thumbnail_url"></param>
+    /// <returns></returns>
     [WebMethod]
     public int InsertModel(int user_id, string name, string description, float[] positions, float[] colors, float[] normals, float[] cameraPos, float[] lookingat, string thumbnail_url)
     {
-        //inserts a new model into the db
         try
         {
             string location = (@"\DB_Files\Model_Thumbnails\Thumbnail" + DateTime.Now.ToString().Replace('/', '-').Replace(' ', '-').Replace(':', '-') + ".png");
@@ -217,9 +236,17 @@ public class WebService : System.Web.Services.WebService
         }
     }
 
+    /// <summary>
+    /// creates a xml file containing model information
+    /// </summary>
+    /// <param name="positions"></param>
+    /// <param name="colors"></param>
+    /// <param name="normals"></param>
+    /// <param name="cameraPos"></param>
+    /// <param name="lookingat"></param>
+    /// <returns></returns>
     private string CreateModelXMLFile(float[] positions, float[] colors, float[] normals, float[] cameraPos, float[] lookingat)
     {
-        //creates a xml file containing model information
         try
         {
             string location = @"/DB_Files/Model_Files/Model_XML" + DateTime.Now.ToString().Replace('/', '-').Replace(' ', '-').Replace(':', '-') + ".xml";
@@ -332,18 +359,26 @@ public class WebService : System.Web.Services.WebService
 
     }
 
+    /// <summary>
+    /// returns an xml reader to read the xml file
+    /// </summary>
+    /// <param name="location"></param>
+    /// <returns></returns>
     [WebMethod]
     public XmlReader GetXMLFile(string location)
     {
-        //returns an xml reader to read the xml file
         return XmlReader.Create(Server.MapPath(location));
     }
 
 
+    /// <summary>
+    /// gets model ids that a specific user created
+    /// </summary>
+    /// <param name="user_id"></param>
+    /// <returns></returns>
     [WebMethod]
     public int[] GetModelIdsByUserId(int user_id)
     {
-        //gets model ids that a specific user created
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -372,10 +407,13 @@ public class WebService : System.Web.Services.WebService
         }
     }
 
+    /// <summary>
+    /// get models ids list
+    /// </summary>
+    /// <returns></returns>
     [WebMethod]
     public int[] GetModelIds()
     {
-        //get models ids list
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -574,10 +612,14 @@ public class WebService : System.Web.Services.WebService
         return null;
     }
 
+    /// <summary>
+    /// get creator id from model id
+    /// </summary>
+    /// <param name="model_id"></param>
+    /// <returns></returns>
     [WebMethod]
     public int GetCreatorUserId(int model_id)
     {
-        //get creator id from model id
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -600,10 +642,15 @@ public class WebService : System.Web.Services.WebService
         return -1;
     }
 
+    /// <summary>
+    /// get the rate of a certain user on a cetain model
+    /// </summary>
+    /// <param name="model_id"></param>
+    /// <param name="user_id"></param>
+    /// <returns></returns>
     [WebMethod]
     public int GetModelUserRate(int model_id, int user_id)
     {
-        //get the rate of a certain user on a cetain model
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -627,10 +674,14 @@ public class WebService : System.Web.Services.WebService
         return 0;
     }
 
+    /// <summary>
+    /// gets model creation date from model id
+    /// </summary>
+    /// <param name="model_id"></param>
+    /// <returns></returns>
     [WebMethod]
     public DateTime GetModelCreationDate(int model_id)
     {
-        //gets model creation date from model id
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -653,10 +704,14 @@ public class WebService : System.Web.Services.WebService
         return DateTime.Now;
     }
 
+    /// <summary>
+    /// returns the xml file location from model id
+    /// </summary>
+    /// <param name="model_id"></param>
+    /// <returns></returns>
     [WebMethod]
     public XmlReader GetModelXMLFile(int model_id)
     {
-        //returns the xml file location from model id
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -680,10 +735,14 @@ public class WebService : System.Web.Services.WebService
         return null;
     }
 
+    /// <summary>
+    /// returns model name from model id
+    /// </summary>
+    /// <param name="model_id"></param>
+    /// <returns></returns>
     [WebMethod]
     public string GetModelName(int model_id)
     {
-        //returns model name from model id
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -706,10 +765,14 @@ public class WebService : System.Web.Services.WebService
         return null;
     }
 
+    /// <summary>
+    /// returns model description from model id
+    /// </summary>
+    /// <param name="model_id"></param>
+    /// <returns></returns>
     [WebMethod]
     public string GetModelDescription(int model_id)
     {
-        //returns model description from model id
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -732,10 +795,14 @@ public class WebService : System.Web.Services.WebService
         return null;
     }
 
+    /// <summary>
+    /// returns model thumbnail in base64 form
+    /// </summary>
+    /// <param name="model_id"></param>
+    /// <returns></returns>
     [WebMethod]
     public string GetModelThumbnail(int model_id)
     {
-        //returns model thumbnail in base64 form
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -759,19 +826,26 @@ public class WebService : System.Web.Services.WebService
         return null;
     }
 
+    /// <summary>
+    /// converts binary data from png file into base64 form and adds a prefix
+    /// </summary>
+    /// <param name="location"></param>
+    /// <returns></returns>
     private string ConvertToDataUrl(string location)
     {
-        //converts binary data from png file into base64 form and adds a prefix
         byte[] binaryData = File.ReadAllBytes(Server.MapPath(location));
         string base64 = Convert.ToBase64String(binaryData);
         return "data:image/png;base64," + base64;
     }
 
 
+    /// <summary>
+    /// returns a list of all the models
+    /// </summary>
+    /// <returns></returns>
     [WebMethod]
     public XmlReader GetModelsList()
     {
-        //returns a list of all the models
         try
         {
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)

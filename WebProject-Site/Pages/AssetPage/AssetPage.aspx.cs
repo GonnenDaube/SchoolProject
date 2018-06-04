@@ -12,14 +12,23 @@ using System.IO;
 
 public partial class Pages_AssetPage_AssetPage : System.Web.UI.Page
 {
+    /// <summary>
+    /// 
+    /// </summary>
     private maker_service.WebService ws;
+    /// <summary>
+    /// 
+    /// </summary>
     private int model_id;
 
-
+    /// <summary>
+    /// gets model information from data base by model id in the url
+    /// clear TempModels file
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void Page_Load(object sender, EventArgs e)
     {
-        //gets model information from data base by model id in the url
-        //clear TempModels file
         DirectoryInfo temp = new DirectoryInfo(Server.MapPath("/Resources/TempModels/"));
         foreach(FileInfo f in temp.GetFiles())
         {
@@ -94,9 +103,13 @@ public partial class Pages_AssetPage_AssetPage : System.Web.UI.Page
         }
     }
 
+    /// <summary>
+    /// gets user name from model id
+    /// </summary>
+    /// <param name="model_id"></param>
+    /// <returns></returns>
     private string GetUserName(int model_id)
     {
-        //gets user name from model id
         int userId = ws.GetCreatorUserId(model_id);
 
         SqlConnection sqlConnection = new SqlConnection(resources.ResourceManager.GetString("Connection_String"));
@@ -121,9 +134,13 @@ public partial class Pages_AssetPage_AssetPage : System.Web.UI.Page
         return username;
     }
 
+    /// <summary>
+    /// log download at web service and generate a model file
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void Download_Btn_Click(object sender, EventArgs e)
     {
-        //log download at web service and generate a model file
         //log downloads
         ws.InsertDownload((int)Session["user-id"], model_id);
 
@@ -238,9 +255,13 @@ public partial class Pages_AssetPage_AssetPage : System.Web.UI.Page
         }
     }
 
+    /// <summary>
+    /// updates model rating on rating changes
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void UpdateRating(object sender, EventArgs e)
     {
-        //updates model rating on rating changes
         string senderId = ((ImageButton)sender).ID;
         int rate = int.Parse(senderId.Substring(senderId.IndexOf('n') + 1)) + 1;
         ws.InsertRating((int)Session["user-id"], model_id, rate);

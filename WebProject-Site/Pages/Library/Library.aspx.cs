@@ -10,11 +10,18 @@ using Resources;
 
 public partial class Pages_Library_Library : System.Web.UI.Page
 {
+    /// <summary>
+    /// an instance of the maker_service
+    /// </summary>
     maker_service.WebService ws;
 
+    /// <summary>
+    /// generates models list
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void Page_Load(object sender, EventArgs e)
     {
-        //generates models list
         //Gets asstes id's
         ws = new maker_service.WebService();
 
@@ -22,14 +29,20 @@ public partial class Pages_Library_Library : System.Web.UI.Page
         
         for(int i = 0; i < ids.Length; i++)
         {
-            AssetPanel.Controls.Add(GenerateAssetControl(i, ids[i]));//would get asset id
+            AssetPanel.Controls.Add(GenerateAssetControl(i, ids[i]));
         }
 
         ws.CloseConnection();
     }
 
+    /// <summary>
+    /// gets asset id and generates an Asset Control from it
+    /// </summary>
+    /// <param name="index"></param>
+    /// <param name="model_id"></param>
+    /// <returns></returns>
     private HtmlGenericControl GenerateAssetControl(int index, int model_id)
-    {// gets asset id and generates an Asset Control from it
+    {
         HtmlGenericControl asset = new HtmlGenericControl("div");
         asset.Attributes["class"] = "Asset";
         if (index % 4 == 0)//is new line
@@ -43,8 +56,13 @@ public partial class Pages_Library_Library : System.Web.UI.Page
         return asset;
     }
 
+    /// <summary>
+    /// gets asset id and generates thumbnail control from it
+    /// </summary>
+    /// <param name="model_id"></param>
+    /// <returns></returns>
     private Image GenerateThumbnailControl(int model_id)
-    {// gets asset id and generates thumbnail control from it
+    {
         Image thumbnail = new Image();
         thumbnail.CssClass = "thumbnail";
         thumbnail.ImageUrl = ws.GetModelThumbnail(model_id);
@@ -52,8 +70,13 @@ public partial class Pages_Library_Library : System.Web.UI.Page
         return thumbnail;
     }
 
+    /// <summary>
+    /// gets asset id and generates description control from it
+    /// </summary>
+    /// <param name="model_id"></param>
+    /// <returns></returns>
     private HtmlGenericControl GenerateDescriptionControl(int model_id)
-    {// gets asset id and generates description control from it
+    {
         HtmlGenericControl description = new HtmlGenericControl("div");
         description.Attributes["class"] = "description";
 
@@ -71,9 +94,13 @@ public partial class Pages_Library_Library : System.Web.UI.Page
         return description;
     }
 
+    /// <summary>
+    /// get user name from model id
+    /// </summary>
+    /// <param name="model_id"></param>
+    /// <returns></returns>
     private string GetUserName(int model_id)
     {
-        //get user name from model id
         int userId = ws.GetCreatorUserId(model_id);
 
         SqlConnection sqlConnection = new SqlConnection(resources.ResourceManager.GetString("Connection_String"));
@@ -99,8 +126,13 @@ public partial class Pages_Library_Library : System.Web.UI.Page
 
     }
 
+    /// <summary>
+    /// gets asset id and generates a link button that redirects for asset page
+    /// </summary>
+    /// <param name="model_id"></param>
+    /// <returns></returns>
     private HtmlGenericControl GenerateExpandButton(int model_id)
-    {// gets asset id and generates a link button that redirects for asset page
+    {
         HtmlGenericControl expand = new HtmlGenericControl("a");
         expand.Attributes["class"] = "ExpandBtn";
         expand.Attributes["href"] = "/Pages/AssetPage/AssetPage.aspx?" + model_id;//adds item id to the end of the url

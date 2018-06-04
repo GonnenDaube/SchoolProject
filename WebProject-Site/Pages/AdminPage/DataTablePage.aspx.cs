@@ -12,14 +12,26 @@ using System.Data;
 
 public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
 {
-
+    /// <summary>
+    /// connection to data base
+    /// </summary>
     private SqlConnection sqlConnection;
+    /// <summary>
+    /// name of data table shown
+    /// </summary>
     private string dataTableName;
+    /// <summary>
+    /// an instance of the maker_service
+    /// </summary>
     private maker_service.WebService ws;
 
+    /// <summary>
+    /// create responsive table for each table by looking at the url
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void Page_Load(object sender, EventArgs e)
     {
-        //create responsive table for each table by looking at the url
         dataTableName = GetDataTableName(Request.Url.AbsoluteUri);
         if(dataTableName.Equals("users"))
         {
@@ -174,9 +186,15 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
         }
     }
 
+    /// <summary>
+    /// generates a table row containing information from the data base and editable
+    /// </summary>
+    /// <param name="reader"></param>
+    /// <param name="index"></param>
+    /// <param name="counter"></param>
+    /// <returns></returns>
     private TableRow GenerateTableRow(SqlDataReader reader, int index, ref int counter)
     {
-        //generates a table row containing information from the data base and editable
         TableRow row = new TableRow();
         row.CssClass = "table-row";
         TableCell cell;
@@ -218,9 +236,15 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
         return row;
     }
 
+    /// <summary>
+    /// overloaded function that used DataTableReader instead of SqlDataReader
+    /// </summary>
+    /// <param name="reader"></param>
+    /// <param name="index"></param>
+    /// <param name="counter"></param>
+    /// <returns></returns>
     private TableRow GenerateTableRow(DataTableReader reader, int index, ref int counter)
     {
-        //overloaded function that used DataTableReader instead of SqlDataReader
         TableRow row = new TableRow();
         row.CssClass = "table-row";
         TableCell cell;
@@ -262,9 +286,12 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
         return row;
     }
 
+    /// <summary>
+    /// generates a header row containing column names
+    /// </summary>
+    /// <param name="titles"></param>
     private void GenerateHeaderRow(string[] titles)
     {
-        //generates a header row containing column names
         TableHeaderCell cell;
         for(int i = 0; i < titles.Length; i++)
         {
@@ -275,15 +302,24 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
         }
     }
 
+    /// <summary>
+    /// manipulates url to get table name
+    /// </summary>
+    /// <param name="uri"></param>
+    /// <returns></returns>
     private string GetDataTableName(string uri)
     {
-        //manipulates url to get table name
         return uri.Substring(uri.IndexOf("table=") + ("table=").Length);
     }
 
+    /// <summary>
+    /// generate a generic checkbox with an initial state and a should post back boolean
+    /// </summary>
+    /// <param name="initialState"></param>
+    /// <param name="shouldPostBack"></param>
+    /// <returns></returns>
     private CheckBox GenerateCheckBox(bool initialState, bool shouldPostBack)
     {
-        //generate a generic checkbox with an initial state and a should post back boolean
         CheckBox cb = new CheckBox();
         cb.Checked = initialState;
         cb.Attributes["class"] = "checkbox";
@@ -295,9 +331,15 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
         return cb;
     }
 
+    /// <summary>
+    /// generates a generic text box
+    /// </summary>
+    /// <param name="text"></param>
+    /// <param name="index"></param>
+    /// <param name="shouldTextChanged"></param>
+    /// <returns></returns>
     private TextBox GenerateTextBox(string text, int index, bool shouldTextChanged)
     {
-        //generates a generic text box
         TextBox tb = new TextBox();
         tb.Text = text;
         tb.CssClass = "textbox-admin Report1942Font";
@@ -311,9 +353,13 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
         return tb;
     }
 
+    /// <summary>
+    /// generates a text box validator with a text box to validate
+    /// </summary>
+    /// <param name="controlToValidate"></param>
+    /// <returns></returns>
     private RequiredFieldValidator GenerateTextBoxValidator(TextBox controlToValidate)
     {
-        //generates a text box validator with a text box to validate
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.ControlToValidate = controlToValidate.ID;
         validator.Text = "*";
@@ -321,9 +367,14 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
         return validator;
     }
 
+    /// <summary>
+    /// generates a footer row containing an insert functionality
+    /// </summary>
+    /// <param name="reader"></param>
+    /// <param name="counter"></param>
+    /// <returns></returns>
     private TableFooterRow GenerateFooterRow(SqlDataReader reader, ref int counter)
     {
-        //generates a footer row containing an insert functionality
         TableFooterRow row = new TableFooterRow();
         TableCell cell;
         for (int i = 0; i < reader.FieldCount; i++)
@@ -352,9 +403,14 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
         return row;
     }
 
+    /// <summary>
+    /// overloaded function using DataTableReader instead of SqlDataReader
+    /// </summary>
+    /// <param name="reader"></param>
+    /// <param name="counter"></param>
+    /// <returns></returns>
     private TableFooterRow GenerateFooterRow(DataTableReader reader, ref int counter)
     {
-        //overloaded function using DataTableReader instead of SqlDataReader
         TableFooterRow row = new TableFooterRow();
         TableCell cell;
         for (int i = 0; i < reader.FieldCount; i++)
@@ -387,9 +443,15 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
         return row;
     }
 
+    /// <summary>
+    /// generates an image button
+    /// </summary>
+    /// <param name="path"></param>
+    /// <param name="clickEvent"></param>
+    /// <param name="id"></param>
+    /// <returns></returns>
     private ImageButton GenerateImgButton(string path, ImageClickEventHandler clickEvent, string id)
     {
-        //generates an image button
         ImageButton btn = new ImageButton();
         btn.CssClass = "delete-btn-admin";
         btn.ImageUrl = path;
@@ -398,9 +460,14 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
         return btn;
     }
 
+    /// <summary>
+    /// generates an image
+    /// </summary>
+    /// <param name="path"></param>
+    /// <param name="id"></param>
+    /// <returns></returns>
     private Image GenerateImage(string path, string id)
     {
-        //generates an image
         Image img = new Image();
         img.ID = id;
         img.CssClass = "admin-action-img not-changed";
@@ -408,9 +475,13 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
         return img;
     }
 
+    /// <summary>
+    /// saves changes into data base
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void save_btn_Click(object sender, EventArgs e)
     {
-        //saves changes into data base
 
         //passed validation
         if (dataTableName.Equals("users"))
@@ -642,9 +713,13 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
         }
     }
 
+    /// <summary>
+    /// delete a row from the table
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void delete_btn_Click(object sender, EventArgs e)
     {
-        //delete a row from the table
         if (sender.GetType().Equals(typeof(ImageButton)))
         {
             if (dataTableName.Equals("users"))
@@ -755,10 +830,14 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
         }
     }
 
+    /// <summary>
+    /// runs if text has changed at sender
+    /// puts a flag to update row on save button click
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void text_changed(object sender, EventArgs e)
     {
-        //runs if text has changed at sender
-        //puts a flag to update row on save button click
         TableCell senderCell = (TableCell)((TextBox)sender).Parent;
         string cellId = senderCell.ID;
         string rowId = cellId.Substring(cellId.IndexOf("row") + 3);
@@ -768,10 +847,14 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
         ((Image)table.FindControl("row" + rowId + "cell-action").Controls[1]).CssClass = "admin-action-img changed";
     }
 
+    /// <summary>
+    /// runs if checkbox has changed state at sender
+    /// puts a flag to update row on save button click
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void checked_changed(object sender, EventArgs e)
     {
-        //runs if checkbox has changed state at sender
-        //puts a flag to update row on save button click
         TableCell senderCell = (TableCell)((CheckBox)sender).Parent;
         string cellId = senderCell.ID;
         string rowId = cellId.Substring(cellId.IndexOf("row") + 3);
@@ -781,9 +864,14 @@ public partial class Pages_AdminPage_DataTablePage : System.Web.UI.Page
         ((Image)table.FindControl("row" + rowId + "cell-action").Controls[1]).CssClass = "admin-action-img changed";
     }
 
+    /// <summary>
+    /// checks if insert row is full (recursively)
+    /// </summary>
+    /// <param name="row"></param>
+    /// <param name="index"></param>
+    /// <returns></returns>
     private bool InsertRowFull(TableFooterRow row, int index)
     {
-        //checks if insert row is full (recursively)
         if (index >= row.Controls.Count)
             return true;
         if(row.Controls[index].Controls[0] is TextBox)

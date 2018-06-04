@@ -14,14 +14,22 @@ using System.Security.Cryptography;
 
 public partial class Pages_HomePage_HomePage : System.Web.UI.Page
 {
-
+    /// <summary>
+    /// No function logic
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void Page_Load(object sender, EventArgs e)
     {
     }
 
+    /// <summary>
+    /// sign up functionality
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void SignUp(object sender, EventArgs e)
     {
-        //sign up functionality
         SqlConnection sqlConnection = new SqlConnection(resources.ResourceManager.GetString("Connection_String"));
         sqlConnection.Open();
         string sqlCmd = "SELECT * FROM [Users] WHERE username = @username;";
@@ -140,9 +148,12 @@ public partial class Pages_HomePage_HomePage : System.Web.UI.Page
         content_consumer.Text = "False";
     }
 
+    /// <summary>
+    /// generates a random key to be checked on validation
+    /// </summary>
+    /// <returns></returns>
     private int KeyGenerator()
     {
-        //generates a random key to be checked on validation
         using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
         {
             // Buffer storage.
@@ -154,9 +165,12 @@ public partial class Pages_HomePage_HomePage : System.Web.UI.Page
         }
     }
 
+    /// <summary>
+    /// generates a random color for each user
+    /// </summary>
+    /// <returns></returns>
     private string ColorGenerator()
     {
-        //generates a random color for each user
         string[] colors = new string[5];
         colors[0] = "rgb(10, 16, 13)";
         colors[1] = "rgb(176, 186, 0)";
@@ -168,9 +182,13 @@ public partial class Pages_HomePage_HomePage : System.Web.UI.Page
         return colors[pos];
     }
 
+    /// <summary>
+    /// login functionality
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void Login(object sender, EventArgs e)
     {
-        //login functionality
         SqlConnection sqlConnection = new SqlConnection(resources.ResourceManager.GetString("Connection_String"));
         sqlConnection.Open();
         string sqlCmd = "SELECT * FROM [Users] WHERE password = @password AND email = @email AND validated = 'True';";
@@ -204,9 +222,13 @@ public partial class Pages_HomePage_HomePage : System.Web.UI.Page
         }
     }
 
+    /// <summary>
+    /// checks if username is already taken and puts an error message
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void usernameBox_TextChanged(object sender, EventArgs e)
     {
-        //checks if username is already taken and puts an error message
         SqlConnection sqlConnection = new SqlConnection(resources.ResourceManager.GetString("Connection_String"));
         sqlConnection.Open();
         string sqlCmd = "SELECT * FROM [Users] WHERE username = @username;";

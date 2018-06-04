@@ -8,19 +8,26 @@ using System.Web.UI.HtmlControls;
 
 public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
 {
+    /// <summary>
+    /// tab color array
+    /// </summary>
     private string[] colors;
+    /// <summary>
+    /// random number generator object
+    /// </summary>
     private Random rnd;
+    /// <summary>
+    /// an instance of the maker_service
+    /// </summary>
     private maker_service.WebService ws;
 
+    /// <summary>
+    /// generates asset tabs to enable a user to look at the models it created
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void Page_Load(object sender, EventArgs e)
     {
-
-
-        //color: rgb(216, 216, 216);
-        //color: rgb(252, 246, 189);
-        //color: rgb(208, 244, 222);
-        //color: rgb(222, 246, 202);
-        //color: rgb(248, 189, 196);
         colors = new string[5];
         colors[0] = "rgb(216, 216, 216)";
         colors[1] = "rgb(252, 246, 189)";
@@ -41,9 +48,15 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
         ws.CloseConnection();
     }
 
+    /// <summary>
+    /// generates a "file" containing asset information and a tab
+    /// </summary>
+    /// <param name="index"></param>
+    /// <param name="total"></param>
+    /// <param name="model_id"></param>
+    /// <returns></returns>
     private HtmlGenericControl GenerateAssetFile(int index, int total, int model_id)
     {
-        //generates a "file" containing asset information and a tab
         HtmlGenericControl file_div = new HtmlGenericControl("div");
         file_div.ID = "file-div-" + index;
         if(index != 0)
@@ -61,9 +74,16 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
         return file_div;
     }
 
+    /// <summary>
+    /// generates a tab that can be clicked in order to show model info
+    /// </summary>
+    /// <param name="index"></param>
+    /// <param name="total"></param>
+    /// <param name="color"></param>
+    /// <param name="model_id"></param>
+    /// <returns></returns>
     private HtmlGenericControl GenerateTab(int index, int total, string color, int model_id)
     {
-        //generates a tab that can be clicked in order to show model info
         HtmlGenericControl tab = new HtmlGenericControl("div");
         tab.ID = "file-tab-" + index;
         tab.Attributes["class"] = "asset-file-tab";
@@ -83,9 +103,15 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
         return tab;
     }
 
+    /// <summary>
+    /// generate a file containing model info
+    /// </summary>
+    /// <param name="index"></param>
+    /// <param name="color"></param>
+    /// <param name="model_id"></param>
+    /// <returns></returns>
     private HtmlGenericControl GenerateFile(int index, string color, int model_id)
     {
-        //generate a file containing model info
         HtmlGenericControl file = new HtmlGenericControl("div");
         file.Attributes["class"] = "asset-file-color";
         file.Attributes["style"] = "background-color:" + color;
@@ -122,9 +148,15 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
         return file;
     }
 
+    /// <summary>
+    /// generates a button
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="posClass"></param>
+    /// <param name="model_id"></param>
+    /// <returns></returns>
     private Button GenerateButton(string name, string posClass, int model_id)
     {
-        //generates a button
         Button button = new Button();
         button.CssClass = "profile-action-button Report1942Font " + posClass;
 
@@ -139,9 +171,13 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
         return button;
     }
 
+    /// <summary>
+    /// called if delete button is clicked (deletes model)
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void Delete_Model_Click(object sender, EventArgs e)
     {
-        //called if delete button is clicked (deletes model)
         int model_id = int.Parse(((Button)sender).ToolTip);
 
         string[] name = { "@model_id" };
@@ -155,17 +191,28 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
         Response.Redirect(Request.Url.AbsoluteUri);
     }
 
+    /// <summary>
+    /// called if view button is clicked, redirects to model page
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void View_Model_Click(object sender, EventArgs e)
     {
-        //called if view button is clicked, redirects to model page
         int model_id = int.Parse(((Button)sender).ToolTip);
 
         Response.Redirect("http://localhost:57143/Pages/AssetPage/AssetPage.aspx?" + model_id);
     }
 
+    /// <summary>
+    /// generates a graph containing downloads per date
+    /// </summary>
+    /// <param name="index"></param>
+    /// <param name="model_id"></param>
+    /// <param name="labelX"></param>
+    /// <param name="labelY"></param>
+    /// <returns></returns>
     private HtmlGenericControl GenerateAssetGraph(int index, int model_id, out Label[] labelX, out Label[] labelY)
     {
-        //generates a graph containing downloads per date
         HtmlGenericControl svg = new HtmlGenericControl("svg");
         svg.Attributes["class"] = "asset-graph";
 
@@ -301,9 +348,13 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
         return svg;
     }
 
+    /// <summary>
+    /// calcs the offset between dates
+    /// </summary>
+    /// <param name="timeCount"></param>
+    /// <returns></returns>
     private TimeSpan CalcAxisOffset(Dictionary<DateTime, int> timeCount)
     {
-        //calcs the offset between dates
         DateTime first = timeCount.First().Key;
         DateTime last = timeCount.Last().Key;
 
@@ -312,9 +363,13 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
         return smallOffset;
     }
 
+    /// <summary>
+    /// finds the max downloads per day
+    /// </summary>
+    /// <param name="timeCount"></param>
+    /// <returns></returns>
     private int CalcMaxCount(Dictionary<TimeSpan, int> timeCount)
     {
-        //finds the max downloads per day
         int max = 0;
         for(int i = 0; i<timeCount.Count; i++)
         {
@@ -324,9 +379,13 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
         return max;
     }
 
+    /// <summary>
+    /// converts date string into DateTime object
+    /// </summary>
+    /// <param name="date"></param>
+    /// <returns></returns>
     private DateTime ConvertToDate(string date)
     {
-        //converts date string into DateTime object
         DateTime result;
         if (DateTime.TryParse(date, out result))
             // in DD/MM/YYYY format
