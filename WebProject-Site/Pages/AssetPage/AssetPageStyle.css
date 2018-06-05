@@ -61,6 +61,8 @@
     top:30%;
     font-size:3vw;
     color:rgb(120, 51, 39);
+    width:9vw;
+    overflow-x:hidden;
 }
 
 .breakLine-pos{

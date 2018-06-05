@@ -88,7 +88,9 @@ public partial class Pages_ProfilePage_ProfilePage : System.Web.UI.Page
         tab.ID = "file-tab-" + index;
         tab.Attributes["class"] = "asset-file-tab";
         float width = 15;
-        float leftPos = 85 * index / (total - 1);
+        float leftPos = 0;
+        if(total > 1)
+            leftPos = 85 * index / (total - 1);
         if(leftPos > 15 * index)
         {
             leftPos = 15 * index;

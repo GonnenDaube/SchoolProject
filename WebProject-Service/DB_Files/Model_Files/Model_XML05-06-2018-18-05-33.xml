@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<rootElement>
+  <camera-values>
+    <camera-position>-0.6324866, 0.577709, -15.44814</camera-position>
+    <camera-looking-at>0.07954051, -0.1149107, 0.9901846</camera-looking-at>
+  </camera-values>
+  <model-attributes>
+    <position-attribute>
+      <vertex0>5.853695, 3.721707, 0</vertex0>
+      <vertex1>5.869733, -2.212176, 0</vertex1>
+      <vertex2>-3.239579, 3.689633, 0</vertex2>
+      <vertex3>-3.239579, 3.689633, 0</vertex3>
+      <vertex4>-3.239579, -2.308401, 0</vertex4>
+      <vertex5>5.869733, -2.212176, 0</vertex5>
+      <vertex6>-1.092525, -1.037605, 1.614601</vertex6>
+      <vertex7>-1.311226, -1.849767, 4.108758</vertex7>
+      <vertex8>-1.196344, -0.7668849, 4.403385</vertex8>
+    </position-attribute>
+    <color-attribute>
+      <vertex0>1, 0, 0</vertex0>
+      <vertex1>1, 0, 0</vertex1>
+      <vertex2>1, 0, 0</vertex2>
+      <vertex3>1, 0, 0</vertex3>
+      <vertex4>1, 0, 0</vertex4>
+      <vertex5>1, 0, 0</vertex5>
+      <vertex6>1, 0, 0</vertex6>
+      <vertex7>1, 0, 0</vertex7>
+      <vertex8>1, 0, 0</vertex8>
+    </color-attribute>
+    <normal-attribute>
+      <vertex0>0.5385448, 0.8312321, 0.1379232</vertex0>
+      <vertex1>0.5385448, 0.8312321, 0.1379232</vertex1>
+      <vertex2>0.5385448, 0.8312321, 0.1379232</vertex2>
+      <vertex3>0.007927113, -0.7504337, 0.6608981</vertex3>
+      <vertex4>0.007927113, -0.7504337, 0.6608981</vertex4>
+      <vertex5>0.007927113, -0.7504337, 0.6608981</vertex5>
+      <vertex6>1, 1, 1</vertex6>
+      <vertex7>1, 1, 1</vertex7>
+      <vertex8>1, 1, 1</vertex8>
+    </normal-attribute>
+  </model-attributes>
+</rootElement>
